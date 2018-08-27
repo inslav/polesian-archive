@@ -1,0 +1,103 @@
+/*
+ * This file is part of Polesian Archive.
+ *
+ * Copyright (c) Institute of Slavic Studies of the Russian Academy of Sciences
+ *
+ * Polesian Archive is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, version 3.
+ *
+ * Polesian Archive is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code. If you have not received
+ * a copy of the GNU General Public License along with Polesian Archive,
+ * see <http://www.gnu.org/licenses/>.
+ */
+
+@import '~bootstrap/scss/bootstrap';
+
+$headerHeight: 50px;
+$footerHeight: 60px;
+
+html {
+  position: relative;
+  min-height: 100%;
+
+  body {
+    margin-bottom: $footerHeight;
+  }
+
+  .pa-header {
+    height: $headerHeight;
+
+    .pa-navbar-brand {
+      line-height: $headerHeight;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+  }
+
+  .pa-sidebar {
+    position: -webkit-sticky;
+    position: sticky;
+    min-height: calc(100vh - #{$headerHeight} - #{$footerHeight});
+    padding-top: 1.5rem;
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    .pa-nav {
+      .pa-nav-item {
+
+        .pa-nav-link {
+          padding-left: 0;
+          padding-right: 0;
+          color: $gray-700;
+        }
+
+        &.pa-active {
+          .pa-nav-link {
+            color: $blue;
+          }
+        }
+
+        &:hover {
+          .pa-nav-link {
+            color: $gray-800;
+          }
+        }
+      }
+    }
+  }
+
+  .pa-main {
+    padding-top: 1.5rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  .pa-footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: $footerHeight;
+    line-height: $footerHeight;
+    background-color: #f5f5f5;
+  }
+}
+
+
+
+
+/* Custom page CSS
+-------------------------------------------------- */
+/* Not required for template or sticky footer method. */
+
+.container {
+  width: auto;
+  max-width: 680px;
+  padding: 0 15px;
+}

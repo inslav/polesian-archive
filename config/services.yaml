@@ -1,0 +1,51 @@
+# This file is part of Polesian Archive.
+#
+# Copyright (c) Institute of Slavic Studies of the Russian Academy of Sciences
+#
+# Polesian Archive is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, version 3.
+#
+# Polesian Archive is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU General Public License for more details.
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code. If you have not received
+# a copy of the GNU General Public License along with Polesian Archive,
+# see <http://www.gnu.org/licenses/>.
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+parameters:
+  locale: 'ru'
+
+services:
+  # default configuration for services in *this* file
+  _defaults:
+    autowire: true      # Automatically injects dependencies in your services.
+    autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+    public: false       # Allows optimizing the container by removing unused services; this also means
+                        # fetching services directly from the container via $container->get() won't work.
+                        # The best practice is to be explicit about your dependencies anyway.
+
+  # makes classes in src/ available to be used as services
+  # this creates a service per class whose id is the fully-qualified class name
+  App\:
+    resource: '../src/*'
+    exclude: '../src/{Entity,Migrations,Tests,Kernel.php}'
+
+  # controllers are imported separately to make sure services can be injected
+  # as action arguments even if you don't extend any base controller class
+  App\Controller\:
+    resource: '../src/Controller'
+    tags: ['controller.service_arguments']
+
+  # add more service definitions when explicit configuration is needed
+  # please note that last definitions always *replace* previous ones
+
+  App\Menu\MenuBuilder:
+    arguments: ['@knp_menu.factory', '@request_stack']
+    tags:
+      - { name: knp_menu.menu_builder, method: createMainMenu, alias: main }

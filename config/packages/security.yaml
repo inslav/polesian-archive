@@ -1,0 +1,42 @@
+# This file is part of Polesian Archive.
+#
+# Copyright (c) Institute of Slavic Studies of the Russian Academy of Sciences
+#
+# Polesian Archive is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, version 3.
+#
+# Polesian Archive is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU General Public License for more details.
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code. If you have not received
+# a copy of the GNU General Public License along with Polesian Archive,
+# see <http://www.gnu.org/licenses/>.
+
+security:
+  # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+  providers:
+    in_memory: { memory: ~ }
+  firewalls:
+    dev:
+      pattern: ^/(_(profiler|wdt)|css|images|js)/
+      security: false
+    main:
+      anonymous: true
+
+      # activate different ways to authenticate
+
+      # http_basic: true
+      # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
+
+      # form_login: true
+      # https://symfony.com/doc/current/security/form_login_setup.html
+
+  # Easy way to control access for large sections of your site
+  # Note: Only the *first* access control that matches will be used
+  access_control:
+    # - { path: ^/admin, roles: ROLE_ADMIN }
+    # - { path: ^/profile, roles: ROLE_USER }

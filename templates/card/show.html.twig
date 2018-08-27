@@ -1,0 +1,64 @@
+{#-
+
+This file is part of Polesian Archive.
+
+Copyright (c) Institute of Slavic Studies of the Russian Academy of Sciences
+
+Polesian Archive is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, version 3.
+
+Polesian Archive is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code. If you have not received
+a copy of the GNU General Public License along with Polesian Archive,
+see <http://www.gnu.org/licenses/>.
+
+-#}
+
+{% extends 'base.html.twig' %}
+
+{% import _self as self %}
+
+{% block title %}
+    {{ ('controller.'~controller~'.'~method~'.title')|trans }}{{ card.id }} – {{ 'page.label'|trans }}
+{% endblock %}
+
+{% block page_title %}
+    {{ parent() }}{{ card.id }}
+{% endblock %}
+
+{% block page_content %}
+    <table class="table table-bordered">
+        <tbody>
+            {{ self.format_text_row('village', card.village) }}
+            {{ self.format_text_row('raion', card.raion) }}
+            {{ self.format_text_row('oblast', card.oblast) }}
+            {{ self.format_text_row('question', card.question) }}
+            {{ self.format_text_row('program', card.program) }}
+            {{ self.format_text_row('year', card.year) }}
+            {{ self.format_text_row('text', card.text|nl2br) }}
+            {{ self.format_text_row('description', card.description) }}
+            {{ self.format_text_row('keywords', card.keywords|join(', ')) }}
+            {{ self.format_text_row('terms', card.terms|join(', ')) }}
+            {{ self.format_text_row('collectors', card.collectors|join(', ')) }}
+            {{ self.format_text_row('informers', card.informers|join(', ')) }}
+        </tbody>
+    </table>
+{% endblock %}
+
+{%- macro format_text_row(labelTranslationKey, content) -%}
+    {% import _self as self %}
+    {{ self.fill_row(('controller.card.show.card.' ~ labelTranslationKey)|trans, content|default('-')) }}
+{%- endmacro -%}
+
+{%- macro fill_row(thContent, tdContend) -%}
+    <tr>
+        <th scope="row">{{ thContent|raw }}</th>
+        <td>{{ tdContend|raw }}</td>
+    </tr>
+{%- endmacro -%}

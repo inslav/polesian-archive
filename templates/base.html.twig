@@ -1,0 +1,70 @@
+{#-
+
+This file is part of Polesian Archive.
+
+Copyright (c) Institute of Slavic Studies of the Russian Academy of Sciences
+
+Polesian Archive is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, version 3.
+
+Polesian Archive is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code. If you have not received
+a copy of the GNU General Public License along with Polesian Archive,
+see <http://www.gnu.org/licenses/>.
+
+-#}
+
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>{% block title %}{{ ('controller.'~controller~'.'~method~'.title')|trans }} – {{ 'page.label'|trans }}{% endblock %}</title>
+
+        {% block stylesheets %}
+            <link href="{{ asset('build/css/base.css') }}" rel="stylesheet">
+        {% endblock %}
+    </head>
+
+    <body>
+
+        <nav class="navbar navbar-dark bg-dark flex-nowrap p-0 pa-header">
+            <a class="navbar-brand col-12 pa-navbar-brand" href="{{ path('index') }}">{{ 'page.label'|trans }}</a>
+        </nav>
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-2 bg-light sidebar pa-sidebar">
+                    {{ knp_menu_render('main', {'currentClass': 'pa-active'}) }}
+                </div>
+
+                <main role="main" class="col-10 pa-main">
+                    <h1 class="border-bottom">{% block page_title %}{{ ('controller.'~controller~'.'~method~'.title')|trans }}{% endblock %}</h1>
+                    <div>
+                        {% block page_content %}{% endblock %}
+                    </div>
+                </main>
+            </div>
+        </div>
+
+        <footer class="pa-footer">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-2"></div>
+                    <div class="col-10">
+                        <span class="text-muted">
+                            &copy; {{ 'now'|date('Y') }} – {{ 'page.footer'|trans }}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>
