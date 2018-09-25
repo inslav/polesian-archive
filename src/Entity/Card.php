@@ -24,6 +24,8 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -43,39 +45,26 @@ class Card
     private $id;
 
     /**
-     * @var string
+     * @var Village
      *
-     * @ORM\Column(type="string", length=255)
+     * @ORM\ManyToOne(targetEntity="App\Entity\Village", inversedBy="cards")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $village;
 
     /**
-     * @var string
+     * @var bool
      *
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="boolean", options={"default": false})
      */
-    private $raion;
+    private $isHutor;
 
     /**
-     * @var string
+     * @var Collection|Question[]
      *
-     * @ORM\Column(type="string", length=255)
+     * @ORM\ManyToMany(targetEntity="App\Entity\Question")
      */
-    private $oblast;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(type="string", length=255)
-     */
-    private $question;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(type="string", length=255)
-     */
-    private $program;
+    private $questions;
 
     /**
      * @var int
@@ -99,32 +88,42 @@ class Card
     private $description;
 
     /**
-     * @var string[]
+     * @var Collection|Keyword[]
      *
-     * @ORM\Column(type="array")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Keyword", inversedBy="cards")
      */
     private $keywords;
 
     /**
-     * @var string[]
+     * @var Collection|Term[]
      *
-     * @ORM\Column(type="array")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Term", inversedBy="cards")
      */
     private $terms;
 
     /**
-     * @var string[]
+     * @var Collection|Informer[]
      *
-     * @ORM\Column(type="array")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Informer", inversedBy="cards")
+     */
+    private $informers;
+
+    /**
+     * @var Collection|Collector[]
+     *
+     * @ORM\ManyToMany(targetEntity="App\Entity\Collector", inversedBy="cards")
      */
     private $collectors;
 
-    /**
-     * @var string[]
-     *
-     * @ORM\Column(type="array")
-     */
-    private $informers;
+    public function __construct()
+    {
+        $this->isHutor = false;
+        $this->questions = new ArrayCollection();
+        $this->keywords = new ArrayCollection();
+        $this->terms = new ArrayCollection();
+        $this->informers = new ArrayCollection();
+        $this->collectors = new ArrayCollection();
+    }
 
     /**
      * @return int|null
@@ -135,19 +134,19 @@ class Card
     }
 
     /**
-     * @return string|null
+     * @return Village|null
      */
-    public function getVillage(): ?string
+    public function getVillage(): ?Village
     {
         return $this->village;
     }
 
     /**
-     * @param string $village
+     * @param Village|null $village
      *
      * @return Card
      */
-    public function setVillage(string $village): self
+    public function setVillage(?Village $village): self
     {
         $this->village = $village;
 
@@ -155,81 +154,75 @@ class Card
     }
 
     /**
-     * @return string|null
+     * @return bool|null
      */
-    public function getRaion(): ?string
+    public function getIsHutor(): ?bool
     {
-        return $this->raion;
+        return $this->isHutor;
     }
 
     /**
-     * @param string $raion
+     * @param bool $isHutor
      *
      * @return Card
      */
-    public function setRaion(string $raion): self
+    public function setIsHutor(bool $isHutor): self
     {
-        $this->raion = $raion;
+        $this->isHutor = $isHutor;
 
         return $this;
     }
 
     /**
-     * @return string|null
+     * @return Collection|Question[]
      */
-    public function getOblast(): ?string
+    public function getQuestions(): Collection
     {
-        return $this->oblast;
+        return $this->questions;
     }
 
     /**
-     * @param string $oblast
+     * @param iterable|Question[] $questions
      *
      * @return Card
      */
-    public function setOblast(string $oblast): self
+    public function setQuestions(iterable $questions): self
     {
-        $this->oblast = $oblast;
+        $this->questions = new ArrayCollection();
+
+        foreach ($questions as $question) {
+            $this->addQuestion($question);
+        }
 
         return $this;
     }
 
     /**
-     * @return string|null
-     */
-    public function getQuestion(): ?string
-    {
-        return $this->question;
-    }
-
-    /**
-     * @param string $question
+     * @param Question $question
      *
      * @return Card
      */
-    public function setQuestion(string $question): self
+    public function addQuestion(Question $question): self
     {
-        $this->question = $question;
+        $this->questions[] = $question;
+
+        if (!$this->questions->contains($question)) {
+            $this->questions[] = $question;
+        }
 
         return $this;
     }
 
     /**
-     * @return string|null
-     */
-    public function getProgram(): ?string
-    {
-        return $this->program;
-    }
-
-    /**
-     * @param string $program
+     * @param Question $question
      *
      * @return Card
      */
-    public function setProgram(string $program): self
+    public function removeQuestion(Question $question): self
     {
-        $this->program = $program;
+        if ($this->questions->contains($question)) {
+            $this->questions->removeElement($question);
+        }
 
         return $this;
     }
@@ -295,81 +288,211 @@ class Card
     }
 
     /**
-     * @return string[]|null
+     * @return Collection|Keyword[]
      */
-    public function getKeywords(): ?array
+    public function getKeywords(): Collection
     {
         return $this->keywords;
     }
 
     /**
-     * @param string[] $keywords
+     * @param iterable|Keyword[] $keywords
      *
      * @return Card
      */
-    public function setKeywords(array $keywords): self
+    public function setKeywords(iterable $keywords): self
     {
-        $this->keywords = $keywords;
+        $this->keywords = new ArrayCollection();
+
+        foreach ($keywords as $keyword) {
+            $this->addKeyword($keyword);
+        }
 
         return $this;
     }
 
     /**
-     * @return string[]|null
+     * @param Keyword $newKeyword
+     *
+     * @return Card
      */
-    public function getTerms(): ?array
+    public function addKeyword(Keyword $newKeyword): self
+    {
+        if (!$this->keywords->contains($newKeyword)) {
+            $this->keywords[] = $newKeyword;
+            $newKeyword->addCard($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param Keyword $newKeyword
+     *
+     * @return Card
+     */
+    public function removeKeyword(Keyword $newKeyword): self
+    {
+        if ($this->keywords->contains($newKeyword)) {
+            $this->keywords->removeElement($newKeyword);
+            $newKeyword->removeCard($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Term[]
+     */
+    public function getTerms(): Collection
     {
         return $this->terms;
     }
 
     /**
-     * @param string[] $terms
+     * @param iterable|Term[] $terms
      *
      * @return Card
      */
-    public function setTerms(array $terms): self
+    public function setTerms(iterable $terms): self
     {
-        $this->terms = $terms;
+        $this->terms = new ArrayCollection();
+
+        foreach ($terms as $term) {
+            $this->addTerm($term);
+        }
 
         return $this;
     }
 
     /**
-     * @return string[]|null
-     */
-    public function getCollectors(): ?array
-    {
-        return $this->collectors;
-    }
-
-    /**
-     * @param string[] $collectors
+     * @param Term $term
      *
      * @return Card
      */
-    public function setCollectors(array $collectors): self
+    public function addTerm(Term $term): self
     {
-        $this->collectors = $collectors;
+        if (!$this->terms->contains($term)) {
+            $this->terms[] = $term;
+        }
 
         return $this;
     }
 
     /**
-     * @return string[]|null
+     * @param Term $term
+     *
+     * @return Card
      */
-    public function getInformers(): ?array
+    public function removeTerm(Term $term): self
+    {
+        if ($this->terms->contains($term)) {
+            $this->terms->removeElement($term);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Informer[]
+     */
+    public function getInformers(): Collection
     {
         return $this->informers;
     }
 
     /**
-     * @param string[] $informers
+     * @param iterable|Informer[] $informers
      *
      * @return Card
      */
-    public function setInformers(array $informers): self
+    public function setInformers(iterable $informers): self
     {
-        $this->informers = $informers;
+        $this->informers = new ArrayCollection();
+
+        foreach ($informers as $informer) {
+            $this->addInformer($informer);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param Informer $informer
+     *
+     * @return Card
+     */
+    public function addInformer(Informer $informer): self
+    {
+        if (!$this->informers->contains($informer)) {
+            $this->informers[] = $informer;
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param Informer $informer
+     *
+     * @return Card
+     */
+    public function removeInformer(Informer $informer): self
+    {
+        if ($this->informers->contains($informer)) {
+            $this->informers->removeElement($informer);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Collector[]
+     */
+    public function getCollectors(): Collection
+    {
+        return $this->collectors;
+    }
+
+    /**
+     * @param iterable|Collector[] $collectors
+     *
+     * @return Card
+     */
+    public function setCollectors(iterable $collectors): self
+    {
+        $this->collectors = new ArrayCollection();
+
+        foreach ($collectors as $collector) {
+            $this->addCollector($collector);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param Collector $collector
+     *
+     * @return Card
+     */
+    public function addCollector(Collector $collector): self
+    {
+        if (!$this->collectors->contains($collector)) {
+            $this->collectors[] = $collector;
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param Collector $collector
+     *
+     * @return Card
+     */
+    public function removeCollector(Collector $collector): self
+    {
+        if ($this->collectors->contains($collector)) {
+            $this->collectors->removeElement($collector);
+        }
 
         return $this;
     }

@@ -24,7 +24,9 @@ declare(strict_types=1);
 
 namespace App\FilterableTable;
 
+use App\Entity\Village;
 use Vyfony\Bundle\FilterableTableBundle\Filter\Configurator\AbstractFilterConfigurator;
+use Vyfony\Bundle\FilterableTableBundle\Filter\Configurator\Parameter\EntityChoiceParameter;
 use Vyfony\Bundle\FilterableTableBundle\Filter\Configurator\Parameter\FilterParameterInterface;
 use Vyfony\Bundle\FilterableTableBundle\Filter\Configurator\Parameter\TableParameter\TableParameterInterface;
 use Vyfony\Bundle\FilterableTableBundle\Filter\Configurator\Restriction\FilterRestrictionInterface;
@@ -41,7 +43,7 @@ final class CardsFilterConfigurator extends AbstractFilterConfigurator
     {
         return [
             'label_attr' => ['class' => ''],
-            'translation_domain' => 'FilterableTableType',
+            'translation_domain' => 'messages',
             'attr' => ['class' => ''],
             'method' => 'GET',
             'csrf_protection' => false,
@@ -56,7 +58,7 @@ final class CardsFilterConfigurator extends AbstractFilterConfigurator
     {
         return [
             'attr' => ['class' => 'btn btn-default'],
-            'label' => 'form.type.filterableTable.button.submit',
+            'label' => 'controller.card.list.filter.submitButton',
         ];
     }
 
@@ -67,7 +69,7 @@ final class CardsFilterConfigurator extends AbstractFilterConfigurator
     {
         return [
             'attr' => ['class' => 'btn btn-default'],
-            'label' => 'form.type.filterableTable.button.reset',
+            'label' => 'controller.card.list.filter.resetButton',
         ];
     }
 
@@ -86,6 +88,12 @@ final class CardsFilterConfigurator extends AbstractFilterConfigurator
     protected function factoryFilterParameters(): array
     {
         return [
+            (new EntityChoiceParameter())
+                ->setClass(Village::class)
+                ->setIsExpanded(false)
+                ->setChoiceLabel('name')
+                ->setPropertyName('village')
+                ->setLabel('controller.card.list.filter.village'),
         ];
     }
 

@@ -31,3 +31,8 @@ see <http://www.gnu.org/licenses/>.
     {% import '@VyfonyFilterableTable/filterable_table.html.twig' as filterable_table %}
     {{ filterable_table.render_table(table) }}
 {%- endblock -%}
+
+{%- block right_sidebar_content -%}
+    {% import '@VyfonyFilterableTable/filterable_table.html.twig' as filterable_table %}
+    {{ filterable_table.render_filter(filterForm) }}
+{%- endblock -%}

@@ -45,7 +45,7 @@ final class CardControllerTest extends WebTestCase
         );
 
         $this->assertSame(1, $crawler->filter('.pa-header')->count(), 'Header area');
-        $this->assertSame(1, $crawler->filter('.pa-sidebar')->count(), 'Sidebar area');
+        $this->assertSame(2, $crawler->filter('.pa-sidebar')->count(), 'Sidebar area');
         $this->assertSame(1, $crawler->filter('.pa-main')->count(), 'Main area');
         $this->assertSame(1, $crawler->filter('.pa-footer')->count(), 'Footer area');
     }
@@ -64,7 +64,7 @@ final class CardControllerTest extends WebTestCase
         );
 
         $this->assertSame(1, $crawler->filter('.pa-header')->count(), 'Header area');
-        $this->assertSame(1, $crawler->filter('.pa-sidebar')->count(), 'Sidebar area');
+        $this->assertSame(2, $crawler->filter('.pa-sidebar')->count(), 'Sidebar area');
         $this->assertSame(1, $crawler->filter('.pa-main')->count(), 'Main area');
         $this->assertSame(1, $crawler->filter('.pa-footer')->count(), 'Footer area');
     }

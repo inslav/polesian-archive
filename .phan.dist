@@ -100,7 +100,7 @@ return [
         'PhanTypeInvalidThrowsIsTrait',
         'PhanTypeInvalidThrowsIsInterface',
         'PhanTypeMagicVoidWithReturn',
-//        'PhanTypeMismatchArgument',
+        'PhanTypeMismatchArgument',
         'PhanTypeMismatchArgumentInternal',
         'PhanPartialTypeMismatchArgument',
         'PhanPartialTypeMismatchArgumentInternal',
@@ -127,7 +127,7 @@ return [
         'PhanPartialTypeMismatchReturn',
         'PhanPossiblyNullTypeReturn',
         'PhanPossiblyFalseTypeReturn',
-        'PhanTypeMismatchDeclaredReturn',
+//        'PhanTypeMismatchDeclaredReturn', // Phan does not work with collection content type annotations
         'PhanTypeMismatchDeclaredReturnNullable',
         'PhanTypeMismatchDeclaredParam',
         'PhanTypeMismatchDeclaredParamNullable',

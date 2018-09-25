@@ -1,3 +1,7 @@
+<?php
+
+declare(strict_types=1);
+
 /*
  * This file is part of Polesian Archive.
  *
@@ -18,43 +22,27 @@
  * see <http://www.gnu.org/licenses/>.
  */
 
-@mixin sorted-column($isAsc){
-  &:after {
-    content: '';
-    width: 0;
-    height: 0;
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent;
-    position: absolute;
-    top: 50%;
-    margin-top: -2.5px;
-    margin-left: 5px;
+namespace App\Repository;
 
-    @if ($isAsc) {
-      border-bottom: 5px solid #2f2f2f;
-    } @else {
-      border-top: 5px solid #2f2f2f;
+use App\Entity\Keyword;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Symfony\Bridge\Doctrine\RegistryInterface;
+
+/**
+ * @method Keyword|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Keyword|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Keyword[]    findAll()
+ * @method Keyword[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ *
+ * @author Anton Dyshkant <vyshkant@gmail.com>
+ */
+final class KeywordRepository extends ServiceEntityRepository
+{
+    /**
+     * @param RegistryInterface $registry
+     */
+    public function __construct(RegistryInterface $registry)
+    {
+        parent::__construct($registry, Keyword::class);
     }
-  }
-}
-
-table {
-  th[data-vyfony-filterable-table-sortable] {
-    cursor: pointer;
-    position: relative;
-
-    &[data-vyfony-filterable-table-sort-order="asc"] {
-      @include sorted-column(true);
-    }
-
-    &[data-vyfony-filterable-table-sort-order="desc"] {
-      @include sorted-column(false);
-    }
-
-    &:not([data-vyfony-filterable-table-sort-order]) {
-      &:hover {
-        @include sorted-column(false);
-      }
-    }
-  }
 }

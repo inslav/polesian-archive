@@ -26,21 +26,29 @@ controller:
         village: Село
         question: Вопрос
         program: Программа
+      filter:
+        village: Село
+        program: Программа
+        resetButton: Сбросить фильтры
+        submitButton: Применить
     show:
       title: Карточка №
       card:
-        village: Село
-        raion: Район
-        oblast: Область
-        question: Вопрос
-        program: Программа
-        year: Год
-        text: Диалектный текст
-        description: Описание
-        keywords: Ключевые слова
-        terms: Термины
-        collectors: Собиратели
-        informers: Информаторы
+        value:
+          additionalQuestion: доп
+          villageRaionAndOblast: "village, raion район, oblast область"
+          question: "программа program, вопрос questionNumberquestionLetterpostfix"
+        label:
+          village: Село
+          question: Вопрос
+          program: Программа
+          year: Год
+          text: Диалектный текст
+          description: Описание
+          keywords: Ключевые слова
+          terms: Термины
+          collectors: Собиратели
+          informers: Информаторы
 
 page:
   label: База данных Полесского архива

@@ -24,6 +24,7 @@ declare(strict_types=1);
 
 namespace App\FilterableTable;
 
+use App\Entity\Card;
 use Vyfony\Bundle\FilterableTableBundle\Table\Configurator\AbstractTableConfigurator;
 use Vyfony\Bundle\FilterableTableBundle\Table\Metadata\Column\ColumnMetadata;
 use Vyfony\Bundle\FilterableTableBundle\Table\Metadata\Column\ColumnMetadataInterface;
@@ -42,19 +43,17 @@ final class CardsTableConfigurator extends AbstractTableConfigurator
             (new ColumnMetadata())
                 ->setName('id')
                 ->setIsIdentifier(true)
+                ->setIsSortable(true)
                 ->setLabel('controller.card.list.table.id'),
             (new ColumnMetadata())
                 ->setName('description')
                 ->setLabel('controller.card.list.table.description'),
             (new ColumnMetadata())
                 ->setName('village')
+                ->setValueExtractor(function (Card $card): string {
+                    return $card->getVillage()->getName();
+                })
                 ->setLabel('controller.card.list.table.village'),
-            (new ColumnMetadata())
-                ->setName('question')
-                ->setLabel('controller.card.list.table.question'),
-            (new ColumnMetadata())
-                ->setName('program')
-                ->setLabel('controller.card.list.table.program'),
         ];
     }
 

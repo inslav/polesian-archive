@@ -1,3 +1,7 @@
+<?php
+
+declare(strict_types=1);
+
 /*
  * This file is part of Polesian Archive.
  *
@@ -18,43 +22,30 @@
  * see <http://www.gnu.org/licenses/>.
  */
 
-@mixin sorted-column($isAsc){
-  &:after {
-    content: '';
-    width: 0;
-    height: 0;
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent;
-    position: absolute;
-    top: 50%;
-    margin-top: -2.5px;
-    margin-left: 5px;
+namespace App\DataFixtures;
 
-    @if ($isAsc) {
-      border-bottom: 5px solid #2f2f2f;
-    } @else {
-      border-top: 5px solid #2f2f2f;
+use App\Entity\Collector;
+use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\Persistence\ObjectManager;
+
+/**
+ * @author Anton Dyshkant <vyshkant@gmail.com>
+ */
+final class CollectorFixtures extends Fixture
+{
+    public const COLLECTOR_GURA_A_V = 'Гура А. В.';
+
+    /**
+     * @param ObjectManager $manager
+     */
+    public function load(ObjectManager $manager): void
+    {
+        $collector = (new Collector())
+            ->setName('Гура А. В.')
+        ;
+        $manager->persist($collector);
+        $this->addReference(self::COLLECTOR_GURA_A_V, $collector);
+
+        $manager->flush();
     }
-  }
-}
-
-table {
-  th[data-vyfony-filterable-table-sortable] {
-    cursor: pointer;
-    position: relative;
-
-    &[data-vyfony-filterable-table-sort-order="asc"] {
-      @include sorted-column(true);
-    }
-
-    &[data-vyfony-filterable-table-sort-order="desc"] {
-      @include sorted-column(false);
-    }
-
-    &:not([data-vyfony-filterable-table-sort-order]) {
-      &:hover {
-        @include sorted-column(false);
-      }
-    }
-  }
 }

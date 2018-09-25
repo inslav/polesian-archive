@@ -26,25 +26,49 @@ namespace App\DataFixtures;
 
 use App\Entity\Card;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
 /**
  * @author Anton Dyshkant <vyshkant@gmail.com>
  */
-final class CardFixtures extends Fixture
+final class CardFixtures extends Fixture implements DependentFixtureInterface
 {
     /**
      * @param ObjectManager $manager
      */
     public function load(ObjectManager $manager): void
     {
-        $card = new Card();
-        $card
-            ->setVillage('Барбаров')
-            ->setRaion('Мозырский')
-            ->setOblast('Гомельская')
-            ->setQuestion('10а')
-            ->setProgram('I')
+        $manager->persist($this->getCard1());
+
+        $manager->persist($this->getCard2());
+
+        $manager->flush();
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getDependencies(): array
+    {
+        return [
+            VillageFixtures::class,
+            QuestionFixtures::class,
+            KeywordFixtures::class,
+            TermFixtures::class,
+            CollectorFixtures::class,
+            InformerFixtures::class,
+        ];
+    }
+
+    /**
+     * @return Card
+     */
+    private function getCard1(): Card
+    {
+        return (new Card())
+            ->setVillage($this->getReference(VillageFixtures::VILLAGE_BARBAROV))
+            ->addQuestion($this->getReference(QuestionFixtures::PROGRAM_I_QUESTION_10A))
             ->setYear(1983)
             ->setText(<<<EOT
 [Поют] бáбу, як бая́ра иду́ть:
@@ -54,20 +78,34 @@ final class CardFixtures extends Fixture
 EOT
             )
             ->setDescription('Свадебная песня о сеянии невестой цветов-чернобривцев.')
-            ->setKeywords(['Невеста', 'Сажать', 'Свадебные песни', 'Цвести', 'Цветы'])
-            ->setTerms([])
-            ->setCollectors(['Гура А. В.'])
-            ->setInformers(['МСВ'])
+            ->setKeywords([
+                $this->getReference(KeywordFixtures::KEYWORD_NEVESTA),
+                $this->getReference(KeywordFixtures::KEYWORD_SAZHAT),
+                $this->getReference(KeywordFixtures::KEYWORD_SVADEBNYE_PESNI),
+                $this->getReference(KeywordFixtures::KEYWORD_TSVESTI),
+                $this->getReference(KeywordFixtures::KEYWORD_TSVETY),
+            ])
+            ->setTerms([
+                $this->getReference(TermFixtures::TERM_1),
+                $this->getReference(TermFixtures::TERM_2),
+            ])
+            ->setCollectors([
+                $this->getReference(CollectorFixtures::COLLECTOR_GURA_A_V),
+            ])
+            ->setInformers([
+                $this->getReference(InformerFixtures::INFORMER_MSV),
+            ])
         ;
-        $manager->persist($card);
+    }
 
-        $card = new Card();
-        $card
-            ->setVillage('Щедрогор')
-            ->setRaion('Ратновский')
-            ->setOblast('Волынская')
-            ->setQuestion('6')
-            ->setProgram('XI')
+    /**
+     * @return Card
+     */
+    private function getCard2(): Card
+    {
+        return (new Card())
+            ->setVillage($this->getReference(VillageFixtures::VILLAGE_SHCHEDROGOR))
+            ->addQuestion($this->getReference(QuestionFixtures::PROGRAM_XI_QUESTION_6))
             ->setYear(1979)
             ->setText(<<<EOT
 Кáжуть, што колосо́к був таке́й: скриз от поче́тку до верхá были колоски́, мобу́ть и де́сять колоски́в. Як люди прогреши́ли, то Госпо́дь так хоти́в, шоб вже не було́ людям ния́к жи́та. То Госпо́дь став брáти от спо́да, от зе́мни, так ссуне от низи́ до ве́рха. И стоя́в собáка и каже: "Гав, Го́споди, мени́ став [оставь]". А кот кáже: "Няв, а Го́споди, и мени́ став". И Госпо́дь стáви (аорист - С.Н.) по колоско́ви. И пшени́ца зро́ду ро́дит по одному́ колоску́. Стáры люди кáжуть, што грих би́ти собáку и котá, бо вони́ хле́ба вы́просили у Бога. (САВ)
@@ -77,34 +115,7 @@ EOT
             ->setKeywords([])
             ->setTerms([])
             ->setCollectors([])
-            ->setInformers(['САВ'])
+            ->setInformers([])
         ;
-        $manager->persist($card);
-
-        $card = new Card();
-        $card
-            ->setVillage('Выступовичи')
-            ->setRaion('Овручский')
-            ->setOblast('Житомирская')
-            ->setQuestion('16б')
-            ->setProgram('IV')
-            ->setYear(1981)
-            ->setText(<<<EOT
-Де́ти [коледовщики] хо́дят по хáте и пою́т:
-У нáшэй тётки зáйчик.
-Дáйти хли́ба крáйчик!"
-Им и дают пирогá.
-(ШАИ)
-EOT
-            )
-            ->setDescription('Дети колядут, им дают пирога.')
-            ->setKeywords([])
-            ->setTerms([])
-            ->setCollectors([])
-            ->setInformers(['ШАИ'])
-        ;
-        $manager->persist($card);
-
-        $manager->flush();
     }
 }

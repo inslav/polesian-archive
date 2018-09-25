@@ -36,6 +36,8 @@ see <http://www.gnu.org/licenses/>.
         <env name="APP_ENV" value="test" />
         <env name="APP_SECRET" value="not_so_secret" />
         <env name="DATABASE_URL" value="mysql://db_user:db_password@127.0.0.1:3306/db_name" />
+        <env name="MAILER_URL" value="null://localhost"/>
+        <env name="SYMFONY_DEPRECATIONS_HELPER" value="weak_vendors" />
     </php>
 
     <testsuites>

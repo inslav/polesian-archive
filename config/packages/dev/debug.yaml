@@ -16,34 +16,7 @@
 # a copy of the GNU General Public License along with Polesian Archive,
 # see <http://www.gnu.org/licenses/>.
 
-###> symfony/framework-bundle ###
-/.env
-/public/bundles/
-/var/
-/vendor/
-###< symfony/framework-bundle ###
-
-###> symfony/webpack-encore-pack ###
-/node_modules/
-/public/build/
-/npm-debug.log
-/yarn-error.log
-###< symfony/webpack-encore-pack ###
-
-###> symfony/phpunit-bridge ###
-/bin/.phpunit/
-/phpunit.xml
-###< symfony/phpunit-bridge ###
-
-###> symfony/web-server-bundle ###
-/.web-server-pid
-###< symfony/web-server-bundle ###
-
-###> friendsofphp/php-cs-fixer ###
-/.php_cs
-/.php_cs.cache
-###< friendsofphp/php-cs-fixer ###
-
-###> phpro/grumphp ###
-/grumphp.yml
-###< phpro/grumphp ###
+debug:
+    # Forwards VarDumper Data clones to a centralized server allowing to inspect dumps on CLI or in your browser.
+    # See the "server:dump" command to start a new server.
+    dump_destination: "tcp://%env(VAR_DUMPER_SERVER)%"

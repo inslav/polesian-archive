@@ -35,25 +35,64 @@ see <http://www.gnu.org/licenses/>.
 {% block page_content %}
     <table class="table table-bordered">
         <tbody>
-            {{ self.format_text_row('village', card.village) }}
-            {{ self.format_text_row('raion', card.raion) }}
-            {{ self.format_text_row('oblast', card.oblast) }}
-            {{ self.format_text_row('question', card.question) }}
-            {{ self.format_text_row('program', card.program) }}
+            {{ self.format_text_row('village', self.format_village(card.village)) }}
+            {{ self.format_text_row('question', self.format_questions(card.questions)) }}
             {{ self.format_text_row('year', card.year) }}
             {{ self.format_text_row('text', card.text|nl2br) }}
             {{ self.format_text_row('description', card.description) }}
-            {{ self.format_text_row('keywords', card.keywords|join(', ')) }}
-            {{ self.format_text_row('terms', card.terms|join(', ')) }}
-            {{ self.format_text_row('collectors', card.collectors|join(', ')) }}
-            {{ self.format_text_row('informers', card.informers|join(', ')) }}
+            {{ self.format_text_row('keywords', self.format_collection_of_named_entities('keywords', card.keywords)) }}
+            {{ self.format_text_row('terms', self.format_collection_of_named_entities('terms', card.terms)) }}
+            {{ self.format_text_row('informers', self.format_collection_of_named_entities('informers', card.informers)) }}
+            {{ self.format_text_row('collectors', self.format_collection_of_named_entities('collectors', card.collectors)) }}
         </tbody>
     </table>
 {% endblock %}
 
+{%- macro format_village(village) -%}
+
+    {% set villageTranslationData = {
+        'village': village.name,
+        'raion': village.raion,
+        'oblast': village.oblast
+    } %}
+
+    {{ 'controller.card.show.card.value.villageRaionAndOblast'|trans(villageTranslationData) }}
+{%- endmacro -%}
+
+{%- macro format_questions(questions) -%}
+
+    {% set formattedQuestions = [] %}
+
+    {% for question in questions %}
+
+        {% set questionTranslationData = {
+            'program': question.program.number,
+            'questionNumber': question.number,
+            'questionLetter': question.letter,
+            'postfix': question.isAdditional ? '-' ~ 'controller.card.show.card.value.additionalQuestion'|trans : ''
+        } %}
+
+        {% set formattedQuestions = formattedQuestions|merge(['controller.card.show.card.value.question'|trans(questionTranslationData)]) %}
+    {% endfor %}
+
+    {{ formattedQuestions|join('; ') }}
+{%- endmacro -%}
+
+{%- macro format_collection_of_named_entities(key, collection) -%}
+
+    {% set formattedEntities = [] %}
+
+    {% for entity in collection %}
+        {% set formattedEntities = formattedEntities|merge([entity.name]) %}
+    {% endfor %}
+
+    {{ formattedEntities|join(', ') }}
+{%- endmacro -%}
+
 {%- macro format_text_row(labelTranslationKey, content) -%}
     {% import _self as self %}
-    {{ self.fill_row(('controller.card.show.card.' ~ labelTranslationKey)|trans, content|default('-')) }}
+
+    {{ self.fill_row(('controller.card.show.card.label.' ~ labelTranslationKey)|trans, content|default('-')) }}
 {%- endmacro -%}
 
 {%- macro fill_row(thContent, tdContend) -%}
