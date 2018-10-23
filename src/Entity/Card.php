@@ -53,11 +53,11 @@ class Card
     private $village;
 
     /**
-     * @var bool
+     * @var string|null
      *
-     * @ORM\Column(type="boolean", options={"default": false})
+     * @ORM\Column(type="string", nullable=true)
      */
-    private $isHutor;
+    private $khutor;
 
     /**
      * @var Collection|Question[]
@@ -72,6 +72,13 @@ class Card
      * @ORM\Column(type="integer")
      */
     private $year;
+
+    /**
+     * @var Season
+     *
+     * @ORM\ManyToOne(targetEntity="App\Entity\Season", inversedBy="cards")
+     */
+    private $season;
 
     /**
      * @var string
@@ -117,7 +124,6 @@ class Card
 
     public function __construct()
     {
-        $this->isHutor = false;
         $this->questions = new ArrayCollection();
         $this->keywords = new ArrayCollection();
         $this->terms = new ArrayCollection();
@@ -154,21 +160,21 @@ class Card
     }
 
     /**
-     * @return bool|null
+     * @return string|null
      */
-    public function getIsHutor(): ?bool
+    public function getKhutor(): ?string
     {
-        return $this->isHutor;
+        return $this->khutor;
     }
 
     /**
-     * @param bool $isHutor
+     * @param string|null $khutor
      *
      * @return Card
      */
-    public function setIsHutor(bool $isHutor): self
+    public function setKhutor(?string $khutor): self
     {
-        $this->isHutor = $isHutor;
+        $this->khutor = $khutor;
 
         return $this;
     }
@@ -493,6 +499,26 @@ class Card
         if ($this->collectors->contains($collector)) {
             $this->collectors->removeElement($collector);
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Season|null
+     */
+    public function getSeason(): ?Season
+    {
+        return $this->season;
+    }
+
+    /**
+     * @param Season|null $season
+     *
+     * @return Card
+     */
+    public function setSeason(?Season $season): self
+    {
+        $this->season = $season;
 
         return $this;
     }

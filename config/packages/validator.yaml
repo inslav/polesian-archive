@@ -17,5 +17,5 @@
 # see <http://www.gnu.org/licenses/>.
 
 framework:
-    validation:
-        email_validation_mode: html5
+  validation:
+    email_validation_mode: html5

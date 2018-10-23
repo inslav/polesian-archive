@@ -17,5 +17,5 @@
 # see <http://www.gnu.org/licenses/>.
 
 sensio_framework_extra:
-    router:
-        annotations: false
+  router:
+    annotations: false

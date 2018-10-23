@@ -26,13 +26,12 @@ namespace App\DataFixtures;
 
 use App\Entity\Question;
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
 /**
  * @author Anton Dyshkant <vyshkant@gmail.com>
  */
-final class QuestionFixtures extends Fixture implements DependentFixtureInterface
+final class QuestionFixtures extends Fixture
 {
     public const PROGRAM_I_QUESTION_10A = 'I-10а';
 
@@ -44,32 +43,19 @@ final class QuestionFixtures extends Fixture implements DependentFixtureInterfac
     public function load(ObjectManager $manager): void
     {
         $question = (new Question())
-            ->setNumber(10)
-            ->setProgram($this->getReference(ProgramFixtures::PROGRAM_I))
-            ->setLetter('а')
-            ->setIsAdditional(false)
+            ->setProgramNumber('I')
+            ->setNumber('10а')
         ;
         $manager->persist($question);
         $this->addReference(self::PROGRAM_I_QUESTION_10A, $question);
 
         $question = (new Question())
-            ->setNumber(6)
-            ->setProgram($this->getReference(ProgramFixtures::PROGRAM_XI))
-            ->setIsAdditional(false)
+            ->setProgramNumber('XI')
+            ->setNumber('6')
         ;
         $manager->persist($question);
         $this->addReference(self::PROGRAM_XI_QUESTION_6, $question);
 
         $manager->flush();
-    }
-
-    /**
-     * @return string[]
-     */
-    public function getDependencies(): array
-    {
-        return [
-            ProgramFixtures::class,
-        ];
     }
 }

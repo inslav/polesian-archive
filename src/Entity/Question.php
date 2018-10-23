@@ -43,38 +43,18 @@ class Question
     private $id;
 
     /**
-     * @var int|null
+     * @var string
      *
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
     private $number;
 
     /**
-     * @var string|null
+     * @var string
      *
-     * @ORM\Column(type="string", nullable=true, length=255)
+     * @ORM\Column(type="string", length=255)
      */
-    private $letter;
-
-    /**
-     * @var bool
-     *
-     * @ORM\Column(type="boolean", options={"default": false})
-     */
-    private $isAdditional;
-
-    /**
-     * @var Program
-     *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Program", inversedBy="questions")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $program;
-
-    public function __construct()
-    {
-        $this->isAdditional = false;
-    }
+    private $programNumber;
 
     /**
      * @return int|null
@@ -85,19 +65,19 @@ class Question
     }
 
     /**
-     * @return int|null
+     * @return string|null
      */
-    public function getNumber(): ?int
+    public function getNumber(): ?string
     {
         return $this->number;
     }
 
     /**
-     * @param int $number
+     * @param string $number
      *
      * @return Question
      */
-    public function setNumber(int $number): self
+    public function setNumber(string $number): self
     {
         $this->number = $number;
 
@@ -107,59 +87,19 @@ class Question
     /**
      * @return string|null
      */
-    public function getLetter(): ?string
+    public function getProgramNumber(): ?string
     {
-        return $this->letter;
+        return $this->programNumber;
     }
 
     /**
-     * @param string $letter
+     * @param string $programNumber
      *
      * @return Question
      */
-    public function setLetter(string $letter): self
+    public function setProgramNumber(string $programNumber): self
     {
-        $this->letter = $letter;
-
-        return $this;
-    }
-
-    /**
-     * @return bool
-     */
-    public function getIsAdditional(): bool
-    {
-        return $this->isAdditional;
-    }
-
-    /**
-     * @param bool $isAdditional
-     *
-     * @return Question
-     */
-    public function setIsAdditional(bool $isAdditional): self
-    {
-        $this->isAdditional = $isAdditional;
-
-        return $this;
-    }
-
-    /**
-     * @return Program|null
-     */
-    public function getProgram(): ?Program
-    {
-        return $this->program;
-    }
-
-    /**
-     * @param Program|null $program
-     *
-     * @return Question
-     */
-    public function setProgram(?Program $program): self
-    {
-        $this->program = $program;
+        $this->programNumber = $programNumber;
 
         return $this;
     }

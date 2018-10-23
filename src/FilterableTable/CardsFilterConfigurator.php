@@ -24,10 +24,14 @@ declare(strict_types=1);
 
 namespace App\FilterableTable;
 
+use App\Entity\Collector;
+use App\Entity\Keyword;
+use App\Entity\Term;
 use App\Entity\Village;
 use Vyfony\Bundle\FilterableTableBundle\Filter\Configurator\AbstractFilterConfigurator;
 use Vyfony\Bundle\FilterableTableBundle\Filter\Configurator\Parameter\EntityChoiceParameter;
 use Vyfony\Bundle\FilterableTableBundle\Filter\Configurator\Parameter\FilterParameterInterface;
+use Vyfony\Bundle\FilterableTableBundle\Filter\Configurator\Parameter\JoinedEntityChoiceParameter;
 use Vyfony\Bundle\FilterableTableBundle\Filter\Configurator\Parameter\TableParameter\TableParameterInterface;
 use Vyfony\Bundle\FilterableTableBundle\Filter\Configurator\Restriction\FilterRestrictionInterface;
 
@@ -94,6 +98,24 @@ final class CardsFilterConfigurator extends AbstractFilterConfigurator
                 ->setChoiceLabel('name')
                 ->setPropertyName('village')
                 ->setLabel('controller.card.list.filter.village'),
+            (new JoinedEntityChoiceParameter())
+                ->setClass(Keyword::class)
+                ->setIsExpanded(false)
+                ->setChoiceLabel('name')
+                ->setPropertyName('keywords')
+                ->setLabel('controller.card.list.filter.keywords'),
+            (new JoinedEntityChoiceParameter())
+                ->setClass(Term::class)
+                ->setIsExpanded(false)
+                ->setChoiceLabel('name')
+                ->setPropertyName('terms')
+                ->setLabel('controller.card.list.filter.terms'),
+            (new JoinedEntityChoiceParameter())
+                ->setClass(Collector::class)
+                ->setIsExpanded(false)
+                ->setChoiceLabel('name')
+                ->setPropertyName('collectors')
+                ->setLabel('controller.card.list.filter.collectors'),
         ];
     }
 

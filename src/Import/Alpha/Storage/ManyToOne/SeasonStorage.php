@@ -22,38 +22,41 @@ declare(strict_types=1);
  * see <http://www.gnu.org/licenses/>.
  */
 
-namespace App\DataFixtures;
+namespace App\Import\Alpha\Storage\ManyToOne;
 
-use App\Entity\Program;
-use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Common\Persistence\ObjectManager;
+use App\Entity\Season;
+use App\Import\Alpha\Entity\AlphaCard;
 
 /**
  * @author Anton Dyshkant <vyshkant@gmail.com>
  */
-final class ProgramFixtures extends Fixture
+final class SeasonStorage extends AbstractManyToOneEntityStorage
 {
-    public const PROGRAM_I = 'I';
-
-    public const PROGRAM_XI = 'XI';
+    /**
+     * @param AlphaCard $alphaCard
+     *
+     * @return string|null
+     */
+    protected function getAlphaEntityKey(AlphaCard $alphaCard): ?string
+    {
+        return $this->valueConverter->getTrimmedOrNull($alphaCard->getSezon());
+    }
 
     /**
-     * @param ObjectManager $manager
+     * @param AlphaCard $alphaCard
+     *
+     * @return object|null
      */
-    public function load(ObjectManager $manager): void
+    protected function createEntity(AlphaCard $alphaCard): ?object
     {
-        $program = (new Program())
-            ->setNumber('I')
-        ;
-        $manager->persist($program);
-        $this->addReference(self::PROGRAM_I, $program);
+        $seasonName = $this->valueConverter->getTrimmedOrNull($alphaCard->getSezon());
 
-        $program = (new Program())
-            ->setNumber('XI')
-        ;
-        $manager->persist($program);
-        $this->addReference(self::PROGRAM_XI, $program);
+        if (null === $seasonName) {
+            return null;
+        }
 
-        $manager->flush();
+        return (new Season())
+            ->setName($seasonName)
+        ;
     }
 }

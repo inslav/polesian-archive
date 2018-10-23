@@ -17,5 +17,5 @@
 # see <http://www.gnu.org/licenses/>.
 
 framework:
-    assets:
-        json_manifest_path: '%kernel.project_dir%/public/build/manifest.json'
+  assets:
+    json_manifest_path: '%kernel.project_dir%/public/build/manifest.json'

@@ -35,9 +35,10 @@
         "symfony/web-link": "^4.1",
         "symfony/webpack-encore-pack": "*",
         "symfony/yaml": "^4.1",
-        "vyfony/filterable-table-bundle": "^0.1.0"
+        "vyfony/filterable-table-bundle": "^0.1.4"
     },
     "require-dev": {
+        "ext-pdo_sqlsrv": "*",
         "doctrine/doctrine-fixtures-bundle": "^3.0",
         "friendsofphp/php-cs-fixer": "^2.12",
         "jakub-onderka/php-parallel-lint": "^1.0",

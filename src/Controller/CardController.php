@@ -45,13 +45,13 @@ final class CardController extends Controller
      */
     public function list(): array
     {
-        $tableFilter = $this->container->get('vyfony_filterable_table.table_interface');
+        $filterableTable = $this->container->get('vyfony_filterable_table.table_interface');
 
         return [
             'controller' => 'card',
             'method' => 'list',
-            'filterForm' => $tableFilter->getFormView(),
-            'table' => $tableFilter->getTableMetadata(),
+            'filterForm' => $filterableTable->getFormView(),
+            'table' => $filterableTable->getTableMetadata(),
         ];
     }
 

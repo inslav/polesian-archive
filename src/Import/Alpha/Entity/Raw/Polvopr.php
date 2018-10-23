@@ -22,27 +22,22 @@ declare(strict_types=1);
  * see <http://www.gnu.org/licenses/>.
  */
 
-namespace App\Repository;
+namespace App\Import\Alpha\Entity\Raw;
 
-use App\Entity\Program;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Symfony\Bridge\Doctrine\RegistryInterface;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @method Program|null find($id, $lockMode = null, $lockVersion = null)
- * @method Program|null findOneBy(array $criteria, array $orderBy = null)
- * @method Program[]    findAll()
- * @method Program[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @ORM\Table(name="polvopr")
+ * @ORM\Entity()
  *
  * @author Anton Dyshkant <vyshkant@gmail.com>
  */
-final class ProgramRepository extends ServiceEntityRepository
+class Polvopr
 {
     /**
-     * @param RegistryInterface $registry
+     * @var string|null
+     *
+     * @ORM\Column(name="vopr", type="string", length=5, nullable=true, options={"fixed"=true})
      */
-    public function __construct(RegistryInterface $registry)
-    {
-        parent::__construct($registry, Program::class);
-    }
+    private $vopr;
 }

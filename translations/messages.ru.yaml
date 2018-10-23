@@ -21,23 +21,24 @@ controller:
     list:
       title: Список карточек
       table:
-        id: Идентификатор
+        id: Id
         description: Описание
         village: Село
         question: Вопрос
         program: Программа
       filter:
         village: Село
-        program: Программа
+        keywords: Ключевые слова
+        terms: Термины
+        collectors: Собиратели
         resetButton: Сбросить фильтры
         submitButton: Применить
     show:
       title: Карточка №
       card:
         value:
-          additionalQuestion: доп
           villageRaionAndOblast: "village, raion район, oblast область"
-          question: "программа program, вопрос questionNumberquestionLetterpostfix"
+          question: "программа programNumber, вопрос questionNumber"
         label:
           village: Село
           question: Вопрос

@@ -58,6 +58,7 @@ final class CardFixtures extends Fixture implements DependentFixtureInterface
             TermFixtures::class,
             CollectorFixtures::class,
             InformerFixtures::class,
+            SeasonFixtures::class,
         ];
     }
 
@@ -70,6 +71,7 @@ final class CardFixtures extends Fixture implements DependentFixtureInterface
             ->setVillage($this->getReference(VillageFixtures::VILLAGE_BARBAROV))
             ->addQuestion($this->getReference(QuestionFixtures::PROGRAM_I_QUESTION_10A))
             ->setYear(1983)
+            ->setSeason($this->getReference(SeasonFixtures::SEASON_SUMMER))
             ->setText(<<<EOT
 [Поют] бáбу, як бая́ра иду́ть:
 Насе́ю чэрнабри́ўцаў цэ́лую граду́,
@@ -107,6 +109,7 @@ EOT
             ->setVillage($this->getReference(VillageFixtures::VILLAGE_SHCHEDROGOR))
             ->addQuestion($this->getReference(QuestionFixtures::PROGRAM_XI_QUESTION_6))
             ->setYear(1979)
+            ->setSeason($this->getReference(SeasonFixtures::SEASON_WINTER))
             ->setText(<<<EOT
 Кáжуть, што колосо́к був таке́й: скриз от поче́тку до верхá были колоски́, мобу́ть и де́сять колоски́в. Як люди прогреши́ли, то Госпо́дь так хоти́в, шоб вже не було́ людям ния́к жи́та. То Госпо́дь став брáти от спо́да, от зе́мни, так ссуне от низи́ до ве́рха. И стоя́в собáка и каже: "Гав, Го́споди, мени́ став [оставь]". А кот кáже: "Няв, а Го́споди, и мени́ став". И Госпо́дь стáви (аорист - С.Н.) по колоско́ви. И пшени́ца зро́ду ро́дит по одному́ колоску́. Стáры люди кáжуть, што грих би́ти собáку и котá, бо вони́ хле́ба вы́просили у Бога. (САВ)
 EOT

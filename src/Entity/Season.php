@@ -29,11 +29,11 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\ProgramRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\SeasonRepository")
  *
  * @author Anton Dyshkant <vyshkant@gmail.com>
  */
-class Program
+class Season
 {
     /**
      * @var int
@@ -49,17 +49,18 @@ class Program
      *
      * @ORM\Column(type="string", length=255)
      */
-    private $number;
+    private $name;
 
     /**
-     * @var Collection|Question[]
-     * @ORM\OneToMany(targetEntity="App\Entity\Question", mappedBy="program", orphanRemoval=true)
+     * @var Collection|Card[]
+     *
+     * @ORM\OneToMany(targetEntity="App\Entity\Card", mappedBy="season")
      */
-    private $questions;
+    private $cards;
 
     public function __construct()
     {
-        $this->questions = new ArrayCollection();
+        $this->cards = new ArrayCollection();
     }
 
     /**
@@ -73,74 +74,57 @@ class Program
     /**
      * @return string|null
      */
-    public function getNumber(): ?string
+    public function getName(): ?string
     {
-        return $this->number;
+        return $this->name;
     }
 
     /**
-     * @param string $number
+     * @param string $name
      *
-     * @return Program
+     * @return Season
      */
-    public function setNumber(string $number): self
+    public function setName(string $name): self
     {
-        $this->number = $number;
+        $this->name = $name;
 
         return $this;
     }
 
     /**
-     * @return Collection|Question[]
+     * @return Collection|Card[]
      */
-    public function getQuestions(): Collection
+    public function getCards(): Collection
     {
-        return $this->questions;
+        return $this->cards;
     }
 
     /**
-     * @param iterable|Question[] $questions
+     * @param Card $card
      *
-     * @return Program
+     * @return Season
      */
-    public function setQuestions(iterable $questions): self
+    public function addCard(Card $card): self
     {
-        $this->questions = new ArrayCollection();
-
-        foreach ($questions as $question) {
-            $this->addQuestion($question);
+        if (!$this->cards->contains($card)) {
+            $this->cards[] = $card;
+            $card->setSeason($this);
         }
 
         return $this;
     }
 
     /**
-     * @param Question $question
+     * @param Card $card
      *
-     * @return Program
+     * @return Season
      */
-    public function addQuestion(Question $question): self
+    public function removeCard(Card $card): self
     {
-        if (!$this->questions->contains($question)) {
-            $this->questions[] = $question;
-            $question->setProgram($this);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @param Question $question
-     *
-     * @return Program
-     */
-    public function removeQuestion(Question $question): self
-    {
-        if ($this->questions->contains($question)) {
-            $this->questions->removeElement($question);
-
-            if ($question->getProgram() === $this) {
-                $question->setProgram(null);
+        if ($this->cards->contains($card)) {
+            $this->cards->removeElement($card);
+            if ($card->getSeason() === $this) {
+                $card->setSeason(null);
             }
         }
 

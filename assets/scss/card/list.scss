@@ -43,18 +43,27 @@ table {
     cursor: pointer;
     position: relative;
 
-    &[data-vyfony-filterable-table-sort-order="asc"] {
+    > a {
+      display: block;
+    }
+
+    &[data-vyfony-filterable-table-sort-order="asc"] > a {
       @include sorted-column(true);
     }
 
-    &[data-vyfony-filterable-table-sort-order="desc"] {
+    &[data-vyfony-filterable-table-sort-order="desc"] > a {
       @include sorted-column(false);
     }
 
     &:not([data-vyfony-filterable-table-sort-order]) {
-      &:hover {
+      &:hover > a {
         @include sorted-column(false);
       }
     }
+  }
+
+  th:nth-child(1),
+  td:nth-child(1) {
+    min-width: 50px;
   }
 }

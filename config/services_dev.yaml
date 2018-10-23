@@ -1,0 +1,37 @@
+services:
+  App\Import\Alpha\AlphaImporter:
+    arguments:
+      - '@Symfony\Bridge\Doctrine\RegistryInterface'
+      - '@App\Import\Alpha\ValueTrimmer\AlphaValueConverterInterface'
+      - '@App\Import\Alpha\Storage\ManyToOne\VillageStorage'
+      - '@App\Import\Alpha\Storage\ManyToOne\QuestionStorage'
+      - '@App\Import\Alpha\Storage\ManyToOne\SeasonStorage'
+      - '@App\Import\Alpha\Storage\ManyToMany\KeywordStorage'
+      - '@App\Import\Alpha\Storage\ManyToMany\TermStorage'
+      - '@App\Import\Alpha\Storage\ManyToMany\InformerStorage'
+      - '@App\Import\Alpha\Storage\ManyToMany\CollectorStorage'
+      - '@monolog.logger.alpha_import'
+
+  App\Import\Alpha\Storage\ManyToMany\CollectorStorage:
+    arguments:
+      - '@Symfony\Bridge\Doctrine\RegistryInterface'
+      - '@App\Import\Alpha\ValueTrimmer\AlphaValueConverterInterface'
+      - '@monolog.logger.alpha_import'
+
+  App\Import\Alpha\Storage\ManyToMany\InformerStorage:
+    arguments:
+      - '@Symfony\Bridge\Doctrine\RegistryInterface'
+      - '@App\Import\Alpha\ValueTrimmer\AlphaValueConverterInterface'
+      - '@monolog.logger.alpha_import'
+
+  App\Import\Alpha\Storage\ManyToMany\KeywordStorage:
+    arguments:
+      - '@Symfony\Bridge\Doctrine\RegistryInterface'
+      - '@App\Import\Alpha\ValueTrimmer\AlphaValueConverterInterface'
+      - '@monolog.logger.alpha_import'
+
+  App\Import\Alpha\Storage\ManyToMany\TermStorage:
+    arguments:
+      - '@Symfony\Bridge\Doctrine\RegistryInterface'
+      - '@App\Import\Alpha\ValueTrimmer\AlphaValueConverterInterface'
+      - '@monolog.logger.alpha_import'

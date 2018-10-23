@@ -66,10 +66,8 @@ see <http://www.gnu.org/licenses/>.
     {% for question in questions %}
 
         {% set questionTranslationData = {
-            'program': question.program.number,
+            'programNumber': question.programNumber,
             'questionNumber': question.number,
-            'questionLetter': question.letter,
-            'postfix': question.isAdditional ? '-' ~ 'controller.card.show.card.value.additionalQuestion'|trans : ''
         } %}
 
         {% set formattedQuestions = formattedQuestions|merge(['controller.card.show.card.value.question'|trans(questionTranslationData)]) %}

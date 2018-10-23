@@ -58,38 +58,6 @@ final class CardsTableConfigurator extends AbstractTableConfigurator
     }
 
     /**
-     * @return string
-     */
-    protected function getListRoute(): string
-    {
-        return 'card__list';
-    }
-
-    /**
-     * @return string
-     */
-    protected function getShowRoute(): string
-    {
-        return 'card__show';
-    }
-
-    /**
-     * @return string
-     */
-    protected function getDefaultSortBy(): string
-    {
-        return 'id';
-    }
-
-    /**
-     * @return string
-     */
-    protected function getDefaultSortOrder(): string
-    {
-        return 'asc';
-    }
-
-    /**
      * @return string[]
      */
     protected function getShowRouteParameters(): array
