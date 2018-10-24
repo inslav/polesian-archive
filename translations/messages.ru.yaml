@@ -31,6 +31,7 @@ controller:
         keywords: Ключевые слова
         terms: Термины
         collectors: Собиратели
+        year: Год
         resetButton: Сбросить фильтры
         submitButton: Применить
     show:

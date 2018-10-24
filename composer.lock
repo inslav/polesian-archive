@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "972c6e3a1728a9ffa0d81bf23c19d698",
+    "content-hash": "23bd5ab3f6b826f6c30558a1236ca930",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -4901,16 +4901,16 @@
         },
         {
             "name": "vyfony/filterable-table-bundle",
-            "version": "v0.1.5",
+            "version": "v0.1.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/vyfony/filterable-table-bundle.git",
-                "reference": "3b1a38b426002223f5d63a5fed67ce0f4951adf2"
+                "reference": "2d1eed2db151b55977d46fc4af51b38ffb941cce"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/vyfony/filterable-table-bundle/zipball/3b1a38b426002223f5d63a5fed67ce0f4951adf2",
-                "reference": "3b1a38b426002223f5d63a5fed67ce0f4951adf2",
+                "url": "https://api.github.com/repos/vyfony/filterable-table-bundle/zipball/2d1eed2db151b55977d46fc4af51b38ffb941cce",
+                "reference": "2d1eed2db151b55977d46fc4af51b38ffb941cce",
                 "shasum": ""
             },
             "require": {
@@ -4965,7 +4965,7 @@
                 "symfony-bundle",
                 "table"
             ],
-            "time": "2018-10-23T19:16:33+00:00"
+            "time": "2018-10-24T21:06:39+00:00"
         },
         {
             "name": "webmozart/assert",

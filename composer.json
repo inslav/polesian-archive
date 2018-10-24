@@ -35,7 +35,7 @@
         "symfony/web-link": "^4.1",
         "symfony/webpack-encore-pack": "*",
         "symfony/yaml": "^4.1",
-        "vyfony/filterable-table-bundle": "^0.1.4"
+        "vyfony/filterable-table-bundle": "^0.1.6"
     },
     "require-dev": {
         "ext-pdo_sqlsrv": "*",

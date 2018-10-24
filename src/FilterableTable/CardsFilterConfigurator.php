@@ -31,6 +31,7 @@ use App\Entity\Village;
 use Vyfony\Bundle\FilterableTableBundle\Filter\Configurator\AbstractFilterConfigurator;
 use Vyfony\Bundle\FilterableTableBundle\Filter\Configurator\Parameter\EntityChoiceParameter;
 use Vyfony\Bundle\FilterableTableBundle\Filter\Configurator\Parameter\FilterParameterInterface;
+use Vyfony\Bundle\FilterableTableBundle\Filter\Configurator\Parameter\IntegerChoiceParameter;
 use Vyfony\Bundle\FilterableTableBundle\Filter\Configurator\Parameter\JoinedEntityChoiceParameter;
 use Vyfony\Bundle\FilterableTableBundle\Filter\Configurator\Parameter\TableParameter\TableParameterInterface;
 use Vyfony\Bundle\FilterableTableBundle\Filter\Configurator\Restriction\FilterRestrictionInterface;
@@ -43,7 +44,7 @@ final class CardsFilterConfigurator extends AbstractFilterConfigurator
     /**
      * @return array
      */
-    public function factoryDefaultOptions(): array
+    public function createDefaults(): array
     {
         return [
             'label_attr' => ['class' => ''],
@@ -58,7 +59,7 @@ final class CardsFilterConfigurator extends AbstractFilterConfigurator
     /**
      * @return array
      */
-    public function factorySubmitButtonOptions(): array
+    public function createSubmitButtonOptions(): array
     {
         return [
             'attr' => ['class' => 'btn btn-default'],
@@ -69,7 +70,7 @@ final class CardsFilterConfigurator extends AbstractFilterConfigurator
     /**
      * @return array
      */
-    public function factoryResetButtonOptions(): array
+    public function createResetButtonOptions(): array
     {
         return [
             'attr' => ['class' => 'btn btn-default'],
@@ -80,7 +81,7 @@ final class CardsFilterConfigurator extends AbstractFilterConfigurator
     /**
      * @return FilterRestrictionInterface[]
      */
-    protected function factoryFilterRestrictions(): array
+    protected function createFilterRestrictions(): array
     {
         return [
         ];
@@ -89,7 +90,7 @@ final class CardsFilterConfigurator extends AbstractFilterConfigurator
     /**
      * @return FilterParameterInterface[]
      */
-    protected function factoryFilterParameters(): array
+    protected function createFilterParameters(): array
     {
         return [
             (new EntityChoiceParameter())
@@ -116,37 +117,18 @@ final class CardsFilterConfigurator extends AbstractFilterConfigurator
                 ->setChoiceLabel('name')
                 ->setPropertyName('collectors')
                 ->setLabel('controller.card.list.filter.collectors'),
+            (new IntegerChoiceParameter())
+                ->setLabel('controller.card.list.filter.year')
+                ->setPropertyName('year'),
         ];
     }
 
     /**
      * @return TableParameterInterface[]
      */
-    protected function factoryTableParameters(): array
+    protected function createTableParameters(): array
     {
         return [
-        ];
-    }
-
-    /**
-     * @return array
-     */
-    protected function factoryCommonFilterParameterOptions(): array
-    {
-        return [
-            'label_attr' => ['class' => ''],
-            'required' => false,
-        ];
-    }
-
-    /**
-     * @return array
-     */
-    protected function factoryCommonTableParameterOptions(): array
-    {
-        return [
-            'label_attr' => ['class' => ''],
-            'required' => true,
         ];
     }
 }
