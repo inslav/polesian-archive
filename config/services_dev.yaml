@@ -1,37 +1,48 @@
 services:
-  App\Import\Alpha\AlphaImporter:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  App\Command\ImportDb\:
+    resource: '../src/Command/ImportDb/*'
+
+  App\ImportDb\:
+    resource: '../src/ImportDb/*'
+
+  App\ImportDb\Alpha\AlphaImporter:
     arguments:
       - '@Symfony\Bridge\Doctrine\RegistryInterface'
-      - '@App\Import\Alpha\ValueTrimmer\AlphaValueConverterInterface'
-      - '@App\Import\Alpha\Storage\ManyToOne\VillageStorage'
-      - '@App\Import\Alpha\Storage\ManyToOne\QuestionStorage'
-      - '@App\Import\Alpha\Storage\ManyToOne\SeasonStorage'
-      - '@App\Import\Alpha\Storage\ManyToMany\KeywordStorage'
-      - '@App\Import\Alpha\Storage\ManyToMany\TermStorage'
-      - '@App\Import\Alpha\Storage\ManyToMany\InformerStorage'
-      - '@App\Import\Alpha\Storage\ManyToMany\CollectorStorage'
+      - '@App\ImportDb\Alpha\ValueTrimmer\AlphaValueConverterInterface'
+      - '@App\ImportDb\Alpha\Storage\ManyToOne\VillageStorage'
+      - '@App\ImportDb\Alpha\Storage\ManyToOne\QuestionStorage'
+      - '@App\ImportDb\Alpha\Storage\ManyToOne\SeasonStorage'
+      - '@App\ImportDb\Alpha\Storage\ManyToMany\KeywordStorage'
+      - '@App\ImportDb\Alpha\Storage\ManyToMany\TermStorage'
+      - '@App\ImportDb\Alpha\Storage\ManyToMany\InformerStorage'
+      - '@App\ImportDb\Alpha\Storage\ManyToMany\CollectorStorage'
       - '@monolog.logger.alpha_import'
 
-  App\Import\Alpha\Storage\ManyToMany\CollectorStorage:
+  App\ImportDb\Alpha\Storage\ManyToMany\CollectorStorage:
     arguments:
       - '@Symfony\Bridge\Doctrine\RegistryInterface'
-      - '@App\Import\Alpha\ValueTrimmer\AlphaValueConverterInterface'
+      - '@App\ImportDb\Alpha\ValueTrimmer\AlphaValueConverterInterface'
       - '@monolog.logger.alpha_import'
 
-  App\Import\Alpha\Storage\ManyToMany\InformerStorage:
+  App\ImportDb\Alpha\Storage\ManyToMany\InformerStorage:
     arguments:
       - '@Symfony\Bridge\Doctrine\RegistryInterface'
-      - '@App\Import\Alpha\ValueTrimmer\AlphaValueConverterInterface'
+      - '@App\ImportDb\Alpha\ValueTrimmer\AlphaValueConverterInterface'
       - '@monolog.logger.alpha_import'
 
-  App\Import\Alpha\Storage\ManyToMany\KeywordStorage:
+  App\ImportDb\Alpha\Storage\ManyToMany\KeywordStorage:
     arguments:
       - '@Symfony\Bridge\Doctrine\RegistryInterface'
-      - '@App\Import\Alpha\ValueTrimmer\AlphaValueConverterInterface'
+      - '@App\ImportDb\Alpha\ValueTrimmer\AlphaValueConverterInterface'
       - '@monolog.logger.alpha_import'
 
-  App\Import\Alpha\Storage\ManyToMany\TermStorage:
+  App\ImportDb\Alpha\Storage\ManyToMany\TermStorage:
     arguments:
       - '@Symfony\Bridge\Doctrine\RegistryInterface'
-      - '@App\Import\Alpha\ValueTrimmer\AlphaValueConverterInterface'
+      - '@App\ImportDb\Alpha\ValueTrimmer\AlphaValueConverterInterface'
       - '@monolog.logger.alpha_import'

@@ -17,23 +17,28 @@
 # see <http://www.gnu.org/licenses/>.
 
 parameters:
-  locale: 'ru'
+  env(ALPHA_DATABASE_NAME): ''
+  env(ALPHA_DATABASE_USER): ''
+  env(ALPHA_DATABASE_PASSWORD): ''
+  env(ALPHA_DATABASE_HOST): ''
 
-services:
-  _defaults:
-    autowire: true
-    autoconfigure: true
-    public: false
-
-  App\:
-    resource: '../src/*'
-    exclude: '../src/{Entity,Kernel.php,ImportDb,Command/ImportDb}'
-
-  App\Controller\:
-    resource: '../src/Controller'
-    tags: ['controller.service_arguments']
-
-  App\Menu\MenuBuilder:
-    arguments: ['@knp_menu.factory', '@request_stack']
-    tags:
-      - { name: knp_menu.menu_builder, method: createMainMenu, alias: main }
+doctrine:
+  dbal:
+    connections:
+      alpha:
+        driver: 'pdo_sqlsrv'
+        dbname: '%env(resolve:ALPHA_DATABASE_NAME)%'
+        user: '%env(resolve:ALPHA_DATABASE_USER)%'
+        password: '%env(resolve:ALPHA_DATABASE_PASSWORD)%'
+        host: '%env(resolve:ALPHA_DATABASE_HOST)%'
+  orm:
+    entity_managers:
+      alpha:
+        connection: alpha
+        mappings:
+          Alpha:
+            is_bundle: false
+            type: annotation
+            dir: '%kernel.project_dir%/src/ImportDb/Alpha/Entity'
+            prefix: 'App\ImportDb\Alpha\Entity'
+            alias: Alpha

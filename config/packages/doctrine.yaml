@@ -18,10 +18,6 @@
 
 parameters:
   env(DATABASE_URL): ''
-  env(ALPHA_DATABASE_NAME): ''
-  env(ALPHA_DATABASE_USER): ''
-  env(ALPHA_DATABASE_PASSWORD): ''
-  env(ALPHA_DATABASE_HOST): ''
 
 doctrine:
   dbal:
@@ -35,12 +31,6 @@ doctrine:
           charset: utf8mb4
           collate: utf8mb4_unicode_ci
         url: '%env(resolve:DATABASE_URL)%'
-      alpha:
-        driver: 'pdo_sqlsrv'
-        dbname: '%env(resolve:ALPHA_DATABASE_NAME)%'
-        user: '%env(resolve:ALPHA_DATABASE_USER)%'
-        password: '%env(resolve:ALPHA_DATABASE_PASSWORD)%'
-        host: '%env(resolve:ALPHA_DATABASE_HOST)%'
   orm:
     default_entity_manager: default
     auto_generate_proxy_classes: '%kernel.debug%'
@@ -56,12 +46,3 @@ doctrine:
             dir: '%kernel.project_dir%/src/Entity'
             prefix: 'App\Entity'
             alias: App
-      alpha:
-        connection: alpha
-        mappings:
-          Alpha:
-            is_bundle: false
-            type: annotation
-            dir: '%kernel.project_dir%/src/Import/Alpha/Entity'
-            prefix: 'App\Import\Alpha\Entity'
-            alias: Alpha
