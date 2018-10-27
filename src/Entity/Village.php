@@ -30,6 +30,9 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\VillageRepository")
+ * @ORM\Table(
+ *     uniqueConstraints={@ORM\UniqueConstraint(name="village_of_raion_of_oblast", columns={"name", "raion", "oblast"})}
+ * )
  *
  * @author Anton Dyshkant <vyshkant@gmail.com>
  */

@@ -32,6 +32,7 @@ use App\Entity\Question;
 use App\Entity\Term;
 use App\Entity\Village;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Vyfony\Bundle\FilterableTableBundle\Filter\Configurator\AbstractFilterConfigurator;
 use Vyfony\Bundle\FilterableTableBundle\Filter\Configurator\Parameter\CustomChoiceParameter;
@@ -106,6 +107,10 @@ final class CardsFilterConfigurator extends AbstractFilterConfigurator
                 ->setChoicesFactory(function (string $queryParameterName, EntityManager $entityManager): array {
                     $entityCollection = $entityManager->getRepository(Program::class)->findAll();
 
+                    usort($entityCollection, function (Program $a, Program $b): int {
+                        return strnatcmp($a->getNumber(), $b->getNumber());
+                    });
+
                     $choiceValueFactory = function (Program $program): int {
                         return $program->getId();
                     };
@@ -149,30 +154,44 @@ final class CardsFilterConfigurator extends AbstractFilterConfigurator
                 ->setChoiceLabelFactory(function (Question $question): string {
                     return $question->getProgram()->getNumber().'.'.$question->getNumber();
                 })
+                ->setSortValuesCallback(function (EntityRepository $repository): QueryBuilder {
+                    $questionAlias = 'question';
+                    $programAlias = 'program';
+
+                    return $repository
+                        ->createQueryBuilder($questionAlias)
+                        ->join($questionAlias.'.program', $programAlias)
+                        ->orderBy($programAlias.'.number', 'ASC')
+                        ->addOrderBy($questionAlias.'.number', 'ASC');
+                })
                 ->setQueryParameterName('questions')
                 ->setLabel('controller.card.list.filter.question'),
             (new EntityChoiceParameter())
                 ->setClass(Village::class)
                 ->setIsExpanded(false)
                 ->setChoiceLabel('name')
+                ->sortValues('name')
                 ->setQueryParameterName('village')
                 ->setLabel('controller.card.list.filter.village'),
             (new JoinedEntityChoiceParameter())
                 ->setClass(Keyword::class)
                 ->setIsExpanded(false)
                 ->setChoiceLabel('name')
+                ->sortValues('name')
                 ->setQueryParameterName('keywords')
                 ->setLabel('controller.card.list.filter.keywords'),
             (new JoinedEntityChoiceParameter())
                 ->setClass(Term::class)
                 ->setIsExpanded(false)
                 ->setChoiceLabel('name')
+                ->sortValues('name')
                 ->setQueryParameterName('terms')
                 ->setLabel('controller.card.list.filter.terms'),
             (new JoinedEntityChoiceParameter())
                 ->setClass(Collector::class)
                 ->setIsExpanded(false)
                 ->setChoiceLabel('name')
+                ->sortValues('name')
                 ->setQueryParameterName('collectors')
                 ->setLabel('controller.card.list.filter.collectors'),
             (new IntegerChoiceParameter())

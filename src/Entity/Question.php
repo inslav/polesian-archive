@@ -28,6 +28,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\QuestionRepository")
+ * @ORM\Table(uniqueConstraints={@ORM\UniqueConstraint(name="question_of_program", columns={"program", "number"})})
  *
  * @author Anton Dyshkant <vyshkant@gmail.com>
  */
@@ -43,13 +44,6 @@ class Question
     private $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(type="string", length=255)
-     */
-    private $number;
-
-    /**
      * @var Program
      *
      * @ORM\ManyToOne(targetEntity="App\Entity\Program", inversedBy="questions")
@@ -58,31 +52,18 @@ class Question
     private $program;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=255)
+     */
+    private $number;
+
+    /**
      * @return int|null
      */
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getNumber(): ?string
-    {
-        return $this->number;
-    }
-
-    /**
-     * @param string $number
-     *
-     * @return Question
-     */
-    public function setNumber(string $number): self
-    {
-        $this->number = $number;
-
-        return $this;
     }
 
     /**
@@ -101,6 +82,26 @@ class Question
     public function setProgram(?Program $program): self
     {
         $this->program = $program;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getNumber(): ?string
+    {
+        return $this->number;
+    }
+
+    /**
+     * @param string $number
+     *
+     * @return Question
+     */
+    public function setNumber(string $number): self
+    {
+        $this->number = $number;
 
         return $this;
     }
