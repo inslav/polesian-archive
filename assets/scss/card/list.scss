@@ -18,6 +18,8 @@
  * see <http://www.gnu.org/licenses/>.
  */
 
+@import "~bootstrap/scss/bootstrap";
+
 @mixin sorted-column($isAsc){
   &:after {
     content: '';
@@ -38,32 +40,50 @@
   }
 }
 
-table {
-  th[data-vyfony-filterable-table-sortable] {
-    cursor: pointer;
-    position: relative;
+main.pa-main {
+  table {
+    th[data-vyfony-filterable-table-sortable] {
+      cursor: pointer;
+      position: relative;
 
-    > a {
-      display: block;
-    }
+      > a {
+        display: block;
+      }
 
-    &[data-vyfony-filterable-table-sort-order="asc"] > a {
-      @include sorted-column(true);
-    }
+      &[data-vyfony-filterable-table-sort-order="asc"] > a {
+        @include sorted-column(true);
+      }
 
-    &[data-vyfony-filterable-table-sort-order="desc"] > a {
-      @include sorted-column(false);
-    }
-
-    &:not([data-vyfony-filterable-table-sort-order]) {
-      &:hover > a {
+      &[data-vyfony-filterable-table-sort-order="desc"] > a {
         @include sorted-column(false);
       }
+
+      &:not([data-vyfony-filterable-table-sort-order]) {
+        &:hover > a {
+          @include sorted-column(false);
+        }
+      }
+    }
+
+    th:nth-child(1),
+    td:nth-child(1) {
+      min-width: 50px;
     }
   }
 
-  th:nth-child(1),
-  td:nth-child(1) {
-    min-width: 50px;
+  form {
+    .vyfony-filterable-table-bundle--form-group {
+      @extend .col-4;
+    }
+
+    .vyfony-filterable-table-bundle--button-form-group {
+      padding-right: 15px;
+      padding-left: 15px;
+    }
+  }
+
+  ul {
+    margin-left: auto;
+    margin-right: auto;
   }
 }
