@@ -24,16 +24,22 @@ declare(strict_types=1);
 
 namespace App\FilterableTable;
 
+use App\Entity\Card;
 use App\Entity\Collector;
 use App\Entity\Keyword;
+use App\Entity\Program;
+use App\Entity\Question;
 use App\Entity\Term;
 use App\Entity\Village;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\QueryBuilder;
 use Vyfony\Bundle\FilterableTableBundle\Filter\Configurator\AbstractFilterConfigurator;
-use Vyfony\Bundle\FilterableTableBundle\Filter\Configurator\Parameter\EntityChoiceParameter;
+use Vyfony\Bundle\FilterableTableBundle\Filter\Configurator\Parameter\CustomChoiceParameter;
+use Vyfony\Bundle\FilterableTableBundle\Filter\Configurator\Parameter\EntityChoice\EntityChoiceParameter;
+use Vyfony\Bundle\FilterableTableBundle\Filter\Configurator\Parameter\EntityChoice\JoinedEntityChoiceParameter;
 use Vyfony\Bundle\FilterableTableBundle\Filter\Configurator\Parameter\FilterParameterInterface;
 use Vyfony\Bundle\FilterableTableBundle\Filter\Configurator\Parameter\IntegerChoiceParameter;
-use Vyfony\Bundle\FilterableTableBundle\Filter\Configurator\Parameter\JoinedEntityChoiceParameter;
-use Vyfony\Bundle\FilterableTableBundle\Filter\Configurator\Parameter\TableParameter\TableParameterInterface;
+use Vyfony\Bundle\FilterableTableBundle\Filter\Configurator\Parameter\Table\TableParameterInterface;
 use Vyfony\Bundle\FilterableTableBundle\Filter\Configurator\Restriction\FilterRestrictionInterface;
 
 /**
@@ -93,33 +99,83 @@ final class CardsFilterConfigurator extends AbstractFilterConfigurator
     protected function createFilterParameters(): array
     {
         return [
+            (new CustomChoiceParameter())
+                ->setChoicesFactory(function (string $queryParameterName, EntityManager $entityManager): array {
+                    $entityCollection = $entityManager->getRepository(Program::class)->findAll();
+
+                    $choiceValueFactory = function (Program $program): int {
+                        return $program->getId();
+                    };
+
+                    $choiceLabelFactory = function (Program $program): string {
+                        return $program->getNumber();
+                    };
+
+                    $values = array_map($choiceValueFactory, $entityCollection);
+                    $labels = array_map($choiceLabelFactory, $entityCollection);
+
+                    return array_combine($labels, $values);
+                })
+                ->setQueryFactory(
+                    function (
+                        string $queryParameterName,
+                        QueryBuilder $queryBuilder,
+                        array $formData,
+                        string $entityAlias
+                    ): ?string {
+                        if (0 === \count($formData[$queryParameterName])) {
+                            return null;
+                        }
+
+                        $questionAlias = 'question';
+                        $programAlias = 'program';
+
+                        $queryBuilder
+                            ->innerJoin($entityAlias.'.questions', $questionAlias)
+                            ->innerJoin($questionAlias.'.program', $programAlias)
+                        ;
+
+                        return (string) $queryBuilder->expr()->in($programAlias.'.id', $formData[$queryParameterName]);
+                    }
+                )
+                ->setQueryParameterName('program')
+                ->setLabel('controller.card.list.filter.program'),
+            (new JoinedEntityChoiceParameter())
+                ->setClass(Question::class)
+                ->setIsExpanded(false)
+                ->setChoiceLabelFactory(function (Question $question): string {
+                    return $question->getProgram()->getNumber().'.'.$question->getNumber();
+                })
+                ->setQueryParameterName('questions')
+                ->setLabel('controller.card.list.filter.question'),
             (new EntityChoiceParameter())
                 ->setClass(Village::class)
                 ->setIsExpanded(false)
                 ->setChoiceLabel('name')
-                ->setPropertyName('village')
+                ->setQueryParameterName('village')
                 ->setLabel('controller.card.list.filter.village'),
             (new JoinedEntityChoiceParameter())
                 ->setClass(Keyword::class)
                 ->setIsExpanded(false)
                 ->setChoiceLabel('name')
-                ->setPropertyName('keywords')
+                ->setQueryParameterName('keywords')
                 ->setLabel('controller.card.list.filter.keywords'),
             (new JoinedEntityChoiceParameter())
                 ->setClass(Term::class)
                 ->setIsExpanded(false)
                 ->setChoiceLabel('name')
-                ->setPropertyName('terms')
+                ->setQueryParameterName('terms')
                 ->setLabel('controller.card.list.filter.terms'),
             (new JoinedEntityChoiceParameter())
                 ->setClass(Collector::class)
                 ->setIsExpanded(false)
                 ->setChoiceLabel('name')
-                ->setPropertyName('collectors')
+                ->setQueryParameterName('collectors')
                 ->setLabel('controller.card.list.filter.collectors'),
             (new IntegerChoiceParameter())
+                ->setClass(Card::class)
                 ->setLabel('controller.card.list.filter.year')
-                ->setPropertyName('year'),
+                ->setQueryParameterName('year'),
         ];
     }
 

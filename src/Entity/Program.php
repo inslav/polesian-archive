@@ -24,14 +24,16 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\QuestionRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\ProgramRepository")
  *
  * @author Anton Dyshkant <vyshkant@gmail.com>
  */
-class Question
+class Program
 {
     /**
      * @var int
@@ -50,12 +52,16 @@ class Question
     private $number;
 
     /**
-     * @var Program
+     * @var Collection|Question[]
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Program", inversedBy="questions")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\OneToMany(targetEntity="App\Entity\Question", mappedBy="program", orphanRemoval=true)
      */
-    private $program;
+    private $questions;
+
+    public function __construct()
+    {
+        $this->questions = new ArrayCollection();
+    }
 
     /**
      * @return int|null
@@ -76,7 +82,7 @@ class Question
     /**
      * @param string $number
      *
-     * @return Question
+     * @return Program
      */
     public function setNumber(string $number): self
     {
@@ -86,21 +92,41 @@ class Question
     }
 
     /**
-     * @return Program|null
+     * @return Collection|Question[]
      */
-    public function getProgram(): ?Program
+    public function getQuestions(): Collection
     {
-        return $this->program;
+        return $this->questions;
     }
 
     /**
-     * @param Program|null $program
+     * @param Question $question
      *
-     * @return Question
+     * @return Program
      */
-    public function setProgram(?Program $program): self
+    public function addQuestion(Question $question): self
     {
-        $this->program = $program;
+        if (!$this->questions->contains($question)) {
+            $this->questions[] = $question;
+            $question->setProgram($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param Question $question
+     *
+     * @return Program
+     */
+    public function removeQuestion(Question $question): self
+    {
+        if ($this->questions->contains($question)) {
+            $this->questions->removeElement($question);
+            if ($question->getProgram() === $this) {
+                $question->setProgram(null);
+            }
+        }
 
         return $this;
     }

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "23bd5ab3f6b826f6c30558a1236ca930",
+    "content-hash": "2bb11e13fadd5f92bda0102535c9643d",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -2044,16 +2044,16 @@
         },
         {
             "name": "sensio/framework-extra-bundle",
-            "version": "v5.2.1",
+            "version": "v5.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/SensioFrameworkExtraBundle.git",
-                "reference": "535b56b7b0325e87b15b9c57bd3631ae2a0b9f16"
+                "reference": "9ef408febe2f12e70118ef61c6515035a06c5830"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/SensioFrameworkExtraBundle/zipball/535b56b7b0325e87b15b9c57bd3631ae2a0b9f16",
-                "reference": "535b56b7b0325e87b15b9c57bd3631ae2a0b9f16",
+                "url": "https://api.github.com/repos/sensiolabs/SensioFrameworkExtraBundle/zipball/9ef408febe2f12e70118ef61c6515035a06c5830",
+                "reference": "9ef408febe2f12e70118ef61c6515035a06c5830",
                 "shasum": ""
             },
             "require": {
@@ -2111,7 +2111,7 @@
                 "annotations",
                 "controllers"
             ],
-            "time": "2018-09-30T05:16:57+00:00"
+            "time": "2018-10-26T14:09:02+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -4901,16 +4901,16 @@
         },
         {
             "name": "vyfony/filterable-table-bundle",
-            "version": "v0.1.6",
+            "version": "v0.1.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/vyfony/filterable-table-bundle.git",
-                "reference": "2d1eed2db151b55977d46fc4af51b38ffb941cce"
+                "reference": "c368b7f32d682cb424cd23bb5f1dc9202df17338"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/vyfony/filterable-table-bundle/zipball/2d1eed2db151b55977d46fc4af51b38ffb941cce",
-                "reference": "2d1eed2db151b55977d46fc4af51b38ffb941cce",
+                "url": "https://api.github.com/repos/vyfony/filterable-table-bundle/zipball/c368b7f32d682cb424cd23bb5f1dc9202df17338",
+                "reference": "c368b7f32d682cb424cd23bb5f1dc9202df17338",
                 "shasum": ""
             },
             "require": {
@@ -4965,7 +4965,7 @@
                 "symfony-bundle",
                 "table"
             ],
-            "time": "2018-10-24T21:06:39+00:00"
+            "time": "2018-10-27T16:14:21+00:00"
         },
         {
             "name": "webmozart/assert",

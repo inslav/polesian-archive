@@ -32,6 +32,8 @@ controller:
         terms: Термины
         collectors: Собиратели
         year: Год
+        program: Программа
+        question: Вопрос
         resetButton: Сбросить фильтры
         submitButton: Применить
     show:
