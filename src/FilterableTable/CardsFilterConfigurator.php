@@ -39,8 +39,11 @@ use Vyfony\Bundle\FilterableTableBundle\Filter\Configurator\Parameter\EntityChoi
 use Vyfony\Bundle\FilterableTableBundle\Filter\Configurator\Parameter\EntityChoice\JoinedEntityChoiceParameter;
 use Vyfony\Bundle\FilterableTableBundle\Filter\Configurator\Parameter\FilterParameterInterface;
 use Vyfony\Bundle\FilterableTableBundle\Filter\Configurator\Parameter\IntegerChoiceParameter;
+use Vyfony\Bundle\FilterableTableBundle\Filter\Configurator\Parameter\Table\RadioColumnChoiceTableParameter;
+use Vyfony\Bundle\FilterableTableBundle\Filter\Configurator\Parameter\Table\RadioOption\RadioOption;
 use Vyfony\Bundle\FilterableTableBundle\Filter\Configurator\Parameter\Table\TableParameterInterface;
 use Vyfony\Bundle\FilterableTableBundle\Filter\Configurator\Restriction\FilterRestrictionInterface;
+use Vyfony\Bundle\FilterableTableBundle\Table\Metadata\Column\ColumnMetadata;
 
 /**
  * @author Anton Dyshkant <vyshkant@gmail.com>
@@ -185,6 +188,29 @@ final class CardsFilterConfigurator extends AbstractFilterConfigurator
     protected function createTableParameters(): array
     {
         return [
+            (new RadioColumnChoiceTableParameter())
+                ->addRadioOption(
+                    (new RadioOption())
+                        ->setName('description')
+                        ->setLabel('controller.card.list.filter.dataColumn.option.description')
+                        ->setColumnMetadata(
+                            (new ColumnMetadata())
+                                ->setName('description')
+                                ->setLabel('controller.card.list.table.description')
+                        )
+                )
+                ->addRadioOption(
+                    (new RadioOption())
+                        ->setName('text')
+                        ->setLabel('controller.card.list.filter.dataColumn.option.text')
+                        ->setColumnMetadata(
+                            (new ColumnMetadata())
+                                ->setName('text')
+                                ->setLabel('controller.card.list.table.text')
+                        )
+                )
+                ->setQueryParameterName('dataColumn')
+                ->setLabel('controller.card.list.filter.dataColumn.label'),
         ];
     }
 }

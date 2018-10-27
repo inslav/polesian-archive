@@ -23,17 +23,23 @@ controller:
       table:
         id: Id
         description: Описание
+        text: Диалектный текст
         village: Село
         question: Вопрос
         program: Программа
       filter:
+        program: Программа
+        question: Вопрос
         village: Село
         keywords: Ключевые слова
         terms: Термины
         collectors: Собиратели
         year: Год
-        program: Программа
-        question: Вопрос
+        dataColumn:
+          label: Колонка с данными
+          option:
+            text: Диалектный текст
+            description: Описание
         resetButton: Сбросить фильтры
         submitButton: Применить
     show:

@@ -46,9 +46,6 @@ final class CardsTableConfigurator extends AbstractTableConfigurator
                 ->setIsSortable(true)
                 ->setLabel('controller.card.list.table.id'),
             (new ColumnMetadata())
-                ->setName('description')
-                ->setLabel('controller.card.list.table.description'),
-            (new ColumnMetadata())
                 ->setName('village')
                 ->setValueExtractor(function (Card $card): string {
                     return $card->getVillage()->getName();
