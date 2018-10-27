@@ -250,7 +250,7 @@ return [
         'PhanAccessPropertyProtected',
         'PhanAccessMethodPrivate',
         'PhanAccessMethodPrivateWithCallMagicMethod',
-        'PhanAccessMethodProtected',
+//        'PhanAccessMethodProtected', Phan does not understand the call of protected method declared in common parent class
         'PhanAccessMethodProtectedWithCallMagicMethod',
         'PhanAccessSignatureMismatch',
         'PhanAccessSignatureMismatchInternal',

@@ -24,35 +24,14 @@ declare(strict_types=1);
 
 namespace App\ImportDb\Alpha\Storage\ManyToOne;
 
-use App\Entity\Question;
+use App\Entity\Program;
 use App\ImportDb\Alpha\Entity\AlphaCard;
-use App\ImportDb\Alpha\ValueTrimmer\AlphaValueConverterInterface;
-use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
  * @author Anton Dyshkant <vyshkant@gmail.com>
  */
-final class QuestionStorage extends AbstractManyToOneEntityStorage
+final class ProgramStorage extends AbstractManyToOneEntityStorage
 {
-    /**
-     * @var ProgramStorage
-     */
-    private $programStorage;
-
-    /**
-     * @param RegistryInterface            $doctrine
-     * @param AlphaValueConverterInterface $valueConverter
-     * @param ProgramStorage               $programStorage
-     */
-    public function __construct(
-        RegistryInterface $doctrine,
-        AlphaValueConverterInterface $valueConverter,
-        ProgramStorage $programStorage
-    ) {
-        parent::__construct($doctrine, $valueConverter);
-        $this->programStorage = $programStorage;
-    }
-
     /**
      * @param AlphaCard $alphaCard
      *
@@ -60,9 +39,7 @@ final class QuestionStorage extends AbstractManyToOneEntityStorage
      */
     protected function getAlphaEntityKey(AlphaCard $alphaCard): ?string
     {
-        return $this->valueConverter->getTrimmed(
-            $this->programStorage->getAlphaEntityKey($alphaCard).$alphaCard->getNvopr()
-        );
+        return $this->valueConverter->getTrimmed($alphaCard->getNprog());
     }
 
     /**
@@ -72,9 +49,8 @@ final class QuestionStorage extends AbstractManyToOneEntityStorage
      */
     protected function createEntity(AlphaCard $alphaCard): ?object
     {
-        return (new Question())
-            ->setProgram($this->programStorage->getEntity($alphaCard))
-            ->setNumber($this->valueConverter->getTrimmed($alphaCard->getNvopr()))
+        return (new Program())
+            ->setNumber($this->valueConverter->getTrimmed($alphaCard->getNprog()))
         ;
     }
 }
