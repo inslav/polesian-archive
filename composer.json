@@ -16,6 +16,7 @@
     "require": {
         "php": "^7.2.8",
         "ext-iconv": "*",
+        "ext-json": "*",
         "knplabs/knp-menu-bundle": "^2.2",
         "sensio/framework-extra-bundle": "^5.2",
         "symfony/asset": "^4.1",
@@ -35,7 +36,7 @@
         "symfony/web-link": "^4.1",
         "symfony/webpack-encore-pack": "*",
         "symfony/yaml": "^4.1",
-        "vyfony/filterable-table-bundle": "^0.1.9"
+        "vyfony/filterable-table-bundle": "^0.1.11"
     },
     "require-dev": {
         "ext-pdo_sqlsrv": "*",

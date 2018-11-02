@@ -89,6 +89,14 @@ final class CardsFilterConfigurator extends AbstractFilterConfigurator
     }
 
     /**
+     * @return string
+     */
+    public function getDisablePaginationLabel(): string
+    {
+        return 'controller.card.list.filter.disablePaginator';
+    }
+
+    /**
      * @return FilterRestrictionInterface[]
      */
     protected function createFilterRestrictions(): array

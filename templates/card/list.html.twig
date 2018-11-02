@@ -28,9 +28,20 @@ see <http://www.gnu.org/licenses/>.
 {% endblock %}
 
 {%- block page_content -%}
+
     {% import '@VyfonyFilterableTable/filterable_table.html.twig' as filterable_table %}
-    {{ filterable_table.render_filter(filterForm, '@VyfonyFilterableTable/filterable_table_form_layout.html.twig') }}
+
+    {{ filterable_table.render_filter(filterForm) }}
+
     <div class="row">
         {{ filterable_table.render_table(table) }}
+    </div>
+
+    <div class="row">
+        {{ filterable_table.render_paginator(table) }}
+    </div>
+
+    <div class="row">
+        {{ filterable_table.render_checkbox_handlers(table) }}
     </div>
 {%- endblock -%}

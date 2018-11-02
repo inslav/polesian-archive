@@ -25,6 +25,7 @@ declare(strict_types=1);
 namespace App\FilterableTable;
 
 use App\Entity\Card;
+use Vyfony\Bundle\FilterableTableBundle\Table\Checkbox\CheckboxHandler;
 use Vyfony\Bundle\FilterableTableBundle\Table\Configurator\AbstractTableConfigurator;
 use Vyfony\Bundle\FilterableTableBundle\Table\Metadata\Column\ColumnMetadata;
 use Vyfony\Bundle\FilterableTableBundle\Table\Metadata\Column\ColumnMetadataInterface;
@@ -37,7 +38,7 @@ final class CardsTableConfigurator extends AbstractTableConfigurator
     /**
      * @return ColumnMetadataInterface[]
      */
-    protected function factoryColumnMetadataCollection(): array
+    protected function createColumnMetadataCollection(): array
     {
         return [
             (new ColumnMetadata())
@@ -55,10 +56,12 @@ final class CardsTableConfigurator extends AbstractTableConfigurator
     }
 
     /**
-     * @return string[]
+     * @return array
      */
-    protected function getShowRouteParameters(): array
+    protected function createCheckboxHandlers(): array
     {
-        return ['id' => 'id'];
+        return [
+            new CheckboxHandler('filterable_table__download_txt', 'controller.card.list.download.txt'),
+        ];
     }
 }
