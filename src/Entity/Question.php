@@ -28,7 +28,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\QuestionRepository")
- * @ORM\Table(uniqueConstraints={@ORM\UniqueConstraint(name="question_of_program", columns={"program", "number"})})
+ * @ORM\Table(uniqueConstraints={@ORM\UniqueConstraint(name="question_of_program", columns={"program_id", "number"})})
  *
  * @author Anton Dyshkant <vyshkant@gmail.com>
  */

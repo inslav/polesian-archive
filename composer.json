@@ -21,6 +21,7 @@
         "sensio/framework-extra-bundle": "^5.2",
         "symfony/asset": "^4.1",
         "symfony/console": "^4.1",
+        "symfony/dotenv": "^4.1",
         "symfony/expression-language": "^4.1",
         "symfony/flex": "^1.0",
         "symfony/form": "^4.1",
@@ -39,7 +40,6 @@
         "vyfony/filterable-table-bundle": "^0.1.11"
     },
     "require-dev": {
-        "ext-pdo_sqlsrv": "*",
         "doctrine/doctrine-fixtures-bundle": "^3.0",
         "friendsofphp/php-cs-fixer": "^2.12",
         "jakub-onderka/php-parallel-lint": "^1.0",
@@ -51,7 +51,6 @@
         "symfony/browser-kit": "^4.1",
         "symfony/css-selector": "^4.1",
         "symfony/debug-pack": "*",
-        "symfony/dotenv": "^4.1",
         "symfony/maker-bundle": "^1.6",
         "symfony/phpunit-bridge": "^4.1",
         "symfony/profiler-pack": "*",
