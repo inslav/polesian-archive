@@ -17,6 +17,7 @@
         "php": "^7.2.8",
         "ext-iconv": "*",
         "ext-json": "*",
+        "doctrine/doctrine-fixtures-bundle": "^3.0",
         "knplabs/knp-menu-bundle": "^2.2",
         "sensio/framework-extra-bundle": "^5.2",
         "sensiolabs/security-checker": "^5.0",
@@ -41,7 +42,6 @@
         "vyfony/filterable-table-bundle": "^0.1.11"
     },
     "require-dev": {
-        "doctrine/doctrine-fixtures-bundle": "^3.0",
         "friendsofphp/php-cs-fixer": "^2.12",
         "jakub-onderka/php-parallel-lint": "^1.0",
         "phan/phan": "^0.12.15",
