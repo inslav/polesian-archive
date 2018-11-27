@@ -29,5 +29,8 @@ namespace App\ImportDb\Alpha;
  */
 interface AlphaImporterInterface
 {
-    public function import(): void;
+    /**
+     * @param string $pathToSkippedAlphaCardsLogFile
+     */
+    public function import(string $pathToSkippedAlphaCardsLogFile): void;
 }

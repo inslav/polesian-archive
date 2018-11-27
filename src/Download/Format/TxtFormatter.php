@@ -24,17 +24,41 @@ declare(strict_types=1);
 
 namespace App\Download\Format;
 
+use App\Converter\QuestionToQuestionNumberConverter;
 use App\Entity\Card;
 use App\Entity\Collector;
 use App\Entity\Keyword;
 use App\Entity\Question;
 use App\Entity\Term;
+use App\Import\Program\Question\Number\Formatter\QuestionNumberFormatterInterface;
 
 /**
  * @author Anton Dyshkant <vyshkant@gmail.com>
  */
 final class TxtFormatter implements FormatterInterface
 {
+    /**
+     * @var QuestionToQuestionNumberConverter
+     */
+    private $questionToQuestionNumberConverter;
+
+    /**
+     * @var QuestionNumberFormatterInterface
+     */
+    private $questionNumberFormatter;
+
+    /**
+     * @param QuestionToQuestionNumberConverter $questionToQuestionNumberConverter
+     * @param QuestionNumberFormatterInterface  $questionNumberFormatter
+     */
+    public function __construct(
+        QuestionToQuestionNumberConverter $questionToQuestionNumberConverter,
+        QuestionNumberFormatterInterface $questionNumberFormatter
+    ) {
+        $this->questionToQuestionNumberConverter = $questionToQuestionNumberConverter;
+        $this->questionNumberFormatter = $questionNumberFormatter;
+    }
+
     /**
      * @param Card[]|array $cards
      *
@@ -81,10 +105,8 @@ final class TxtFormatter implements FormatterInterface
             $card
                 ->getQuestions()
                 ->map(function (Question $question): string {
-                    return sprintf(
-                        '%s.%s',
-                        $question->getProgram()->getNumber(),
-                        $question->getNumber()
+                    return $this->questionNumberFormatter->format(
+                        $this->questionToQuestionNumberConverter->convert($question)
                     );
                 })
                 ->toArray()

@@ -47,7 +47,7 @@ final class InformerStorage extends AbstractManyToManyEntityStorage
      */
     protected function getAlphaEntityKey(object $alphaEntity): string
     {
-        return $alphaEntity->getInformator();
+        return mb_strtoupper($this->valueConverter->getTrimmed($alphaEntity->getInformator()));
     }
 
     /**
@@ -63,12 +63,12 @@ final class InformerStorage extends AbstractManyToManyEntityStorage
     /**
      * @param object|AlphaInformer $alphaEntity
      *
-     * @return object
+     * @return object|Informer
      */
     protected function createEntity(object $alphaEntity): object
     {
         return (new Informer())
-            ->setName($this->valueConverter->getTrimmed($alphaEntity->getInformator()))
+            ->setName(mb_strtoupper($this->valueConverter->getTrimmed($alphaEntity->getInformator())))
         ;
     }
 }

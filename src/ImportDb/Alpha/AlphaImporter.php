@@ -26,6 +26,8 @@ namespace App\ImportDb\Alpha;
 
 use App\Entity\Card;
 use App\ImportDb\Alpha\Entity\AlphaCard;
+use App\ImportDb\Alpha\SkippedCard\Collector\SkippedAlphaCardsCollectorInterface;
+use App\ImportDb\Alpha\SkippedCard\Converter\SkippedAlphaCardConverterInterface;
 use App\ImportDb\Alpha\Storage\ManyToMany\AbstractManyToManyEntityStorage;
 use App\ImportDb\Alpha\Storage\ManyToMany\CollectorStorage;
 use App\ImportDb\Alpha\Storage\ManyToMany\InformerStorage;
@@ -36,6 +38,7 @@ use App\ImportDb\Alpha\Storage\ManyToOne\SeasonStorage;
 use App\ImportDb\Alpha\Storage\ManyToOne\VillageStorage;
 use App\ImportDb\Alpha\ValueTrimmer\AlphaValueConverterInterface;
 use Doctrine\Common\Persistence\ObjectManager;
+use InvalidArgumentException;
 use Psr\Log\LoggerInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -58,6 +61,16 @@ final class AlphaImporter implements AlphaImporterInterface
      * @var AlphaValueConverterInterface
      */
     private $valueConverter;
+
+    /**
+     * @var SkippedAlphaCardsCollectorInterface
+     */
+    private $skippedAlphaCardsCollector;
+
+    /**
+     * @var SkippedAlphaCardConverterInterface
+     */
+    private $skippedAlphaCardConverter;
 
     /**
      * @var VillageStorage
@@ -100,20 +113,24 @@ final class AlphaImporter implements AlphaImporterInterface
     private $logger;
 
     /**
-     * @param RegistryInterface            $doctrine
-     * @param AlphaValueConverterInterface $valueConverter
-     * @param VillageStorage               $villageStorage
-     * @param QuestionStorage              $questionStorage
-     * @param SeasonStorage                $seasonStorage
-     * @param KeywordStorage               $keywordsStorage
-     * @param TermStorage                  $termsStorage
-     * @param InformerStorage              $informersStorage
-     * @param CollectorStorage             $collectorsStorage
-     * @param LoggerInterface              $logger
+     * @param RegistryInterface                   $doctrine
+     * @param AlphaValueConverterInterface        $valueConverter
+     * @param SkippedAlphaCardsCollectorInterface $skippedAlphaCardsCollector
+     * @param SkippedAlphaCardConverterInterface  $skippedAlphaCardConverter
+     * @param VillageStorage                      $villageStorage
+     * @param QuestionStorage                     $questionStorage
+     * @param SeasonStorage                       $seasonStorage
+     * @param KeywordStorage                      $keywordsStorage
+     * @param TermStorage                         $termsStorage
+     * @param InformerStorage                     $informersStorage
+     * @param CollectorStorage                    $collectorsStorage
+     * @param LoggerInterface                     $logger
      */
     public function __construct(
         RegistryInterface $doctrine,
         AlphaValueConverterInterface $valueConverter,
+        SkippedAlphaCardsCollectorInterface $skippedAlphaCardsCollector,
+        SkippedAlphaCardConverterInterface $skippedAlphaCardConverter,
         VillageStorage $villageStorage,
         QuestionStorage $questionStorage,
         SeasonStorage $seasonStorage,
@@ -126,6 +143,8 @@ final class AlphaImporter implements AlphaImporterInterface
         $this->alphaObjectManager = $doctrine->getManager('alpha');
         $this->defaultObjectManager = $doctrine->getManager('default');
         $this->valueConverter = $valueConverter;
+        $this->skippedAlphaCardsCollector = $skippedAlphaCardsCollector;
+        $this->skippedAlphaCardConverter = $skippedAlphaCardConverter;
         $this->villageStorage = $villageStorage;
         $this->questionStorage = $questionStorage;
         $this->seasonStorage = $seasonStorage;
@@ -136,75 +155,151 @@ final class AlphaImporter implements AlphaImporterInterface
         $this->logger = $logger;
     }
 
-    public function import(): void
+    /**
+     * @param string $pathToSkippedAlphaCardsLogFile
+     */
+    public function import(string $pathToSkippedAlphaCardsLogFile): void
     {
         $this->logger->info(sprintf('Running Alpha Import %s', static::class));
 
-        $this->importCards();
+        $this->importCards($pathToSkippedAlphaCardsLogFile);
 
         $this->logger->info('Alpha Import has been successfully finished');
     }
 
-    private function importCards(): void
+    /**
+     * @param string $pathToSkippedAlphaCardsLogFile
+     */
+    private function importCards(string $pathToSkippedAlphaCardsLogFile): void
     {
         $this->logger->info('Importing AlphaCards');
 
-        $this->logger->info('Retrieving AlphaCards from DB');
+        $alphaCards = $this->getAlphaCardsForImport();
 
-        $alphaCards = $this->alphaObjectManager->getRepository(AlphaCard::class)->findAll();
+        $this->convertAlphaCardsToCards($alphaCards);
 
+        $this->writeSkippedAlphaCardsToFile($pathToSkippedAlphaCardsLogFile);
+
+        $this->writeCardsToDb();
+
+        $this->logger->info('Cards import has been successfully finished');
+    }
+
+    /**
+     * @param AlphaCard[] $alphaCards
+     */
+    private function convertAlphaCardsToCards(array $alphaCards): void
+    {
         $alphaCardsCount = \count($alphaCards);
 
-        $this->logger->info(sprintf('Loaded %d AlphaCards', $alphaCardsCount));
-
-        $this->logger->info('Starting AlphaCards to Cards conversion');
+        $this->logger->info(
+            sprintf('Starting AlphaCards to Cards conversion. Total AlphaCards count: "%d"', $alphaCardsCount)
+        );
 
         $processingAlphaCardIndex = 0;
 
         foreach ($alphaCards as $alphaCard) {
-            try {
-                $this->logger->info(
-                    sprintf(
-                        'Trying to convert %d\'th AlphaCard "%s" to Card',
-                        ++$processingAlphaCardIndex,
-                        trim($alphaCard->getSpvnkey())
-                    )
-                );
+            $this->convertAlphaCardToCard(
+                $alphaCard,
+                $processingAlphaCardIndex,
+                $alphaCardsCount - $processingAlphaCardIndex
+            );
 
-                $card = (new Card())
-                    ->setVillage($this->villageStorage->getEntity($alphaCard))
-                    ->setKhutor($this->valueConverter->getTrimmedOrNull($alphaCard->getHutor()))
-                    ->setQuestions([$this->questionStorage->getEntity($alphaCard)])
-                    ->setYear($this->valueConverter->getInt($alphaCard->getGod()))
-                    ->setSeason($this->seasonStorage->getEntity($alphaCard))
-                    ->setText($this->valueConverter->getTrimmed($alphaCard->getDtext()))
-                    ->setDescription($this->valueConverter->getTrimmed($alphaCard->getOptext()))
-                    ->setKeywords($this->keywordStorage->getAndPersistEntities($alphaCard))
-                    ->setTerms($this->termStorage->getAndPersistEntities($alphaCard))
-                    ->setInformers($this->informerStorage->getAndPersistEntities($alphaCard))
-                    ->setCollectors($this->collectorStorage->getAndPersistEntities($alphaCard))
-                ;
-
-                $this->logger->info('Persisting newly created Card object');
-
-                $this->defaultObjectManager->persist($card);
-            } catch (\Throwable $throwable) {
-                $this->logger->error(
-                    sprintf('Error occurred while converting alpha card "%s" to card', trim($alphaCard->getSpvnkey())),
-                    ['exception' => $throwable]
-                );
-            }
-
-            $this->logger->info(sprintf('%d AlphaCards left', $alphaCardsCount - $processingAlphaCardIndex));
+            ++$processingAlphaCardIndex;
         }
 
+        $this->logger->info('AlphaCards to Cards conversion has been successfully finished');
+    }
+
+    /**
+     * @param AlphaCard $alphaCard
+     * @param int       $processingAlphaCardIndex
+     * @param int       $alphaCardsLeft
+     */
+    private function convertAlphaCardToCard(
+        AlphaCard $alphaCard,
+        int $processingAlphaCardIndex,
+        int $alphaCardsLeft
+    ): void {
+        try {
+            $this->logger->info(
+                sprintf(
+                    'Trying to convert %d\'th AlphaCard "%s" to Card (%d left)',
+                    $processingAlphaCardIndex,
+                    trim($alphaCard->getSpvnkey()),
+                    $alphaCardsLeft
+                )
+            );
+
+            $text = $this->valueConverter->getTrimmed($alphaCard->getDtext());
+
+            if (false !== strpos($text, \chr(0)) || false !== strpos($text, \chr(1))) {
+                throw new InvalidArgumentException('Cannot save card with special characters in its text');
+            }
+
+            $card = (new Card())
+                ->setVillage($this->villageStorage->getEntity($alphaCard))
+                ->setKhutor($this->valueConverter->getTrimmedOrNull($alphaCard->getHutor()))
+                ->setQuestions([$this->questionStorage->getEntity($alphaCard)])
+                ->setYear($this->valueConverter->getInt($alphaCard->getGod()))
+                ->setSeason($this->seasonStorage->getEntity($alphaCard))
+                ->setHasPositiveAnswer(null === $this->valueConverter->getTrimmedOrNull($alphaCard->getOtv()))
+                ->setText($text)
+                ->setDescription($this->valueConverter->getTrimmed($alphaCard->getOptext()))
+                ->setKeywords($this->keywordStorage->getAndPersistEntities($alphaCard))
+                ->setTerms($this->termStorage->getAndPersistEntities($alphaCard))
+                ->setInformers($this->informerStorage->getAndPersistEntities($alphaCard))
+                ->setCollectors($this->collectorStorage->getAndPersistEntities($alphaCard))
+            ;
+
+            $this->defaultObjectManager->persist($card);
+        } catch (\Throwable $throwable) {
+            $this->logger->error(
+                sprintf('Error occurred while converting alpha card "%s" to card', trim($alphaCard->getSpvnkey())),
+                ['exception' => $throwable]
+            );
+
+            $this->skippedAlphaCardsCollector->add(
+                $this->skippedAlphaCardConverter->convertAlphaCardToSkippedAlphaCard($alphaCard)
+            );
+        }
+    }
+
+    /**
+     * @param string $pathToSkippedAlphaCardsLogFile
+     */
+    private function writeSkippedAlphaCardsToFile(string $pathToSkippedAlphaCardsLogFile): void
+    {
+        $this->logger->info(sprintf('Writing skipped AlphaCards to file "%s"', $pathToSkippedAlphaCardsLogFile));
+
+        file_put_contents(
+            $pathToSkippedAlphaCardsLogFile,
+            json_encode(
+                $this->skippedAlphaCardsCollector->getSkippedAlphaCards(),
+                JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT
+            )
+        );
+
+        $this->logger->info('Skipped AlphaCards has been successfully written');
+    }
+
+    private function writeCardsToDb(): void
+    {
         $this->logger->info('Flushing DB');
 
         $this->defaultObjectManager->flush();
 
         $this->logger->info('DB has been successfully flushed');
+    }
 
-        $this->logger->info('Cards import has been successfully finished');
+    /**
+     * @return AlphaCard[]
+     */
+    private function getAlphaCardsForImport(): array
+    {
+        $this->logger->info('Retrieving AlphaCards from DB');
+
+        return $this->alphaObjectManager->getRepository(AlphaCard::class)->findAll();
     }
 
     private function importEntitiesWithoutRelationToCard(): void
@@ -227,7 +322,7 @@ final class AlphaImporter implements AlphaImporterInterface
     }
 
     /**
-     * @return array|AbstractManyToManyEntityStorage[]
+     * @return AbstractManyToManyEntityStorage[]
      */
     private function getManyToManyAlphaEntityStorages(): array
     {

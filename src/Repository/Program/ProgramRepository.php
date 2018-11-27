@@ -22,10 +22,12 @@ declare(strict_types=1);
  * see <http://www.gnu.org/licenses/>.
  */
 
-namespace App\Repository;
+namespace App\Repository\Program;
 
-use App\Entity\Program;
+use App\Entity\Program\Program;
+use App\Entity\Program\Section;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\ORMException;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -36,7 +38,7 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  *
  * @author Anton Dyshkant <vyshkant@gmail.com>
  */
-class ProgramRepository extends ServiceEntityRepository
+final class ProgramRepository extends ServiceEntityRepository
 {
     /**
      * @param RegistryInterface $registry
@@ -44,5 +46,27 @@ class ProgramRepository extends ServiceEntityRepository
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Program::class);
+    }
+
+    /**
+     * @param string  $number
+     * @param string  $name
+     * @param Section $section
+     *
+     * @throws ORMException
+     *
+     * @return Program
+     */
+    public function createProgram(string $number, string $name, Section $section): Program
+    {
+        $program = new Program();
+
+        $program->setNumber($number);
+        $program->setName($name);
+        $program->setSection($section);
+
+        $this->getEntityManager()->persist($program);
+
+        return $program;
     }
 }

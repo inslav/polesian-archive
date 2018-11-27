@@ -47,7 +47,7 @@ final class CollectorStorage extends AbstractManyToManyEntityStorage
      */
     protected function getAlphaEntityKey(object $alphaEntity): string
     {
-        return $alphaEntity->getSobir();
+        return $this->valueConverter->getTrimmed($alphaEntity->getSobir());
     }
 
     /**
@@ -63,7 +63,7 @@ final class CollectorStorage extends AbstractManyToManyEntityStorage
     /**
      * @param object|AlphaCollector $alphaEntity
      *
-     * @return object
+     * @return object|Collector
      */
     protected function createEntity(object $alphaEntity): object
     {

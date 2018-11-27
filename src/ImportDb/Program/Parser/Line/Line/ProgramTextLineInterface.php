@@ -22,38 +22,11 @@ declare(strict_types=1);
  * see <http://www.gnu.org/licenses/>.
  */
 
-namespace App\DataFixtures;
-
-use App\Entity\Program;
-use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Common\Persistence\ObjectManager;
+namespace App\ImportDb\Program\Parser\Line\Line;
 
 /**
  * @author Anton Dyshkant <vyshkant@gmail.com>
  */
-final class ProgramFixtures extends Fixture
+interface ProgramTextLineInterface
 {
-    public const PROGRAM_I = 'I';
-
-    public const PROGRAM_XI = 'XI';
-
-    /**
-     * @param ObjectManager $manager
-     */
-    public function load(ObjectManager $manager): void
-    {
-        $program = (new Program())
-            ->setNumber('I')
-        ;
-        $manager->persist($program);
-        $this->addReference(self::PROGRAM_I, $program);
-
-        $program = (new Program())
-            ->setNumber('XI')
-        ;
-        $manager->persist($program);
-        $this->addReference(self::PROGRAM_XI, $program);
-
-        $manager->flush();
-    }
 }

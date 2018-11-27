@@ -24,11 +24,13 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use App\Entity\Program\Paragraph;
+use App\Entity\Program\Program;
+use App\Entity\Program\Subparagraph;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\QuestionRepository")
- * @ORM\Table(uniqueConstraints={@ORM\UniqueConstraint(name="question_of_program", columns={"program_id", "number"})})
  *
  * @author Anton Dyshkant <vyshkant@gmail.com>
  */
@@ -46,17 +48,36 @@ class Question
     /**
      * @var Program
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Program", inversedBy="questions")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Program\Program")
      * @ORM\JoinColumn(nullable=false)
      */
     private $program;
 
     /**
-     * @var string
+     * @var Paragraph|null
      *
-     * @ORM\Column(type="string", length=255)
+     * @ORM\ManyToOne(targetEntity="App\Entity\Program\Paragraph")
      */
-    private $number;
+    private $paragraph;
+
+    /**
+     * @var Subparagraph|null
+     *
+     * @ORM\ManyToOne(targetEntity="App\Entity\Program\Subparagraph")
+     */
+    private $subparagraph;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(type="boolean", options={"default": 0})
+     */
+    private $isAdditional;
+
+    public function __construct()
+    {
+        $this->isAdditional = false;
+    }
 
     /**
      * @return int|null
@@ -75,11 +96,11 @@ class Question
     }
 
     /**
-     * @param Program|null $program
+     * @param Program $program
      *
      * @return Question
      */
-    public function setProgram(?Program $program): self
+    public function setProgram(Program $program): self
     {
         $this->program = $program;
 
@@ -87,21 +108,61 @@ class Question
     }
 
     /**
-     * @return string|null
+     * @return Paragraph|null
      */
-    public function getNumber(): ?string
+    public function getParagraph(): ?Paragraph
     {
-        return $this->number;
+        return $this->paragraph;
     }
 
     /**
-     * @param string $number
+     * @param Paragraph|null $paragraph
      *
      * @return Question
      */
-    public function setNumber(string $number): self
+    public function setParagraph(?Paragraph $paragraph): self
     {
-        $this->number = $number;
+        $this->paragraph = $paragraph;
+
+        return $this;
+    }
+
+    /**
+     * @return Subparagraph|null
+     */
+    public function getSubparagraph(): ?Subparagraph
+    {
+        return $this->subparagraph;
+    }
+
+    /**
+     * @param Subparagraph|null $subparagraph
+     *
+     * @return Question
+     */
+    public function setSubparagraph(?Subparagraph $subparagraph): self
+    {
+        $this->subparagraph = $subparagraph;
+
+        return $this;
+    }
+
+    /**
+     * @return bool|null
+     */
+    public function getIsAdditional(): bool
+    {
+        return $this->isAdditional;
+    }
+
+    /**
+     * @param bool $isAdditional
+     *
+     * @return Question
+     */
+    public function setIsAdditional(bool $isAdditional): self
+    {
+        $this->isAdditional = $isAdditional;
 
         return $this;
     }

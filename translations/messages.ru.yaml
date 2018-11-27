@@ -50,7 +50,8 @@ controller:
       card:
         value:
           villageRaionAndOblast: "village, raion район, oblast область"
-          question: "программа programNumber, вопрос questionNumber"
+          question: "program.paragraphsubparagraphisAdditional"
+          isAdditional: .доп
         label:
           village: Село
           question: Вопрос

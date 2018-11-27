@@ -36,7 +36,7 @@ see <http://www.gnu.org/licenses/>.
     <table class="table table-bordered">
         <tbody>
             {{ self.format_text_row('village', self.format_village(card.village)) }}
-            {{ self.format_text_row('question', self.format_questions(card.questions)) }}
+            {{ self.format_text_row('question', self.format_questions(card.questions, questionNumberFormatter)) }}
             {{ self.format_text_row('year', card.year) }}
             {{ self.format_text_row('text', card.text|nl2br) }}
             {{ self.format_text_row('description', card.description) }}
@@ -59,18 +59,12 @@ see <http://www.gnu.org/licenses/>.
     {{ 'controller.card.show.card.value.villageRaionAndOblast'|trans(villageTranslationData) }}
 {%- endmacro -%}
 
-{%- macro format_questions(questions) -%}
+{%- macro format_questions(questions, questionNumberFormatter) -%}
 
     {% set formattedQuestions = [] %}
 
     {% for question in questions %}
-
-        {% set questionTranslationData = {
-            'programNumber': question.program.number,
-            'questionNumber': question.number,
-        } %}
-
-        {% set formattedQuestions = formattedQuestions|merge(['controller.card.show.card.value.question'|trans(questionTranslationData)]) %}
+        {% set formattedQuestions = formattedQuestions|merge([questionNumberFormatter.formatQuestion(question)]) %}
     {% endfor %}
 
     {{ formattedQuestions|join('; ') }}

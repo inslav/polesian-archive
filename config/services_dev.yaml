@@ -14,6 +14,8 @@ services:
     arguments:
       - '@Symfony\Bridge\Doctrine\RegistryInterface'
       - '@App\ImportDb\Alpha\ValueTrimmer\AlphaValueConverterInterface'
+      - '@App\ImportDb\Alpha\SkippedCard\Collector\SkippedAlphaCardsCollectorInterface'
+      - '@App\ImportDb\Alpha\SkippedCard\Converter\SkippedAlphaCardConverterInterface'
       - '@App\ImportDb\Alpha\Storage\ManyToOne\VillageStorage'
       - '@App\ImportDb\Alpha\Storage\ManyToOne\QuestionStorage'
       - '@App\ImportDb\Alpha\Storage\ManyToOne\SeasonStorage'
@@ -45,4 +47,84 @@ services:
     arguments:
       - '@Symfony\Bridge\Doctrine\RegistryInterface'
       - '@App\ImportDb\Alpha\ValueTrimmer\AlphaValueConverterInterface'
+      - '@monolog.logger.alpha_import'
+
+  App\ImportDb\Alpha\Storage\ManyToOne\Persisted\ParagraphStorage:
+    arguments:
+      - '@Symfony\Bridge\Doctrine\RegistryInterface'
+      - '@App\ImportDb\Alpha\ValueTrimmer\AlphaValueConverterInterface'
+      - '@App\Import\Program\Question\Number\Parser\QuestionNumberParserInterface'
+      - '@monolog.logger.alpha_import'
+      - '@App\ImportDb\Alpha\Storage\ManyToOne\Persisted\ProgramStorage'
+
+  App\ImportDb\Alpha\Storage\ManyToOne\Persisted\ProgramStorage:
+    arguments:
+      - '@Symfony\Bridge\Doctrine\RegistryInterface'
+      - '@App\ImportDb\Alpha\ValueTrimmer\AlphaValueConverterInterface'
+      - '@App\Import\Program\Question\Number\Parser\QuestionNumberParserInterface'
+      - '@monolog.logger.alpha_import'
+
+  App\ImportDb\Alpha\Storage\ManyToOne\Persisted\SubparagraphStorage:
+    arguments:
+      - '@Symfony\Bridge\Doctrine\RegistryInterface'
+      - '@App\ImportDb\Alpha\ValueTrimmer\AlphaValueConverterInterface'
+      - '@App\Import\Program\Question\Number\Parser\QuestionNumberParserInterface'
+      - '@monolog.logger.alpha_import'
+      - '@App\Import\Program\Question\Number\Formatter\QuestionNumberFormatterInterface'
+      - '@App\ImportDb\Alpha\Storage\ManyToOne\Persisted\ParagraphStorage'
+      - '@App\ImportDb\Alpha\Storage\ManyToOne\Persisted\ProgramStorage'
+
+  App\ImportDb\Alpha\Storage\ManyToOne\ParagraphStorage:
+    arguments:
+      - '@Symfony\Bridge\Doctrine\RegistryInterface'
+      - '@App\ImportDb\Alpha\ValueTrimmer\AlphaValueConverterInterface'
+      - '@App\Import\Program\Question\Number\Parser\QuestionNumberParserInterface'
+      - '@monolog.logger.alpha_import'
+      - '@App\ImportDb\Alpha\Storage\ManyToOne\ProgramStorage'
+
+  App\ImportDb\Alpha\Storage\ManyToOne\ProgramStorage:
+    arguments:
+      - '@Symfony\Bridge\Doctrine\RegistryInterface'
+      - '@App\ImportDb\Alpha\ValueTrimmer\AlphaValueConverterInterface'
+      - '@App\Import\Program\Question\Number\Parser\QuestionNumberParserInterface'
+      - '@monolog.logger.alpha_import'
+      - '@App\ImportDb\Alpha\Storage\ManyToOne\SectionStorage'
+
+  App\ImportDb\Alpha\Storage\ManyToOne\QuestionStorage:
+    arguments:
+      - '@Symfony\Bridge\Doctrine\RegistryInterface'
+      - '@App\ImportDb\Alpha\ValueTrimmer\AlphaValueConverterInterface'
+      - '@App\Import\Program\Question\Number\Parser\QuestionNumberParserInterface'
+      - '@monolog.logger.alpha_import'
+      - '@App\ImportDb\Alpha\Storage\ManyToOne\Persisted\ProgramStorage'
+      - '@App\ImportDb\Alpha\Storage\ManyToOne\Persisted\ParagraphStorage'
+      - '@App\ImportDb\Alpha\Storage\ManyToOne\Persisted\SubparagraphStorage'
+
+  App\ImportDb\Alpha\Storage\ManyToOne\SeasonStorage:
+    arguments:
+      - '@Symfony\Bridge\Doctrine\RegistryInterface'
+      - '@App\ImportDb\Alpha\ValueTrimmer\AlphaValueConverterInterface'
+      - '@App\Import\Program\Question\Number\Parser\QuestionNumberParserInterface'
+      - '@monolog.logger.alpha_import'
+
+  App\ImportDb\Alpha\Storage\ManyToOne\SectionStorage:
+    arguments:
+      - '@Symfony\Bridge\Doctrine\RegistryInterface'
+      - '@App\ImportDb\Alpha\ValueTrimmer\AlphaValueConverterInterface'
+      - '@App\Import\Program\Question\Number\Parser\QuestionNumberParserInterface'
+      - '@monolog.logger.alpha_import'
+
+  App\ImportDb\Alpha\Storage\ManyToOne\SubparagraphStorage:
+    arguments:
+      - '@Symfony\Bridge\Doctrine\RegistryInterface'
+      - '@App\ImportDb\Alpha\ValueTrimmer\AlphaValueConverterInterface'
+      - '@App\Import\Program\Question\Number\Parser\QuestionNumberParserInterface'
+      - '@monolog.logger.alpha_import'
+      - '@App\ImportDb\Alpha\Storage\ManyToOne\ParagraphStorage'
+
+  App\ImportDb\Alpha\Storage\ManyToOne\VillageStorage:
+    arguments:
+      - '@Symfony\Bridge\Doctrine\RegistryInterface'
+      - '@App\ImportDb\Alpha\ValueTrimmer\AlphaValueConverterInterface'
+      - '@App\Import\Program\Question\Number\Parser\QuestionNumberParserInterface'
       - '@monolog.logger.alpha_import'

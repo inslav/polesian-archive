@@ -54,11 +54,11 @@ final class CardFixtures extends Fixture implements DependentFixtureInterface
         return [
             VillageFixtures::class,
             QuestionFixtures::class,
+            SeasonFixtures::class,
             KeywordFixtures::class,
             TermFixtures::class,
             CollectorFixtures::class,
             InformerFixtures::class,
-            SeasonFixtures::class,
         ];
     }
 
@@ -69,7 +69,7 @@ final class CardFixtures extends Fixture implements DependentFixtureInterface
     {
         return (new Card())
             ->setVillage($this->getReference(VillageFixtures::VILLAGE_BARBAROV))
-            ->addQuestion($this->getReference(QuestionFixtures::PROGRAM_I_QUESTION_10A))
+            ->addQuestion($this->getReference(QuestionFixtures::QUESTION_1))
             ->setYear(1983)
             ->setSeason($this->getReference(SeasonFixtures::SEASON_SUMMER))
             ->setText(<<<EOT
@@ -107,7 +107,9 @@ EOT
     {
         return (new Card())
             ->setVillage($this->getReference(VillageFixtures::VILLAGE_SHCHEDROGOR))
-            ->addQuestion($this->getReference(QuestionFixtures::PROGRAM_XI_QUESTION_6))
+            ->addQuestion($this->getReference(QuestionFixtures::QUESTION_2))
+            ->addQuestion($this->getReference(QuestionFixtures::QUESTION_3))
+            ->addQuestion($this->getReference(QuestionFixtures::QUESTION_4))
             ->setYear(1979)
             ->setSeason($this->getReference(SeasonFixtures::SEASON_WINTER))
             ->setText(<<<EOT

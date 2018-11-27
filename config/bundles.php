@@ -39,4 +39,5 @@ return [
     Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle::class => ['all' => true],
     Vyfony\Bundle\FilterableTableBundle\VyfonyFilterableTableBundle::class => ['all' => true],
     Knp\Bundle\MenuBundle\KnpMenuBundle::class => ['all' => true],
+    Vyfony\Bundle\MysqldumpBundle\VyfonyMysqldumpBundle::class => ['dev' => true, 'test' => true],
 ];

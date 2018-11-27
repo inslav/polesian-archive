@@ -24,6 +24,7 @@ declare(strict_types=1);
 
 namespace App\DataFixtures;
 
+use App\DataFixtures\Program\ProgramFixtures;
 use App\Entity\Question;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
@@ -34,9 +35,13 @@ use Doctrine\Common\Persistence\ObjectManager;
  */
 final class QuestionFixtures extends Fixture implements DependentFixtureInterface
 {
-    public const PROGRAM_I_QUESTION_10A = 'I-10а';
+    public const QUESTION_1 = 'question-1';
 
-    public const PROGRAM_XI_QUESTION_6 = 'XI-6';
+    public const QUESTION_2 = 'question-2';
+
+    public const QUESTION_3 = 'question-3';
+
+    public const QUESTION_4 = 'question-4';
 
     /**
      * @param ObjectManager $manager
@@ -45,17 +50,36 @@ final class QuestionFixtures extends Fixture implements DependentFixtureInterfac
     {
         $question = (new Question())
             ->setProgram($this->getReference(ProgramFixtures::PROGRAM_I))
-            ->setNumber('10а')
+            ->setIsAdditional(true)
         ;
         $manager->persist($question);
-        $this->addReference(self::PROGRAM_I_QUESTION_10A, $question);
+        $this->addReference(self::QUESTION_1, $question);
+
+        $question = (new Question())
+            ->setProgram($this->getReference(ProgramFixtures::PROGRAM_I))
+            ->setParagraph($this->getReference(ParagraphFixtures::PROGRAM_I_PARAGRAPH_10))
+            ->setIsAdditional(false)
+        ;
+        $manager->persist($question);
+        $this->addReference(self::QUESTION_2, $question);
 
         $question = (new Question())
             ->setProgram($this->getReference(ProgramFixtures::PROGRAM_XI))
-            ->setNumber('6')
+            ->setParagraph($this->getReference(ParagraphFixtures::PROGRAM_XI_PARAGRAPH_6))
+            ->setSubparagraph($this->getReference(SubparagraphFixtures::PROGRAM_XI_PARAGRAPH_6_SUBPARAGRAPH_A))
+            ->setIsAdditional(true)
         ;
         $manager->persist($question);
-        $this->addReference(self::PROGRAM_XI_QUESTION_6, $question);
+        $this->addReference(self::QUESTION_3, $question);
+
+        $question = (new Question())
+            ->setProgram($this->getReference(ProgramFixtures::PROGRAM_XI))
+            ->setParagraph($this->getReference(ParagraphFixtures::PROGRAM_XI_PARAGRAPH_6))
+            ->setSubparagraph($this->getReference(SubparagraphFixtures::PROGRAM_XI_PARAGRAPH_6_SUBPARAGRAPH_B))
+            ->setIsAdditional(false)
+        ;
+        $manager->persist($question);
+        $this->addReference(self::QUESTION_4, $question);
 
         $manager->flush();
     }
@@ -67,6 +91,8 @@ final class QuestionFixtures extends Fixture implements DependentFixtureInterfac
     {
         return [
             ProgramFixtures::class,
+            ParagraphFixtures::class,
+            SubparagraphFixtures::class,
         ];
     }
 }

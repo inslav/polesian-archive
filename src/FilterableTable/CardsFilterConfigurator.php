@@ -27,8 +27,8 @@ namespace App\FilterableTable;
 use App\Entity\Card;
 use App\Entity\Collector;
 use App\Entity\Keyword;
-use App\Entity\Program;
-use App\Entity\Question;
+use App\Entity\Program\Paragraph;
+use App\Entity\Program\Program;
 use App\Entity\Term;
 use App\Entity\Village;
 use Doctrine\ORM\EntityManager;
@@ -157,20 +157,20 @@ final class CardsFilterConfigurator extends AbstractFilterConfigurator
                 ->setQueryParameterName('program')
                 ->setLabel('controller.card.list.filter.program'),
             (new JoinedEntityChoiceParameter())
-                ->setClass(Question::class)
+                ->setClass(Paragraph::class)
                 ->setIsExpanded(false)
-                ->setChoiceLabelFactory(function (Question $question): string {
-                    return $question->getProgram()->getNumber().'.'.$question->getNumber();
+                ->setChoiceLabelFactory(function (Paragraph $paragraph): string {
+                    return $paragraph->getProgram()->getNumber().'.'.$paragraph->getNumber();
                 })
                 ->setSortValuesCallback(function (EntityRepository $repository): QueryBuilder {
-                    $questionAlias = 'question';
+                    $paragraphAlias = 'paragraph';
                     $programAlias = 'program';
 
                     return $repository
-                        ->createQueryBuilder($questionAlias)
-                        ->join($questionAlias.'.program', $programAlias)
+                        ->createQueryBuilder($paragraphAlias)
+                        ->join($paragraphAlias.'.program', $programAlias)
                         ->orderBy($programAlias.'.number', 'ASC')
-                        ->addOrderBy($questionAlias.'.number', 'ASC');
+                        ->addOrderBy($paragraphAlias.'.number', 'ASC');
                 })
                 ->setQueryParameterName('questions')
                 ->setLabel('controller.card.list.filter.question'),

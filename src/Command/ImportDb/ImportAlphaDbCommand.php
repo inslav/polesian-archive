@@ -26,6 +26,7 @@ namespace App\Command\ImportDb;
 
 use App\ImportDb\Alpha\AlphaImporterInterface;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
@@ -54,6 +55,11 @@ final class ImportAlphaDbCommand extends Command
         $this
             ->setName('app:import-db:alpha')
             ->setDescription('Import data from DB of version alpha')
+            ->addArgument(
+                'skipped-alpha-cards-log-file',
+                InputArgument::REQUIRED,
+                'Path to skipped AlphaCards log file'
+            )
         ;
     }
 
@@ -61,11 +67,11 @@ final class ImportAlphaDbCommand extends Command
      * @param InputInterface  $input
      * @param OutputInterface $output
      *
-     * @return int|null
+     * @return int
      */
-    protected function execute(InputInterface $input, OutputInterface $output): ?int
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $this->importer->import();
+        $this->importer->import($input->getArgument('skipped-alpha-cards-log-file'));
 
         (new SymfonyStyle($input, $output))->success('DB import has been successfully completed');
 

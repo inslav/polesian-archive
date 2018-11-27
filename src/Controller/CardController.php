@@ -25,6 +25,7 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Entity\Card;
+use App\Import\Program\Question\Number\Formatter\QuestionNumberFormatterInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
@@ -36,6 +37,19 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class CardController extends Controller
 {
+    /**
+     * @var QuestionNumberFormatterInterface
+     */
+    private $questionFormatter;
+
+    /**
+     * @param QuestionNumberFormatterInterface $questionFormatter
+     */
+    public function __construct(QuestionNumberFormatterInterface $questionFormatter)
+    {
+        $this->questionFormatter = $questionFormatter;
+    }
+
     /**
      * @Route("/list", name="card__list")
      *
@@ -70,6 +84,7 @@ final class CardController extends Controller
             'controller' => 'card',
             'method' => 'show',
             'card' => $this->getDoctrine()->getRepository(Card::class)->find($id),
+            'questionNumberFormatter' => $this->questionFormatter,
         ];
     }
 }

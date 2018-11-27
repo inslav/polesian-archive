@@ -25,8 +25,13 @@ declare(strict_types=1);
 namespace App\ImportDb\Alpha\Storage\ManyToOne;
 
 use App\Entity\Question;
+use App\Import\Program\Question\Number\Parser\QuestionNumberParserInterface;
 use App\ImportDb\Alpha\Entity\AlphaCard;
+use App\ImportDb\Alpha\Storage\ManyToOne\Persisted\ParagraphStorage;
+use App\ImportDb\Alpha\Storage\ManyToOne\Persisted\ProgramStorage;
+use App\ImportDb\Alpha\Storage\ManyToOne\Persisted\SubparagraphStorage;
 use App\ImportDb\Alpha\ValueTrimmer\AlphaValueConverterInterface;
+use Psr\Log\LoggerInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -40,17 +45,37 @@ final class QuestionStorage extends AbstractManyToOneEntityStorage
     private $programStorage;
 
     /**
-     * @param RegistryInterface            $doctrine
-     * @param AlphaValueConverterInterface $valueConverter
-     * @param ProgramStorage               $programStorage
+     * @var ParagraphStorage
+     */
+    private $paragraphStorage;
+
+    /**
+     * @var SubparagraphStorage
+     */
+    private $subparagraphStorage;
+
+    /**
+     * @param RegistryInterface             $doctrine
+     * @param AlphaValueConverterInterface  $valueConverter
+     * @param QuestionNumberParserInterface $questionNumberParser
+     * @param LoggerInterface               $logger
+     * @param ProgramStorage                $programStorage
+     * @param ParagraphStorage              $paragraphStorage
+     * @param SubparagraphStorage           $subparagraphStorage
      */
     public function __construct(
         RegistryInterface $doctrine,
         AlphaValueConverterInterface $valueConverter,
-        ProgramStorage $programStorage
+        QuestionNumberParserInterface $questionNumberParser,
+        LoggerInterface $logger,
+        ProgramStorage $programStorage,
+        ParagraphStorage $paragraphStorage,
+        SubparagraphStorage $subparagraphStorage
     ) {
-        parent::__construct($doctrine, $valueConverter);
+        parent::__construct($doctrine, $valueConverter, $questionNumberParser, $logger);
         $this->programStorage = $programStorage;
+        $this->paragraphStorage = $paragraphStorage;
+        $this->subparagraphStorage = $subparagraphStorage;
     }
 
     /**
@@ -60,21 +85,26 @@ final class QuestionStorage extends AbstractManyToOneEntityStorage
      */
     protected function getAlphaEntityKey(AlphaCard $alphaCard): ?string
     {
-        return $this->valueConverter->getTrimmed(
-            $this->programStorage->getAlphaEntityKey($alphaCard).$alphaCard->getNvopr()
-        );
+        $programKey = $this->programStorage->getAlphaEntityKey($alphaCard);
+        $paragraphKey = $this->paragraphStorage->getAlphaEntityKey($alphaCard);
+        $subparagraphKey = $this->subparagraphStorage->getAlphaEntityKey($alphaCard);
+        $isAdditionalKey = $this->getQuestionNumber($alphaCard)->getIsAdditional() ? '1' : '0';
+
+        return $programKey.$paragraphKey.$subparagraphKey.$isAdditionalKey;
     }
 
     /**
      * @param AlphaCard $alphaCard
      *
-     * @return object|null
+     * @return Question
      */
-    protected function createEntity(AlphaCard $alphaCard): ?object
+    protected function createEntity(AlphaCard $alphaCard): object
     {
         return (new Question())
             ->setProgram($this->programStorage->getEntity($alphaCard))
-            ->setNumber($this->valueConverter->getTrimmed($alphaCard->getNvopr()))
+            ->setParagraph($this->paragraphStorage->getEntity($alphaCard))
+            ->setSubparagraph($this->subparagraphStorage->getEntity($alphaCard))
+            ->setIsAdditional($this->getQuestionNumber($alphaCard)->getIsAdditional())
         ;
     }
 }

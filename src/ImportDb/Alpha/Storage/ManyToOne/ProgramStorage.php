@@ -24,14 +24,41 @@ declare(strict_types=1);
 
 namespace App\ImportDb\Alpha\Storage\ManyToOne;
 
-use App\Entity\Program;
+use App\Entity\Program\Program;
+use App\Import\Program\Question\Number\Parser\QuestionNumberParserInterface;
 use App\ImportDb\Alpha\Entity\AlphaCard;
+use App\ImportDb\Alpha\ValueTrimmer\AlphaValueConverterInterface;
+use Psr\Log\LoggerInterface;
+use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
  * @author Anton Dyshkant <vyshkant@gmail.com>
  */
 final class ProgramStorage extends AbstractManyToOneEntityStorage
 {
+    /**
+     * @var SectionStorage
+     */
+    private $sectionStorage;
+
+    /**
+     * @param RegistryInterface             $doctrine
+     * @param AlphaValueConverterInterface  $valueConverter
+     * @param QuestionNumberParserInterface $questionNumberParser
+     * @param LoggerInterface               $logger
+     * @param SectionStorage                $sectionStorage
+     */
+    public function __construct(
+        RegistryInterface $doctrine,
+        AlphaValueConverterInterface $valueConverter,
+        QuestionNumberParserInterface $questionNumberParser,
+        LoggerInterface $logger,
+        SectionStorage $sectionStorage
+    ) {
+        parent::__construct($doctrine, $valueConverter, $questionNumberParser, $logger);
+        $this->sectionStorage = $sectionStorage;
+    }
+
     /**
      * @param AlphaCard $alphaCard
      *
@@ -45,11 +72,12 @@ final class ProgramStorage extends AbstractManyToOneEntityStorage
     /**
      * @param AlphaCard $alphaCard
      *
-     * @return object|null
+     * @return Program
      */
-    protected function createEntity(AlphaCard $alphaCard): ?object
+    protected function createEntity(AlphaCard $alphaCard): object
     {
         return (new Program())
+            ->setSection($this->sectionStorage->getEntity($alphaCard))
             ->setNumber($this->valueConverter->getTrimmed($alphaCard->getNprog()))
         ;
     }

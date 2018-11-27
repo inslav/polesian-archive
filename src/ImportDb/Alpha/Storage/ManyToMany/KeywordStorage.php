@@ -47,7 +47,7 @@ final class KeywordStorage extends AbstractManyToManyEntityStorage
      */
     protected function getAlphaEntityKey(object $alphaEntity): string
     {
-        return $alphaEntity->getSlov();
+        return mb_strtolower($this->valueConverter->getTrimmed($alphaEntity->getSlov()));
     }
 
     /**
@@ -63,12 +63,12 @@ final class KeywordStorage extends AbstractManyToManyEntityStorage
     /**
      * @param object|AlphaKeyword $alphaEntity
      *
-     * @return object
+     * @return object|Keyword
      */
     protected function createEntity(object $alphaEntity): object
     {
         return (new Keyword())
-            ->setName($this->valueConverter->getTrimmed($alphaEntity->getSlov()))
+            ->setName(mb_strtolower($this->valueConverter->getTrimmed($alphaEntity->getSlov())))
         ;
     }
 }

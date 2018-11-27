@@ -53,7 +53,10 @@ parameters:
       metadata:
         priority: -70
     phpmnd:
-      exclude_path: ['node_modules', 'var', 'vendor']
+      exclude_path:
+        - 'node_modules'
+        - 'var'
+        - 'vendor'
       metadata:
         priority: -80
     phpcsfixer2:
@@ -62,7 +65,13 @@ parameters:
         priority: -90
     phpcs:
       standard: PSR2
-      ignore_patterns: ['/node_modules/*', '/src/DataFixtures/*', '/src/Migrations/*', '/var/*', '/vendor/*']
+      ignore_patterns:
+        - '/node_modules/*'
+        - '/src/DataFixtures/*'
+        - '/src/Migrations/*'
+        - '/tests/*'
+        - '/var/*'
+        - '/vendor/*'
       metadata:
         priority: -100
     phpunit:

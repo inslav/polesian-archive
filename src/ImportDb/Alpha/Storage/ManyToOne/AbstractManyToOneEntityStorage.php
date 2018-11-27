@@ -24,9 +24,13 @@ declare(strict_types=1);
 
 namespace App\ImportDb\Alpha\Storage\ManyToOne;
 
+use App\Import\Program\Question\Number\Parser\QuestionNumberParserInterface;
+use App\Import\Program\Question\Number\QuestionNumberInterface;
 use App\ImportDb\Alpha\Entity\AlphaCard;
 use App\ImportDb\Alpha\ValueTrimmer\AlphaValueConverterInterface;
 use Doctrine\Common\Persistence\ObjectManager;
+use LogicException;
+use Psr\Log\LoggerInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -50,19 +54,37 @@ abstract class AbstractManyToOneEntityStorage
     protected $valueConverter;
 
     /**
-     * @var array|object[]
+     * @var QuestionNumberParserInterface
      */
-    private $entityByAlphaEntityKeyCache = [];
+    private $questionNumberParser;
 
     /**
-     * @param RegistryInterface            $doctrine
-     * @param AlphaValueConverterInterface $valueConverter
+     * @var object[]
      */
-    public function __construct(RegistryInterface $doctrine, AlphaValueConverterInterface $valueConverter)
-    {
+    private $entityByAlphaEntityKeyCache;
+
+    /**
+     * @var LoggerInterface
+     */
+    private $logger;
+
+    /**
+     * @param RegistryInterface             $doctrine
+     * @param AlphaValueConverterInterface  $valueConverter
+     * @param QuestionNumberParserInterface $questionNumberParser
+     * @param LoggerInterface               $logger
+     */
+    public function __construct(
+        RegistryInterface $doctrine,
+        AlphaValueConverterInterface $valueConverter,
+        QuestionNumberParserInterface $questionNumberParser,
+        LoggerInterface $logger
+    ) {
         $this->alphaObjectManager = $doctrine->getManager('alpha');
         $this->defaultObjectManager = $doctrine->getManager('default');
         $this->valueConverter = $valueConverter;
+        $this->questionNumberParser = $questionNumberParser;
+        $this->logger = $logger;
     }
 
     /**
@@ -70,8 +92,10 @@ abstract class AbstractManyToOneEntityStorage
      *
      * @return object|null
      */
-    public function getEntity(AlphaCard $alphaCard): ?object
+    final public function getEntity(AlphaCard $alphaCard): ?object
     {
+        $this->initializeCache();
+
         $alphaEntityKey = $this->getAlphaEntityKey($alphaCard);
 
         if (null === $alphaEntityKey) {
@@ -81,9 +105,13 @@ abstract class AbstractManyToOneEntityStorage
         if (!array_key_exists($alphaEntityKey, $this->entityByAlphaEntityKeyCache)) {
             $entity = $this->createEntity($alphaCard);
 
-            if (null !== $entity) {
-                $this->defaultObjectManager->persist($entity);
+            if (null === $entity) {
+                throw new LogicException(
+                    sprintf('Expected to create entity with alpha entity key "%s", got null', $alphaEntityKey)
+                );
             }
+
+            $this->defaultObjectManager->persist($entity);
 
             $this->entityByAlphaEntityKeyCache[$alphaEntityKey] = $entity;
         }
@@ -101,7 +129,39 @@ abstract class AbstractManyToOneEntityStorage
     /**
      * @param AlphaCard $alphaCard
      *
-     * @return object|null
+     * @return object
      */
-    abstract protected function createEntity(AlphaCard $alphaCard): ?object;
+    abstract protected function createEntity(AlphaCard $alphaCard): object;
+
+    /**
+     * @param AlphaCard $alphaCard
+     *
+     * @return QuestionNumberInterface
+     */
+    final protected function getQuestionNumber(AlphaCard $alphaCard): QuestionNumberInterface
+    {
+        return $this->questionNumberParser
+            ->parseQuestionNumber(
+                $this->valueConverter->getTrimmed($alphaCard->getNprog()).
+                '.'.
+                $this->valueConverter->getTrimmed($alphaCard->getNvopr())
+            );
+    }
+
+    /**
+     * @return object[]
+     */
+    protected function getInitialCacheValue(): array
+    {
+        return [];
+    }
+
+    private function initializeCache(): void
+    {
+        if (null === $this->entityByAlphaEntityKeyCache) {
+            $this->logger->debug(sprintf('Initializing entity by alpha entity key cache in "%s"', static::class));
+
+            $this->entityByAlphaEntityKeyCache = $this->getInitialCacheValue();
+        }
+    }
 }

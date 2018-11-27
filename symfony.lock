@@ -506,6 +506,9 @@
     "vyfony/filterable-table-bundle": {
         "version": "v0.1.1"
     },
+    "vyfony/mysqldump-bundle": {
+        "version": "v0.1.2"
+    },
     "webmozart/assert": {
         "version": "1.3.0"
     },

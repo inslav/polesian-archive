@@ -62,6 +62,8 @@ final class AlphaValueConverter implements AlphaValueConverterInterface
     /**
      * @param string $value
      *
+     * @throws InvalidArgumentException
+     *
      * @return int
      */
     public function getInt(string $value): int

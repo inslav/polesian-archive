@@ -39,24 +39,24 @@ final class SeasonStorage extends AbstractManyToOneEntityStorage
      */
     protected function getAlphaEntityKey(AlphaCard $alphaCard): ?string
     {
-        return $this->valueConverter->getTrimmedOrNull($alphaCard->getSezon());
-    }
-
-    /**
-     * @param AlphaCard $alphaCard
-     *
-     * @return object|null
-     */
-    protected function createEntity(AlphaCard $alphaCard): ?object
-    {
         $seasonName = $this->valueConverter->getTrimmedOrNull($alphaCard->getSezon());
 
         if (null === $seasonName) {
             return null;
         }
 
+        return mb_strtolower($seasonName);
+    }
+
+    /**
+     * @param AlphaCard $alphaCard
+     *
+     * @return Season
+     */
+    protected function createEntity(AlphaCard $alphaCard): object
+    {
         return (new Season())
-            ->setName($seasonName)
+            ->setName(mb_strtolower($this->valueConverter->getTrimmedOrNull($alphaCard->getSezon())))
         ;
     }
 }

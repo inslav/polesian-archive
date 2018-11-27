@@ -81,6 +81,13 @@ class Card
     private $season;
 
     /**
+     * @var bool
+     *
+     * @ORM\Column(type="boolean", options={"default": 0})
+     */
+    private $hasPositiveAnswer;
+
+    /**
      * @var string
      *
      * @ORM\Column(type="text")
@@ -125,6 +132,7 @@ class Card
     public function __construct()
     {
         $this->questions = new ArrayCollection();
+        $this->hasPositiveAnswer = false;
         $this->keywords = new ArrayCollection();
         $this->terms = new ArrayCollection();
         $this->informers = new ArrayCollection();
@@ -249,6 +257,46 @@ class Card
     public function setYear(int $year): self
     {
         $this->year = $year;
+
+        return $this;
+    }
+
+    /**
+     * @return Season|null
+     */
+    public function getSeason(): ?Season
+    {
+        return $this->season;
+    }
+
+    /**
+     * @param Season|null $season
+     *
+     * @return Card
+     */
+    public function setSeason(?Season $season): self
+    {
+        $this->season = $season;
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getHasPositiveAnswer(): bool
+    {
+        return $this->hasPositiveAnswer;
+    }
+
+    /**
+     * @param bool $hasPositiveAnswer
+     *
+     * @return Card
+     */
+    public function setHasPositiveAnswer(bool $hasPositiveAnswer): self
+    {
+        $this->hasPositiveAnswer = $hasPositiveAnswer;
 
         return $this;
     }
@@ -499,26 +547,6 @@ class Card
         if ($this->collectors->contains($collector)) {
             $this->collectors->removeElement($collector);
         }
-
-        return $this;
-    }
-
-    /**
-     * @return Season|null
-     */
-    public function getSeason(): ?Season
-    {
-        return $this->season;
-    }
-
-    /**
-     * @param Season|null $season
-     *
-     * @return Card
-     */
-    public function setSeason(?Season $season): self
-    {
-        $this->season = $season;
 
         return $this;
     }

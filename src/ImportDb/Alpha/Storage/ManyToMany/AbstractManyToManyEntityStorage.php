@@ -51,17 +51,17 @@ abstract class AbstractManyToManyEntityStorage
     protected $valueConverter;
 
     /**
-     * @var array|object[]
+     * @var object[]
      */
     private $entityByAlphaEntityKeyCache = [];
 
     /**
-     * @var array|object[][]
+     * @var object[][]
      */
     private $alphaEntitiesByAlphaCardKeyCache;
 
     /**
-     * @var array|object[]
+     * @var object[]
      */
     private $alphaEntitiesWithoutRelationToAlphaCard;
 
@@ -89,9 +89,9 @@ abstract class AbstractManyToManyEntityStorage
     /**
      * @param AlphaCard $alphaCard
      *
-     * @return array|object[]
+     * @return object[]
      */
-    public function getAndPersistEntities(AlphaCard $alphaCard): array
+    final public function getAndPersistEntities(AlphaCard $alphaCard): array
     {
         $entities = [];
 
@@ -103,9 +103,9 @@ abstract class AbstractManyToManyEntityStorage
     }
 
     /**
-     * @return array|object[]
+     * @return object[]
      */
-    public function getAndPersistEntitiesWithoutRelationToAlphaCard(): array
+    final public function getAndPersistEntitiesWithoutRelationToAlphaCard(): array
     {
         if (null === $this->alphaEntitiesWithoutRelationToAlphaCard) {
             $this->createAlphaEntitiesCache();
@@ -168,9 +168,7 @@ abstract class AbstractManyToManyEntityStorage
      */
     private function getEntity(object $alphaEntity): object
     {
-        $alphaEntityKey = $this->valueConverter->getTrimmed(
-            $this->getAlphaEntityKey($alphaEntity)
-        );
+        $alphaEntityKey = $this->getAlphaEntityKey($alphaEntity);
 
         if (!array_key_exists($alphaEntityKey, $this->entityByAlphaEntityKeyCache)) {
             $entity = $this->createEntity($alphaEntity);
@@ -186,7 +184,7 @@ abstract class AbstractManyToManyEntityStorage
     /**
      * @param AlphaCard $alphaCard
      *
-     * @return array|object[]
+     * @return object[]
      */
     private function getAlphaEntities(AlphaCard $alphaCard): array
     {
@@ -203,7 +201,7 @@ abstract class AbstractManyToManyEntityStorage
 
     private function createAlphaEntitiesCache(): void
     {
-        $this->logger->info(sprintf('Creating alpha-entities cache for "%s"', static::class));
+        $this->logger->debug(sprintf('Creating alpha-entities cache for "%s"', static::class));
 
         $this->alphaEntitiesByAlphaCardKeyCache = [];
 
@@ -211,11 +209,11 @@ abstract class AbstractManyToManyEntityStorage
 
         $alphaEntityClass = $this->getAlphaEntityClass();
 
-        $this->logger->info(sprintf('Loading alpha-entities of class "%s"', $alphaEntityClass));
+        $this->logger->debug(sprintf('Loading alpha-entities of class "%s"', $alphaEntityClass));
 
         $alphaEntities = $this->alphaObjectManager->getRepository($alphaEntityClass)->findAll();
 
-        $this->logger->info(
+        $this->logger->debug(
             sprintf('Loaded "%d" alpha-entities of class "%s"', \count($alphaEntities), $alphaEntityClass)
         );
 
@@ -233,8 +231,6 @@ abstract class AbstractManyToManyEntityStorage
             }
         }
 
-        $this->logger->info(
-            sprintf('Alpha-entities cache creation for class "%s" has been successfully finished', static::class)
-        );
+        $this->logger->info(sprintf('Created alpha-entities cache for class "%s"', static::class));
     }
 }

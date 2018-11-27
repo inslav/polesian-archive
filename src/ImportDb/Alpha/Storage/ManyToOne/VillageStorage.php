@@ -27,7 +27,7 @@ namespace App\ImportDb\Alpha\Storage\ManyToOne;
 use App\Entity\Village;
 use App\ImportDb\Alpha\Entity\AlphaCard;
 use App\ImportDb\Alpha\Entity\AlphaVillage;
-use RuntimeException;
+use InvalidArgumentException;
 
 /**
  * @author Anton Dyshkant <vyshkant@gmail.com>
@@ -35,7 +35,7 @@ use RuntimeException;
 final class VillageStorage extends AbstractManyToOneEntityStorage
 {
     /**
-     * @var array|AlphaVillage[]
+     * @var AlphaVillage[]
      */
     private $alphaEntityByAlphaEntityKeyCache;
 
@@ -52,9 +52,9 @@ final class VillageStorage extends AbstractManyToOneEntityStorage
     /**
      * @param AlphaCard $alphaCard
      *
-     * @return object|null
+     * @return Village
      */
-    protected function createEntity(AlphaCard $alphaCard): ?object
+    protected function createEntity(AlphaCard $alphaCard): object
     {
         $alphaVillage = $this->getAlphaEntity($alphaCard);
 
@@ -68,6 +68,8 @@ final class VillageStorage extends AbstractManyToOneEntityStorage
     /**
      * @param AlphaCard $alphaCard
      *
+     * @throws InvalidArgumentException
+     *
      * @return AlphaVillage
      */
     private function getAlphaEntity(AlphaCard $alphaCard): AlphaVillage
@@ -79,14 +81,14 @@ final class VillageStorage extends AbstractManyToOneEntityStorage
         $alphaEntityKey = $alphaCard->getSelokey();
 
         if (!array_key_exists($alphaEntityKey, $this->alphaEntityByAlphaEntityKeyCache)) {
-            throw new RuntimeException(sprintf('Cannot get alpha village with key %s', $alphaEntityKey));
+            throw new InvalidArgumentException(sprintf('Cannot get alpha village with key %s', $alphaEntityKey));
         }
 
         return $this->alphaEntityByAlphaEntityKeyCache[$alphaEntityKey];
     }
 
     /**
-     * @return array|AlphaVillage[]
+     * @return AlphaVillage[]
      */
     private function createAlphaEntityByAlphaEntityKeyCache(): array
     {
@@ -96,7 +98,7 @@ final class VillageStorage extends AbstractManyToOneEntityStorage
             $alphaEntityKey = $alphaEntity->getSelokey();
 
             if (array_key_exists($alphaEntityKey, $alphaEntityByAlphaEntityKeyCache)) {
-                throw new RuntimeException(sprintf('Duplicate village key %s', $alphaEntityKey));
+                throw new InvalidArgumentException(sprintf('Duplicate village key %s', $alphaEntityKey));
             }
 
             $alphaEntityByAlphaEntityKeyCache[$alphaEntityKey] = $alphaEntity;

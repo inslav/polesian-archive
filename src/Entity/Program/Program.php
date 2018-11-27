@@ -22,14 +22,14 @@ declare(strict_types=1);
  * see <http://www.gnu.org/licenses/>.
  */
 
-namespace App\Entity;
+namespace App\Entity\Program;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\ProgramRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\Program\ProgramRepository")
  *
  * @author Anton Dyshkant <vyshkant@gmail.com>
  */
@@ -45,6 +45,14 @@ class Program
     private $id;
 
     /**
+     * @var Section
+     *
+     * @ORM\ManyToOne(targetEntity="App\Entity\Program\Section", inversedBy="programs")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $section;
+
+    /**
      * @var string
      *
      * @ORM\Column(type="string", length=255, unique=true)
@@ -52,15 +60,22 @@ class Program
     private $number;
 
     /**
-     * @var Collection|Question[]
+     * @var string
      *
-     * @ORM\OneToMany(targetEntity="App\Entity\Question", mappedBy="program", orphanRemoval=true)
+     * @ORM\Column(type="string", length=255, unique=true)
      */
-    private $questions;
+    private $name;
+
+    /**
+     * @var Collection|Paragraph[]
+     *
+     * @ORM\OneToMany(targetEntity="App\Entity\Program\Paragraph", mappedBy="program", orphanRemoval=true)
+     */
+    private $paragraphs;
 
     public function __construct()
     {
-        $this->questions = new ArrayCollection();
+        $this->paragraphs = new ArrayCollection();
     }
 
     /**
@@ -69,6 +84,26 @@ class Program
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    /**
+     * @return Section|null
+     */
+    public function getSection(): ?Section
+    {
+        return $this->section;
+    }
+
+    /**
+     * @param Section|null $section
+     *
+     * @return Program
+     */
+    public function setSection(?Section $section): self
+    {
+        $this->section = $section;
+
+        return $this;
     }
 
     /**
@@ -92,39 +127,59 @@ class Program
     }
 
     /**
-     * @return Collection|Question[]
+     * @return string|null
      */
-    public function getQuestions(): Collection
+    public function getName(): ?string
     {
-        return $this->questions;
+        return $this->name;
     }
 
     /**
-     * @param Question $question
+     * @param string $name
      *
      * @return Program
      */
-    public function addQuestion(Question $question): self
+    public function setName(string $name): self
     {
-        if (!$this->questions->contains($question)) {
-            $this->questions[] = $question;
-            $question->setProgram($this);
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Paragraph[]
+     */
+    public function getParagraphs(): Collection
+    {
+        return $this->paragraphs;
+    }
+
+    /**
+     * @param Paragraph $paragraph
+     *
+     * @return Program
+     */
+    public function addParagraph(Paragraph $paragraph): self
+    {
+        if (!$this->paragraphs->contains($paragraph)) {
+            $this->paragraphs[] = $paragraph;
+            $paragraph->setProgram($this);
         }
 
         return $this;
     }
 
     /**
-     * @param Question $question
+     * @param Paragraph $paragraph
      *
      * @return Program
      */
-    public function removeQuestion(Question $question): self
+    public function removeParagraph(Paragraph $paragraph): self
     {
-        if ($this->questions->contains($question)) {
-            $this->questions->removeElement($question);
-            if ($question->getProgram() === $this) {
-                $question->setProgram(null);
+        if ($this->paragraphs->contains($paragraph)) {
+            $this->paragraphs->removeElement($paragraph);
+            if ($paragraph->getProgram() === $this) {
+                $paragraph->setProgram(null);
             }
         }
 
