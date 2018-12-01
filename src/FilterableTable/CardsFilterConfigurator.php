@@ -43,6 +43,7 @@ use Vyfony\Bundle\FilterableTableBundle\Filter\Configurator\Parameter\IntegerCho
 use Vyfony\Bundle\FilterableTableBundle\Filter\Configurator\Parameter\Table\RadioColumnChoiceTableParameter;
 use Vyfony\Bundle\FilterableTableBundle\Filter\Configurator\Parameter\Table\RadioOption\RadioOption;
 use Vyfony\Bundle\FilterableTableBundle\Filter\Configurator\Parameter\Table\TableParameterInterface;
+use Vyfony\Bundle\FilterableTableBundle\Filter\Configurator\Parameter\TextFilterParameter;
 use Vyfony\Bundle\FilterableTableBundle\Filter\Configurator\Restriction\FilterRestrictionInterface;
 use Vyfony\Bundle\FilterableTableBundle\Table\Metadata\Column\ColumnMetadata;
 
@@ -206,6 +207,11 @@ final class CardsFilterConfigurator extends AbstractFilterConfigurator
                 ->setClass(Card::class)
                 ->setLabel('controller.card.list.filter.year')
                 ->setQueryParameterName('year'),
+            (new TextFilterParameter())
+                ->addSearchField('description')
+                ->addSearchField('text')
+                ->setLabel('controller.card.list.filter.textOrDescription')
+                ->setQueryParameterName('text'),
         ];
     }
 

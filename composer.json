@@ -41,7 +41,7 @@
         "symfony/web-link": "4.2.*",
         "symfony/webpack-encore-pack": "*",
         "symfony/yaml": "4.2.*",
-        "vyfony/filterable-table-bundle": "^0.1.11"
+        "vyfony/filterable-table-bundle": "^0.1.12"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.12",

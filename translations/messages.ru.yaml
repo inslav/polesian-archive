@@ -35,6 +35,7 @@ controller:
         terms: Термины
         collectors: Собиратели
         year: Год
+        textOrDescription: Текст или описание
         dataColumn:
           label: Колонка с данными
           option:
