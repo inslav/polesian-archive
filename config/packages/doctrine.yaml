@@ -33,7 +33,7 @@ doctrine:
         url: '%env(resolve:DATABASE_URL)%'
   orm:
     default_entity_manager: default
-    auto_generate_proxy_classes: '%kernel.debug%'
+    auto_generate_proxy_classes: true
     entity_managers:
       default:
         connection: default

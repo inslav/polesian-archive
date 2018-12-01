@@ -24,14 +24,14 @@ declare(strict_types=1);
 
 namespace App\Command;
 
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * @author Anton Dyshkant <vyshkant@gmail.com>
  */
-final class DebugCommand extends ContainerAwareCommand
+final class DebugCommand extends Command
 {
     protected function configure(): void
     {

@@ -26,29 +26,23 @@ see <http://www.gnu.org/licenses/>.
          xsi:noNamespaceSchemaLocation="http://schema.phpunit.de/7.3/phpunit.xsd"
          backupGlobals="false"
          colors="true"
-         bootstrap="vendor/autoload.php"
-         failOnRisky="true"
-         failOnWarning="true"
+         bootstrap="config/bootstrap.php"
 >
     <php>
         <ini name="error_reporting" value="-1" />
-        <env name="KERNEL_CLASS" value="App\Kernel" />
         <env name="APP_ENV" value="test" />
-        <env name="APP_SECRET" value="not_so_secret" />
-        <env name="DATABASE_URL" value="mysql://db_user:db_password@127.0.0.1:3306/db_name" />
-        <env name="MAILER_URL" value="null://localhost"/>
-        <env name="SYMFONY_DEPRECATIONS_HELPER" value="weak_vendors" />
+        <env name="SHELL_VERBOSITY" value="-1" />
     </php>
 
     <testsuites>
         <testsuite name="Polesian Archive Test Suite">
-            <directory>tests/</directory>
+            <directory>tests</directory>
         </testsuite>
     </testsuites>
 
     <filter>
         <whitelist>
-            <directory>src/</directory>
+            <directory>src</directory>
         </whitelist>
     </filter>
 

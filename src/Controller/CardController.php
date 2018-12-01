@@ -27,26 +27,36 @@ namespace App\Controller;
 use App\Entity\Card;
 use App\Import\Program\Question\Number\Formatter\QuestionNumberFormatterInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use Vyfony\Bundle\FilterableTableBundle\Table\TableInterface;
 
 /**
  * @Route("/card")
  *
  * @author Anton Dyshkant <vyshkant@gmail.com>
  */
-final class CardController extends Controller
+final class CardController extends AbstractController
 {
+    /**
+     * @var TableInterface
+     */
+    private $filterableTable;
+
     /**
      * @var QuestionNumberFormatterInterface
      */
     private $questionFormatter;
 
     /**
+     * @param TableInterface                   $filterableTable
      * @param QuestionNumberFormatterInterface $questionFormatter
      */
-    public function __construct(QuestionNumberFormatterInterface $questionFormatter)
-    {
+    public function __construct(
+        TableInterface $filterableTable,
+        QuestionNumberFormatterInterface $questionFormatter
+    ) {
+        $this->filterableTable = $filterableTable;
         $this->questionFormatter = $questionFormatter;
     }
 
@@ -59,13 +69,11 @@ final class CardController extends Controller
      */
     public function list(): array
     {
-        $filterableTable = $this->container->get('vyfony_filterable_table.table_interface');
-
         return [
             'controller' => 'card',
             'method' => 'list',
-            'filterForm' => $filterableTable->getFormView(),
-            'table' => $filterableTable->getTableMetadata(),
+            'filterForm' => $this->filterableTable->getFormView(),
+            'table' => $this->filterableTable->getTableMetadata(),
         ];
     }
 

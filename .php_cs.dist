@@ -73,6 +73,16 @@ return PhpCsFixer\Config::create()
     ->setFinder(
         PhpCsFixer\Finder::create()
             ->in(['bin', 'src', 'tests'])
-            ->append([__FILE__, '.phan.dist', 'bin/console', 'bin/phpunit', 'config/bundles.php', 'public/index.php'])
+            ->append(
+                [
+                    __FILE__,
+                    '.phan.dist',
+                    'bin/console',
+                    'bin/phpunit',
+                    'config/bootstrap.php',
+                    'config/bundles.php',
+                    'public/index.php',
+                ]
+            )
     )
 ;

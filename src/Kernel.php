@@ -26,7 +26,7 @@ namespace App;
 
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
-use Symfony\Component\Config\Exception\FileLoaderLoadException;
+use Symfony\Component\Config\Exception\LoaderLoadException;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\Config\Resource\FileResource;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -40,26 +40,7 @@ final class Kernel extends BaseKernel
 {
     use MicroKernelTrait;
 
-    /**
-     * @var string
-     */
     private const CONFIG_EXTENSION = '.yaml';
-
-    /**
-     * @return string
-     */
-    public function getCacheDir(): string
-    {
-        return $this->getProjectDir().'/var/cache/'.$this->environment;
-    }
-
-    /**
-     * @return string
-     */
-    public function getLogDir(): string
-    {
-        return $this->getProjectDir().'/var/log';
-    }
 
     /**
      * @return iterable
@@ -69,7 +50,7 @@ final class Kernel extends BaseKernel
         $bundles = require $this->getBundlesDeclarationFile();
 
         foreach ($bundles as $class => $environments) {
-            if (isset($environments['all']) || isset($environments[$this->environment])) {
+            if ($environments[$this->environment] ?? $environments['all'] ?? false) {
                 yield new $class();
             }
         }
@@ -87,7 +68,7 @@ final class Kernel extends BaseKernel
 
         $container->setParameter('container.dumper.inline_class_loader', true);
 
-        $configDir = $this->getProjectDir().'/config';
+        $configDir = $this->getConfigDir();
 
         $loader->load($configDir.'/{packages}/*'.self::CONFIG_EXTENSION, 'glob');
         $loader->load($configDir.'/{packages}/'.$this->environment.'/**/*'.self::CONFIG_EXTENSION, 'glob');
@@ -98,7 +79,7 @@ final class Kernel extends BaseKernel
     /**
      * @param RouteCollectionBuilder $routes
      *
-     * @throws FileLoaderLoadException
+     * @throws LoaderLoadException
      */
     protected function configureRoutes(RouteCollectionBuilder $routes): void
     {

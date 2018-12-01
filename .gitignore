@@ -17,7 +17,8 @@
 # see <http://www.gnu.org/licenses/>.
 
 ###> symfony/framework-bundle ###
-/.env
+/.env.local
+/.env.*.local
 /public/bundles/
 /var/
 /vendor/
@@ -31,7 +32,7 @@
 ###< symfony/webpack-encore-pack ###
 
 ###> symfony/phpunit-bridge ###
-/bin/.phpunit/
+.phpunit
 /phpunit.xml
 ###< symfony/phpunit-bridge ###
 
