@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "80118a6d6d8b72dfd7b16827196198d4",
+    "content-hash": "055d38ab987271b5dcb1b7017ff42e86",
     "packages": [
         {
             "name": "composer/ca-bundle",
@@ -2668,16 +2668,16 @@
         },
         {
             "name": "symfony/contracts",
-            "version": "v1.0.0",
+            "version": "v1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/contracts.git",
-                "reference": "4a33574d5771f4b04334cd4f7d43de96a92efb62"
+                "reference": "3edf0ab943d1985a356721952cba36ff31bd6e5f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/contracts/zipball/4a33574d5771f4b04334cd4f7d43de96a92efb62",
-                "reference": "4a33574d5771f4b04334cd4f7d43de96a92efb62",
+                "url": "https://api.github.com/repos/symfony/contracts/zipball/3edf0ab943d1985a356721952cba36ff31bd6e5f",
+                "reference": "3edf0ab943d1985a356721952cba36ff31bd6e5f",
                 "shasum": ""
             },
             "require": {
@@ -2732,7 +2732,7 @@
                 "interoperability",
                 "standards"
             ],
-            "time": "2018-10-31T08:00:32+00:00"
+            "time": "2018-11-24T09:35:08+00:00"
         },
         {
             "name": "symfony/debug",
@@ -5469,16 +5469,16 @@
         },
         {
             "name": "vyfony/filterable-table-bundle",
-            "version": "v0.1.12",
+            "version": "v0.1.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/vyfony/filterable-table-bundle.git",
-                "reference": "cc29baccd5dacb68e78488fabea886e4c26d49ae"
+                "reference": "ec753b671642ee55507026023fe7400c1b1a8f4e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/vyfony/filterable-table-bundle/zipball/cc29baccd5dacb68e78488fabea886e4c26d49ae",
-                "reference": "cc29baccd5dacb68e78488fabea886e4c26d49ae",
+                "url": "https://api.github.com/repos/vyfony/filterable-table-bundle/zipball/ec753b671642ee55507026023fe7400c1b1a8f4e",
+                "reference": "ec753b671642ee55507026023fe7400c1b1a8f4e",
                 "shasum": ""
             },
             "require": {
@@ -5535,7 +5535,7 @@
                 "symfony-bundle",
                 "table"
             ],
-            "time": "2018-11-30T23:48:37+00:00"
+            "time": "2018-12-02T20:38:42+00:00"
         },
         {
             "name": "webmozart/assert",
