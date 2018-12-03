@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "055d38ab987271b5dcb1b7017ff42e86",
+    "content-hash": "b510fdda727ae662ffc16ad2ed0696e5",
     "packages": [
         {
             "name": "composer/ca-bundle",
@@ -5469,16 +5469,16 @@
         },
         {
             "name": "vyfony/filterable-table-bundle",
-            "version": "v0.1.13",
+            "version": "v0.1.14",
             "source": {
                 "type": "git",
                 "url": "https://github.com/vyfony/filterable-table-bundle.git",
-                "reference": "ec753b671642ee55507026023fe7400c1b1a8f4e"
+                "reference": "44b71313afcf7822179dd0b59b8968ce028c33fe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/vyfony/filterable-table-bundle/zipball/ec753b671642ee55507026023fe7400c1b1a8f4e",
-                "reference": "ec753b671642ee55507026023fe7400c1b1a8f4e",
+                "url": "https://api.github.com/repos/vyfony/filterable-table-bundle/zipball/44b71313afcf7822179dd0b59b8968ce028c33fe",
+                "reference": "44b71313afcf7822179dd0b59b8968ce028c33fe",
                 "shasum": ""
             },
             "require": {
@@ -5535,7 +5535,7 @@
                 "symfony-bundle",
                 "table"
             ],
-            "time": "2018-12-02T20:38:42+00:00"
+            "time": "2018-12-03T23:30:08+00:00"
         },
         {
             "name": "webmozart/assert",
@@ -5698,16 +5698,16 @@
     "packages-dev": [
         {
             "name": "composer/composer",
-            "version": "1.7.3",
+            "version": "1.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/composer.git",
-                "reference": "e965b9aaa8854c3067f1ed2ae45f436572d73eb7"
+                "reference": "d8aef3af866b28786ce9b8647e52c42496436669"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/composer/zipball/e965b9aaa8854c3067f1ed2ae45f436572d73eb7",
-                "reference": "e965b9aaa8854c3067f1ed2ae45f436572d73eb7",
+                "url": "https://api.github.com/repos/composer/composer/zipball/d8aef3af866b28786ce9b8647e52c42496436669",
+                "reference": "d8aef3af866b28786ce9b8647e52c42496436669",
                 "shasum": ""
             },
             "require": {
@@ -5743,7 +5743,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.7-dev"
+                    "dev-master": "1.8-dev"
                 }
             },
             "autoload": {
@@ -5774,7 +5774,7 @@
                 "dependency",
                 "package"
             ],
-            "time": "2018-11-01T09:05:06+00:00"
+            "time": "2018-12-03T09:31:16+00:00"
         },
         {
             "name": "composer/semver",

@@ -229,7 +229,7 @@ final class CardsFilterConfigurator extends AbstractFilterConfigurator
                         ->setColumnMetadata(
                             (new ColumnMetadata())
                                 ->setName('description')
-                                ->setLabel('controller.card.list.table.description')
+                                ->setLabel('controller.card.list.table.column.description')
                         )
                 )
                 ->addRadioOption(
@@ -239,7 +239,7 @@ final class CardsFilterConfigurator extends AbstractFilterConfigurator
                         ->setColumnMetadata(
                             (new ColumnMetadata())
                                 ->setName('text')
-                                ->setLabel('controller.card.list.table.text')
+                                ->setLabel('controller.card.list.table.column.text')
                         )
                 )
                 ->setQueryParameterName('dataColumn')

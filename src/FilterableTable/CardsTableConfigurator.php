@@ -36,6 +36,14 @@ use Vyfony\Bundle\FilterableTableBundle\Table\Metadata\Column\ColumnMetadataInte
 final class CardsTableConfigurator extends AbstractTableConfigurator
 {
     /**
+     * @return string
+     */
+    protected function getResultsCountText(): string
+    {
+        return 'controller.card.list.table.resultsCount';
+    }
+
+    /**
      * @return ColumnMetadataInterface[]
      */
     protected function createColumnMetadataCollection(): array
@@ -45,13 +53,13 @@ final class CardsTableConfigurator extends AbstractTableConfigurator
                 ->setName('id')
                 ->setIsIdentifier(true)
                 ->setIsSortable(true)
-                ->setLabel('controller.card.list.table.id'),
+                ->setLabel('controller.card.list.table.column.id'),
             (new ColumnMetadata())
                 ->setName('village')
                 ->setValueExtractor(function (Card $card): string {
                     return $card->getVillage()->getName();
                 })
-                ->setLabel('controller.card.list.table.village'),
+                ->setLabel('controller.card.list.table.column.village'),
         ];
     }
 
@@ -61,7 +69,11 @@ final class CardsTableConfigurator extends AbstractTableConfigurator
     protected function createCheckboxHandlers(): array
     {
         return [
-            new CheckboxHandler('filterable_table__download_txt', 'controller.card.list.download.txt'),
+            new CheckboxHandler(
+                'filterable_table__download_txt',
+                'controller.card.list.download.txt.label',
+                'controller.card.list.download.txt.emptySelectionError'
+            ),
         ];
     }
 }

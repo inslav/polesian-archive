@@ -21,12 +21,12 @@ controller:
     list:
       title: Список карточек
       table:
-        id: Id
-        description: Описание
-        text: Диалектный текст
-        village: Село
-        question: Вопрос
-        program: Программа
+        column:
+          id: Id
+          village: Село
+          description: Описание
+          text: Диалектный текст
+        resultsCount: "Найдено карточек: count"
       filter:
         program: Программа
         question: Вопрос
@@ -45,7 +45,9 @@ controller:
         resetButton: Сбросить фильтры
         submitButton: Применить
       download:
-        txt: Скачать в формате .txt
+        txt:
+          label: Скачать в формате .txt
+          emptySelectionError: Не выбрана ни одна карточка
     show:
       title: Карточка №
       card:
