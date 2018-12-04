@@ -233,8 +233,14 @@ final class AlphaImporter implements AlphaImporterInterface
 
             $text = $this->valueConverter->getTrimmed($alphaCard->getDtext());
 
-            if (false !== strpos($text, \chr(0)) || false !== strpos($text, \chr(1))) {
+            if ($this->isTextValueBroken($text)) {
                 throw new InvalidArgumentException('Cannot save card with special characters in its text');
+            }
+
+            $description = $this->valueConverter->getTrimmed($alphaCard->getOptext());
+
+            if ($this->isTextValueBroken($description)) {
+                throw new InvalidArgumentException('Cannot save card with special characters in its description');
             }
 
             $card = (new Card())
@@ -245,7 +251,7 @@ final class AlphaImporter implements AlphaImporterInterface
                 ->setSeason($this->seasonStorage->getEntity($alphaCard))
                 ->setHasPositiveAnswer(null === $this->valueConverter->getTrimmedOrNull($alphaCard->getOtv()))
                 ->setText($text)
-                ->setDescription($this->valueConverter->getTrimmed($alphaCard->getOptext()))
+                ->setDescription($description)
                 ->setKeywords($this->keywordStorage->getAndPersistEntities($alphaCard))
                 ->setTerms($this->termStorage->getAndPersistEntities($alphaCard))
                 ->setInformers($this->informerStorage->getAndPersistEntities($alphaCard))
@@ -332,5 +338,15 @@ final class AlphaImporter implements AlphaImporterInterface
             $this->keywordStorage,
             $this->termStorage,
         ];
+    }
+
+    /**
+     * @param string $textValue
+     *
+     * @return bool
+     */
+    private function isTextValueBroken(string $textValue): bool
+    {
+        return false !== mb_strpos($textValue, \chr(0)) || false !== mb_strpos($textValue, \chr(1));
     }
 }
