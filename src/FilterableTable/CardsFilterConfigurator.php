@@ -27,12 +27,11 @@ namespace App\FilterableTable;
 use App\Entity\Card;
 use App\Entity\Collector;
 use App\Entity\Keyword;
-use App\Entity\Program\Paragraph;
 use App\Entity\Program\Program;
 use App\Entity\Term;
 use App\Entity\Village;
+use App\FilterableTable\Filter\Parameter\QuestionFilterParameter;
 use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Vyfony\Bundle\FilterableTableBundle\Filter\Configurator\AbstractFilterConfigurator;
 use Vyfony\Bundle\FilterableTableBundle\Filter\Configurator\Parameter\CustomChoiceParameter;
@@ -52,6 +51,20 @@ use Vyfony\Bundle\FilterableTableBundle\Table\Metadata\Column\ColumnMetadata;
  */
 final class CardsFilterConfigurator extends AbstractFilterConfigurator
 {
+    /**
+     * @var QuestionFilterParameter
+     */
+    private $questionFilterParameter;
+
+    /**
+     * @param QuestionFilterParameter $questionFilterParameter
+     */
+    public function __construct(
+        QuestionFilterParameter $questionFilterParameter
+    ) {
+        $this->questionFilterParameter = $questionFilterParameter;
+    }
+
     /**
      * @return array
      */
@@ -157,24 +170,7 @@ final class CardsFilterConfigurator extends AbstractFilterConfigurator
                 )
                 ->setQueryParameterName('program')
                 ->setLabel('controller.card.list.filter.program'),
-            (new JoinedEntityChoiceParameter())
-                ->setClass(Paragraph::class)
-                ->setIsExpanded(false)
-                ->setChoiceLabelFactory(function (Paragraph $paragraph): string {
-                    return $paragraph->getProgram()->getNumber().'.'.$paragraph->getNumber();
-                })
-                ->setSortValuesCallback(function (EntityRepository $repository): QueryBuilder {
-                    $paragraphAlias = 'paragraph';
-                    $programAlias = 'program';
-
-                    return $repository
-                        ->createQueryBuilder($paragraphAlias)
-                        ->join($paragraphAlias.'.program', $programAlias)
-                        ->orderBy($programAlias.'.number', 'ASC')
-                        ->addOrderBy($paragraphAlias.'.number', 'ASC');
-                })
-                ->setQueryParameterName('questions')
-                ->setLabel('controller.card.list.filter.question'),
+            $this->questionFilterParameter,
             (new EntityChoiceParameter())
                 ->setClass(Village::class)
                 ->setIsExpanded(false)

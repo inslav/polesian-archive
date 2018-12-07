@@ -43,6 +43,8 @@ final class QuestionFixtures extends Fixture implements DependentFixtureInterfac
 
     public const QUESTION_4 = 'question-4';
 
+    public const QUESTION_5 = 'question-5';
+
     /**
      * @param ObjectManager $manager
      */
@@ -80,6 +82,15 @@ final class QuestionFixtures extends Fixture implements DependentFixtureInterfac
         ;
         $manager->persist($question);
         $this->addReference(self::QUESTION_4, $question);
+
+        $question = (new Question())
+            ->setProgram($this->getReference(ProgramFixtures::PROGRAM_XI))
+            ->setParagraph($this->getReference(ParagraphFixtures::PROGRAM_XI_PARAGRAPH_6))
+            ->setSubparagraph($this->getReference(SubparagraphFixtures::PROGRAM_XI_PARAGRAPH_6_SUBPARAGRAPH_B))
+            ->setIsAdditional(false)
+        ;
+        $manager->persist($question);
+        $this->addReference(self::QUESTION_5, $question);
 
         $manager->flush();
     }

@@ -70,6 +70,7 @@ final class CardFixtures extends Fixture implements DependentFixtureInterface
         return (new Card())
             ->setVillage($this->getReference(VillageFixtures::VILLAGE_BARBAROV))
             ->addQuestion($this->getReference(QuestionFixtures::QUESTION_1))
+            ->addQuestion($this->getReference(QuestionFixtures::QUESTION_5))
             ->setYear(1983)
             ->setSeason($this->getReference(SeasonFixtures::SEASON_SUMMER))
             ->setText(<<<EOT
