@@ -22,12 +22,12 @@ declare(strict_types=1);
  * see <http://www.gnu.org/licenses/>.
  */
 
-namespace App\Entity\Program;
+namespace App\Entity\PolesianProgram;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\Program\SubparagraphRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\PolesianProgram\SubparagraphRepository")
  * @ORM\Table(
  *     uniqueConstraints={@ORM\UniqueConstraint(name="subparagraph_of_paragraph", columns={"paragraph_id", "letter"})}
  * )
@@ -48,7 +48,7 @@ class Subparagraph
     /**
      * @var Paragraph
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Program\Paragraph", inversedBy="subparagraphs")
+     * @ORM\ManyToOne(targetEntity="App\Entity\PolesianProgram\Paragraph", inversedBy="subparagraphs")
      * @ORM\JoinColumn(nullable=false)
      */
     private $paragraph;

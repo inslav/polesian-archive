@@ -24,7 +24,7 @@ declare(strict_types=1);
 
 namespace App\ImportDb\Alpha\Storage\ManyToOne;
 
-use App\Entity\Program\Subparagraph;
+use App\Entity\PolesianProgram\Subparagraph;
 use App\Import\Program\Question\Number\Parser\QuestionNumberParserInterface;
 use App\ImportDb\Alpha\Entity\AlphaCard;
 use App\ImportDb\Alpha\ValueTrimmer\AlphaValueConverterInterface;

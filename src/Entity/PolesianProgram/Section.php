@@ -22,14 +22,14 @@ declare(strict_types=1);
  * see <http://www.gnu.org/licenses/>.
  */
 
-namespace App\Entity\Program;
+namespace App\Entity\PolesianProgram;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\Program\SectionRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\PolesianProgram\SectionRepository")
  *
  * @author Anton Dyshkant <vyshkant@gmail.com>
  */
@@ -54,7 +54,7 @@ class Section
     /**
      * @var Collection|Program[]
      *
-     * @ORM\OneToMany(targetEntity="App\Entity\Program\Program", mappedBy="section", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\PolesianProgram\Program", mappedBy="section", orphanRemoval=true)
      */
     private $programs;
 

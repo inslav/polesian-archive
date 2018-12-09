@@ -43,6 +43,10 @@ final class MenuBuilder
      */
     private $requestStack;
 
+    /**
+     * @param FactoryInterface $factory
+     * @param RequestStack     $requestStack
+     */
     public function __construct(FactoryInterface $factory, RequestStack $requestStack)
     {
         $this->factory = $factory;
@@ -67,8 +71,25 @@ final class MenuBuilder
         ;
 
         $menu
+            ->addChild('page.menu.polesianProgram', ['route' => 'polesian_program__index'])
+            ->setCurrent(
+                \in_array(
+                    $currentRoute,
+                    [
+                        'polesian_program__index',
+                        'polesian_program__program',
+                        'polesian_program__paragraph',
+                        'polesian_program__subparagraph',
+                    ],
+                    true
+                )
+            )
+        ;
+
+        $menu
             ->addChild('page.menu.dataBase', ['route' => 'card__list'])
-            ->setCurrent(\in_array($currentRoute, ['card__list', 'card__show'], true));
+            ->setCurrent(\in_array($currentRoute, ['card__list', 'card__show'], true))
+        ;
 
         foreach ($menu->getChildren() as $child) {
             $child

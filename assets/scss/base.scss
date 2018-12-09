@@ -61,18 +61,24 @@ html {
         .pa-nav-link {
           padding-left: 0;
           padding-right: 0;
-          color: $gray-700;
+          color: $body-color;
         }
 
         &.pa-active {
           .pa-nav-link {
             color: $blue;
           }
+
+          &:hover {
+            .pa-nav-link {
+              color: $blue;
+            }
+          }
         }
 
         &:hover {
           .pa-nav-link {
-            color: $gray-800;
+            color: $gray-600;
           }
         }
       }

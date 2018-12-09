@@ -22,53 +22,38 @@ declare(strict_types=1);
  * see <http://www.gnu.org/licenses/>.
  */
 
-namespace App\DataFixtures;
+namespace App\DataFixtures\PolesianProgram;
 
-use App\Entity\Program\Subparagraph;
+use App\Entity\PolesianProgram\Section;
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
 /**
  * @author Anton Dyshkant <vyshkant@gmail.com>
  */
-final class SubparagraphFixtures extends Fixture implements DependentFixtureInterface
+final class SectionFixtures extends Fixture
 {
-    public const PROGRAM_XI_PARAGRAPH_6_SUBPARAGRAPH_A = 'XI.6а';
+    public const SECTION_FAMILY = 'family';
 
-    public const PROGRAM_XI_PARAGRAPH_6_SUBPARAGRAPH_B = 'XI.6б';
+    public const SECTION_NATURE = 'nature';
 
     /**
      * @param ObjectManager $manager
      */
     public function load(ObjectManager $manager): void
     {
-        $subparagraph = (new Subparagraph())
-            ->setLetter('а')
-            ->setText('зной;')
-            ->setParagraph($this->getReference(ParagraphFixtures::PROGRAM_XI_PARAGRAPH_6))
+        $section = (new Section())
+            ->setName('СЕМЕЙНАЯ ОБРЯДНОСТЬ')
         ;
-        $manager->persist($subparagraph);
-        $this->addReference(self::PROGRAM_XI_PARAGRAPH_6_SUBPARAGRAPH_A, $subparagraph);
+        $manager->persist($section);
+        $this->addReference(self::SECTION_FAMILY, $section);
 
-        $subparagraph = (new Subparagraph())
-            ->setLetter('б')
-            ->setText('жара;')
-            ->setParagraph($this->getReference(ParagraphFixtures::PROGRAM_XI_PARAGRAPH_6))
+        $section = (new Section())
+            ->setName('ПРЕДСТАВЛЕНИЯ О ПРИРОДЕ')
         ;
-        $manager->persist($subparagraph);
-        $this->addReference(self::PROGRAM_XI_PARAGRAPH_6_SUBPARAGRAPH_B, $subparagraph);
+        $manager->persist($section);
+        $this->addReference(self::SECTION_NATURE, $section);
 
         $manager->flush();
-    }
-
-    /**
-     * @return string[]
-     */
-    public function getDependencies(): array
-    {
-        return [
-            ParagraphFixtures::class,
-        ];
     }
 }

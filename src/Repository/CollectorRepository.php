@@ -29,11 +29,6 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
- * @method Collector|null find($id, $lockMode = null, $lockVersion = null)
- * @method Collector|null findOneBy(array $criteria, array $orderBy = null)
- * @method Collector[]    findAll()
- * @method Collector[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
- *
  * @author Anton Dyshkant <vyshkant@gmail.com>
  */
 final class CollectorRepository extends ServiceEntityRepository

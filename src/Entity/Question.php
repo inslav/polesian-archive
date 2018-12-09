@@ -24,9 +24,9 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-use App\Entity\Program\Paragraph;
-use App\Entity\Program\Program;
-use App\Entity\Program\Subparagraph;
+use App\Entity\PolesianProgram\Paragraph;
+use App\Entity\PolesianProgram\Program;
+use App\Entity\PolesianProgram\Subparagraph;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -48,7 +48,7 @@ class Question
     /**
      * @var Program
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Program\Program")
+     * @ORM\ManyToOne(targetEntity="App\Entity\PolesianProgram\Program")
      * @ORM\JoinColumn(nullable=false)
      */
     private $program;
@@ -56,14 +56,14 @@ class Question
     /**
      * @var Paragraph|null
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Program\Paragraph")
+     * @ORM\ManyToOne(targetEntity="App\Entity\PolesianProgram\Paragraph")
      */
     private $paragraph;
 
     /**
      * @var Subparagraph|null
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Program\Subparagraph")
+     * @ORM\ManyToOne(targetEntity="App\Entity\PolesianProgram\Subparagraph")
      */
     private $subparagraph;
 

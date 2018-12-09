@@ -22,14 +22,14 @@ declare(strict_types=1);
  * see <http://www.gnu.org/licenses/>.
  */
 
-namespace App\Entity\Program;
+namespace App\Entity\PolesianProgram;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\Program\ParagraphRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\PolesianProgram\ParagraphRepository")
  * @ORM\Table(uniqueConstraints={@ORM\UniqueConstraint(name="paragraph_of_program", columns={"program_id", "number"})})
  *
  * @author Anton Dyshkant <vyshkant@gmail.com>
@@ -48,7 +48,7 @@ class Paragraph
     /**
      * @var Program
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Program\Program", inversedBy="paragraphs")
+     * @ORM\ManyToOne(targetEntity="App\Entity\PolesianProgram\Program", inversedBy="paragraphs")
      * @ORM\JoinColumn(nullable=false)
      */
     private $program;
@@ -77,7 +77,7 @@ class Paragraph
     /**
      * @var Collection|Subparagraph[]
      *
-     * @ORM\OneToMany(targetEntity="App\Entity\Program\Subparagraph", mappedBy="paragraph", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\PolesianProgram\Subparagraph", mappedBy="paragraph", orphanRemoval=true)
      */
     private $subparagraphs;
 

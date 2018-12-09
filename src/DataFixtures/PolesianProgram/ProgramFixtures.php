@@ -22,10 +22,9 @@ declare(strict_types=1);
  * see <http://www.gnu.org/licenses/>.
  */
 
-namespace App\DataFixtures\Program;
+namespace App\DataFixtures\PolesianProgram;
 
-use App\DataFixtures\SectionFixtures;
-use App\Entity\Program\Program;
+use App\Entity\PolesianProgram\Program;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -37,7 +36,11 @@ final class ProgramFixtures extends Fixture implements DependentFixtureInterface
 {
     public const PROGRAM_I = 'I';
 
-    public const PROGRAM_XI = 'XI';
+    public const PROGRAM_II = 'II';
+
+    public const PROGRAM_XIV = 'XIV';
+
+    public const PROGRAM_XV = 'XV';
 
     /**
      * @param ObjectManager $manager
@@ -46,19 +49,35 @@ final class ProgramFixtures extends Fixture implements DependentFixtureInterface
     {
         $program = (new Program())
             ->setNumber('I')
-            ->setName('Представления о погоде')
-            ->setSection($this->getReference(SectionFixtures::SECTION_NATURE))
+            ->setName('Свадьба')
+            ->setSection($this->getReference(SectionFixtures::SECTION_FAMILY))
         ;
         $manager->persist($program);
         $this->addReference(self::PROGRAM_I, $program);
 
         $program = (new Program())
-            ->setNumber('XI')
-            ->setName('Представления о животных')
+            ->setNumber('II')
+            ->setName('Родины')
+            ->setSection($this->getReference(SectionFixtures::SECTION_FAMILY))
+        ;
+        $manager->persist($program);
+        $this->addReference(self::PROGRAM_II, $program);
+
+        $program = (new Program())
+            ->setNumber('XIV')
+            ->setName('Астрономия. Метеорология. Время')
             ->setSection($this->getReference(SectionFixtures::SECTION_NATURE))
         ;
         $manager->persist($program);
-        $this->addReference(self::PROGRAM_XI, $program);
+        $this->addReference(self::PROGRAM_XIV, $program);
+
+        $program = (new Program())
+            ->setNumber('XV')
+            ->setName('Дождь. Гром. Град')
+            ->setSection($this->getReference(SectionFixtures::SECTION_NATURE))
+        ;
+        $manager->persist($program);
+        $this->addReference(self::PROGRAM_XV, $program);
 
         $manager->flush();
     }

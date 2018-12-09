@@ -22,51 +22,49 @@ declare(strict_types=1);
  * see <http://www.gnu.org/licenses/>.
  */
 
-namespace App\Repository\Program;
+namespace App\Repository\PolesianProgram;
 
-use App\Entity\Program\Program;
-use App\Entity\Program\Section;
+use App\Entity\PolesianProgram\Section;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\ORMException;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
- * @method Program|null find($id, $lockMode = null, $lockVersion = null)
- * @method Program|null findOneBy(array $criteria, array $orderBy = null)
- * @method Program[]    findAll()
- * @method Program[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
- *
  * @author Anton Dyshkant <vyshkant@gmail.com>
  */
-final class ProgramRepository extends ServiceEntityRepository
+final class SectionRepository extends ServiceEntityRepository
 {
     /**
      * @param RegistryInterface $registry
      */
     public function __construct(RegistryInterface $registry)
     {
-        parent::__construct($registry, Program::class);
+        parent::__construct($registry, Section::class);
     }
 
     /**
-     * @param string  $number
-     * @param string  $name
-     * @param Section $section
+     * @param string $name
      *
      * @throws ORMException
      *
-     * @return Program
+     * @return Section
      */
-    public function createProgram(string $number, string $name, Section $section): Program
+    public function createSection(string $name): Section
     {
-        $program = new Program();
+        $section = new Section();
 
-        $program->setNumber($number);
-        $program->setName($name);
-        $program->setSection($section);
+        $section->setName($name);
 
-        $this->getEntityManager()->persist($program);
+        $this->getEntityManager()->persist($section);
 
-        return $program;
+        return $section;
+    }
+
+    /**
+     * @return array
+     */
+    public function findAllOrderedByDefault(): array
+    {
+        return $this->findBy([], ['id' => 'ASC']);
     }
 }

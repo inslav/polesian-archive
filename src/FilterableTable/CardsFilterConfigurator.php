@@ -27,7 +27,7 @@ namespace App\FilterableTable;
 use App\Entity\Card;
 use App\Entity\Collector;
 use App\Entity\Keyword;
-use App\Entity\Program\Program;
+use App\Entity\PolesianProgram\Program;
 use App\Entity\Term;
 use App\Entity\Village;
 use App\FilterableTable\Filter\Parameter\QuestionFilterParameter;

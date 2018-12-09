@@ -24,7 +24,7 @@ declare(strict_types=1);
 
 namespace App\ImportDb\Alpha\Storage\ManyToOne\Persisted;
 
-use App\Entity\Program\Subparagraph;
+use App\Entity\PolesianProgram\Subparagraph;
 use App\Import\Program\Question\Number\Formatter\QuestionNumberFormatterInterface;
 use App\Import\Program\Question\Number\Parser\QuestionNumberParserInterface;
 use App\Import\Program\Question\Number\QuestionNumberInterface;

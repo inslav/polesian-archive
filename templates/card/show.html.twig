@@ -22,17 +22,13 @@ see <http://www.gnu.org/licenses/>.
 
 {% extends 'base.html.twig' %}
 
-{% import _self as self %}
-
-{% block title %}
-    {{ ('controller.'~controller~'.'~method~'.title')|trans }}{{ card.id }} – {{ 'page.label'|trans }}
-{% endblock %}
-
-{% block page_title %}
+{% block title -%}
     {{ parent() }}{{ card.id }}
-{% endblock %}
+{%- endblock %}
 
 {% block page_content %}
+    {% import _self as self %}
+
     <table class="table table-bordered">
         <tbody>
             {{ self.format_text_row('village', self.format_village(card.village)) }}

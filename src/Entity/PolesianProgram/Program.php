@@ -22,14 +22,14 @@ declare(strict_types=1);
  * see <http://www.gnu.org/licenses/>.
  */
 
-namespace App\Entity\Program;
+namespace App\Entity\PolesianProgram;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\Program\ProgramRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\PolesianProgram\ProgramRepository")
  *
  * @author Anton Dyshkant <vyshkant@gmail.com>
  */
@@ -47,7 +47,7 @@ class Program
     /**
      * @var Section
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Program\Section", inversedBy="programs")
+     * @ORM\ManyToOne(targetEntity="App\Entity\PolesianProgram\Section", inversedBy="programs")
      * @ORM\JoinColumn(nullable=false)
      */
     private $section;
@@ -69,7 +69,7 @@ class Program
     /**
      * @var Collection|Paragraph[]
      *
-     * @ORM\OneToMany(targetEntity="App\Entity\Program\Paragraph", mappedBy="program", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\PolesianProgram\Paragraph", mappedBy="program", orphanRemoval=true)
      */
     private $paragraphs;
 

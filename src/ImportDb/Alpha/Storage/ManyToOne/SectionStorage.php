@@ -24,7 +24,7 @@ declare(strict_types=1);
 
 namespace App\ImportDb\Alpha\Storage\ManyToOne;
 
-use App\Entity\Program\Section;
+use App\Entity\PolesianProgram\Section;
 use App\ImportDb\Alpha\Entity\AlphaCard;
 
 /**

@@ -53,8 +53,6 @@ controller:
       card:
         value:
           villageRaionAndOblast: "village, raion район, oblast область"
-          question: "program.paragraphsubparagraphisAdditional"
-          isAdditional: .доп
         label:
           village: Село
           question: Вопрос
@@ -66,10 +64,20 @@ controller:
           terms: Термины
           collectors: Собиратели
           informers: Информаторы
+  polesianProgram:
+    index:
+      title: Полесская программа
+    program:
+      title: Программа
+    paragraph:
+      title: Вопрос
+    subparagraph:
+      title: Вопрос
 
 page:
   label: База данных Полесского архива
   menu:
     index: Главная
+    polesianProgram: Полесская программа
     dataBase: База данных
   footer: Институт славяноведения Российской академии наук

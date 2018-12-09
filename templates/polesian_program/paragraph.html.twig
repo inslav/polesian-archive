@@ -1,0 +1,60 @@
+{#-
+
+This file is part of Polesian Archive.
+
+Copyright (c) Institute of Slavic Studies of the Russian Academy of Sciences
+
+Polesian Archive is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, version 3.
+
+Polesian Archive is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code. If you have not received
+a copy of the GNU General Public License along with Polesian Archive,
+see <http://www.gnu.org/licenses/>.
+
+-#}
+
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('build/css/polesian-program/paragraph.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block title -%}
+    {{ parent() }} {{ paragraph.program.number ~ '.' ~ paragraph.number }}
+{%- endblock %}
+
+{% block page_content %}
+    {% import _self as self %}
+    {% import 'polesian_program/program.html.twig' as program_formatter %}
+
+    {{ program_formatter.format_program_title(paragraph.program) }}
+
+    {{ self.format_paragraph(paragraph) }}
+{% endblock %}
+
+{% macro format_paragraph(paragraph) %}
+    {% import _self as self %}
+    {% import 'polesian_program/subparagraph.html.twig' as subparagraph_formatter %}
+
+    {{ self.format_paragraph_title(paragraph) }}
+
+    {% for subparagraph in paragraph.subparagraphs %}
+        {{ subparagraph_formatter.format_subparagraph(subparagraph) }}
+    {% endfor %}
+{% endmacro %}
+
+{% macro format_paragraph_title(paragraph) %}
+    <div class="pa-polesian-program-row pa-paragraph-row">
+        {% set formattedTitle %}<span class="pa-paragraph-title">{{ paragraph.title }}</span>{% endset %}
+
+        <a href="{{ path('polesian_program__paragraph', {programNumber: paragraph.program.number, number: paragraph.number}) }}">{{ paragraph.number }}.{{ paragraph.title ? (' ' ~ formattedTitle ~ '.')|raw }}{{ paragraph.text ? ' ' ~ paragraph.text }}</a>
+    </div>
+{% endmacro %}

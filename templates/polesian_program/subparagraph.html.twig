@@ -1,0 +1,51 @@
+{#-
+
+This file is part of Polesian Archive.
+
+Copyright (c) Institute of Slavic Studies of the Russian Academy of Sciences
+
+Polesian Archive is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, version 3.
+
+Polesian Archive is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code. If you have not received
+a copy of the GNU General Public License along with Polesian Archive,
+see <http://www.gnu.org/licenses/>.
+
+-#}
+
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('build/css/polesian-program/subparagraph.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block title -%}
+    {{ parent() }} {{ subparagraph.paragraph.program.number ~ '.' ~ subparagraph.paragraph.number ~ subparagraph.letter }}
+{%- endblock %}
+
+{% block page_content %}
+    {% import _self as self %}
+    {% import 'polesian_program/program.html.twig' as program_formatter %}
+    {% import 'polesian_program/paragraph.html.twig' as paragraph_formatter %}
+
+    {{ program_formatter.format_program_title(subparagraph.paragraph.program) }}
+
+    {{ paragraph_formatter.format_paragraph_title(subparagraph.paragraph) }}
+
+    {{ self.format_subparagraph(subparagraph) }}
+{% endblock %}
+
+{% macro format_subparagraph(subparagraph) %}
+    <div class="pa-polesian-program-row pa-subparagraph-row">
+        <a href="{{ path('polesian_program__subparagraph', {programNumber: subparagraph.paragraph.program.number, paragraphNumber: subparagraph.paragraph.number, letter: subparagraph.letter}) }}">{{ subparagraph.letter }}) {{ subparagraph.text }}</a>
+    </div>
+{% endmacro %}
+

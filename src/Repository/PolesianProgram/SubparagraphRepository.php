@@ -22,20 +22,17 @@ declare(strict_types=1);
  * see <http://www.gnu.org/licenses/>.
  */
 
-namespace App\Repository\Program;
+namespace App\Repository\PolesianProgram;
 
-use App\Entity\Program\Paragraph;
-use App\Entity\Program\Subparagraph;
+use App\Entity\PolesianProgram\Paragraph;
+use App\Entity\PolesianProgram\Subparagraph;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\ORMException;
+use LogicException;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
- * @method Subparagraph|null find($id, $lockMode = null, $lockVersion = null)
- * @method Subparagraph|null findOneBy(array $criteria, array $orderBy = null)
- * @method Subparagraph[]    findAll()
- * @method Subparagraph[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
- *
  * @author Anton Dyshkant <vyshkant@gmail.com>
  */
 final class SubparagraphRepository extends ServiceEntityRepository
@@ -68,5 +65,41 @@ final class SubparagraphRepository extends ServiceEntityRepository
         $this->getEntityManager()->persist($subparagraph);
 
         return $subparagraph;
+    }
+
+    /**
+     * @param string $programNumber
+     * @param int    $paragraphNumber
+     * @param string $letter
+     *
+     * @throws LogicException
+     *
+     * @return Subparagraph|null
+     */
+    public function findOneByProgramNumberAndParagraphNumberAndLetter(
+        string $programNumber,
+        int $paragraphNumber,
+        string $letter
+    ): ?Subparagraph {
+        $queryBuilder = $this->createQueryBuilder('subparagraph');
+
+        $query = $queryBuilder
+            ->innerJoin('subparagraph.paragraph', 'paragraph')
+            ->innerJoin('paragraph.program', 'program')
+            ->setParameter('programNumber', $programNumber)
+            ->setParameter('paragraphNumber', $paragraphNumber)
+            ->setParameter('letter', $letter)
+            ->select('subparagraph')
+            ->andWhere($queryBuilder->expr()->eq('program.number', ':programNumber'))
+            ->andWhere($queryBuilder->expr()->eq('paragraph.number', ':paragraphNumber'))
+            ->andWhere($queryBuilder->expr()->eq('subparagraph.letter', ':letter'))
+            ->getQuery()
+        ;
+
+        try {
+            return $query->getOneOrNullResult();
+        } catch (NonUniqueResultException $e) {
+            throw new LogicException(sprintf('The built query "%s" returns non-unique result', $query->getDQL()));
+        }
     }
 }

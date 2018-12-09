@@ -24,7 +24,9 @@ declare(strict_types=1);
 
 namespace App\DataFixtures;
 
-use App\DataFixtures\Program\ProgramFixtures;
+use App\DataFixtures\PolesianProgram\ParagraphFixtures;
+use App\DataFixtures\PolesianProgram\ProgramFixtures;
+use App\DataFixtures\PolesianProgram\SubparagraphFixtures;
 use App\Entity\Question;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
@@ -45,6 +47,14 @@ final class QuestionFixtures extends Fixture implements DependentFixtureInterfac
 
     public const QUESTION_5 = 'question-5';
 
+    public const QUESTION_6 = 'question-6';
+
+    public const QUESTION_7 = 'question-7';
+
+    public const QUESTION_8 = 'question-8';
+
+    public const QUESTION_9 = 'question-9';
+
     /**
      * @param ObjectManager $manager
      */
@@ -59,38 +69,74 @@ final class QuestionFixtures extends Fixture implements DependentFixtureInterfac
 
         $question = (new Question())
             ->setProgram($this->getReference(ProgramFixtures::PROGRAM_I))
-            ->setParagraph($this->getReference(ParagraphFixtures::PROGRAM_I_PARAGRAPH_10))
+            ->setParagraph($this->getReference(ParagraphFixtures::PROGRAM_I_PARAGRAPH_1))
             ->setIsAdditional(false)
         ;
         $manager->persist($question);
         $this->addReference(self::QUESTION_2, $question);
 
         $question = (new Question())
-            ->setProgram($this->getReference(ProgramFixtures::PROGRAM_XI))
-            ->setParagraph($this->getReference(ParagraphFixtures::PROGRAM_XI_PARAGRAPH_6))
-            ->setSubparagraph($this->getReference(SubparagraphFixtures::PROGRAM_XI_PARAGRAPH_6_SUBPARAGRAPH_A))
-            ->setIsAdditional(true)
+            ->setProgram($this->getReference(ProgramFixtures::PROGRAM_I))
+            ->setParagraph($this->getReference(ParagraphFixtures::PROGRAM_I_PARAGRAPH_1))
+            ->setSubparagraph($this->getReference(SubparagraphFixtures::PROGRAM_I_PARAGRAPH_1_SUBPARAGRAPH_A))
+            ->setIsAdditional(false)
         ;
         $manager->persist($question);
         $this->addReference(self::QUESTION_3, $question);
 
         $question = (new Question())
-            ->setProgram($this->getReference(ProgramFixtures::PROGRAM_XI))
-            ->setParagraph($this->getReference(ParagraphFixtures::PROGRAM_XI_PARAGRAPH_6))
-            ->setSubparagraph($this->getReference(SubparagraphFixtures::PROGRAM_XI_PARAGRAPH_6_SUBPARAGRAPH_B))
+            ->setProgram($this->getReference(ProgramFixtures::PROGRAM_I))
+            ->setParagraph($this->getReference(ParagraphFixtures::PROGRAM_I_PARAGRAPH_1))
+            ->setSubparagraph($this->getReference(SubparagraphFixtures::PROGRAM_I_PARAGRAPH_1_SUBPARAGRAPH_B))
             ->setIsAdditional(false)
         ;
         $manager->persist($question);
         $this->addReference(self::QUESTION_4, $question);
 
         $question = (new Question())
-            ->setProgram($this->getReference(ProgramFixtures::PROGRAM_XI))
-            ->setParagraph($this->getReference(ParagraphFixtures::PROGRAM_XI_PARAGRAPH_6))
-            ->setSubparagraph($this->getReference(SubparagraphFixtures::PROGRAM_XI_PARAGRAPH_6_SUBPARAGRAPH_B))
-            ->setIsAdditional(false)
+            ->setProgram($this->getReference(ProgramFixtures::PROGRAM_II))
+            ->setParagraph($this->getReference(ParagraphFixtures::PROGRAM_II_PARAGRAPH_1))
+            ->setSubparagraph($this->getReference(SubparagraphFixtures::PROGRAM_II_PARAGRAPH_1_SUBPARAGRAPH_A))
+            ->setIsAdditional(true)
         ;
         $manager->persist($question);
         $this->addReference(self::QUESTION_5, $question);
+
+        $question = (new Question())
+            ->setProgram($this->getReference(ProgramFixtures::PROGRAM_II))
+            ->setParagraph($this->getReference(ParagraphFixtures::PROGRAM_II_PARAGRAPH_2))
+            ->setSubparagraph($this->getReference(SubparagraphFixtures::PROGRAM_II_PARAGRAPH_2_SUBPARAGRAPH_B))
+            ->setIsAdditional(false)
+        ;
+        $manager->persist($question);
+        $this->addReference(self::QUESTION_6, $question);
+
+        $question = (new Question())
+            ->setProgram($this->getReference(ProgramFixtures::PROGRAM_XIV))
+            ->setParagraph($this->getReference(ParagraphFixtures::PROGRAM_XIV_PARAGRAPH_1))
+            ->setSubparagraph(null)
+            ->setIsAdditional(false)
+        ;
+        $manager->persist($question);
+        $this->addReference(self::QUESTION_7, $question);
+
+        $question = (new Question())
+            ->setProgram($this->getReference(ProgramFixtures::PROGRAM_XV))
+            ->setParagraph($this->getReference(ParagraphFixtures::PROGRAM_XV_PARAGRAPH_1))
+            ->setSubparagraph($this->getReference(SubparagraphFixtures::PROGRAM_XV_PARAGRAPH_1_SUBPARAGRAPH_Z))
+            ->setIsAdditional(false)
+        ;
+        $manager->persist($question);
+        $this->addReference(self::QUESTION_8, $question);
+
+        $question = (new Question())
+            ->setProgram($this->getReference(ProgramFixtures::PROGRAM_XV))
+            ->setParagraph($this->getReference(ParagraphFixtures::PROGRAM_XV_PARAGRAPH_2))
+            ->setSubparagraph(null)
+            ->setIsAdditional(true)
+        ;
+        $manager->persist($question);
+        $this->addReference(self::QUESTION_9, $question);
 
         $manager->flush();
     }

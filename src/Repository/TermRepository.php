@@ -29,11 +29,6 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
- * @method Term|null find($id, $lockMode = null, $lockVersion = null)
- * @method Term|null findOneBy(array $criteria, array $orderBy = null)
- * @method Term[]    findAll()
- * @method Term[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
- *
  * @author Anton Dyshkant <vyshkant@gmail.com>
  */
 final class TermRepository extends ServiceEntityRepository

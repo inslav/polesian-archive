@@ -1,0 +1,55 @@
+{#-
+
+This file is part of Polesian Archive.
+
+Copyright (c) Institute of Slavic Studies of the Russian Academy of Sciences
+
+Polesian Archive is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, version 3.
+
+Polesian Archive is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code. If you have not received
+a copy of the GNU General Public License along with Polesian Archive,
+see <http://www.gnu.org/licenses/>.
+
+-#}
+
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('build/css/polesian-program/program.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block title -%}
+    {{ parent() }} {{ program.number }}
+{%- endblock %}
+
+{% block page_content %}
+    {% import _self as self %}
+
+    {{ self.format_program(program) }}
+{% endblock %}
+
+{% macro format_program(program) %}
+    {% import _self as self %}
+    {% import 'polesian_program/paragraph.html.twig' as paragraph_formatter %}
+
+    {{ self.format_program_title(program) }}
+
+    {% for paragraph in program.paragraphs %}
+        {{ paragraph_formatter.format_paragraph(paragraph) }}
+    {% endfor %}
+{% endmacro %}
+
+{% macro format_program_title(program) %}
+    <div class="pa-polesian-program-row pa-program-row">
+        <a href="{{ path('polesian_program__program', {number: program.number}) }}">{{ program.number }}. {{ program.name }}</a>
+    </div>
+{% endmacro %}

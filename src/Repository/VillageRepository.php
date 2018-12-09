@@ -29,11 +29,6 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
- * @method Village|null find($id, $lockMode = null, $lockVersion = null)
- * @method Village|null findOneBy(array $criteria, array $orderBy = null)
- * @method Village[]    findAll()
- * @method Village[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
- *
  * @author Anton Dyshkant <vyshkant@gmail.com>
  */
 final class VillageRepository extends ServiceEntityRepository

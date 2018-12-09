@@ -22,53 +22,56 @@ declare(strict_types=1);
  * see <http://www.gnu.org/licenses/>.
  */
 
-namespace App\Repository\Program;
+namespace App\Repository\PolesianProgram;
 
-use App\Entity\Program\Paragraph;
-use App\Entity\Program\Program;
+use App\Entity\PolesianProgram\Program;
+use App\Entity\PolesianProgram\Section;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\ORMException;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
- * @method Paragraph|null find($id, $lockMode = null, $lockVersion = null)
- * @method Paragraph|null findOneBy(array $criteria, array $orderBy = null)
- * @method Paragraph[]    findAll()
- * @method Paragraph[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
- *
  * @author Anton Dyshkant <vyshkant@gmail.com>
  */
-final class ParagraphRepository extends ServiceEntityRepository
+final class ProgramRepository extends ServiceEntityRepository
 {
     /**
      * @param RegistryInterface $registry
      */
     public function __construct(RegistryInterface $registry)
     {
-        parent::__construct($registry, Paragraph::class);
+        parent::__construct($registry, Program::class);
     }
 
     /**
-     * @param int         $number
-     * @param string|null $title
-     * @param string|null $text
-     * @param Program     $program
+     * @param string  $number
+     * @param string  $name
+     * @param Section $section
      *
      * @throws ORMException
      *
-     * @return Paragraph
+     * @return Program
      */
-    public function createParagraph(int $number, ?string $title, ?string $text, Program $program): Paragraph
+    public function createProgram(string $number, string $name, Section $section): Program
     {
-        $paragraph = new Paragraph();
+        $program = new Program();
 
-        $paragraph->setNumber($number);
-        $paragraph->setTitle($title);
-        $paragraph->setText($text);
-        $paragraph->setProgram($program);
+        $program->setNumber($number);
+        $program->setName($name);
+        $program->setSection($section);
 
-        $this->getEntityManager()->persist($paragraph);
+        $this->getEntityManager()->persist($program);
 
-        return $paragraph;
+        return $program;
+    }
+
+    /**
+     * @param string $number
+     *
+     * @return Program|null
+     */
+    public function findOneByNumber(string $number): ?Program
+    {
+        return $this->findOneBy(['number' => $number]);
     }
 }
