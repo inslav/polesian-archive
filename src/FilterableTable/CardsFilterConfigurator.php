@@ -138,7 +138,7 @@ final class CardsFilterConfigurator extends AbstractFilterConfigurator
                     };
 
                     $choiceLabelFactory = function (Program $program): string {
-                        return $program->getNumber();
+                        return sprintf('%s. %s', $program->getNumber(), $program->getName());
                     };
 
                     $values = array_map($choiceValueFactory, $entityCollection);
