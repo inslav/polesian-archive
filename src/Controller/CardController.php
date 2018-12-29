@@ -24,9 +24,8 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use App\Entity\Card;
-use App\Import\Program\Question\Number\Formatter\QuestionNumberFormatterInterface;
-use App\Repository\CardRepository;
+use App\Import\Card\Formatter\QuestionNumber\Formatter\QuestionNumberFormatterInterface;
+use App\Repository\Card\CardRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;

@@ -24,12 +24,12 @@ declare(strict_types=1);
 
 namespace App\FilterableTable;
 
-use App\Entity\Card;
-use App\Entity\Collector;
-use App\Entity\Keyword;
+use App\Entity\Card\Card;
+use App\Entity\Card\Collector;
+use App\Entity\Card\Keyword;
+use App\Entity\Card\Term;
+use App\Entity\Card\Village;
 use App\Entity\PolesianProgram\Program;
-use App\Entity\Term;
-use App\Entity\Village;
 use App\FilterableTable\Filter\Parameter\QuestionFilterParameter;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\QueryBuilder;

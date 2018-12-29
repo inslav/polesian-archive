@@ -24,7 +24,7 @@ declare(strict_types=1);
 
 namespace App\FilterableTable;
 
-use App\Entity\Card;
+use App\Entity\Card\Card;
 use Vyfony\Bundle\FilterableTableBundle\Table\Checkbox\CheckboxHandler;
 use Vyfony\Bundle\FilterableTableBundle\Table\Configurator\AbstractTableConfigurator;
 use Vyfony\Bundle\FilterableTableBundle\Table\Metadata\Column\ColumnMetadata;

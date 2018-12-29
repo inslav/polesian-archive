@@ -27,7 +27,7 @@ namespace App\Download;
 use App\Download\File\DownloadFileInfo;
 use App\Download\File\DownloadFileInfoInterface;
 use App\Download\Format\FormatterInterface;
-use App\Entity\Card;
+use App\Entity\Card\Card;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**

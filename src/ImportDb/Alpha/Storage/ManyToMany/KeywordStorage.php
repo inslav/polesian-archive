@@ -24,7 +24,7 @@ declare(strict_types=1);
 
 namespace App\ImportDb\Alpha\Storage\ManyToMany;
 
-use App\Entity\Keyword;
+use App\Entity\Card\Keyword;
 use App\ImportDb\Alpha\Entity\AlphaKeyword;
 
 /**

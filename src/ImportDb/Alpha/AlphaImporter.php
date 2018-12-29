@@ -24,7 +24,7 @@ declare(strict_types=1);
 
 namespace App\ImportDb\Alpha;
 
-use App\Entity\Card;
+use App\Entity\Card\Card;
 use App\ImportDb\Alpha\Entity\AlphaCard;
 use App\ImportDb\Alpha\SkippedCard\Collector\SkippedAlphaCardsCollectorInterface;
 use App\ImportDb\Alpha\SkippedCard\Converter\SkippedAlphaCardConverterInterface;

@@ -24,7 +24,7 @@ declare(strict_types=1);
 
 namespace App\ImportDb\Alpha\Storage\ManyToOne;
 
-use App\Entity\Season;
+use App\Entity\Card\Season;
 use App\ImportDb\Alpha\Entity\AlphaCard;
 
 /**

@@ -24,13 +24,13 @@ declare(strict_types=1);
 
 namespace App\Download\Format;
 
-use App\Converter\QuestionToQuestionNumberConverter;
-use App\Entity\Card;
-use App\Entity\Collector;
-use App\Entity\Keyword;
-use App\Entity\Question;
-use App\Entity\Term;
-use App\Import\Program\Question\Number\Formatter\QuestionNumberFormatterInterface;
+use App\Entity\Card\Card;
+use App\Entity\Card\Collector;
+use App\Entity\Card\Keyword;
+use App\Entity\Card\Question;
+use App\Entity\Card\Term;
+use App\Import\Card\Formatter\QuestionNumber\Converter\QuestionToQuestionNumberConverter;
+use App\Import\Card\Formatter\QuestionNumber\Formatter\QuestionNumberFormatterInterface;
 
 /**
  * @author Anton Dyshkant <vyshkant@gmail.com>

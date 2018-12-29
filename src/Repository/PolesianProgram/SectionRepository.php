@@ -61,7 +61,7 @@ final class SectionRepository extends ServiceEntityRepository
     }
 
     /**
-     * @return array
+     * @return Section[]
      */
     public function findAllOrderedByDefault(): array
     {

@@ -36,8 +36,9 @@ return [
         'vendor',
     ],
     'exclude_analysis_directory_list' => [
+        'bin/.phpunit/',
+        'tests',
         'vendor/',
-        'bin/.phpunit',
     ],
     'whitelist_issue_types' => [
         'PhanSyntaxError',

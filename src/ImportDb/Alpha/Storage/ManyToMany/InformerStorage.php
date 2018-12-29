@@ -24,7 +24,7 @@ declare(strict_types=1);
 
 namespace App\ImportDb\Alpha\Storage\ManyToMany;
 
-use App\Entity\Informer;
+use App\Entity\Card\Informer;
 use App\ImportDb\Alpha\Entity\AlphaInformer;
 
 /**

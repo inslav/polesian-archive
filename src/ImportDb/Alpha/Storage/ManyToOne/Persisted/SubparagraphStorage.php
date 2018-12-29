@@ -25,9 +25,9 @@ declare(strict_types=1);
 namespace App\ImportDb\Alpha\Storage\ManyToOne\Persisted;
 
 use App\Entity\PolesianProgram\Subparagraph;
-use App\Import\Program\Question\Number\Formatter\QuestionNumberFormatterInterface;
-use App\Import\Program\Question\Number\Parser\QuestionNumberParserInterface;
-use App\Import\Program\Question\Number\QuestionNumberInterface;
+use App\Import\Card\Formatter\QuestionNumber\Formatter\QuestionNumberFormatterInterface;
+use App\Import\Card\Formatter\QuestionNumber\Parser\QuestionNumberParserInterface;
+use App\Import\Card\Formatter\QuestionNumber\QuestionNumberInterface;
 use App\ImportDb\Alpha\Entity\AlphaCard;
 use App\ImportDb\Alpha\ValueTrimmer\AlphaValueConverterInterface;
 use Psr\Log\LoggerInterface;

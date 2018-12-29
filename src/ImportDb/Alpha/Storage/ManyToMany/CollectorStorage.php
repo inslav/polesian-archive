@@ -24,7 +24,7 @@ declare(strict_types=1);
 
 namespace App\ImportDb\Alpha\Storage\ManyToMany;
 
-use App\Entity\Collector;
+use App\Entity\Card\Collector;
 use App\ImportDb\Alpha\Entity\AlphaCollector;
 
 /**

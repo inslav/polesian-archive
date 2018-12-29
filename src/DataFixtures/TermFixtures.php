@@ -24,7 +24,7 @@ declare(strict_types=1);
 
 namespace App\DataFixtures;
 
-use App\Entity\Term;
+use App\Entity\Card\Term;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 

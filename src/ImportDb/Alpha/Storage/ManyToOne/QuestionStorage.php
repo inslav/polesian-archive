@@ -24,8 +24,8 @@ declare(strict_types=1);
 
 namespace App\ImportDb\Alpha\Storage\ManyToOne;
 
-use App\Entity\Question;
-use App\Import\Program\Question\Number\Parser\QuestionNumberParserInterface;
+use App\Entity\Card\Question;
+use App\Import\Card\Formatter\QuestionNumber\Parser\QuestionNumberParserInterface;
 use App\ImportDb\Alpha\Entity\AlphaCard;
 use App\ImportDb\Alpha\Storage\ManyToOne\Persisted\ParagraphStorage;
 use App\ImportDb\Alpha\Storage\ManyToOne\Persisted\ProgramStorage;

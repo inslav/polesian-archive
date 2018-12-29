@@ -27,7 +27,7 @@ namespace App\DataFixtures;
 use App\DataFixtures\PolesianProgram\ParagraphFixtures;
 use App\DataFixtures\PolesianProgram\ProgramFixtures;
 use App\DataFixtures\PolesianProgram\SubparagraphFixtures;
-use App\Entity\Question;
+use App\Entity\Card\Question;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;

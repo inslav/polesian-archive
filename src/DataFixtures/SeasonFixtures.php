@@ -24,7 +24,7 @@ declare(strict_types=1);
 
 namespace App\DataFixtures;
 
-use App\Entity\Season;
+use App\Entity\Card\Season;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 

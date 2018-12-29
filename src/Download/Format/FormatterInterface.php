@@ -24,7 +24,7 @@ declare(strict_types=1);
 
 namespace App\Download\Format;
 
-use App\Entity\Card;
+use App\Entity\Card\Card;
 
 /**
  * @author Anton Dyshkant <vyshkant@gmail.com>

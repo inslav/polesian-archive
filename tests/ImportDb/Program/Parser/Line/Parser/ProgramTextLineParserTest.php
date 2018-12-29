@@ -25,10 +25,14 @@ declare(strict_types=1);
 namespace App\Tests\ImportDb\Program\Parser\Line\Parser;
 
 use App\ImportDb\Program\Parser\Line\Line\Paragraph\ParagraphLine;
+use App\ImportDb\Program\Parser\Line\Line\Paragraph\ParagraphLineInterface;
 use App\ImportDb\Program\Parser\Line\Line\Program\ProgramLine;
+use App\ImportDb\Program\Parser\Line\Line\Program\ProgramLineInterface;
 use App\ImportDb\Program\Parser\Line\Line\ProgramTextLineInterface;
 use App\ImportDb\Program\Parser\Line\Line\Section\SectionLine;
+use App\ImportDb\Program\Parser\Line\Line\Section\SectionLineInterface;
 use App\ImportDb\Program\Parser\Line\Line\Subparagraph\SubparagraphLine;
+use App\ImportDb\Program\Parser\Line\Line\Subparagraph\SubparagraphLineInterface;
 use App\ImportDb\Program\Parser\Line\Parser\ProgramTextLineParser;
 use PHPUnit\Framework\TestCase;
 
@@ -50,10 +54,10 @@ final class ProgramTextLineParserTest extends TestCase
     /**
      * @dataProvider getSectionLines
      *
-     * @param string      $programTextLine
-     * @param SectionLine $expectedSectionLine
+     * @param string               $programTextLine
+     * @param SectionLineInterface $expectedSectionLine
      */
-    public function testParseSectionLine(string $programTextLine, SectionLine $expectedSectionLine): void
+    public function testParseSectionLine(string $programTextLine, SectionLineInterface $expectedSectionLine): void
     {
         $parsedSectionLine = $this->programTextLineParser->parseProgramTextLine($programTextLine);
 
@@ -67,10 +71,10 @@ final class ProgramTextLineParserTest extends TestCase
     /**
      * @dataProvider getProgramLines
      *
-     * @param string      $programTextLine
-     * @param ProgramLine $expectedLine
+     * @param string               $programTextLine
+     * @param ProgramLineInterface $expectedLine
      */
-    public function testParseProgramLine(string $programTextLine, ProgramLine $expectedLine): void
+    public function testParseProgramLine(string $programTextLine, ProgramLineInterface $expectedLine): void
     {
         $parsedLine = $this->programTextLineParser->parseProgramTextLine($programTextLine);
 
@@ -85,10 +89,10 @@ final class ProgramTextLineParserTest extends TestCase
     /**
      * @dataProvider getParagraphLines
      *
-     * @param string        $programTextLine
-     * @param ParagraphLine $expectedLine
+     * @param string                 $programTextLine
+     * @param ParagraphLineInterface $expectedLine
      */
-    public function testParseParagraphLine(string $programTextLine, ParagraphLine $expectedLine): void
+    public function testParseParagraphLine(string $programTextLine, ParagraphLineInterface $expectedLine): void
     {
         $parsedLine = $this->programTextLineParser->parseProgramTextLine($programTextLine);
 
@@ -104,10 +108,10 @@ final class ProgramTextLineParserTest extends TestCase
     /**
      * @dataProvider getSubparagraphLines
      *
-     * @param string           $programTextLine
-     * @param SubparagraphLine $expectedLine
+     * @param string                    $programTextLine
+     * @param SubparagraphLineInterface $expectedLine
      */
-    public function testParseSubparagraphLine(string $programTextLine, SubparagraphLine $expectedLine): void
+    public function testParseSubparagraphLine(string $programTextLine, SubparagraphLineInterface $expectedLine): void
     {
         $parsedLine = $this->programTextLineParser->parseProgramTextLine($programTextLine);
 
@@ -128,7 +132,7 @@ final class ProgramTextLineParserTest extends TestCase
      * @param string                   $programTextLine
      * @param ProgramTextLineInterface $expectedLine
      */
-    public function testObjectsAreIdentical(string $programTextLine, ProgramTextLineInterface $expectedLine): void
+    public function testParseWithObjectsEqualityCheck(string $programTextLine, ProgramTextLineInterface $expectedLine): void
     {
         $parsedLine = $this->programTextLineParser->parseProgramTextLine($programTextLine);
 

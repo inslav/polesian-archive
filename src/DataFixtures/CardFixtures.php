@@ -24,7 +24,7 @@ declare(strict_types=1);
 
 namespace App\DataFixtures;
 
-use App\Entity\Card;
+use App\Entity\Card\Card;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -73,6 +73,7 @@ final class CardFixtures extends Fixture implements DependentFixtureInterface
             ->addQuestion($this->getReference(QuestionFixtures::QUESTION_5))
             ->setYear(1983)
             ->setSeason($this->getReference(SeasonFixtures::SEASON_SUMMER))
+            ->setHasPositiveAnswer(true)
             ->setText(<<<EOT
 [Поют] бáбу, як бая́ра иду́ть:
 Насе́ю чэрнабри́ўцаў цэ́лую граду́,
@@ -113,6 +114,7 @@ EOT
             ->addQuestion($this->getReference(QuestionFixtures::QUESTION_4))
             ->setYear(1979)
             ->setSeason($this->getReference(SeasonFixtures::SEASON_WINTER))
+            ->setHasPositiveAnswer(false)
             ->setText(<<<EOT
 Кáжуть, што колосо́к був таке́й: скриз от поче́тку до верхá были колоски́, мобу́ть и де́сять колоски́в. Як люди прогреши́ли, то Госпо́дь так хоти́в, шоб вже не було́ людям ния́к жи́та. То Госпо́дь став брáти от спо́да, от зе́мни, так ссуне от низи́ до ве́рха. И стоя́в собáка и каже: "Гав, Го́споди, мени́ став [оставь]". А кот кáже: "Няв, а Го́споди, и мени́ став". И Госпо́дь стáви (аорист - С.Н.) по колоско́ви. И пшени́ца зро́ду ро́дит по одному́ колоску́. Стáры люди кáжуть, што грих би́ти собáку и котá, бо вони́ хле́ба вы́просили у Бога. (САВ)
 EOT

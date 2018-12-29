@@ -24,11 +24,11 @@ declare(strict_types=1);
 
 namespace App\FilterableTable\Filter\Parameter;
 
-use App\Entity\Question;
-use App\Import\Program\Question\Number\Formatter\QuestionNumberFormatterInterface;
-use App\Import\Program\Question\Number\Parser\QuestionNumberParserInterface;
-use App\Import\Program\Question\Number\QuestionNumberInterface;
-use App\Repository\QuestionRepository;
+use App\Entity\Card\Question;
+use App\Import\Card\Formatter\QuestionNumber\Formatter\QuestionNumberFormatterInterface;
+use App\Import\Card\Formatter\QuestionNumber\Parser\QuestionNumberParserInterface;
+use App\Import\Card\Formatter\QuestionNumber\QuestionNumberInterface;
+use App\Repository\Card\QuestionRepository;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;

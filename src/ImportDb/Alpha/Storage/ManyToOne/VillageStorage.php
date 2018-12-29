@@ -24,7 +24,7 @@ declare(strict_types=1);
 
 namespace App\ImportDb\Alpha\Storage\ManyToOne;
 
-use App\Entity\Village;
+use App\Entity\Card\Village;
 use App\ImportDb\Alpha\Entity\AlphaCard;
 use App\ImportDb\Alpha\Entity\AlphaVillage;
 use InvalidArgumentException;

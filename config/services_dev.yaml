@@ -53,7 +53,7 @@ services:
     arguments:
       - '@Symfony\Bridge\Doctrine\RegistryInterface'
       - '@App\ImportDb\Alpha\ValueTrimmer\AlphaValueConverterInterface'
-      - '@App\Import\Program\Question\Number\Parser\QuestionNumberParserInterface'
+      - '@App\Import\Card\Formatter\QuestionNumber\Parser\QuestionNumberParserInterface'
       - '@monolog.logger.alpha_import'
       - '@App\ImportDb\Alpha\Storage\ManyToOne\Persisted\ProgramStorage'
 
@@ -61,16 +61,16 @@ services:
     arguments:
       - '@Symfony\Bridge\Doctrine\RegistryInterface'
       - '@App\ImportDb\Alpha\ValueTrimmer\AlphaValueConverterInterface'
-      - '@App\Import\Program\Question\Number\Parser\QuestionNumberParserInterface'
+      - '@App\Import\Card\Formatter\QuestionNumber\Parser\QuestionNumberParserInterface'
       - '@monolog.logger.alpha_import'
 
   App\ImportDb\Alpha\Storage\ManyToOne\Persisted\SubparagraphStorage:
     arguments:
       - '@Symfony\Bridge\Doctrine\RegistryInterface'
       - '@App\ImportDb\Alpha\ValueTrimmer\AlphaValueConverterInterface'
-      - '@App\Import\Program\Question\Number\Parser\QuestionNumberParserInterface'
+      - '@App\Import\Card\Formatter\QuestionNumber\Parser\QuestionNumberParserInterface'
       - '@monolog.logger.alpha_import'
-      - '@App\Import\Program\Question\Number\Formatter\QuestionNumberFormatterInterface'
+      - '@App\Import\Card\Formatter\QuestionNumber\Formatter\QuestionNumberFormatterInterface'
       - '@App\ImportDb\Alpha\Storage\ManyToOne\Persisted\ParagraphStorage'
       - '@App\ImportDb\Alpha\Storage\ManyToOne\Persisted\ProgramStorage'
 
@@ -78,7 +78,7 @@ services:
     arguments:
       - '@Symfony\Bridge\Doctrine\RegistryInterface'
       - '@App\ImportDb\Alpha\ValueTrimmer\AlphaValueConverterInterface'
-      - '@App\Import\Program\Question\Number\Parser\QuestionNumberParserInterface'
+      - '@App\Import\Card\Formatter\QuestionNumber\Parser\QuestionNumberParserInterface'
       - '@monolog.logger.alpha_import'
       - '@App\ImportDb\Alpha\Storage\ManyToOne\ProgramStorage'
 
@@ -86,7 +86,7 @@ services:
     arguments:
       - '@Symfony\Bridge\Doctrine\RegistryInterface'
       - '@App\ImportDb\Alpha\ValueTrimmer\AlphaValueConverterInterface'
-      - '@App\Import\Program\Question\Number\Parser\QuestionNumberParserInterface'
+      - '@App\Import\Card\Formatter\QuestionNumber\Parser\QuestionNumberParserInterface'
       - '@monolog.logger.alpha_import'
       - '@App\ImportDb\Alpha\Storage\ManyToOne\SectionStorage'
 
@@ -94,7 +94,7 @@ services:
     arguments:
       - '@Symfony\Bridge\Doctrine\RegistryInterface'
       - '@App\ImportDb\Alpha\ValueTrimmer\AlphaValueConverterInterface'
-      - '@App\Import\Program\Question\Number\Parser\QuestionNumberParserInterface'
+      - '@App\Import\Card\Formatter\QuestionNumber\Parser\QuestionNumberParserInterface'
       - '@monolog.logger.alpha_import'
       - '@App\ImportDb\Alpha\Storage\ManyToOne\Persisted\ProgramStorage'
       - '@App\ImportDb\Alpha\Storage\ManyToOne\Persisted\ParagraphStorage'
@@ -104,21 +104,21 @@ services:
     arguments:
       - '@Symfony\Bridge\Doctrine\RegistryInterface'
       - '@App\ImportDb\Alpha\ValueTrimmer\AlphaValueConverterInterface'
-      - '@App\Import\Program\Question\Number\Parser\QuestionNumberParserInterface'
+      - '@App\Import\Card\Formatter\QuestionNumber\Parser\QuestionNumberParserInterface'
       - '@monolog.logger.alpha_import'
 
   App\ImportDb\Alpha\Storage\ManyToOne\SectionStorage:
     arguments:
       - '@Symfony\Bridge\Doctrine\RegistryInterface'
       - '@App\ImportDb\Alpha\ValueTrimmer\AlphaValueConverterInterface'
-      - '@App\Import\Program\Question\Number\Parser\QuestionNumberParserInterface'
+      - '@App\Import\Card\Formatter\QuestionNumber\Parser\QuestionNumberParserInterface'
       - '@monolog.logger.alpha_import'
 
   App\ImportDb\Alpha\Storage\ManyToOne\SubparagraphStorage:
     arguments:
       - '@Symfony\Bridge\Doctrine\RegistryInterface'
       - '@App\ImportDb\Alpha\ValueTrimmer\AlphaValueConverterInterface'
-      - '@App\Import\Program\Question\Number\Parser\QuestionNumberParserInterface'
+      - '@App\Import\Card\Formatter\QuestionNumber\Parser\QuestionNumberParserInterface'
       - '@monolog.logger.alpha_import'
       - '@App\ImportDb\Alpha\Storage\ManyToOne\ParagraphStorage'
 
@@ -126,5 +126,5 @@ services:
     arguments:
       - '@Symfony\Bridge\Doctrine\RegistryInterface'
       - '@App\ImportDb\Alpha\ValueTrimmer\AlphaValueConverterInterface'
-      - '@App\Import\Program\Question\Number\Parser\QuestionNumberParserInterface'
+      - '@App\Import\Card\Formatter\QuestionNumber\Parser\QuestionNumberParserInterface'
       - '@monolog.logger.alpha_import'
