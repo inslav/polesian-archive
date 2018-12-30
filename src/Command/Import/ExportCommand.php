@@ -56,6 +56,7 @@ final class ExportCommand extends Command
             ->setDescription('Export data from database to human-readable format')
             ->addArgument('export-file', InputArgument::REQUIRED, 'Path to export file')
             ->addArgument('export-format', InputArgument::REQUIRED, 'Export format')
+            ->addArgument('bunch-size', InputArgument::OPTIONAL, 'Bunch size')
         ;
     }
 
@@ -67,10 +68,12 @@ final class ExportCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
+        $bunchSizeArgument = $input->getArgument('bunch-size');
+
         $this
             ->cardExporterRegistry
             ->getExporter($input->getArgument('export-format'))
-            ->export($input->getArgument('export-file'));
+            ->export($input->getArgument('export-file'), null === $bunchSizeArgument ? null : (int) $bunchSizeArgument);
 
         return 0;
     }

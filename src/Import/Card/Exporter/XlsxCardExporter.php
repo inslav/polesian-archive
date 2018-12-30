@@ -34,6 +34,7 @@ use App\Import\Card\Formatter\QuestionNumber\Formatter\QuestionNumberFormatterIn
 use App\Import\Card\Formatter\VillageFullName\Formatter\VillageFullNameFormatterInterface;
 use App\Import\Card\Importer\XlsxCardImporter;
 use App\Repository\Card\CardRepository;
+use InvalidArgumentException;
 use PhpOffice\PhpSpreadsheet;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
@@ -74,17 +75,41 @@ final class XlsxCardExporter implements CardExporterInterface
     }
 
     /**
+     * @param string   $pathToFile
+     * @param int|null $bunchSize
+     *
+     * @throws PhpSpreadsheet\Exception
+     * @throws InvalidArgumentException
+     */
+    public function export(string $pathToFile, ?int $bunchSize): void
+    {
+        if (null !== $bunchSize && $bunchSize <= 0) {
+            throw new InvalidArgumentException('Bunch size can only be null or greater than zero');
+        }
+
+        $cards = $this->cardRepository->findAllOrderedByDefault();
+
+        if (null === $bunchSize) {
+            $this->exportCards($cards, $pathToFile);
+        } else {
+            foreach (array_chunk($cards, $bunchSize) as $bunchIndex => $cardsBunch) {
+                $this->exportCards($cardsBunch, $this->getBunchPathToFile($pathToFile, $bunchIndex));
+            }
+        }
+    }
+
+    /**
+     * @param array  $cards
      * @param string $pathToFile
      *
      * @throws PhpSpreadsheet\Exception
      */
-    public function export(string $pathToFile): void
+    private function exportCards(array $cards, string $pathToFile): void
     {
         $spreadsheet = new Spreadsheet();
-
         $sheet = $spreadsheet->getActiveSheet();
 
-        foreach ($this->cardRepository->findAllOrderedByDefault() as $entityIndex => $card) {
+        foreach ($cards as $entityIndex => $card) {
             $rowIndex = $entityIndex + 1;
 
             foreach ($this->getColumnValues($card) as $rawColumnIndex => $columnValue) {
@@ -97,8 +122,31 @@ final class XlsxCardExporter implements CardExporterInterface
         }
 
         $writer = new Xlsx($spreadsheet);
-
         $writer->save($pathToFile);
+    }
+
+    /**
+     * @param string $pathToFile
+     * @param int    $bunchIndex
+     *
+     * @return string
+     */
+    private function getBunchPathToFile(string $pathToFile, int $bunchIndex): string
+    {
+        $pathToFileParts = explode('.', $pathToFile);
+
+        $formattedBunchIndex = (string) ($bunchIndex + 1);
+
+        if (\count($pathToFileParts) > 1) {
+            $extension = array_pop($pathToFileParts);
+
+            $pathToFileParts[] = $formattedBunchIndex;
+            $pathToFileParts[] = $extension;
+        } else {
+            $pathToFileParts[] = $formattedBunchIndex;
+        }
+
+        return implode('.', $pathToFileParts);
     }
 
     /**

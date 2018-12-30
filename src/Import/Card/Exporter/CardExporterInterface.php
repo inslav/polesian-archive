@@ -30,7 +30,8 @@ namespace App\Import\Card\Exporter;
 interface CardExporterInterface
 {
     /**
-     * @param string $pathToFile
+     * @param string   $pathToFile
+     * @param int|null $bunchSize
      */
-    public function export(string $pathToFile): void;
+    public function export(string $pathToFile, ?int $bunchSize): void;
 }
