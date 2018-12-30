@@ -29,6 +29,7 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Style\SymfonyStyle;
 
 /**
  * @author Anton Dyshkant <vyshkant@gmail.com>
@@ -71,6 +72,8 @@ final class ImportCommand extends Command
             ->cardImporterRegistry
             ->getImporter($input->getArgument('import-format'))
             ->import($input->getArgument('import-file'));
+
+        (new SymfonyStyle($input, $output))->success('Import has been successfully finished');
 
         return 0;
     }

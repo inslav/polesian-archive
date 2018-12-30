@@ -29,6 +29,7 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Style\SymfonyStyle;
 
 /**
  * @author Anton Dyshkant <vyshkant@gmail.com>
@@ -74,6 +75,8 @@ final class ExportCommand extends Command
             ->cardExporterRegistry
             ->getExporter($input->getArgument('export-format'))
             ->export($input->getArgument('export-file'), null === $bunchSizeArgument ? null : (int) $bunchSizeArgument);
+
+        (new SymfonyStyle($input, $output))->success('Export has been successfully finished');
 
         return 0;
     }
