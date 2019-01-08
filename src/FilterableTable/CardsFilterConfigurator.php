@@ -24,25 +24,19 @@ declare(strict_types=1);
 
 namespace App\FilterableTable;
 
-use App\Entity\Card\Card;
-use App\Entity\Card\Collector;
-use App\Entity\Card\Keyword;
-use App\Entity\Card\Term;
-use App\Entity\Card\Village;
-use App\Entity\PolesianProgram\Program;
+use App\FilterableTable\Filter\Parameter\CollectorFilterParameter;
+use App\FilterableTable\Filter\Parameter\KeywordFilterParameter;
+use App\FilterableTable\Filter\Parameter\ProgramFilterParameter;
 use App\FilterableTable\Filter\Parameter\QuestionFilterParameter;
-use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\QueryBuilder;
+use App\FilterableTable\Filter\Parameter\TermFilterParameter;
+use App\FilterableTable\Filter\Parameter\TextOrDescriptionFilterParameter;
+use App\FilterableTable\Filter\Parameter\VillageFilterParameter;
+use App\FilterableTable\Filter\Parameter\YearFilterParameter;
 use Vyfony\Bundle\FilterableTableBundle\Filter\Configurator\AbstractFilterConfigurator;
-use Vyfony\Bundle\FilterableTableBundle\Filter\Configurator\Parameter\CustomChoiceParameter;
-use Vyfony\Bundle\FilterableTableBundle\Filter\Configurator\Parameter\EntityChoice\EntityChoiceParameter;
-use Vyfony\Bundle\FilterableTableBundle\Filter\Configurator\Parameter\EntityChoice\JoinedEntityChoiceParameter;
 use Vyfony\Bundle\FilterableTableBundle\Filter\Configurator\Parameter\FilterParameterInterface;
-use Vyfony\Bundle\FilterableTableBundle\Filter\Configurator\Parameter\IntegerChoiceParameter;
 use Vyfony\Bundle\FilterableTableBundle\Filter\Configurator\Parameter\Table\RadioColumnChoiceTableParameter;
 use Vyfony\Bundle\FilterableTableBundle\Filter\Configurator\Parameter\Table\RadioOption\RadioOption;
 use Vyfony\Bundle\FilterableTableBundle\Filter\Configurator\Parameter\Table\TableParameterInterface;
-use Vyfony\Bundle\FilterableTableBundle\Filter\Configurator\Parameter\TextFilterParameter;
 use Vyfony\Bundle\FilterableTableBundle\Filter\Configurator\Restriction\FilterRestrictionInterface;
 use Vyfony\Bundle\FilterableTableBundle\Table\Metadata\Column\ColumnMetadata;
 
@@ -52,17 +46,73 @@ use Vyfony\Bundle\FilterableTableBundle\Table\Metadata\Column\ColumnMetadata;
 final class CardsFilterConfigurator extends AbstractFilterConfigurator
 {
     /**
+     * @var ProgramFilterParameter
+     */
+    private $programFilterParameter;
+
+    /**
      * @var QuestionFilterParameter
      */
     private $questionFilterParameter;
 
     /**
-     * @param QuestionFilterParameter $questionFilterParameter
+     * @var VillageFilterParameter
+     */
+    private $villageFilterParameter;
+
+    /**
+     * @var KeywordFilterParameter
+     */
+    private $keywordFilterParameter;
+
+    /**
+     * @var TermFilterParameter
+     */
+    private $termFilterParameter;
+
+    /**
+     * @var CollectorFilterParameter
+     */
+    private $collectorFilterParameter;
+
+    /**
+     * @var YearFilterParameter
+     */
+    private $yearFilterParameter;
+
+    /**
+     * @var TextOrDescriptionFilterParameter
+     */
+    private $textOrDescriptionFilterParameter;
+
+    /**
+     * @param ProgramFilterParameter           $programFilterParameter
+     * @param QuestionFilterParameter          $questionFilterParameter
+     * @param VillageFilterParameter           $villageFilterParameter
+     * @param KeywordFilterParameter           $keywordFilterParameter
+     * @param TermFilterParameter              $termFilterParameter
+     * @param CollectorFilterParameter         $collectorFilterParameter
+     * @param YearFilterParameter              $yearFilterParameter
+     * @param TextOrDescriptionFilterParameter $textOrDescriptionFilterParameter
      */
     public function __construct(
-        QuestionFilterParameter $questionFilterParameter
+        ProgramFilterParameter $programFilterParameter,
+        QuestionFilterParameter $questionFilterParameter,
+        VillageFilterParameter $villageFilterParameter,
+        KeywordFilterParameter $keywordFilterParameter,
+        TermFilterParameter $termFilterParameter,
+        CollectorFilterParameter $collectorFilterParameter,
+        YearFilterParameter $yearFilterParameter,
+        TextOrDescriptionFilterParameter $textOrDescriptionFilterParameter
     ) {
+        $this->programFilterParameter = $programFilterParameter;
         $this->questionFilterParameter = $questionFilterParameter;
+        $this->villageFilterParameter = $villageFilterParameter;
+        $this->keywordFilterParameter = $keywordFilterParameter;
+        $this->termFilterParameter = $termFilterParameter;
+        $this->collectorFilterParameter = $collectorFilterParameter;
+        $this->yearFilterParameter = $yearFilterParameter;
+        $this->textOrDescriptionFilterParameter = $textOrDescriptionFilterParameter;
     }
 
     /**
@@ -125,89 +175,14 @@ final class CardsFilterConfigurator extends AbstractFilterConfigurator
     protected function createFilterParameters(): array
     {
         return [
-            (new CustomChoiceParameter())
-                ->setChoicesFactory(function (string $queryParameterName, EntityManager $entityManager): array {
-                    $entityCollection = $entityManager->getRepository(Program::class)->findAll();
-
-                    usort($entityCollection, function (Program $a, Program $b): int {
-                        return strnatcmp($a->getNumber(), $b->getNumber());
-                    });
-
-                    $choiceValueFactory = function (Program $program): int {
-                        return $program->getId();
-                    };
-
-                    $choiceLabelFactory = function (Program $program): string {
-                        return sprintf('%s. %s', $program->getNumber(), $program->getName());
-                    };
-
-                    $values = array_map($choiceValueFactory, $entityCollection);
-                    $labels = array_map($choiceLabelFactory, $entityCollection);
-
-                    return array_combine($labels, $values);
-                })
-                ->setQueryFactory(
-                    function (
-                        string $queryParameterName,
-                        QueryBuilder $queryBuilder,
-                        array $formData,
-                        string $entityAlias
-                    ): ?string {
-                        if (0 === \count($formData[$queryParameterName])) {
-                            return null;
-                        }
-
-                        $questionAlias = 'question';
-                        $programAlias = 'program';
-
-                        $queryBuilder
-                            ->innerJoin($entityAlias.'.questions', $questionAlias)
-                            ->innerJoin($questionAlias.'.program', $programAlias)
-                        ;
-
-                        return (string) $queryBuilder->expr()->in($programAlias.'.id', $formData[$queryParameterName]);
-                    }
-                )
-                ->setQueryParameterName('program')
-                ->setLabel('controller.card.list.filter.program'),
+            $this->programFilterParameter,
             $this->questionFilterParameter,
-            (new EntityChoiceParameter())
-                ->setClass(Village::class)
-                ->setIsExpanded(false)
-                ->setChoiceLabel('name')
-                ->sortValues('name')
-                ->setQueryParameterName('village')
-                ->setLabel('controller.card.list.filter.village'),
-            (new JoinedEntityChoiceParameter())
-                ->setClass(Keyword::class)
-                ->setIsExpanded(false)
-                ->setChoiceLabel('name')
-                ->sortValues('name')
-                ->setQueryParameterName('keywords')
-                ->setLabel('controller.card.list.filter.keywords'),
-            (new JoinedEntityChoiceParameter())
-                ->setClass(Term::class)
-                ->setIsExpanded(false)
-                ->setChoiceLabel('name')
-                ->sortValues('name')
-                ->setQueryParameterName('terms')
-                ->setLabel('controller.card.list.filter.terms'),
-            (new JoinedEntityChoiceParameter())
-                ->setClass(Collector::class)
-                ->setIsExpanded(false)
-                ->setChoiceLabel('name')
-                ->sortValues('name')
-                ->setQueryParameterName('collectors')
-                ->setLabel('controller.card.list.filter.collectors'),
-            (new IntegerChoiceParameter())
-                ->setClass(Card::class)
-                ->setLabel('controller.card.list.filter.year')
-                ->setQueryParameterName('year'),
-            (new TextFilterParameter())
-                ->addSearchField('description')
-                ->addSearchField('text')
-                ->setLabel('controller.card.list.filter.textOrDescription')
-                ->setQueryParameterName('text'),
+            $this->villageFilterParameter,
+            $this->keywordFilterParameter,
+            $this->termFilterParameter,
+            $this->collectorFilterParameter,
+            $this->yearFilterParameter,
+            $this->textOrDescriptionFilterParameter,
         ];
     }
 

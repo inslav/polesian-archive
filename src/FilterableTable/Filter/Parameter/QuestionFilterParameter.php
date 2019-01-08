@@ -40,8 +40,6 @@ use Vyfony\Bundle\FilterableTableBundle\Filter\Configurator\Parameter\FilterPara
  */
 final class QuestionFilterParameter implements FilterParameterInterface, ExpressionBuilderInterface
 {
-    private const QUERY_PARAMETER_NAME = 'questions';
-
     /**
      * @var QuestionNumberFormatterInterface
      */
@@ -77,7 +75,7 @@ final class QuestionFilterParameter implements FilterParameterInterface, Express
      */
     public function getQueryParameterName(): string
     {
-        return self::QUERY_PARAMETER_NAME;
+        return 'questions';
     }
 
     /**
@@ -116,7 +114,7 @@ final class QuestionFilterParameter implements FilterParameterInterface, Express
      */
     public function buildWhereExpression(QueryBuilder $queryBuilder, array $formData, string $entityAlias): ?string
     {
-        $formattedQuestionNumbers = $formData[self::QUERY_PARAMETER_NAME];
+        $formattedQuestionNumbers = $formData[$this->getQueryParameterName()];
 
         if (0 === \count($formattedQuestionNumbers)) {
             return null;
