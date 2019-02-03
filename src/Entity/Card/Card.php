@@ -102,6 +102,13 @@ class Card
     private $description;
 
     /**
+     * @var string|null
+     *
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $comment;
+
+    /**
      * @var Collection|Keyword[]
      *
      * @ORM\ManyToMany(targetEntity="App\Entity\Card\Keyword", inversedBy="cards")
@@ -337,6 +344,26 @@ class Card
     public function setDescription(string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getComment(): ?string
+    {
+        return $this->comment;
+    }
+
+    /**
+     * @param string|null $comment
+     *
+     * @return Card
+     */
+    public function setComment(?string $comment): self
+    {
+        $this->comment = $comment;
 
         return $this;
     }

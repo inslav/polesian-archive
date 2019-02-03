@@ -82,6 +82,7 @@ final class CardFixtures extends Fixture implements DependentFixtureInterface
 EOT
             )
             ->setDescription('Свадебная песня о сеянии невестой цветов-чернобривцев.')
+            ->setComment('Это комментарий')
             ->setKeywords([
                 $this->getReference(KeywordFixtures::KEYWORD_NEVESTA),
                 $this->getReference(KeywordFixtures::KEYWORD_SAZHAT),

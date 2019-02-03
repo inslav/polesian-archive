@@ -36,6 +36,7 @@ see <http://www.gnu.org/licenses/>.
             {{ self.format_text_row('year', card.year) }}
             {{ self.format_text_row('text', card.text|nl2br) }}
             {{ self.format_text_row('description', card.description) }}
+            {{ self.format_text_row('comment', card.comment) }}
             {{ self.format_text_row('keywords', self.format_collection_of_named_entities('keywords', card.keywords)) }}
             {{ self.format_text_row('terms', self.format_collection_of_named_entities('terms', card.terms)) }}
             {{ self.format_text_row('informers', self.format_collection_of_named_entities('informers', card.informers)) }}

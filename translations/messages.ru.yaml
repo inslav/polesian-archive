@@ -60,6 +60,7 @@ controller:
           year: Год
           text: Диалектный текст
           description: Описание
+          comment: Комментарий
           keywords: Ключевые слова
           terms: Термины
           collectors: Собиратели
