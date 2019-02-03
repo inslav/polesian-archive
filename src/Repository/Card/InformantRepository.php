@@ -24,7 +24,7 @@ declare(strict_types=1);
 
 namespace App\Repository\Card;
 
-use App\Entity\Card\Informer;
+use App\Entity\Card\Informant;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\ORMException;
 use Symfony\Bridge\Doctrine\RegistryInterface;
@@ -32,22 +32,22 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
 /**
  * @author Anton Dyshkant <vyshkant@gmail.com>
  */
-final class InformerRepository extends ServiceEntityRepository
+final class InformantRepository extends ServiceEntityRepository
 {
     /**
      * @param RegistryInterface $registry
      */
     public function __construct(RegistryInterface $registry)
     {
-        parent::__construct($registry, Informer::class);
+        parent::__construct($registry, Informant::class);
     }
 
     /**
      * @param string $name
      *
-     * @return Informer|null
+     * @return Informant|null
      */
-    public function findOneByName(string $name): ?Informer
+    public function findOneByName(string $name): ?Informant
     {
         return $this->findOneBy(['name' => $name]);
     }
@@ -57,17 +57,17 @@ final class InformerRepository extends ServiceEntityRepository
      *
      * @throws ORMException
      *
-     * @return Informer
+     * @return Informant
      */
-    public function createInformer(string $name): Informer
+    public function createInformant(string $name): Informant
     {
-        $informer = new Informer();
+        $informant = new Informant();
 
-        $informer->setName($name);
+        $informant->setName($name);
 
-        $this->getEntityManager()->persist($informer);
+        $this->getEntityManager()->persist($informant);
 
-        return $informer;
+        return $informant;
     }
 
     /**
@@ -75,16 +75,16 @@ final class InformerRepository extends ServiceEntityRepository
      *
      * @throws ORMException
      *
-     * @return Informer
+     * @return Informant
      */
-    public function findOneByNameOrCreate(string $name): Informer
+    public function findOneByNameOrCreate(string $name): Informant
     {
-        $informer = $this->findOneByName($name);
+        $informant = $this->findOneByName($name);
 
-        if (null === $informer) {
-            $informer = $this->createInformer($name);
+        if (null === $informant) {
+            $informant = $this->createInformant($name);
         }
 
-        return $informer;
+        return $informant;
     }
 }

@@ -123,11 +123,11 @@ class Card
     private $terms;
 
     /**
-     * @var Collection|Informer[]
+     * @var Collection|Informant[]
      *
-     * @ORM\ManyToMany(targetEntity="App\Entity\Card\Informer", inversedBy="cards")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Card\Informant", inversedBy="cards")
      */
-    private $informers;
+    private $informants;
 
     /**
      * @var Collection|Collector[]
@@ -142,7 +142,7 @@ class Card
         $this->hasPositiveAnswer = false;
         $this->keywords = new ArrayCollection();
         $this->terms = new ArrayCollection();
-        $this->informers = new ArrayCollection();
+        $this->informants = new ArrayCollection();
         $this->collectors = new ArrayCollection();
     }
 
@@ -475,52 +475,52 @@ class Card
     }
 
     /**
-     * @return Collection|Informer[]
+     * @return Collection|Informant[]
      */
-    public function getInformers(): Collection
+    public function getInformants(): Collection
     {
-        return $this->informers;
+        return $this->informants;
     }
 
     /**
-     * @param iterable|Informer[] $informers
+     * @param iterable|Informant[] $informants
      *
      * @return Card
      */
-    public function setInformers(iterable $informers): self
+    public function setInformants(iterable $informants): self
     {
-        $this->informers = new ArrayCollection();
+        $this->informants = new ArrayCollection();
 
-        foreach ($informers as $informer) {
-            $this->addInformer($informer);
+        foreach ($informants as $informant) {
+            $this->addInformant($informant);
         }
 
         return $this;
     }
 
     /**
-     * @param Informer $informer
+     * @param Informant $informant
      *
      * @return Card
      */
-    public function addInformer(Informer $informer): self
+    public function addInformant(Informant $informant): self
     {
-        if (!$this->informers->contains($informer)) {
-            $this->informers[] = $informer;
+        if (!$this->informants->contains($informant)) {
+            $this->informants[] = $informant;
         }
 
         return $this;
     }
 
     /**
-     * @param Informer $informer
+     * @param Informant $informant
      *
      * @return Card
      */
-    public function removeInformer(Informer $informer): self
+    public function removeInformant(Informant $informant): self
     {
-        if ($this->informers->contains($informer)) {
-            $this->informers->removeElement($informer);
+        if ($this->informants->contains($informant)) {
+            $this->informants->removeElement($informant);
         }
 
         return $this;

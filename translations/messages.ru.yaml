@@ -64,7 +64,7 @@ controller:
           keywords: Ключевые слова
           terms: Термины
           collectors: Собиратели
-          informers: Информаторы
+          informants: Информаторы
   polesianProgram:
     index:
       title: Полесская программа

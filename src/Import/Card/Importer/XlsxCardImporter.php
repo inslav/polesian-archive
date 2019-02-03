@@ -26,14 +26,14 @@ namespace App\Import\Card\Importer;
 
 use App\Entity\Card\Card;
 use App\Entity\Card\Collector;
-use App\Entity\Card\Informer;
+use App\Entity\Card\Informant;
 use App\Entity\Card\Keyword;
 use App\Entity\Card\Question;
 use App\Entity\Card\Term;
 use App\Import\Card\Formatter\QuestionNumber\Parser\QuestionNumberParserInterface;
 use App\Import\Card\Formatter\VillageFullName\Parser\VillageFullNameParserInterface;
 use App\Repository\Card\CollectorRepository;
-use App\Repository\Card\InformerRepository;
+use App\Repository\Card\InformantRepository;
 use App\Repository\Card\KeywordRepository;
 use App\Repository\Card\QuestionRepository;
 use App\Repository\Card\SeasonRepository;
@@ -55,7 +55,7 @@ final class XlsxCardImporter implements CardImporterInterface
 
     public const TERMS_DELIMITER = ', ';
 
-    public const INFORMERS_DELIMITER = ', ';
+    public const INFORMANTS_DELIMITER = ', ';
 
     public const COLLECTORS_DELIMITER = ', ';
 
@@ -106,9 +106,9 @@ final class XlsxCardImporter implements CardImporterInterface
     private $termRepository;
 
     /**
-     * @var InformerRepository
+     * @var InformantRepository
      */
-    private $informerRepository;
+    private $informantRepository;
 
     /**
      * @var CollectorRepository
@@ -124,7 +124,7 @@ final class XlsxCardImporter implements CardImporterInterface
      * @param SeasonRepository               $seasonRepository
      * @param KeywordRepository              $keywordRepository
      * @param TermRepository                 $termRepository
-     * @param InformerRepository             $informerRepository
+     * @param InformantRepository            $informantRepository
      * @param CollectorRepository            $collectorRepository
      */
     public function __construct(
@@ -136,7 +136,7 @@ final class XlsxCardImporter implements CardImporterInterface
         SeasonRepository $seasonRepository,
         KeywordRepository $keywordRepository,
         TermRepository $termRepository,
-        InformerRepository $informerRepository,
+        InformantRepository $informantRepository,
         CollectorRepository $collectorRepository
     ) {
         $this->questionNumberParser = $questionNumberParser;
@@ -147,7 +147,7 @@ final class XlsxCardImporter implements CardImporterInterface
         $this->seasonRepository = $seasonRepository;
         $this->keywordRepository = $keywordRepository;
         $this->termRepository = $termRepository;
-        $this->informerRepository = $informerRepository;
+        $this->informantRepository = $informantRepository;
         $this->collectorRepository = $collectorRepository;
     }
 
@@ -277,14 +277,14 @@ final class XlsxCardImporter implements CardImporterInterface
 
                 $card->setTerms($terms);
             },
-            function (Card $card, string $formattedFormattedInformers): void {
-                $formattedInformers = explode(self::INFORMERS_DELIMITER, $formattedFormattedInformers);
+            function (Card $card, string $formattedFormattedInformants): void {
+                $formattedInformants = explode(self::INFORMANTS_DELIMITER, $formattedFormattedInformants);
 
-                $informers = array_map(function (string $formattedInformer): Informer {
-                    return $this->informerRepository->findOneByNameOrCreate($formattedInformer);
-                }, $formattedInformers);
+                $informants = array_map(function (string $formattedInformant): Informant {
+                    return $this->informantRepository->findOneByNameOrCreate($formattedInformant);
+                }, $formattedInformants);
 
-                $card->setInformers($informers);
+                $card->setInformants($informants);
             },
             function (Card $card, string $formattedFormattedCollectors): void {
                 $formattedCollectors = explode(self::COLLECTORS_DELIMITER, $formattedFormattedCollectors);

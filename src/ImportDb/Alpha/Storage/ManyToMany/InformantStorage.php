@@ -24,24 +24,24 @@ declare(strict_types=1);
 
 namespace App\ImportDb\Alpha\Storage\ManyToMany;
 
-use App\Entity\Card\Informer;
-use App\ImportDb\Alpha\Entity\AlphaInformer;
+use App\Entity\Card\Informant;
+use App\ImportDb\Alpha\Entity\AlphaInformant;
 
 /**
  * @author Anton Dyshkant <vyshkant@gmail.com>
  */
-final class InformerStorage extends AbstractManyToManyEntityStorage
+final class InformantStorage extends AbstractManyToManyEntityStorage
 {
     /**
      * @return string
      */
     protected function getAlphaEntityClass(): string
     {
-        return AlphaInformer::class;
+        return AlphaInformant::class;
     }
 
     /**
-     * @param object|AlphaInformer $alphaEntity
+     * @param object|AlphaInformant $alphaEntity
      *
      * @return string
      */
@@ -51,7 +51,7 @@ final class InformerStorage extends AbstractManyToManyEntityStorage
     }
 
     /**
-     * @param object|AlphaInformer $alphaEntity
+     * @param object|AlphaInformant $alphaEntity
      *
      * @return string|null
      */
@@ -61,13 +61,13 @@ final class InformerStorage extends AbstractManyToManyEntityStorage
     }
 
     /**
-     * @param object|AlphaInformer $alphaEntity
+     * @param object|AlphaInformant $alphaEntity
      *
-     * @return object|Informer
+     * @return object|Informant
      */
     protected function createEntity(object $alphaEntity): object
     {
-        return (new Informer())
+        return (new Informant())
             ->setName(mb_strtoupper($this->valueConverter->getTrimmed($alphaEntity->getInformator())))
         ;
     }

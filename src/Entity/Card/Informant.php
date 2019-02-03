@@ -29,11 +29,11 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\Card\InformerRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\Card\InformantRepository")
  *
  * @author Anton Dyshkant <vyshkant@gmail.com>
  */
-class Informer
+class Informant
 {
     /**
      * @var int
@@ -54,7 +54,7 @@ class Informer
     /**
      * @var Collection|Card[]
      *
-     * @ORM\ManyToMany(targetEntity="App\Entity\Card\Card", mappedBy="informers")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Card\Card", mappedBy="informants")
      */
     private $cards;
 
@@ -82,7 +82,7 @@ class Informer
     /**
      * @param string $name
      *
-     * @return Informer
+     * @return Informant
      */
     public function setName(string $name): self
     {
@@ -102,7 +102,7 @@ class Informer
     /**
      * @param iterable|Card[] $cards
      *
-     * @return Informer
+     * @return Informant
      */
     public function setCards(iterable $cards): self
     {
@@ -118,13 +118,13 @@ class Informer
     /**
      * @param Card $card
      *
-     * @return Informer
+     * @return Informant
      */
     public function addCard(Card $card): self
     {
         if (!$this->cards->contains($card)) {
             $this->cards[] = $card;
-            $card->addInformer($this);
+            $card->addInformant($this);
         }
 
         return $this;
@@ -133,13 +133,13 @@ class Informer
     /**
      * @param Card $card
      *
-     * @return Informer
+     * @return Informant
      */
     public function removeCard(Card $card): self
     {
         if ($this->cards->contains($card)) {
             $this->cards->removeElement($card);
-            $card->removeInformer($this);
+            $card->removeInformant($this);
         }
 
         return $this;

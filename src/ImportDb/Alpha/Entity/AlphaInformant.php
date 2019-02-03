@@ -32,7 +32,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @author Anton Dyshkant <vyshkant@gmail.com>
  */
-class AlphaInformer
+class AlphaInformant
 {
     /**
      * @var string

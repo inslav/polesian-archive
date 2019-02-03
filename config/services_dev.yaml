@@ -21,7 +21,7 @@ services:
       - '@App\ImportDb\Alpha\Storage\ManyToOne\SeasonStorage'
       - '@App\ImportDb\Alpha\Storage\ManyToMany\KeywordStorage'
       - '@App\ImportDb\Alpha\Storage\ManyToMany\TermStorage'
-      - '@App\ImportDb\Alpha\Storage\ManyToMany\InformerStorage'
+      - '@App\ImportDb\Alpha\Storage\ManyToMany\InformantStorage'
       - '@App\ImportDb\Alpha\Storage\ManyToMany\CollectorStorage'
       - '@monolog.logger.alpha_import'
 
@@ -31,7 +31,7 @@ services:
       - '@App\ImportDb\Alpha\ValueTrimmer\AlphaValueConverterInterface'
       - '@monolog.logger.alpha_import'
 
-  App\ImportDb\Alpha\Storage\ManyToMany\InformerStorage:
+  App\ImportDb\Alpha\Storage\ManyToMany\InformantStorage:
     arguments:
       - '@Symfony\Bridge\Doctrine\RegistryInterface'
       - '@App\ImportDb\Alpha\ValueTrimmer\AlphaValueConverterInterface'

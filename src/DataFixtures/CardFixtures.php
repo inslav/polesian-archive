@@ -58,7 +58,7 @@ final class CardFixtures extends Fixture implements DependentFixtureInterface
             KeywordFixtures::class,
             TermFixtures::class,
             CollectorFixtures::class,
-            InformerFixtures::class,
+            InformantFixtures::class,
         ];
     }
 
@@ -97,8 +97,8 @@ EOT
             ->setCollectors([
                 $this->getReference(CollectorFixtures::COLLECTOR_GURA_A_V),
             ])
-            ->setInformers([
-                $this->getReference(InformerFixtures::INFORMER_MSV),
+            ->setInformants([
+                $this->getReference(InformantFixtures::INFORMANT_MSV),
             ])
         ;
     }
@@ -124,7 +124,7 @@ EOT
             ->setKeywords([])
             ->setTerms([])
             ->setCollectors([])
-            ->setInformers([])
+            ->setInformants([])
         ;
     }
 }

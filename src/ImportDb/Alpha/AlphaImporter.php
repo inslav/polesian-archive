@@ -30,7 +30,7 @@ use App\ImportDb\Alpha\SkippedCard\Collector\SkippedAlphaCardsCollectorInterface
 use App\ImportDb\Alpha\SkippedCard\Converter\SkippedAlphaCardConverterInterface;
 use App\ImportDb\Alpha\Storage\ManyToMany\AbstractManyToManyEntityStorage;
 use App\ImportDb\Alpha\Storage\ManyToMany\CollectorStorage;
-use App\ImportDb\Alpha\Storage\ManyToMany\InformerStorage;
+use App\ImportDb\Alpha\Storage\ManyToMany\InformantStorage;
 use App\ImportDb\Alpha\Storage\ManyToMany\KeywordStorage;
 use App\ImportDb\Alpha\Storage\ManyToMany\TermStorage;
 use App\ImportDb\Alpha\Storage\ManyToOne\QuestionStorage;
@@ -98,9 +98,9 @@ final class AlphaImporter implements AlphaImporterInterface
     private $termStorage;
 
     /**
-     * @var InformerStorage
+     * @var InformantStorage
      */
-    private $informerStorage;
+    private $informantStorage;
 
     /**
      * @var CollectorStorage
@@ -122,7 +122,7 @@ final class AlphaImporter implements AlphaImporterInterface
      * @param SeasonStorage                       $seasonStorage
      * @param KeywordStorage                      $keywordsStorage
      * @param TermStorage                         $termsStorage
-     * @param InformerStorage                     $informersStorage
+     * @param InformantStorage                    $informantStorage
      * @param CollectorStorage                    $collectorsStorage
      * @param LoggerInterface                     $logger
      */
@@ -136,7 +136,7 @@ final class AlphaImporter implements AlphaImporterInterface
         SeasonStorage $seasonStorage,
         KeywordStorage $keywordsStorage,
         TermStorage $termsStorage,
-        InformerStorage $informersStorage,
+        InformantStorage $informantStorage,
         CollectorStorage $collectorsStorage,
         LoggerInterface $logger
     ) {
@@ -150,7 +150,7 @@ final class AlphaImporter implements AlphaImporterInterface
         $this->seasonStorage = $seasonStorage;
         $this->keywordStorage = $keywordsStorage;
         $this->termStorage = $termsStorage;
-        $this->informerStorage = $informersStorage;
+        $this->informantStorage = $informantStorage;
         $this->collectorStorage = $collectorsStorage;
         $this->logger = $logger;
     }
@@ -254,7 +254,7 @@ final class AlphaImporter implements AlphaImporterInterface
                 ->setDescription($description)
                 ->setKeywords($this->keywordStorage->getAndPersistEntities($alphaCard))
                 ->setTerms($this->termStorage->getAndPersistEntities($alphaCard))
-                ->setInformers($this->informerStorage->getAndPersistEntities($alphaCard))
+                ->setInformants($this->informantStorage->getAndPersistEntities($alphaCard))
                 ->setCollectors($this->collectorStorage->getAndPersistEntities($alphaCard))
             ;
 
@@ -334,7 +334,7 @@ final class AlphaImporter implements AlphaImporterInterface
     {
         return [
             $this->collectorStorage,
-            $this->informerStorage,
+            $this->informantStorage,
             $this->keywordStorage,
             $this->termStorage,
         ];

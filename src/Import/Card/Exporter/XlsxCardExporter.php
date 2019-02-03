@@ -26,7 +26,7 @@ namespace App\Import\Card\Exporter;
 
 use App\Entity\Card\Card;
 use App\Entity\Card\Collector;
-use App\Entity\Card\Informer;
+use App\Entity\Card\Informant;
 use App\Entity\Card\Keyword;
 use App\Entity\Card\Question;
 use App\Entity\Card\Term;
@@ -168,8 +168,8 @@ final class XlsxCardExporter implements CardExporterInterface
             return $term->getName();
         };
 
-        $formatInformer = function (Informer $informer): string {
-            return $informer->getName();
+        $formatInformant = function (Informant $informant): string {
+            return $informant->getName();
         };
 
         $formatCollector = function (Collector $collector): string {
@@ -190,7 +190,7 @@ final class XlsxCardExporter implements CardExporterInterface
             $card->getDescription(),
             implode(XlsxCardImporter::KEYWORDS_DELIMITER, $card->getKeywords()->map($formatKeyword)->toArray()),
             implode(XlsxCardImporter::TERMS_DELIMITER, $card->getTerms()->map($formatTerm)->toArray()),
-            implode(XlsxCardImporter::INFORMERS_DELIMITER, $card->getInformers()->map($formatInformer)->toArray()),
+            implode(XlsxCardImporter::INFORMANTS_DELIMITER, $card->getInformants()->map($formatInformant)->toArray()),
             implode(XlsxCardImporter::COLLECTORS_DELIMITER, $card->getCollectors()->map($formatCollector)->toArray()),
         ];
     }

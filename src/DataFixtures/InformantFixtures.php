@@ -24,27 +24,27 @@ declare(strict_types=1);
 
 namespace App\DataFixtures;
 
-use App\Entity\Card\Informer;
+use App\Entity\Card\Informant;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 
 /**
  * @author Anton Dyshkant <vyshkant@gmail.com>
  */
-final class InformerFixtures extends Fixture
+final class InformantFixtures extends Fixture
 {
-    public const INFORMER_MSV = 'МСВ';
+    public const INFORMANT_MSV = 'МСВ';
 
     /**
      * @param ObjectManager $manager
      */
     public function load(ObjectManager $manager): void
     {
-        $informer = (new Informer())
+        $informant = (new Informant())
             ->setName('МСВ')
         ;
-        $manager->persist($informer);
-        $this->addReference(self::INFORMER_MSV, $informer);
+        $manager->persist($informant);
+        $this->addReference(self::INFORMANT_MSV, $informant);
 
         $manager->flush();
     }
