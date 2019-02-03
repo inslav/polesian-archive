@@ -37,6 +37,7 @@ class Termdict
     /**
      * @var string|null
      *
+     * @ORM\Id()
      * @ORM\Column(name="term", type="string", nullable=true)
      */
     private $term;

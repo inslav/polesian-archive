@@ -37,6 +37,7 @@ class Slovdict
     /**
      * @var string
      *
+     * @ORM\Id()
      * @ORM\Column(name="slov", type="string")
      */
     private $slov;

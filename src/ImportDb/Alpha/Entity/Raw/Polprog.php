@@ -37,6 +37,7 @@ class Polprog
     /**
      * @var string|null
      *
+     * @ORM\Id()
      * @ORM\Column(name="prog", type="string", length=7, nullable=true, options={"fixed"=true})
      */
     private $prog;

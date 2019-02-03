@@ -37,6 +37,7 @@ class Sobirdict
     /**
      * @var string
      *
+     * @ORM\Id()
      * @ORM\Column(name="sobir", type="string")
      */
     private $sobir;

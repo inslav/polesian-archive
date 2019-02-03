@@ -37,6 +37,7 @@ class Informdict
     /**
      * @var string|null
      *
+     * @ORM\Id()
      * @ORM\Column(name="inform", type="string", nullable=true)
      */
     private $inform;
