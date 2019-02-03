@@ -69,6 +69,13 @@ class Village
     private $oblast;
 
     /**
+     * @var string|null
+     *
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $comment;
+
+    /**
      * @var Collection|Card[]
      *
      * @ORM\OneToMany(targetEntity="App\Entity\Card\Card", mappedBy="village", orphanRemoval=true)
@@ -144,6 +151,26 @@ class Village
     public function setOblast(string $oblast): self
     {
         $this->oblast = $oblast;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getComment(): ?string
+    {
+        return $this->comment;
+    }
+
+    /**
+     * @param string|null $comment
+     *
+     * @return Village
+     */
+    public function setComment(?string $comment): self
+    {
+        $this->comment = $comment;
 
         return $this;
     }

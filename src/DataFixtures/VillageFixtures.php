@@ -46,6 +46,7 @@ final class VillageFixtures extends Fixture
             ->setName('Барбаров')
             ->setRaion('Мозырский')
             ->setOblast('Гомельская')
+            ->setComment('Это комментарий к селу')
         ;
         $manager->persist($village);
         $this->addReference(self::VILLAGE_BARBAROV, $village);
