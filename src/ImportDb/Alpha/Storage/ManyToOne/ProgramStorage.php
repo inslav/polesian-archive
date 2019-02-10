@@ -24,10 +24,10 @@ declare(strict_types=1);
 
 namespace App\ImportDb\Alpha\Storage\ManyToOne;
 
-use App\Entity\PolesianProgram\Program;
 use App\Import\Card\Formatter\QuestionNumber\Parser\QuestionNumberParserInterface;
 use App\ImportDb\Alpha\Entity\AlphaCard;
 use App\ImportDb\Alpha\ValueTrimmer\AlphaValueConverterInterface;
+use App\Persistence\Entity\PolesianProgram\Program;
 use Psr\Log\LoggerInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -60,25 +60,25 @@ final class ProgramStorage extends AbstractManyToOneEntityStorage
     }
 
     /**
-     * @param AlphaCard $alphaCard
+     * @param object|AlphaCard $alphaObject
      *
      * @return string|null
      */
-    protected function getAlphaEntityKey(AlphaCard $alphaCard): ?string
+    protected function getAlphaEntityKey(object $alphaObject): ?string
     {
-        return $this->valueConverter->getTrimmed($alphaCard->getNprog());
+        return $this->valueConverter->getTrimmed($alphaObject->getNprog());
     }
 
     /**
-     * @param AlphaCard $alphaCard
+     * @param object|AlphaCard $alphaObject
      *
      * @return Program
      */
-    protected function createEntity(AlphaCard $alphaCard): object
+    protected function createEntity(object $alphaObject): object
     {
         return (new Program())
-            ->setSection($this->sectionStorage->getEntity($alphaCard))
-            ->setNumber($this->valueConverter->getTrimmed($alphaCard->getNprog()))
+            ->setSection($this->sectionStorage->getEntity($alphaObject))
+            ->setNumber($this->valueConverter->getTrimmed($alphaObject->getNprog()))
         ;
     }
 }

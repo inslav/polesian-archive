@@ -24,8 +24,8 @@ declare(strict_types=1);
 
 namespace App\ImportDb\Alpha\Storage\ManyToOne\Persisted;
 
-use App\Entity\PolesianProgram\Program;
 use App\ImportDb\Alpha\Entity\AlphaCard;
+use App\Persistence\Entity\PolesianProgram\Program;
 
 /**
  * @author Anton Dyshkant <vyshkant@gmail.com>
@@ -51,12 +51,12 @@ final class ProgramStorage extends AbstractPersistedManyToOneEntityStorage
     }
 
     /**
-     * @param AlphaCard $alphaCard
+     * @param object|AlphaCard $alphaObject
      *
      * @return string|null
      */
-    protected function getAlphaEntityKey(AlphaCard $alphaCard): ?string
+    protected function getAlphaEntityKey(object $alphaObject): ?string
     {
-        return $this->valueConverter->getTrimmed($alphaCard->getNprog());
+        return $this->valueConverter->getTrimmed($alphaObject->getNprog());
     }
 }

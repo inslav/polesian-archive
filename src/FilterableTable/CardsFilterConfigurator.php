@@ -26,8 +26,10 @@ namespace App\FilterableTable;
 
 use App\FilterableTable\Filter\Parameter\CollectorFilterParameter;
 use App\FilterableTable\Filter\Parameter\KeywordFilterParameter;
+use App\FilterableTable\Filter\Parameter\OblastFilterParameter;
 use App\FilterableTable\Filter\Parameter\ProgramFilterParameter;
 use App\FilterableTable\Filter\Parameter\QuestionFilterParameter;
+use App\FilterableTable\Filter\Parameter\RaionFilterParameter;
 use App\FilterableTable\Filter\Parameter\TermFilterParameter;
 use App\FilterableTable\Filter\Parameter\TextOrDescriptionFilterParameter;
 use App\FilterableTable\Filter\Parameter\VillageFilterParameter;
@@ -56,6 +58,21 @@ final class CardsFilterConfigurator extends AbstractFilterConfigurator
     private $questionFilterParameter;
 
     /**
+     * @var YearFilterParameter
+     */
+    private $yearFilterParameter;
+
+    /**
+     * @var OblastFilterParameter
+     */
+    private $oblastFilterParameter;
+
+    /**
+     * @var RaionFilterParameter
+     */
+    private $raionFilterParameter;
+
+    /**
      * @var VillageFilterParameter
      */
     private $villageFilterParameter;
@@ -76,11 +93,6 @@ final class CardsFilterConfigurator extends AbstractFilterConfigurator
     private $collectorFilterParameter;
 
     /**
-     * @var YearFilterParameter
-     */
-    private $yearFilterParameter;
-
-    /**
      * @var TextOrDescriptionFilterParameter
      */
     private $textOrDescriptionFilterParameter;
@@ -88,25 +100,32 @@ final class CardsFilterConfigurator extends AbstractFilterConfigurator
     /**
      * @param ProgramFilterParameter           $programFilterParameter
      * @param QuestionFilterParameter          $questionFilterParameter
+     * @param YearFilterParameter              $yearFilterParameter
+     * @param OblastFilterParameter            $oblastFilterParameter
+     * @param RaionFilterParameter             $raionFilterParameter
      * @param VillageFilterParameter           $villageFilterParameter
      * @param KeywordFilterParameter           $keywordFilterParameter
      * @param TermFilterParameter              $termFilterParameter
      * @param CollectorFilterParameter         $collectorFilterParameter
-     * @param YearFilterParameter              $yearFilterParameter
      * @param TextOrDescriptionFilterParameter $textOrDescriptionFilterParameter
      */
     public function __construct(
         ProgramFilterParameter $programFilterParameter,
         QuestionFilterParameter $questionFilterParameter,
+        YearFilterParameter $yearFilterParameter,
+        OblastFilterParameter $oblastFilterParameter,
+        RaionFilterParameter $raionFilterParameter,
         VillageFilterParameter $villageFilterParameter,
         KeywordFilterParameter $keywordFilterParameter,
         TermFilterParameter $termFilterParameter,
         CollectorFilterParameter $collectorFilterParameter,
-        YearFilterParameter $yearFilterParameter,
         TextOrDescriptionFilterParameter $textOrDescriptionFilterParameter
     ) {
         $this->programFilterParameter = $programFilterParameter;
         $this->questionFilterParameter = $questionFilterParameter;
+        $this->yearFilterParameter = $yearFilterParameter;
+        $this->oblastFilterParameter = $oblastFilterParameter;
+        $this->raionFilterParameter = $raionFilterParameter;
         $this->villageFilterParameter = $villageFilterParameter;
         $this->keywordFilterParameter = $keywordFilterParameter;
         $this->termFilterParameter = $termFilterParameter;
@@ -177,6 +196,9 @@ final class CardsFilterConfigurator extends AbstractFilterConfigurator
         return [
             $this->programFilterParameter,
             $this->questionFilterParameter,
+            $this->yearFilterParameter,
+            $this->oblastFilterParameter,
+            $this->raionFilterParameter,
             $this->villageFilterParameter,
             $this->keywordFilterParameter,
             $this->termFilterParameter,

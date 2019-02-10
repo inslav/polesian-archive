@@ -24,12 +24,12 @@ declare(strict_types=1);
 
 namespace App\ImportDb\Alpha\Storage\ManyToOne\Persisted;
 
-use App\Entity\PolesianProgram\Subparagraph;
 use App\Import\Card\Formatter\QuestionNumber\Formatter\QuestionNumberFormatterInterface;
 use App\Import\Card\Formatter\QuestionNumber\Parser\QuestionNumberParserInterface;
 use App\Import\Card\Formatter\QuestionNumber\QuestionNumberInterface;
 use App\ImportDb\Alpha\Entity\AlphaCard;
 use App\ImportDb\Alpha\ValueTrimmer\AlphaValueConverterInterface;
+use App\Persistence\Entity\PolesianProgram\Subparagraph;
 use Psr\Log\LoggerInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -88,17 +88,21 @@ final class SubparagraphStorage extends AbstractPersistedManyToOneEntityStorage
     }
 
     /**
-     * @param AlphaCard $alphaCard
+     * @param object|AlphaCard $alphaObject
      *
      * @return string|null
      */
-    protected function getAlphaEntityKey(AlphaCard $alphaCard): ?string
+    protected function getAlphaEntityKey(object $alphaObject): ?string
     {
         $subparagraphLetter = $this->getFixedSubparagraphLetter(
-            $this->getQuestionNumber($alphaCard)
+            $this->getQuestionNumber($alphaObject)
         );
 
-        return $this->paragraphStorage->getAlphaEntityKey($alphaCard).$subparagraphLetter;
+        if (null === $subparagraphLetter) {
+            return null;
+        }
+
+        return $this->paragraphStorage->getAlphaEntityKey($alphaObject).$subparagraphLetter;
     }
 
     /**

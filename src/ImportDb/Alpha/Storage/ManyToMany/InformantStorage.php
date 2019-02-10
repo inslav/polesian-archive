@@ -24,8 +24,8 @@ declare(strict_types=1);
 
 namespace App\ImportDb\Alpha\Storage\ManyToMany;
 
-use App\Entity\Card\Informant;
 use App\ImportDb\Alpha\Entity\AlphaInformant;
+use App\Persistence\Entity\Card\Informant;
 
 /**
  * @author Anton Dyshkant <vyshkant@gmail.com>

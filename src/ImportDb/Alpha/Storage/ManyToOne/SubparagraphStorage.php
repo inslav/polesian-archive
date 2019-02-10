@@ -24,10 +24,10 @@ declare(strict_types=1);
 
 namespace App\ImportDb\Alpha\Storage\ManyToOne;
 
-use App\Entity\PolesianProgram\Subparagraph;
 use App\Import\Card\Formatter\QuestionNumber\Parser\QuestionNumberParserInterface;
 use App\ImportDb\Alpha\Entity\AlphaCard;
 use App\ImportDb\Alpha\ValueTrimmer\AlphaValueConverterInterface;
+use App\Persistence\Entity\PolesianProgram\Subparagraph;
 use Psr\Log\LoggerInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -62,31 +62,31 @@ final class SubparagraphStorage extends AbstractManyToOneEntityStorage
     }
 
     /**
-     * @param AlphaCard $alphaCard
+     * @param object|AlphaCard $alphaObject
      *
      * @return string|null
      */
-    protected function getAlphaEntityKey(AlphaCard $alphaCard): ?string
+    protected function getAlphaEntityKey(object $alphaObject): ?string
     {
-        $subparagraphLetter = $this->getQuestionNumber($alphaCard)->getSubparagraphLetter();
+        $subparagraphLetter = $this->getQuestionNumber($alphaObject)->getSubparagraphLetter();
 
         if (null === $subparagraphLetter) {
             return null;
         }
 
-        return $this->paragraphStorage->getAlphaEntityKey($alphaCard).$subparagraphLetter;
+        return $this->paragraphStorage->getAlphaEntityKey($alphaObject).$subparagraphLetter;
     }
 
     /**
-     * @param AlphaCard $alphaCard
+     * @param object|AlphaCard $alphaObject
      *
      * @return Subparagraph
      */
-    protected function createEntity(AlphaCard $alphaCard): object
+    protected function createEntity(object $alphaObject): object
     {
         return (new Subparagraph())
-            ->setParagraph($this->paragraphStorage->getEntity($alphaCard))
-            ->setLetter($this->getQuestionNumber($alphaCard)->getSubparagraphLetter())
+            ->setParagraph($this->paragraphStorage->getEntity($alphaObject))
+            ->setLetter($this->getQuestionNumber($alphaObject)->getSubparagraphLetter())
             ->setText(self::DUMMY_TEXT)
         ;
     }

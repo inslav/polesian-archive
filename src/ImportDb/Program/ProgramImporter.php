@@ -24,15 +24,15 @@ declare(strict_types=1);
 
 namespace App\ImportDb\Program;
 
-use App\Entity\PolesianProgram\Paragraph;
-use App\Entity\PolesianProgram\Program;
-use App\Entity\PolesianProgram\Section;
-use App\Entity\PolesianProgram\Subparagraph;
 use App\ImportDb\Program\Parser\Line\Line\Paragraph\ParagraphLineInterface;
 use App\ImportDb\Program\Parser\Line\Line\Program\ProgramLineInterface;
 use App\ImportDb\Program\Parser\Line\Line\Section\SectionLineInterface;
 use App\ImportDb\Program\Parser\Line\Line\Subparagraph\SubparagraphLineInterface;
 use App\ImportDb\Program\Parser\Line\Parser\ProgramTextLineParserInterface;
+use App\Persistence\Entity\PolesianProgram\Paragraph;
+use App\Persistence\Entity\PolesianProgram\Program;
+use App\Persistence\Entity\PolesianProgram\Section;
+use App\Persistence\Entity\PolesianProgram\Subparagraph;
 use Doctrine\ORM\ORMException;
 use InvalidArgumentException;
 use LogicException;

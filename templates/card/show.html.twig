@@ -49,8 +49,8 @@ see <http://www.gnu.org/licenses/>.
 
     {% set villageTranslationData = {
         'village': village.name,
-        'raion': village.raion,
-        'oblast': village.oblast
+        'raion': village.raion.name,
+        'oblast': village.raion.oblast.name
     } %}
 
     {{ 'controller.card.show.card.value.villageRaionAndOblast'|trans(villageTranslationData) }}

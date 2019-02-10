@@ -24,10 +24,14 @@ declare(strict_types=1);
 
 namespace App\ImportDb\Alpha\Storage\ManyToOne;
 
-use App\Entity\Card\Village;
+use App\Import\Card\Formatter\QuestionNumber\Parser\QuestionNumberParserInterface;
 use App\ImportDb\Alpha\Entity\AlphaCard;
 use App\ImportDb\Alpha\Entity\AlphaVillage;
+use App\ImportDb\Alpha\ValueTrimmer\AlphaValueConverterInterface;
+use App\Persistence\Entity\Location\Village;
 use InvalidArgumentException;
+use Psr\Log\LoggerInterface;
+use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
  * @author Anton Dyshkant <vyshkant@gmail.com>
@@ -35,33 +39,55 @@ use InvalidArgumentException;
 final class VillageStorage extends AbstractManyToOneEntityStorage
 {
     /**
+     * @var RaionStorage
+     */
+    private $raionStorage;
+
+    /**
      * @var AlphaVillage[]
      */
     private $alphaEntityByAlphaEntityKeyCache;
 
     /**
-     * @param AlphaCard $alphaCard
-     *
-     * @return string|null
+     * @param RegistryInterface             $doctrine
+     * @param AlphaValueConverterInterface  $valueConverter
+     * @param QuestionNumberParserInterface $questionNumberParser
+     * @param LoggerInterface               $logger
+     * @param RaionStorage                  $raionStorage
      */
-    protected function getAlphaEntityKey(AlphaCard $alphaCard): ?string
-    {
-        return $this->valueConverter->getTrimmed($alphaCard->getSelokey());
+    public function __construct(
+        RegistryInterface $doctrine,
+        AlphaValueConverterInterface $valueConverter,
+        QuestionNumberParserInterface $questionNumberParser,
+        LoggerInterface $logger,
+        RaionStorage $raionStorage
+    ) {
+        parent::__construct($doctrine, $valueConverter, $questionNumberParser, $logger);
+        $this->raionStorage = $raionStorage;
     }
 
     /**
-     * @param AlphaCard $alphaCard
+     * @param object|AlphaCard $alphaObject
+     *
+     * @return string|null
+     */
+    protected function getAlphaEntityKey(object $alphaObject): ?string
+    {
+        return $this->valueConverter->getTrimmed($alphaObject->getSelokey());
+    }
+
+    /**
+     * @param object|AlphaCard $alphaObject
      *
      * @return Village
      */
-    protected function createEntity(AlphaCard $alphaCard): object
+    protected function createEntity(object $alphaObject): object
     {
-        $alphaVillage = $this->getAlphaEntity($alphaCard);
+        $alphaVillage = $this->getAlphaEntity($alphaObject);
 
         return (new Village())
-            ->setName($this->valueConverter->getTrimmed($alphaVillage->getSelo()))
-            ->setRaion($this->valueConverter->getTrimmed($alphaVillage->getDistrict()))
-            ->setOblast($this->valueConverter->getTrimmed($alphaVillage->getRegion()))
+            ->setName($this->valueConverter->getTrimmedOrNull($alphaVillage->getSelo()))
+            ->setRaion($this->raionStorage->getEntity($alphaVillage))
         ;
     }
 

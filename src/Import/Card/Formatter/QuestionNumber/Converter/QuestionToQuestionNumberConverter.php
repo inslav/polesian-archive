@@ -24,9 +24,9 @@ declare(strict_types=1);
 
 namespace App\Import\Card\Formatter\QuestionNumber\Converter;
 
-use App\Entity\Card\Question;
 use App\Import\Card\Formatter\QuestionNumber\QuestionNumber;
 use App\Import\Card\Formatter\QuestionNumber\QuestionNumberInterface;
+use App\Persistence\Entity\Card\Question;
 
 /**
  * @author Anton Dyshkant <vyshkant@gmail.com>

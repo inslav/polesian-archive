@@ -24,13 +24,13 @@ declare(strict_types=1);
 
 namespace App\ImportDb\Alpha\Storage\ManyToOne;
 
-use App\Entity\Card\Question;
 use App\Import\Card\Formatter\QuestionNumber\Parser\QuestionNumberParserInterface;
 use App\ImportDb\Alpha\Entity\AlphaCard;
 use App\ImportDb\Alpha\Storage\ManyToOne\Persisted\ParagraphStorage;
 use App\ImportDb\Alpha\Storage\ManyToOne\Persisted\ProgramStorage;
 use App\ImportDb\Alpha\Storage\ManyToOne\Persisted\SubparagraphStorage;
 use App\ImportDb\Alpha\ValueTrimmer\AlphaValueConverterInterface;
+use App\Persistence\Entity\Card\Question;
 use Psr\Log\LoggerInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -79,32 +79,32 @@ final class QuestionStorage extends AbstractManyToOneEntityStorage
     }
 
     /**
-     * @param AlphaCard $alphaCard
+     * @param object|AlphaCard $alphaObject
      *
      * @return string|null
      */
-    protected function getAlphaEntityKey(AlphaCard $alphaCard): ?string
+    protected function getAlphaEntityKey(object $alphaObject): ?string
     {
-        $programKey = $this->programStorage->getAlphaEntityKey($alphaCard);
-        $paragraphKey = $this->paragraphStorage->getAlphaEntityKey($alphaCard);
-        $subparagraphKey = $this->subparagraphStorage->getAlphaEntityKey($alphaCard);
-        $isAdditionalKey = $this->getQuestionNumber($alphaCard)->getIsAdditional() ? '1' : '0';
+        $programKey = $this->programStorage->getAlphaEntityKey($alphaObject);
+        $paragraphKey = $this->paragraphStorage->getAlphaEntityKey($alphaObject);
+        $subparagraphKey = $this->subparagraphStorage->getAlphaEntityKey($alphaObject);
+        $isAdditionalKey = $this->getQuestionNumber($alphaObject)->getIsAdditional() ? '1' : '0';
 
         return $programKey.$paragraphKey.$subparagraphKey.$isAdditionalKey;
     }
 
     /**
-     * @param AlphaCard $alphaCard
+     * @param object|AlphaCard $alphaObject
      *
      * @return Question
      */
-    protected function createEntity(AlphaCard $alphaCard): object
+    protected function createEntity(object $alphaObject): object
     {
         return (new Question())
-            ->setProgram($this->programStorage->getEntity($alphaCard))
-            ->setParagraph($this->paragraphStorage->getEntity($alphaCard))
-            ->setSubparagraph($this->subparagraphStorage->getEntity($alphaCard))
-            ->setIsAdditional($this->getQuestionNumber($alphaCard)->getIsAdditional())
+            ->setProgram($this->programStorage->getEntity($alphaObject))
+            ->setParagraph($this->paragraphStorage->getEntity($alphaObject))
+            ->setSubparagraph($this->subparagraphStorage->getEntity($alphaObject))
+            ->setIsAdditional($this->getQuestionNumber($alphaObject)->getIsAdditional())
         ;
     }
 }

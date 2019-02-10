@@ -24,10 +24,10 @@ declare(strict_types=1);
 
 namespace App\ImportDb\Alpha\Storage\ManyToOne\Persisted;
 
-use App\Entity\PolesianProgram\Paragraph;
 use App\Import\Card\Formatter\QuestionNumber\Parser\QuestionNumberParserInterface;
 use App\ImportDb\Alpha\Entity\AlphaCard;
 use App\ImportDb\Alpha\ValueTrimmer\AlphaValueConverterInterface;
+use App\Persistence\Entity\PolesianProgram\Paragraph;
 use Psr\Log\LoggerInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -78,18 +78,18 @@ final class ParagraphStorage extends AbstractPersistedManyToOneEntityStorage
     }
 
     /**
-     * @param AlphaCard $alphaCard
+     * @param object|AlphaCard $alphaObject
      *
      * @return string|null
      */
-    protected function getAlphaEntityKey(AlphaCard $alphaCard): ?string
+    protected function getAlphaEntityKey(object $alphaObject): ?string
     {
-        $paragraphNumber = $this->getQuestionNumber($alphaCard)->getParagraphNumber();
+        $paragraphNumber = $this->getQuestionNumber($alphaObject)->getParagraphNumber();
 
         if (null === $paragraphNumber) {
             return null;
         }
 
-        return $this->programStorage->getAlphaEntityKey($alphaCard).$paragraphNumber;
+        return $this->programStorage->getAlphaEntityKey($alphaObject).$paragraphNumber;
     }
 }

@@ -24,8 +24,8 @@ declare(strict_types=1);
 
 namespace App\ImportDb\Alpha\Storage\ManyToOne;
 
-use App\Entity\PolesianProgram\Section;
 use App\ImportDb\Alpha\Entity\AlphaCard;
+use App\Persistence\Entity\PolesianProgram\Section;
 
 /**
  * @author Anton Dyshkant <vyshkant@gmail.com>
@@ -35,21 +35,21 @@ final class SectionStorage extends AbstractManyToOneEntityStorage
     private const DUMMY_SECTION = 'Section';
 
     /**
-     * @param AlphaCard $alphaCard
+     * @param object|AlphaCard $alphaObject
      *
      * @return string|null
      */
-    protected function getAlphaEntityKey(AlphaCard $alphaCard): ?string
+    protected function getAlphaEntityKey(object $alphaObject): ?string
     {
         return self::DUMMY_SECTION;
     }
 
     /**
-     * @param AlphaCard $alphaCard
+     * @param object|AlphaCard $alphaObject
      *
      * @return Section
      */
-    protected function createEntity(AlphaCard $alphaCard): object
+    protected function createEntity(object $alphaObject): object
     {
         return (new Section())
             ->setName(self::DUMMY_SECTION)

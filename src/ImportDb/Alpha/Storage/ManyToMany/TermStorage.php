@@ -24,8 +24,8 @@ declare(strict_types=1);
 
 namespace App\ImportDb\Alpha\Storage\ManyToMany;
 
-use App\Entity\Card\Term;
 use App\ImportDb\Alpha\Entity\AlphaTerm;
+use App\Persistence\Entity\Card\Term;
 
 /**
  * @author Anton Dyshkant <vyshkant@gmail.com>

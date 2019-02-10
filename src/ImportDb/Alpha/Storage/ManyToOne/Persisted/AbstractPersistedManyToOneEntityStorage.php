@@ -25,8 +25,8 @@ declare(strict_types=1);
 namespace App\ImportDb\Alpha\Storage\ManyToOne\Persisted;
 
 use App\ImportDb\Alpha\Entity\AlphaCard;
+use App\ImportDb\Alpha\Exception\BrokenCardException;
 use App\ImportDb\Alpha\Storage\ManyToOne\AbstractManyToOneEntityStorage;
-use InvalidArgumentException;
 
 /**
  * @author Anton Dyshkant <vyshkant@gmail.com>
@@ -60,20 +60,17 @@ abstract class AbstractPersistedManyToOneEntityStorage extends AbstractManyToOne
     }
 
     /**
-     * @param AlphaCard $alphaCard
+     * @param object|AlphaCard $alphaObject
      *
-     * @throws InvalidArgumentException
+     * @throws BrokenCardException
      *
      * @return object
      */
-    final protected function createEntity(AlphaCard $alphaCard): object
+    final protected function createEntity(object $alphaObject): object
     {
-        throw new InvalidArgumentException(
-            sprintf(
-                'Cannot created entity with key "%s": "%s" is persisted storage',
-                $this->getAlphaEntityKey($alphaCard),
-                static::class
-            )
+        throw BrokenCardException::programMismatch(
+            $this->getAlphaEntityKey($alphaObject),
+            static::class
         );
     }
 }

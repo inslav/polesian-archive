@@ -25,6 +25,7 @@ declare(strict_types=1);
 namespace App\Command\ImportDb;
 
 use App\ImportDb\Alpha\AlphaImporterInterface;
+use App\ImportDb\Program\ProgramImporterInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -37,17 +38,26 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 final class ImportAlphaDbCommand extends Command
 {
     /**
-     * @var AlphaImporterInterface
+     * @var ProgramImporterInterface
      */
-    private $importer;
+    private $programImporter;
 
     /**
-     * @param AlphaImporterInterface $importer
+     * @var AlphaImporterInterface
      */
-    public function __construct(AlphaImporterInterface $importer)
-    {
+    private $alphaImporter;
+
+    /**
+     * @param ProgramImporterInterface $programImporter
+     * @param AlphaImporterInterface   $alphaImporter
+     */
+    public function __construct(
+        ProgramImporterInterface $programImporter,
+        AlphaImporterInterface $alphaImporter
+    ) {
         parent::__construct();
-        $this->importer = $importer;
+        $this->programImporter = $programImporter;
+        $this->alphaImporter = $alphaImporter;
     }
 
     protected function configure(): void
@@ -55,6 +65,7 @@ final class ImportAlphaDbCommand extends Command
         $this
             ->setName('app:import-db:alpha')
             ->setDescription('Import data from DB of version alpha')
+            ->addArgument('program-source-file', InputArgument::REQUIRED, 'Path to file with polesian program data')
             ->addArgument(
                 'skipped-alpha-cards-log-file',
                 InputArgument::REQUIRED,
@@ -71,9 +82,13 @@ final class ImportAlphaDbCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $this->importer->import($input->getArgument('skipped-alpha-cards-log-file'));
+        $this->programImporter->importProgram($input->getArgument('program-source-file'));
 
-        (new SymfonyStyle($input, $output))->success('DB import has been successfully completed');
+        (new SymfonyStyle($input, $output))->success('Program import has been successfully completed');
+
+        $this->alphaImporter->import($input->getArgument('skipped-alpha-cards-log-file'));
+
+        (new SymfonyStyle($input, $output))->success('Alpha DB import has been successfully completed');
 
         return 0;
     }

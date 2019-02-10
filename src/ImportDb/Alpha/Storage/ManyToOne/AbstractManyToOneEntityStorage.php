@@ -88,22 +88,22 @@ abstract class AbstractManyToOneEntityStorage
     }
 
     /**
-     * @param AlphaCard $alphaCard
+     * @param object $alphaObject
      *
      * @return object|null
      */
-    final public function getEntity(AlphaCard $alphaCard): ?object
+    final public function getEntity(object $alphaObject): ?object
     {
         $this->initializeCache();
 
-        $alphaEntityKey = $this->getAlphaEntityKey($alphaCard);
+        $alphaEntityKey = $this->getAlphaEntityKey($alphaObject);
 
         if (null === $alphaEntityKey) {
             return null;
         }
 
         if (!array_key_exists($alphaEntityKey, $this->entityByAlphaEntityKeyCache)) {
-            $entity = $this->createEntity($alphaCard);
+            $entity = $this->createEntity($alphaObject);
 
             if (null === $entity) {
                 throw new LogicException(
@@ -120,18 +120,18 @@ abstract class AbstractManyToOneEntityStorage
     }
 
     /**
-     * @param AlphaCard $alphaCard
+     * @param object $alphaObject
      *
      * @return string|null
      */
-    abstract protected function getAlphaEntityKey(AlphaCard $alphaCard): ?string;
+    abstract protected function getAlphaEntityKey(object $alphaObject): ?string;
 
     /**
-     * @param AlphaCard $alphaCard
+     * @param object $alphaObject
      *
      * @return object
      */
-    abstract protected function createEntity(AlphaCard $alphaCard): object;
+    abstract protected function createEntity(object $alphaObject): object;
 
     /**
      * @param AlphaCard $alphaCard

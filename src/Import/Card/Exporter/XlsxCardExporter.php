@@ -24,16 +24,16 @@ declare(strict_types=1);
 
 namespace App\Import\Card\Exporter;
 
-use App\Entity\Card\Card;
-use App\Entity\Card\Collector;
-use App\Entity\Card\Informant;
-use App\Entity\Card\Keyword;
-use App\Entity\Card\Question;
-use App\Entity\Card\Term;
 use App\Import\Card\Formatter\QuestionNumber\Formatter\QuestionNumberFormatterInterface;
 use App\Import\Card\Formatter\VillageFullName\Formatter\VillageFullNameFormatterInterface;
 use App\Import\Card\Importer\XlsxCardImporter;
-use App\Repository\Card\CardRepository;
+use App\Persistence\Entity\Card\Card;
+use App\Persistence\Entity\Card\Collector;
+use App\Persistence\Entity\Card\Informant;
+use App\Persistence\Entity\Card\Keyword;
+use App\Persistence\Entity\Card\Question;
+use App\Persistence\Entity\Card\Term;
+use App\Persistence\Repository\Card\CardRepository;
 use InvalidArgumentException;
 use PhpOffice\PhpSpreadsheet;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;

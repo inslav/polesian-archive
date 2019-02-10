@@ -24,13 +24,13 @@ declare(strict_types=1);
 
 namespace App\Download\Format;
 
-use App\Entity\Card\Card;
-use App\Entity\Card\Collector;
-use App\Entity\Card\Keyword;
-use App\Entity\Card\Question;
-use App\Entity\Card\Term;
 use App\Import\Card\Formatter\QuestionNumber\Converter\QuestionToQuestionNumberConverter;
 use App\Import\Card\Formatter\QuestionNumber\Formatter\QuestionNumberFormatterInterface;
+use App\Persistence\Entity\Card\Card;
+use App\Persistence\Entity\Card\Collector;
+use App\Persistence\Entity\Card\Keyword;
+use App\Persistence\Entity\Card\Question;
+use App\Persistence\Entity\Card\Term;
 
 /**
  * @author Anton Dyshkant <vyshkant@gmail.com>
@@ -116,8 +116,8 @@ final class TxtFormatter implements FormatterInterface
 
         $formattedVillage = sprintf(
             '%s область, %s район, %s %s',
-            $card->getVillage()->getOblast(),
-            $card->getVillage()->getRaion(),
+            $card->getVillage()->getRaion()->getOblast()->getName(),
+            $card->getVillage()->getRaion()->getName(),
             $card->getVillage()->getName(),
             null !== $card->getKhutor() ? sprintf('(хутор %s)', $card->getKhutor()) : ''
         );

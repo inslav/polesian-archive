@@ -24,7 +24,7 @@ declare(strict_types=1);
 
 namespace App\FilterableTable\Filter\Parameter;
 
-use App\Entity\Card\Village;
+use App\Persistence\Entity\Location\Village;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
@@ -67,7 +67,7 @@ final class VillageFilterParameter implements FilterParameterInterface, Expressi
                 'data-vyfony-filterable-table-filter-parameter' => true,
             ],
             'class' => Village::class,
-            'choice_label' => 'name',
+            'choice_label' => $this->createLabelBuilder(),
             'expanded' => false,
             'multiple' => true,
             'query_builder' => $this->createQueryBuilder(),
@@ -109,6 +109,21 @@ final class VillageFilterParameter implements FilterParameterInterface, Expressi
             return $repository
                 ->createQueryBuilder($entityAlias)
                 ->orderBy($entityAlias.'.name', 'ASC');
+        };
+    }
+
+    /**
+     * @return callable
+     */
+    private function createLabelBuilder(): callable
+    {
+        return function (Village $village) {
+            return sprintf(
+                '%s (%s, %s)',
+                $village->getName(),
+                $village->getRaion()->getName(),
+                $village->getRaion()->getOblast()->getName()
+            );
         };
     }
 }

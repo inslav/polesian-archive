@@ -32,22 +32,27 @@ use App\ImportDb\Alpha\SkippedCard\SkippedAlphaCardInterface;
 final class SkippedAlphaCardsCollector implements SkippedAlphaCardsCollectorInterface
 {
     /**
-     * @var SkippedAlphaCardInterface[]
+     * @var SkippedAlphaCardInterface[][]
      */
     private $skippedAlphaCards = [];
 
     /**
+     * @param string                    $errorCategory
      * @param SkippedAlphaCardInterface $skippedAlphaCard
      */
-    public function add(SkippedAlphaCardInterface $skippedAlphaCard): void
+    public function add(string $errorCategory, SkippedAlphaCardInterface $skippedAlphaCard): void
     {
-        $this->skippedAlphaCards[] = $skippedAlphaCard;
+        if (!array_key_exists($errorCategory, $this->skippedAlphaCards)) {
+            $this->skippedAlphaCards[$errorCategory] = [];
+        }
+
+        $this->skippedAlphaCards[$errorCategory][] = $skippedAlphaCard;
     }
 
     /**
-     * @return SkippedAlphaCardInterface[]
+     * @return SkippedAlphaCardInterface[][]
      */
-    public function getSkippedAlphaCards(): array
+    public function getSkippedAlphaCardsByCategory(): array
     {
         return $this->skippedAlphaCards;
     }

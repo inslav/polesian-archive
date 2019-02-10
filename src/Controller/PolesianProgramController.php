@@ -24,10 +24,10 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use App\Repository\PolesianProgram\ParagraphRepository;
-use App\Repository\PolesianProgram\ProgramRepository;
-use App\Repository\PolesianProgram\SectionRepository;
-use App\Repository\PolesianProgram\SubparagraphRepository;
+use App\Persistence\Repository\PolesianProgram\ParagraphRepository;
+use App\Persistence\Repository\PolesianProgram\ProgramRepository;
+use App\Persistence\Repository\PolesianProgram\SectionRepository;
+use App\Persistence\Repository\PolesianProgram\SubparagraphRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;

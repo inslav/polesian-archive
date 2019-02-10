@@ -24,10 +24,10 @@ declare(strict_types=1);
 
 namespace App\Import\Card\Formatter\VillageFullName\Formatter;
 
-use App\Entity\Card\Village;
 use App\Import\Card\Formatter\VillageFullName\Converter\VillageToVillageFullNameConverterInterface;
 use App\Import\Card\Formatter\VillageFullName\Parser\VillageFullNameParser;
 use App\Import\Card\Formatter\VillageFullName\VillageFullNameInterface;
+use App\Persistence\Entity\Location\Village;
 
 /**
  * @author Anton Dyshkant <vyshkant@gmail.com>

@@ -24,9 +24,9 @@ declare(strict_types=1);
 
 namespace App\Import\Card\Formatter\VillageFullName\Converter;
 
-use App\Entity\Card\Village;
 use App\Import\Card\Formatter\VillageFullName\VillageFullName;
 use App\Import\Card\Formatter\VillageFullName\VillageFullNameInterface;
+use App\Persistence\Entity\Location\Village;
 
 /**
  * @author Anton Dyshkant <vyshkant@gmail.com>
@@ -42,8 +42,8 @@ final class VillageToVillageFullNameConverter implements VillageToVillageFullNam
     {
         return new VillageFullName(
             $village->getName(),
-            $village->getRaion(),
-            $village->getOblast()
+            $village->getRaion()->getName(),
+            $village->getRaion()->getOblast()->getName()
         );
     }
 }

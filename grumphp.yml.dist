@@ -67,8 +67,8 @@ parameters:
       standard: PSR2
       ignore_patterns:
         - '/node_modules/*'
-        - '/src/DataFixtures/*'
-        - '/src/Migrations/*'
+        - '/src/Persistence/DataFixtures/*'
+        - '/src/Persistence/Migrations/*'
         - '/tests/*'
         - '/var/*'
         - '/vendor/*'

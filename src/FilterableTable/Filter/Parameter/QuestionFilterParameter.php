@@ -24,11 +24,13 @@ declare(strict_types=1);
 
 namespace App\FilterableTable\Filter\Parameter;
 
-use App\Entity\Card\Question;
 use App\Import\Card\Formatter\QuestionNumber\Formatter\QuestionNumberFormatterInterface;
 use App\Import\Card\Formatter\QuestionNumber\Parser\QuestionNumberParserInterface;
 use App\Import\Card\Formatter\QuestionNumber\QuestionNumberInterface;
-use App\Repository\Card\QuestionRepository;
+use App\Persistence\Entity\Card\Question;
+use App\Persistence\QueryBuilder\Alias\AliasFactoryInterface;
+use App\Persistence\QueryBuilder\Parameter\ParameterFactoryInterface;
+use App\Persistence\Repository\Card\QuestionRepository;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -40,6 +42,16 @@ use Vyfony\Bundle\FilterableTableBundle\Filter\Configurator\Parameter\FilterPara
  */
 final class QuestionFilterParameter implements FilterParameterInterface, ExpressionBuilderInterface
 {
+    /**
+     * @var AliasFactoryInterface
+     */
+    private $aliasFactory;
+
+    /**
+     * @var ParameterFactoryInterface
+     */
+    private $parameterFactory;
+
     /**
      * @var QuestionNumberFormatterInterface
      */
@@ -56,15 +68,21 @@ final class QuestionFilterParameter implements FilterParameterInterface, Express
     private $questionRepository;
 
     /**
+     * @param AliasFactoryInterface            $aliasFactory
+     * @param ParameterFactoryInterface        $parameterFactory
      * @param QuestionNumberFormatterInterface $questionNumberFormatter
      * @param QuestionNumberParserInterface    $questionNumberParser
      * @param QuestionRepository               $questionRepository
      */
     public function __construct(
+        AliasFactoryInterface $aliasFactory,
+        ParameterFactoryInterface $parameterFactory,
         QuestionNumberFormatterInterface $questionNumberFormatter,
         QuestionNumberParserInterface $questionNumberParser,
         QuestionRepository $questionRepository
     ) {
+        $this->aliasFactory = $aliasFactory;
+        $this->parameterFactory = $parameterFactory;
         $this->questionNumberFormatter = $questionNumberFormatter;
         $this->questionNumberParser = $questionNumberParser;
         $this->questionRepository = $questionRepository;
@@ -120,36 +138,36 @@ final class QuestionFilterParameter implements FilterParameterInterface, Express
             return null;
         }
 
+        $queryBuilder
+            ->innerJoin(
+                $entityAlias.'.questions',
+                $questionAlias = $this->aliasFactory->createAlias(static::class, 'question')
+            )
+            ->innerJoin(
+                $questionAlias.'.program',
+                $programAlias = $this->aliasFactory->createAlias(static::class, 'program')
+            )
+            ->innerJoin(
+                $questionAlias.'.paragraph',
+                $paragraphAlias = $this->aliasFactory->createAlias(static::class, 'paragraph')
+            )
+            ->innerJoin(
+                $questionAlias.'.subparagraph',
+                $subparagraphAlias = $this->aliasFactory->createAlias(static::class, 'subparagraph')
+            )
+        ;
+
         $parseQuestionNumber = function (string $formattedQuestionNumber): QuestionNumberInterface {
             return $this->questionNumberParser->parseQuestionNumber($formattedQuestionNumber);
         };
 
         $questionNumbers = array_map($parseQuestionNumber, $formattedQuestionNumbers);
 
-        $queryBuilder
-            ->innerJoin(
-                $entityAlias.'.questions',
-                $questionAlias = $this->createAlias(static::class, 'question')
-            )
-            ->innerJoin(
-                $questionAlias.'.program',
-                $programAlias = $this->createAlias(static::class, 'program')
-            )
-            ->innerJoin(
-                $questionAlias.'.paragraph',
-                $paragraphAlias = $this->createAlias(static::class, 'paragraph')
-            )
-            ->innerJoin(
-                $questionAlias.'.subparagraph',
-                $subparagraphAlias = $this->createAlias(static::class, 'subparagraph')
-            )
-        ;
-
         $orWhereClauses = [];
 
         foreach ($questionNumbers as $index => $questionNumber) {
             $queryBuilder->setParameter(
-                $numberNumberParameter = $this->createParameter(
+                $programNumberParameter = $this->parameterFactory->createParameter(
                     $programNumberFieldAlias = $programAlias.'.number',
                     $index
                 ),
@@ -157,7 +175,7 @@ final class QuestionFilterParameter implements FilterParameterInterface, Express
             );
 
             $queryBuilder->setParameter(
-                $paragraphNumberParameter = $this->createParameter(
+                $paragraphNumberParameter = $this->parameterFactory->createParameter(
                     $paragraphNumberFieldAlias = $paragraphAlias.'.number',
                     $index
                 ),
@@ -165,7 +183,7 @@ final class QuestionFilterParameter implements FilterParameterInterface, Express
             );
 
             $queryBuilder->setParameter(
-                $subparagraphLetterParameter = $this->createParameter(
+                $subparagraphLetterParameter = $this->parameterFactory->createParameter(
                     $subparagraphLetterFieldAlias = $subparagraphAlias.'.letter',
                     $index
                 ),
@@ -173,7 +191,7 @@ final class QuestionFilterParameter implements FilterParameterInterface, Express
             );
 
             $queryBuilder->setParameter(
-                $questionIsAdditionalParameter = $this->createParameter(
+                $questionIsAdditionalParameter = $this->parameterFactory->createParameter(
                     $questionIsAdditionalFieldAlias = $questionAlias.'.isAdditional',
                     $index
                 ),
@@ -181,7 +199,7 @@ final class QuestionFilterParameter implements FilterParameterInterface, Express
             );
 
             $orWhereClauses[] = (string) $queryBuilder->expr()->andX(
-                $queryBuilder->expr()->eq($programNumberFieldAlias, $numberNumberParameter),
+                $queryBuilder->expr()->eq($programNumberFieldAlias, $programNumberParameter),
                 $queryBuilder->expr()->eq($paragraphNumberFieldAlias, $paragraphNumberParameter),
                 $queryBuilder->expr()->eq($subparagraphLetterFieldAlias, $subparagraphLetterParameter),
                 $queryBuilder->expr()->eq($questionIsAdditionalFieldAlias, $questionIsAdditionalParameter)
@@ -207,31 +225,5 @@ final class QuestionFilterParameter implements FilterParameterInterface, Express
         });
 
         return array_combine($formattedQuestions, $formattedQuestions);
-    }
-
-    /**
-     * @param string $className
-     * @param string $alias
-     *
-     * @return string
-     */
-    private function createAlias(string $className, string $alias): string
-    {
-        $classNameParts = explode('\\', $className);
-
-        $classShortName = array_pop($classNameParts);
-
-        return strtolower($classShortName.'_'.$alias);
-    }
-
-    /**
-     * @param string $fieldAlias
-     * @param int    $index
-     *
-     * @return string
-     */
-    private function createParameter(string $fieldAlias, int $index): string
-    {
-        return ':'.str_replace('.', '_', $fieldAlias).'_'.$index;
     }
 }

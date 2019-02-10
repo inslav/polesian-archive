@@ -12,6 +12,7 @@ services:
 
   App\ImportDb\Alpha\AlphaImporter:
     arguments:
+      - '@filesystem'
       - '@Symfony\Bridge\Doctrine\RegistryInterface'
       - '@App\ImportDb\Alpha\ValueTrimmer\AlphaValueConverterInterface'
       - '@App\ImportDb\Alpha\SkippedCard\Collector\SkippedAlphaCardsCollectorInterface'
@@ -123,6 +124,22 @@ services:
       - '@App\ImportDb\Alpha\Storage\ManyToOne\ParagraphStorage'
 
   App\ImportDb\Alpha\Storage\ManyToOne\VillageStorage:
+    arguments:
+      - '@Symfony\Bridge\Doctrine\RegistryInterface'
+      - '@App\ImportDb\Alpha\ValueTrimmer\AlphaValueConverterInterface'
+      - '@App\Import\Card\Formatter\QuestionNumber\Parser\QuestionNumberParserInterface'
+      - '@monolog.logger.alpha_import'
+      - '@App\ImportDb\Alpha\Storage\ManyToOne\RaionStorage'
+
+  App\ImportDb\Alpha\Storage\ManyToOne\RaionStorage:
+    arguments:
+      - '@Symfony\Bridge\Doctrine\RegistryInterface'
+      - '@App\ImportDb\Alpha\ValueTrimmer\AlphaValueConverterInterface'
+      - '@App\Import\Card\Formatter\QuestionNumber\Parser\QuestionNumberParserInterface'
+      - '@monolog.logger.alpha_import'
+      - '@App\ImportDb\Alpha\Storage\ManyToOne\OblastStorage'
+
+  App\ImportDb\Alpha\Storage\ManyToOne\OblastStorage:
     arguments:
       - '@Symfony\Bridge\Doctrine\RegistryInterface'
       - '@App\ImportDb\Alpha\ValueTrimmer\AlphaValueConverterInterface'

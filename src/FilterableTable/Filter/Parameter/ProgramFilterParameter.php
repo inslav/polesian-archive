@@ -24,8 +24,8 @@ declare(strict_types=1);
 
 namespace App\FilterableTable\Filter\Parameter;
 
-use App\Entity\PolesianProgram\Program;
-use App\Repository\PolesianProgram\ProgramRepository;
+use App\Persistence\Entity\PolesianProgram\Program;
+use App\Persistence\Repository\PolesianProgram\ProgramRepository;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;

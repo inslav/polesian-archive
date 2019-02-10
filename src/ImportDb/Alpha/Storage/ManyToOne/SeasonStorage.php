@@ -24,8 +24,8 @@ declare(strict_types=1);
 
 namespace App\ImportDb\Alpha\Storage\ManyToOne;
 
-use App\Entity\Card\Season;
 use App\ImportDb\Alpha\Entity\AlphaCard;
+use App\Persistence\Entity\Card\Season;
 
 /**
  * @author Anton Dyshkant <vyshkant@gmail.com>
@@ -33,13 +33,13 @@ use App\ImportDb\Alpha\Entity\AlphaCard;
 final class SeasonStorage extends AbstractManyToOneEntityStorage
 {
     /**
-     * @param AlphaCard $alphaCard
+     * @param object|AlphaCard $alphaObject
      *
      * @return string|null
      */
-    protected function getAlphaEntityKey(AlphaCard $alphaCard): ?string
+    protected function getAlphaEntityKey(object $alphaObject): ?string
     {
-        $seasonName = $this->valueConverter->getTrimmedOrNull($alphaCard->getSezon());
+        $seasonName = $this->valueConverter->getTrimmedOrNull($alphaObject->getSezon());
 
         if (null === $seasonName) {
             return null;
@@ -49,14 +49,14 @@ final class SeasonStorage extends AbstractManyToOneEntityStorage
     }
 
     /**
-     * @param AlphaCard $alphaCard
+     * @param object|AlphaCard $alphaObject
      *
      * @return Season
      */
-    protected function createEntity(AlphaCard $alphaCard): object
+    protected function createEntity(object $alphaObject): object
     {
         return (new Season())
-            ->setName(mb_strtolower($this->valueConverter->getTrimmedOrNull($alphaCard->getSezon())))
+            ->setName(mb_strtolower($this->valueConverter->getTrimmedOrNull($alphaObject->getSezon())))
         ;
     }
 }

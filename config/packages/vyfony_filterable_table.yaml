@@ -19,7 +19,7 @@
 vyfony_filterable_table:
   table_configurator: App\FilterableTable\CardsTableConfigurator
   filter_configurator: App\FilterableTable\CardsFilterConfigurator
-  entity_class: App\Entity\Card\Card
+  entity_class: App\Persistence\Entity\Card\Card
   default_sort_by: id
   default_sort_order: asc
   list_route: card__list

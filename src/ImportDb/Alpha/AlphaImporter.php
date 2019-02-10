@@ -24,8 +24,8 @@ declare(strict_types=1);
 
 namespace App\ImportDb\Alpha;
 
-use App\Entity\Card\Card;
 use App\ImportDb\Alpha\Entity\AlphaCard;
+use App\ImportDb\Alpha\Exception\BrokenCardException;
 use App\ImportDb\Alpha\SkippedCard\Collector\SkippedAlphaCardsCollectorInterface;
 use App\ImportDb\Alpha\SkippedCard\Converter\SkippedAlphaCardConverterInterface;
 use App\ImportDb\Alpha\Storage\ManyToMany\AbstractManyToManyEntityStorage;
@@ -37,16 +37,22 @@ use App\ImportDb\Alpha\Storage\ManyToOne\QuestionStorage;
 use App\ImportDb\Alpha\Storage\ManyToOne\SeasonStorage;
 use App\ImportDb\Alpha\Storage\ManyToOne\VillageStorage;
 use App\ImportDb\Alpha\ValueTrimmer\AlphaValueConverterInterface;
+use App\Persistence\Entity\Card\Card;
 use Doctrine\Common\Persistence\ObjectManager;
-use InvalidArgumentException;
 use Psr\Log\LoggerInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
+use Symfony\Component\Filesystem\Filesystem;
 
 /**
  * @author Anton Dyshkant <vyshkant@gmail.com>
  */
 final class AlphaImporter implements AlphaImporterInterface
 {
+    /**
+     * @var Filesystem
+     */
+    private $filesystem;
+
     /**
      * @var ObjectManager
      */
@@ -113,6 +119,7 @@ final class AlphaImporter implements AlphaImporterInterface
     private $logger;
 
     /**
+     * @param Filesystem                          $filesystem
      * @param RegistryInterface                   $doctrine
      * @param AlphaValueConverterInterface        $valueConverter
      * @param SkippedAlphaCardsCollectorInterface $skippedAlphaCardsCollector
@@ -127,6 +134,7 @@ final class AlphaImporter implements AlphaImporterInterface
      * @param LoggerInterface                     $logger
      */
     public function __construct(
+        Filesystem $filesystem,
         RegistryInterface $doctrine,
         AlphaValueConverterInterface $valueConverter,
         SkippedAlphaCardsCollectorInterface $skippedAlphaCardsCollector,
@@ -140,6 +148,7 @@ final class AlphaImporter implements AlphaImporterInterface
         CollectorStorage $collectorsStorage,
         LoggerInterface $logger
     ) {
+        $this->filesystem = $filesystem;
         $this->alphaObjectManager = $doctrine->getManager('alpha');
         $this->defaultObjectManager = $doctrine->getManager('default');
         $this->valueConverter = $valueConverter;
@@ -232,15 +241,13 @@ final class AlphaImporter implements AlphaImporterInterface
             );
 
             $text = $this->valueConverter->getTrimmed($alphaCard->getDtext());
-
-            if ($this->isTextValueBroken($text)) {
-                throw new InvalidArgumentException('Cannot save card with special characters in its text');
-            }
-
             $description = $this->valueConverter->getTrimmed($alphaCard->getOptext());
 
-            if ($this->isTextValueBroken($description)) {
-                throw new InvalidArgumentException('Cannot save card with special characters in its description');
+            $isTextBroken = $this->isTextValueBroken($text);
+            $isDescriptionBroken = $this->isTextValueBroken($description);
+
+            if ($isTextBroken || $isDescriptionBroken) {
+                throw BrokenCardException::specialCharacters($isTextBroken, $isDescriptionBroken);
             }
 
             $card = (new Card())
@@ -265,26 +272,40 @@ final class AlphaImporter implements AlphaImporterInterface
                 ['exception' => $throwable]
             );
 
+            $errorCategory = 'unknown';
+
+            if ($throwable instanceof BrokenCardException) {
+                $errorCategory = $throwable->getCategory();
+            }
             $this->skippedAlphaCardsCollector->add(
+                $errorCategory,
                 $this->skippedAlphaCardConverter->convertAlphaCardToSkippedAlphaCard($alphaCard)
             );
         }
     }
 
     /**
-     * @param string $pathToSkippedAlphaCardsLogFile
+     * @param string $pathToSkippedAlphaCardsLogDirectory
      */
-    private function writeSkippedAlphaCardsToFile(string $pathToSkippedAlphaCardsLogFile): void
+    private function writeSkippedAlphaCardsToFile(string $pathToSkippedAlphaCardsLogDirectory): void
     {
-        $this->logger->info(sprintf('Writing skipped AlphaCards to file "%s"', $pathToSkippedAlphaCardsLogFile));
-
-        file_put_contents(
-            $pathToSkippedAlphaCardsLogFile,
-            json_encode(
-                $this->skippedAlphaCardsCollector->getSkippedAlphaCards(),
-                JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT
-            )
+        $this->logger->info(
+            sprintf('Writing skipped AlphaCards to directory "%s"', $pathToSkippedAlphaCardsLogDirectory)
         );
+
+        if (!$this->filesystem->exists($pathToSkippedAlphaCardsLogDirectory)) {
+            $this->filesystem->mkdir($pathToSkippedAlphaCardsLogDirectory);
+        }
+
+        foreach ($this->skippedAlphaCardsCollector->getSkippedAlphaCardsByCategory() as $category => $alphaCards) {
+            file_put_contents(
+                $pathToSkippedAlphaCardsLogDirectory.\DIRECTORY_SEPARATOR.$category,
+                json_encode(
+                    $alphaCards,
+                    JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT
+                )
+            );
+        }
 
         $this->logger->info('Skipped AlphaCards has been successfully written');
     }

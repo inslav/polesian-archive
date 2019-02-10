@@ -26,7 +26,7 @@ services:
 
   App\:
     resource: '../src/*'
-    exclude: '../src/{Entity,Kernel.php,ImportDb,Command/ImportDb}'
+    exclude: '../src/{Command/ImportDb,ImportDb,Persistence/Entity,Kernel.php}'
 
   App\Controller\:
     resource: '../src/Controller'

@@ -24,10 +24,10 @@ declare(strict_types=1);
 
 namespace App\Import\Card\Formatter\QuestionNumber\Formatter;
 
-use App\Entity\Card\Question;
 use App\Import\Card\Formatter\QuestionNumber\Converter\QuestionToQuestionNumberConverterInterface;
 use App\Import\Card\Formatter\QuestionNumber\Parser\QuestionNumberParser;
 use App\Import\Card\Formatter\QuestionNumber\QuestionNumberInterface;
+use App\Persistence\Entity\Card\Question;
 use InvalidArgumentException;
 
 /**
