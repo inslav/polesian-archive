@@ -54,6 +54,13 @@ class Village
     private $name;
 
     /**
+     * @var string|null
+     *
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $numberInAtlas;
+
+    /**
      * @var Raion
      *
      * @ORM\ManyToOne(targetEntity="App\Persistence\Entity\Location\Raion", inversedBy="villages")
@@ -104,6 +111,26 @@ class Village
     public function setName(string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getNumberInAtlas(): ?string
+    {
+        return $this->numberInAtlas;
+    }
+
+    /**
+     * @param string|null $numberInAtlas
+     *
+     * @return Village
+     */
+    public function setNumberInAtlas(?string $numberInAtlas): self
+    {
+        $this->numberInAtlas = $numberInAtlas;
 
         return $this;
     }

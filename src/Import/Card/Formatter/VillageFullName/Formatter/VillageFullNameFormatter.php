@@ -54,6 +54,26 @@ final class VillageFullNameFormatter implements VillageFullNameFormatterInterfac
      */
     public function format(VillageFullNameInterface $villageFullName): string
     {
+        return $this->formatNameAndRaionAndOblast($villageFullName).$this->formatNumberInAtlas($villageFullName);
+    }
+
+    /**
+     * @param Village $village
+     *
+     * @return string
+     */
+    public function formatVillage(Village $village): string
+    {
+        return $this->format($this->villageToVillageFullNameConverter->convertToVillageFullName($village));
+    }
+
+    /**
+     * @param VillageFullNameInterface $villageFullName
+     *
+     * @return string
+     */
+    private function formatNameAndRaionAndOblast(VillageFullNameInterface $villageFullName): string
+    {
         return implode(
             VillageFullNameParser::VILLAGE_FULL_NAME_PARTS_DELIMITER,
             [
@@ -65,12 +85,16 @@ final class VillageFullNameFormatter implements VillageFullNameFormatterInterfac
     }
 
     /**
-     * @param Village $village
+     * @param VillageFullNameInterface $villageFullName
      *
      * @return string
      */
-    public function formatVillage(Village $village): string
+    private function formatNumberInAtlas(VillageFullNameInterface $villageFullName): string
     {
-        return $this->format($this->villageToVillageFullNameConverter->convertToVillageFullName($village));
+        if (null !== $villageFullName->getNumberInAtlas()) {
+            return sprintf(' (%s)', $villageFullName->getNumberInAtlas());
+        }
+
+        return '';
     }
 }

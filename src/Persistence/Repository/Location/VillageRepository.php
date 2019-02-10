@@ -121,6 +121,7 @@ final class VillageRepository extends ServiceEntityRepository
         $village = new Village();
 
         $village->setName($villageFullName->getName());
+        $village->setNumberInAtlas($villageFullName->getNumberInAtlas());
         $village->setRaion(
             $this->raionRepository->findOneByNameAndOblastNameOrCreate(
                 $villageFullName->getRaion(),

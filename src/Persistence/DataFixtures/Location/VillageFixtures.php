@@ -53,6 +53,7 @@ final class VillageFixtures extends Fixture implements DependentFixtureInterface
 
         $village = (new Village())
             ->setName('Щедрогор')
+            ->setNumberInAtlas('76а')
             ->setRaion($this->getReference(RaionFixtures::RAION_RATNOVSKIY))
         ;
         $manager->persist($village);

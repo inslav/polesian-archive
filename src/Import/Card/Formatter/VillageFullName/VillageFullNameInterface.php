@@ -43,4 +43,9 @@ interface VillageFullNameInterface
      * @return string
      */
     public function getOblast(): string;
+
+    /**
+     * @return string|null
+     */
+    public function getNumberInAtlas(): ?string;
 }

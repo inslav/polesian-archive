@@ -43,7 +43,8 @@ final class VillageToVillageFullNameConverter implements VillageToVillageFullNam
         return new VillageFullName(
             $village->getName(),
             $village->getRaion()->getName(),
-            $village->getRaion()->getOblast()->getName()
+            $village->getRaion()->getOblast()->getName(),
+            $village->getNumberInAtlas()
         );
     }
 }

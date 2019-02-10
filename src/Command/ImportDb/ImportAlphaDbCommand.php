@@ -82,9 +82,9 @@ final class ImportAlphaDbCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $this->programImporter->importProgram($input->getArgument('program-source-file'));
-
-        (new SymfonyStyle($input, $output))->success('Program import has been successfully completed');
+//        $this->programImporter->importProgram($input->getArgument('program-source-file'));
+//
+//        (new SymfonyStyle($input, $output))->success('Program import has been successfully completed');
 
         $this->alphaImporter->import($input->getArgument('skipped-alpha-cards-log-file'));
 

@@ -87,6 +87,7 @@ final class VillageStorage extends AbstractManyToOneEntityStorage
 
         return (new Village())
             ->setName($this->valueConverter->getTrimmedOrNull($alphaVillage->getSelo()))
+            ->setNumberInAtlas($this->valueConverter->getTrimmedOrNull($alphaVillage->getInd()))
             ->setRaion($this->raionStorage->getEntity($alphaVillage))
         ;
     }

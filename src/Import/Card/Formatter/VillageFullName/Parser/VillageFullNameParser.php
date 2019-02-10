@@ -42,7 +42,15 @@ final class VillageFullNameParser implements VillageFullNameParserInterface
      */
     public function parseVillageFullName(string $villageFullName): VillageFullNameInterface
     {
-        $villageFullNameParts = explode(self::VILLAGE_FULL_NAME_PARTS_DELIMITER, $villageFullName);
+        if (preg_match('/() \((.+)\)/', $villageFullName, $matches)) {
+            $nameAndRaionAndOblast = $matches[1];
+            $numberInAtlas = $matches[2];
+        } else {
+            $nameAndRaionAndOblast = $villageFullName;
+            $numberInAtlas = null;
+        }
+
+        $villageFullNameParts = explode(self::VILLAGE_FULL_NAME_PARTS_DELIMITER, $nameAndRaionAndOblast);
 
         $partsCount = \count($villageFullNameParts);
         $expectedPartsCount = 3;
@@ -56,7 +64,8 @@ final class VillageFullNameParser implements VillageFullNameParserInterface
         return new VillageFullName(
             $villageFullNameParts[0],
             $villageFullNameParts[1],
-            $villageFullNameParts[2]
+            $villageFullNameParts[2],
+            $numberInAtlas
         );
     }
 }
