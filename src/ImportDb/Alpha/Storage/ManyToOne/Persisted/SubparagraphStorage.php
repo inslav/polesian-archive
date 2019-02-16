@@ -25,6 +25,7 @@ declare(strict_types=1);
 namespace App\ImportDb\Alpha\Storage\ManyToOne\Persisted;
 
 use App\Import\Card\Formatter\QuestionNumber\Formatter\QuestionNumberFormatterInterface;
+use App\Import\Card\Formatter\QuestionNumber\Parser\QuestionNumberParser;
 use App\Import\Card\Formatter\QuestionNumber\Parser\QuestionNumberParserInterface;
 use App\Import\Card\Formatter\QuestionNumber\QuestionNumberInterface;
 use App\ImportDb\Alpha\Entity\AlphaCard;
@@ -114,12 +115,13 @@ final class SubparagraphStorage extends AbstractPersistedManyToOneEntityStorage
     {
         $formattedQuestionNumber = $this->questionNumberFormatter->format($questionNumber);
 
-        $knownErrorsMap = [
+        $correctSubparagraphLetterByFormattedQuestionNumber = [
             'XIII.4в' => 'б',
+            'XIII.4в.доп' => 'б',
         ];
 
-        if (array_key_exists($formattedQuestionNumber, $knownErrorsMap)) {
-            return $knownErrorsMap[$formattedQuestionNumber];
+        if (array_key_exists($formattedQuestionNumber, $correctSubparagraphLetterByFormattedQuestionNumber)) {
+            return $correctSubparagraphLetterByFormattedQuestionNumber[$formattedQuestionNumber];
         }
 
         return $questionNumber->getSubparagraphLetter();
