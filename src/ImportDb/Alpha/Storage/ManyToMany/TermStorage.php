@@ -47,7 +47,7 @@ final class TermStorage extends AbstractManyToManyEntityStorage
      */
     protected function getAlphaEntityKey(object $alphaEntity): string
     {
-        return mb_strtolower($this->valueConverter->getTrimmed($alphaEntity->getTerm()));
+        return $this->getFixedTermName(mb_strtolower($this->valueConverter->getTrimmed($alphaEntity->getTerm())));
     }
 
     /**
@@ -68,7 +68,7 @@ final class TermStorage extends AbstractManyToManyEntityStorage
     protected function createEntity(object $alphaEntity): object
     {
         return (new Term())
-            ->setName($this->getFixedTermName($this->getAlphaEntityKey($alphaEntity)))
+            ->setName($this->getAlphaEntityKey($alphaEntity))
         ;
     }
 
