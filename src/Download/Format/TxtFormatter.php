@@ -112,7 +112,15 @@ final class TxtFormatter implements FormatterInterface
                 ->toArray()
         );
 
-        $formattedYear = sprintf('%d (%s)', $card->getYear(), $card->getSeason()->getName());
+        $formattedYear = sprintf('%d', $card->getYear());
+
+        $formattedYearWithSeason = $formattedYear;
+
+        $season = $card->getSeason();
+
+        if (null !== $season) {
+            $formattedYearWithSeason = sprintf('%s (%s)', $formattedYear, $season->getName());
+        }
 
         $formattedVillage = sprintf(
             '%s область, %s район, %s %s',
@@ -157,7 +165,7 @@ id: {$card->getId()}
 
 вопрос: $formattedQuestions
 
-год: $formattedYear
+год: $formattedYearWithSeason
 
 село: $formattedVillage
 
