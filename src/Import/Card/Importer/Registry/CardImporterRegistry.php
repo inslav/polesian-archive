@@ -55,7 +55,7 @@ final class CardImporterRegistry implements CardImporterRegistryInterface
     {
         $availableImporters = $this->getAvailableImporters();
 
-        if (!array_key_exists($importFormat, $availableImporters)) {
+        if (!\array_key_exists($importFormat, $availableImporters)) {
             throw new InvalidArgumentException(sprintf('Unknown import format "%s"', $importFormat));
         }
 

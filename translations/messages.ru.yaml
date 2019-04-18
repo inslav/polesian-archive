@@ -45,7 +45,8 @@ controller:
             description: Описание
         disablePaginator: показать на одной странице
         resetButton: Сбросить фильтры
-        submitButton: Применить
+        submitButton: Искать
+        searchInFoundButton: Искать в найденном
       download:
         txt:
           label: Скачать в формате .txt

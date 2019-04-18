@@ -37,6 +37,6 @@ final class ParameterFactory implements ParameterFactoryInterface
      */
     public function createParameter(string $fieldAlias, int $index): string
     {
-        return ':'.str_replace('.', '_', $fieldAlias).'_'.$index;
+        return ':'.str_replace('.', '_', $fieldAlias).'_'.uniqid().'_'.$index;
     }
 }

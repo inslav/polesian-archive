@@ -170,7 +170,7 @@ abstract class AbstractManyToManyEntityStorage
     {
         $alphaEntityKey = $this->getAlphaEntityKey($alphaEntity);
 
-        if (!array_key_exists($alphaEntityKey, $this->entityByAlphaEntityKeyCache)) {
+        if (!\array_key_exists($alphaEntityKey, $this->entityByAlphaEntityKeyCache)) {
             $entity = $this->createEntity($alphaEntity);
 
             $this->defaultObjectManager->persist($entity);
@@ -194,7 +194,7 @@ abstract class AbstractManyToManyEntityStorage
 
         $alphaCardKey = $alphaCard->getSpvnkey();
 
-        return array_key_exists($alphaCardKey, $this->alphaEntitiesByAlphaCardKeyCache)
+        return \array_key_exists($alphaCardKey, $this->alphaEntitiesByAlphaCardKeyCache)
             ? $this->alphaEntitiesByAlphaCardKeyCache[$alphaCard->getSpvnkey()]
             : [];
     }
@@ -223,7 +223,7 @@ abstract class AbstractManyToManyEntityStorage
             if (null === $alphaCardKey) {
                 $this->alphaEntitiesWithoutRelationToAlphaCard[] = $alphaEntity;
             } else {
-                if (!array_key_exists($alphaCardKey, $this->alphaEntitiesByAlphaCardKeyCache)) {
+                if (!\array_key_exists($alphaCardKey, $this->alphaEntitiesByAlphaCardKeyCache)) {
                     $this->alphaEntitiesByAlphaCardKeyCache[$alphaCardKey] = [];
                 }
 

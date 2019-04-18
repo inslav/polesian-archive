@@ -76,14 +76,14 @@ final class KeywordFilterParameter implements FilterParameterInterface, Expressi
 
     /**
      * @param QueryBuilder $queryBuilder
-     * @param array        $formData
+     * @param mixed        $formData
      * @param string       $entityAlias
      *
      * @return string|null
      */
-    public function buildWhereExpression(QueryBuilder $queryBuilder, array $formData, string $entityAlias): ?string
+    public function buildWhereExpression(QueryBuilder $queryBuilder, $formData, string $entityAlias): ?string
     {
-        $keywords = $formData[$this->getQueryParameterName()];
+        $keywords = $formData;
 
         if (0 === \count($keywords)) {
             return null;

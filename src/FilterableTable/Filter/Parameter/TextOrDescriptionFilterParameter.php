@@ -24,6 +24,8 @@ declare(strict_types=1);
 
 namespace App\FilterableTable\Filter\Parameter;
 
+use App\Persistence\QueryBuilder\Alias\AliasFactoryInterface;
+use App\Persistence\QueryBuilder\Parameter\ParameterFactoryInterface;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -35,6 +37,28 @@ use Vyfony\Bundle\FilterableTableBundle\Filter\Configurator\Parameter\FilterPara
  */
 final class TextOrDescriptionFilterParameter implements FilterParameterInterface, ExpressionBuilderInterface
 {
+    /**
+     * @var AliasFactoryInterface
+     */
+    private $aliasFactory;
+
+    /**
+     * @var ParameterFactoryInterface
+     */
+    private $parameterFactory;
+
+    /**
+     * @param AliasFactoryInterface     $aliasFactory
+     * @param ParameterFactoryInterface $parameterFactory
+     */
+    public function __construct(
+        AliasFactoryInterface $aliasFactory,
+        ParameterFactoryInterface $parameterFactory
+    ) {
+        $this->aliasFactory = $aliasFactory;
+        $this->parameterFactory = $parameterFactory;
+    }
+
     /**
      * @return string
      */
@@ -69,22 +93,26 @@ final class TextOrDescriptionFilterParameter implements FilterParameterInterface
 
     /**
      * @param QueryBuilder $queryBuilder
-     * @param array        $formData
+     * @param mixed        $formData
      * @param string       $entityAlias
      *
      * @return string|null
      */
-    public function buildWhereExpression(QueryBuilder $queryBuilder, array $formData, string $entityAlias): ?string
+    public function buildWhereExpression(QueryBuilder $queryBuilder, $formData, string $entityAlias): ?string
     {
-        $filterValue = $formData[$this->getQueryParameterName()];
+        $filterValue = $formData;
 
         if (null === $filterValue) {
             return null;
         }
 
-        $parameterName = $this->getQueryParameterName();
-
-        $queryBuilder->setParameter($parameterName, '%'.mb_strtolower($filterValue).'%');
+        $queryBuilder->setParameter(
+            $parameterName = $this->parameterFactory->createParameter(
+                $entityAlias.'_text_or_description',
+                0
+            ),
+            '%'.mb_strtolower($filterValue).'%'
+        );
 
         $fieldNameToExpressionConverter = function (
             string $fieldName
@@ -101,6 +129,6 @@ final class TextOrDescriptionFilterParameter implements FilterParameterInterface
 
         $whereArguments = array_map($fieldNameToExpressionConverter, ['text', 'description']);
 
-        return (string) \call_user_func_array([$queryBuilder->expr(), 'orX'], $whereArguments);
+        return (string) $queryBuilder->expr()->orX(...$whereArguments);
     }
 }

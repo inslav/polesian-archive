@@ -199,7 +199,7 @@ final class TermStorage extends AbstractManyToManyEntityStorage
             'байсетр' => 'байстер',
         ];
 
-        if (array_key_exists($termName, $correctTermNameByTermName)) {
+        if (\array_key_exists($termName, $correctTermNameByTermName)) {
             return $correctTermNameByTermName[$termName];
         }
 

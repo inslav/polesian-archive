@@ -125,14 +125,14 @@ final class QuestionFilterParameter implements FilterParameterInterface, Express
 
     /**
      * @param QueryBuilder $queryBuilder
-     * @param array        $formData
+     * @param mixed        $formData
      * @param string       $entityAlias
      *
      * @return string|null
      */
-    public function buildWhereExpression(QueryBuilder $queryBuilder, array $formData, string $entityAlias): ?string
+    public function buildWhereExpression(QueryBuilder $queryBuilder, $formData, string $entityAlias): ?string
     {
-        $formattedQuestionNumbers = $formData[$this->getQueryParameterName()];
+        $formattedQuestionNumbers = $formData;
 
         if (0 === \count($formattedQuestionNumbers)) {
             return null;

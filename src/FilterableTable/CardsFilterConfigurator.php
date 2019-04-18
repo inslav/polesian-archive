@@ -34,6 +34,8 @@ use App\FilterableTable\Filter\Parameter\TermFilterParameter;
 use App\FilterableTable\Filter\Parameter\TextOrDescriptionFilterParameter;
 use App\FilterableTable\Filter\Parameter\VillageFilterParameter;
 use App\FilterableTable\Filter\Parameter\YearFilterParameter;
+use App\Persistence\Entity\Card\Card;
+use InvalidArgumentException;
 use Vyfony\Bundle\FilterableTableBundle\Filter\Configurator\AbstractFilterConfigurator;
 use Vyfony\Bundle\FilterableTableBundle\Filter\Configurator\Parameter\FilterParameterInterface;
 use Vyfony\Bundle\FilterableTableBundle\Filter\Configurator\Parameter\Table\RadioColumnChoiceTableParameter;
@@ -172,11 +174,38 @@ final class CardsFilterConfigurator extends AbstractFilterConfigurator
     }
 
     /**
+     * @return array
+     */
+    public function createSearchInFoundButtonOptions(): array
+    {
+        return [
+            'attr' => ['class' => 'btn btn-default'],
+            'label' => 'controller.card.list.filter.searchInFoundButton',
+        ];
+    }
+
+    /**
      * @return string
      */
     public function getDisablePaginationLabel(): string
     {
         return 'controller.card.list.filter.disablePaginator';
+    }
+
+    /**
+     * @param mixed $entity
+     *
+     * @return mixed
+     */
+    public function getEntityId($entity)
+    {
+        if (!$entity instanceof Card) {
+            throw new InvalidArgumentException(
+                sprintf('Expected entity of type "%s", "%s" given', Card::class, $entity)
+            );
+        }
+
+        return $entity->getId();
     }
 
     /**

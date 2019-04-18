@@ -87,14 +87,14 @@ final class ProgramFilterParameter implements FilterParameterInterface, Expressi
 
     /**
      * @param QueryBuilder $queryBuilder
-     * @param array        $formData
+     * @param mixed        $formData
      * @param string       $entityAlias
      *
      * @return string|null
      */
-    public function buildWhereExpression(QueryBuilder $queryBuilder, array $formData, string $entityAlias): ?string
+    public function buildWhereExpression(QueryBuilder $queryBuilder, $formData, string $entityAlias): ?string
     {
-        $programIds = $formData[$this->getQueryParameterName()];
+        $programIds = $formData;
 
         if (0 === \count($programIds)) {
             return null;

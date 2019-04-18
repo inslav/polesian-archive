@@ -107,7 +107,7 @@ final class VillageStorage extends AbstractManyToOneEntityStorage
 
         $alphaEntityKey = $alphaCard->getSelokey();
 
-        if (!array_key_exists($alphaEntityKey, $this->alphaEntityByAlphaEntityKeyCache)) {
+        if (!\array_key_exists($alphaEntityKey, $this->alphaEntityByAlphaEntityKeyCache)) {
             throw new InvalidArgumentException(sprintf('Cannot get alpha village with key %s', $alphaEntityKey));
         }
 
@@ -124,7 +124,7 @@ final class VillageStorage extends AbstractManyToOneEntityStorage
         foreach ($this->alphaObjectManager->getRepository(AlphaVillage::class)->findAll() as $alphaEntity) {
             $alphaEntityKey = $alphaEntity->getSelokey();
 
-            if (array_key_exists($alphaEntityKey, $alphaEntityByAlphaEntityKeyCache)) {
+            if (\array_key_exists($alphaEntityKey, $alphaEntityByAlphaEntityKeyCache)) {
                 throw new InvalidArgumentException(sprintf('Duplicate village key %s', $alphaEntityKey));
             }
 

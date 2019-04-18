@@ -87,11 +87,11 @@ main.pa-main {
   }
 
   form {
-    .vyfony-filterable-table-bundle--form-group {
+    .vyfony-filterable-table-bundle-form-group {
       @extend .col-4;
     }
 
-    .vyfony-filterable-table-bundle--button-form-group {
+    .vyfony-filterable-table-bundle-button-form-group {
       padding-right: 15px;
       padding-left: 15px;
     }

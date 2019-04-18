@@ -102,7 +102,7 @@ abstract class AbstractManyToOneEntityStorage
             return null;
         }
 
-        if (!array_key_exists($alphaEntityKey, $this->entityByAlphaEntityKeyCache)) {
+        if (!\array_key_exists($alphaEntityKey, $this->entityByAlphaEntityKeyCache)) {
             $entity = $this->createEntity($alphaObject);
 
             if (null === $entity) {

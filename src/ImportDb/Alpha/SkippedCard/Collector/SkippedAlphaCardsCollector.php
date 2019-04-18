@@ -42,7 +42,7 @@ final class SkippedAlphaCardsCollector implements SkippedAlphaCardsCollectorInte
      */
     public function add(string $errorCategory, SkippedAlphaCardInterface $skippedAlphaCard): void
     {
-        if (!array_key_exists($errorCategory, $this->skippedAlphaCards)) {
+        if (!\array_key_exists($errorCategory, $this->skippedAlphaCards)) {
             $this->skippedAlphaCards[$errorCategory] = [];
         }
 

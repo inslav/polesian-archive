@@ -55,7 +55,7 @@ final class CardExporterRegistry implements CardExporterRegistryInterface
     {
         $availableExporters = $this->getAvailableExporters();
 
-        if (!array_key_exists($exportFormat, $availableExporters)) {
+        if (!\array_key_exists($exportFormat, $availableExporters)) {
             throw new InvalidArgumentException(sprintf('Unknown export format "%s"', $exportFormat));
         }
 

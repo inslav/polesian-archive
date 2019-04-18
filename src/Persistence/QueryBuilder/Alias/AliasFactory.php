@@ -41,6 +41,6 @@ final class AliasFactory implements AliasFactoryInterface
 
         $classShortName = array_pop($classNameParts);
 
-        return strtolower($classShortName.'_'.$alias);
+        return strtolower($classShortName.'_'.$alias.'_'.uniqid());
     }
 }

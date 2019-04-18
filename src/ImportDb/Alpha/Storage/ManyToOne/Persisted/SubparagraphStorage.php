@@ -120,7 +120,7 @@ final class SubparagraphStorage extends AbstractPersistedManyToOneEntityStorage
             'XIII.4в.доп' => 'б',
         ];
 
-        if (array_key_exists($formattedQuestionNumber, $correctSubparagraphLetterByFormattedQuestionNumber)) {
+        if (\array_key_exists($formattedQuestionNumber, $correctSubparagraphLetterByFormattedQuestionNumber)) {
             return $correctSubparagraphLetterByFormattedQuestionNumber[$formattedQuestionNumber];
         }
 
