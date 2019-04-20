@@ -39,7 +39,13 @@ final class OblastStorage extends AbstractManyToOneEntityStorage
      */
     protected function getAlphaEntityKey(object $alphaObject): ?string
     {
-        return $this->valueConverter->getTrimmedOrNull($alphaObject->getRegion());
+        $oblastName = $this->valueConverter->getTrimmedOrNull($alphaObject->getRegion());
+
+        if (null !== $oblastName) {
+            $oblastName = $this->getFixedOblastName($oblastName);
+        }
+
+        return $oblastName;
     }
 
     /**
@@ -52,5 +58,23 @@ final class OblastStorage extends AbstractManyToOneEntityStorage
         return (new Oblast())
             ->setName($this->getAlphaEntityKey($alphaObject))
         ;
+    }
+
+    /**
+     * @param string $oblastName
+     *
+     * @return string
+     */
+    private function getFixedOblastName(string $oblastName): string
+    {
+        $correctOblastNameByOblastName = [
+            'Архангелская' => 'Архангельская',
+        ];
+
+        if (array_key_exists($oblastName, $correctOblastNameByOblastName)) {
+            return $correctOblastNameByOblastName[$oblastName];
+        }
+
+        return $oblastName;
     }
 }
