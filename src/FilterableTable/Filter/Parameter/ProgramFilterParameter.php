@@ -25,6 +25,7 @@ declare(strict_types=1);
 namespace App\FilterableTable\Filter\Parameter;
 
 use App\Persistence\Entity\PolesianProgram\Program;
+use App\Persistence\QueryBuilder\Alias\AliasFactoryInterface;
 use App\Persistence\Repository\PolesianProgram\ProgramRepository;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\QueryBuilder;
@@ -43,11 +44,18 @@ final class ProgramFilterParameter implements FilterParameterInterface, Expressi
     private $programRepository;
 
     /**
-     * @param ProgramRepository $programRepository
+     * @var AliasFactoryInterface
      */
-    public function __construct(ProgramRepository $programRepository)
+    private $aliasFactory;
+
+    /**
+     * @param ProgramRepository     $programRepository
+     * @param AliasFactoryInterface $aliasFactory
+     */
+    public function __construct(ProgramRepository $programRepository, AliasFactoryInterface $aliasFactory)
     {
         $this->programRepository = $programRepository;
+        $this->aliasFactory = $aliasFactory;
     }
 
     /**
@@ -100,12 +108,15 @@ final class ProgramFilterParameter implements FilterParameterInterface, Expressi
             return null;
         }
 
-        $questionAlias = 'question';
-        $programAlias = 'program';
-
         $queryBuilder
-            ->innerJoin($entityAlias.'.questions', $questionAlias)
-            ->innerJoin($questionAlias.'.program', $programAlias)
+            ->innerJoin(
+                $entityAlias.'.questions',
+                $questionAlias = $this->aliasFactory->createAlias(static::class, 'question')
+            )
+            ->innerJoin(
+                $questionAlias.'.program',
+                $programAlias = $this->aliasFactory->createAlias(static::class, 'program')
+            )
         ;
 
         return (string) $queryBuilder->expr()->in($programAlias.'.id', $programIds);

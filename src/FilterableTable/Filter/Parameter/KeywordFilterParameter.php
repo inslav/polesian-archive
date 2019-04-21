@@ -25,6 +25,7 @@ declare(strict_types=1);
 namespace App\FilterableTable\Filter\Parameter;
 
 use App\Persistence\Entity\Card\Keyword;
+use App\Persistence\QueryBuilder\Alias\AliasFactoryInterface;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
@@ -37,6 +38,19 @@ use Vyfony\Bundle\FilterableTableBundle\Filter\Configurator\Parameter\FilterPara
  */
 final class KeywordFilterParameter implements FilterParameterInterface, ExpressionBuilderInterface
 {
+    /**
+     * @var AliasFactoryInterface
+     */
+    private $aliasFactory;
+
+    /**
+     * @param AliasFactoryInterface $aliasFactory
+     */
+    public function __construct(AliasFactoryInterface $aliasFactory)
+    {
+        $this->aliasFactory = $aliasFactory;
+    }
+
     /**
      * @return string
      */
@@ -95,10 +109,11 @@ final class KeywordFilterParameter implements FilterParameterInterface, Expressi
             $ids[] = $keyword->getId();
         }
 
-        $keywordAlias = 'keyword';
-
         $queryBuilder
-            ->innerJoin($entityAlias.'.keywords', $keywordAlias)
+            ->innerJoin(
+                $entityAlias.'.keywords',
+                $keywordAlias = $this->aliasFactory->createAlias(static::class, 'keyword')
+            )
         ;
 
         return (string) $queryBuilder->expr()->in($keywordAlias.'.id', $ids);

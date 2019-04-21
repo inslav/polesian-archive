@@ -25,6 +25,7 @@ declare(strict_types=1);
 namespace App\FilterableTable\Filter\Parameter;
 
 use App\Persistence\Entity\Card\Term;
+use App\Persistence\QueryBuilder\Alias\AliasFactoryInterface;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
@@ -37,6 +38,19 @@ use Vyfony\Bundle\FilterableTableBundle\Filter\Configurator\Parameter\FilterPara
  */
 final class TermFilterParameter implements FilterParameterInterface, ExpressionBuilderInterface
 {
+    /**
+     * @var AliasFactoryInterface
+     */
+    private $aliasFactory;
+
+    /**
+     * @param AliasFactoryInterface $aliasFactory
+     */
+    public function __construct(AliasFactoryInterface $aliasFactory)
+    {
+        $this->aliasFactory = $aliasFactory;
+    }
+
     /**
      * @return string
      */
@@ -95,10 +109,11 @@ final class TermFilterParameter implements FilterParameterInterface, ExpressionB
             $ids[] = $term->getId();
         }
 
-        $termAlias = 'term';
-
         $queryBuilder
-            ->innerJoin($entityAlias.'.terms', $termAlias)
+            ->innerJoin(
+                $entityAlias.'.terms',
+                $termAlias = $this->aliasFactory->createAlias(static::class, 'term')
+            )
         ;
 
         return (string) $queryBuilder->expr()->in($termAlias.'.id', $ids);

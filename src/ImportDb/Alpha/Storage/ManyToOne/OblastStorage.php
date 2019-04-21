@@ -71,7 +71,7 @@ final class OblastStorage extends AbstractManyToOneEntityStorage
             'Архангелская' => 'Архангельская',
         ];
 
-        if (array_key_exists($oblastName, $correctOblastNameByOblastName)) {
+        if (\array_key_exists($oblastName, $correctOblastNameByOblastName)) {
             return $correctOblastNameByOblastName[$oblastName];
         }
 
