@@ -24,8 +24,10 @@ declare(strict_types=1);
 
 namespace App\FilterableTable;
 
+use App\Import\Card\Formatter\QuestionNumber\Formatter\QuestionNumberFormatterInterface;
 use App\Import\Card\Formatter\VillageFullName\Formatter\VillageFullNameFormatterInterface;
 use App\Persistence\Entity\Card\Card;
+use App\Persistence\Entity\Card\Question;
 use Symfony\Component\Routing\RouterInterface;
 use Vyfony\Bundle\FilterableTableBundle\Filter\Configurator\FilterConfiguratorInterface;
 use Vyfony\Bundle\FilterableTableBundle\Table\Checkbox\CheckboxHandler;
@@ -42,6 +44,11 @@ final class CardsTableConfigurator extends AbstractTableConfigurator
      * @var VillageFullNameFormatterInterface
      */
     private $villageFullNameFormatter;
+
+    /**
+     * @var QuestionNumberFormatterInterface
+     */
+    private $questionNumberFormatter;
 
     /**
      * @param RouterInterface                   $router
@@ -65,7 +72,8 @@ final class CardsTableConfigurator extends AbstractTableConfigurator
         array $showRouteParameters,
         int $pageSize,
         int $paginatorTailLength,
-        VillageFullNameFormatterInterface $villageFullNameFormatter
+        VillageFullNameFormatterInterface $villageFullNameFormatter,
+        QuestionNumberFormatterInterface $questionNumberFormatter
     ) {
         parent::__construct(
             $router,
@@ -80,6 +88,7 @@ final class CardsTableConfigurator extends AbstractTableConfigurator
         );
 
         $this->villageFullNameFormatter = $villageFullNameFormatter;
+        $this->questionNumberFormatter = $questionNumberFormatter;
     }
 
     /**
@@ -101,6 +110,19 @@ final class CardsTableConfigurator extends AbstractTableConfigurator
                 ->setIsIdentifier(true)
                 ->setIsSortable(true)
                 ->setLabel('controller.card.list.table.column.id'),
+            (new ColumnMetadata())
+                ->setName('questions')
+                ->setValueExtractor(function (Card $card): string {
+
+                    $formatQuestion = function (Question $question): string {
+                        return $this->questionNumberFormatter->formatQuestion($question);
+                    };
+
+                    $formattedQuestionNumbersArray = $card->getQuestions()->map($formatQuestion)->toArray();
+
+                    return implode(', ', $formattedQuestionNumbersArray);
+                })
+                ->setLabel('controller.card.list.table.column.questions'),
             (new ColumnMetadata())
                 ->setName('village')
                 ->setValueExtractor(function (Card $card): string {

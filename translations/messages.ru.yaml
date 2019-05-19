@@ -23,6 +23,7 @@ controller:
       table:
         column:
           id: Id
+          questions: Номер вопроса
           village: Село
           description: Описание
           text: Диалектный текст
