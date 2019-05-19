@@ -33,6 +33,7 @@ use App\Persistence\QueryBuilder\Parameter\ParameterFactoryInterface;
 use App\Persistence\Repository\Card\QuestionRepository;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\QueryBuilder;
+use Romans\Filter\RomanToInt;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Vyfony\Bundle\FilterableTableBundle\Filter\Configurator\Parameter\ExpressionBuilderInterface;
 use Vyfony\Bundle\FilterableTableBundle\Filter\Configurator\Parameter\FilterParameterInterface;
@@ -63,6 +64,11 @@ final class QuestionFilterParameter implements FilterParameterInterface, Express
     private $questionNumberParser;
 
     /**
+     * @var RomanToInt
+     */
+    private $romanToIntConverter;
+
+    /**
      * @var QuestionRepository
      */
     private $questionRepository;
@@ -72,6 +78,7 @@ final class QuestionFilterParameter implements FilterParameterInterface, Express
      * @param ParameterFactoryInterface        $parameterFactory
      * @param QuestionNumberFormatterInterface $questionNumberFormatter
      * @param QuestionNumberParserInterface    $questionNumberParser
+     * @param RomanToInt                       $romanToIntConverter
      * @param QuestionRepository               $questionRepository
      */
     public function __construct(
@@ -79,12 +86,14 @@ final class QuestionFilterParameter implements FilterParameterInterface, Express
         ParameterFactoryInterface $parameterFactory,
         QuestionNumberFormatterInterface $questionNumberFormatter,
         QuestionNumberParserInterface $questionNumberParser,
+        RomanToInt $romanToIntConverter,
         QuestionRepository $questionRepository
     ) {
         $this->aliasFactory = $aliasFactory;
         $this->parameterFactory = $parameterFactory;
         $this->questionNumberFormatter = $questionNumberFormatter;
         $this->questionNumberParser = $questionNumberParser;
+        $this->romanToIntConverter = $romanToIntConverter;
         $this->questionRepository = $questionRepository;
     }
 
@@ -214,15 +223,64 @@ final class QuestionFilterParameter implements FilterParameterInterface, Express
      */
     private function createChoices(): array
     {
+        $questions = $this->questionRepository->findAll();
+
+        usort($questions, function (Question $a, Question $b): int {
+            $aProgramNumber = $this->romanToIntConverter->filter($a->getProgram()->getNumber());
+            $bProgramNumber = $this->romanToIntConverter->filter($b->getProgram()->getNumber());
+
+            if ($aProgramNumber === $bProgramNumber) {
+                $aParagraph = $a->getParagraph();
+                $bParagraph = $b->getParagraph();
+
+                if (null === $aParagraph && null === $bParagraph) {
+                    return 0;
+                }
+
+                if (null !== $aParagraph && null === $bParagraph) {
+                    return 1;
+                }
+
+                if (null === $aParagraph && null !== $bParagraph) {
+                    return -1;
+                }
+
+                $aParagraphNumber = $aParagraph->getNumber();
+                $bParagraphNumber = $bParagraph->getNumber();
+
+                if ($aParagraphNumber === $bParagraphNumber) {
+                    $aSubparagraph = $a->getSubparagraph();
+                    $bSubparagraph = $b->getSubparagraph();
+
+                    if (null === $aSubparagraph && null === $bSubparagraph) {
+                        return 0;
+                    }
+
+                    if (null !== $aSubparagraph && null === $bSubparagraph) {
+                        return 1;
+                    }
+
+                    if (null === $aSubparagraph && null !== $bSubparagraph) {
+                        return -1;
+                    }
+
+                    $aSubparagraphLetter = $aSubparagraph->getLetter();
+                    $bSubparagraphLetter = $bSubparagraph->getLetter();
+
+                    return strnatcmp($aSubparagraphLetter, $bSubparagraphLetter);
+                }
+
+                return $aParagraphNumber < $bParagraphNumber ? -1 : 1;
+            }
+
+            return $aProgramNumber < $bProgramNumber ? -1 : 1;
+        });
+
         $formatQuestion = function (Question $question): string {
             return $this->questionNumberFormatter->formatQuestion($question);
         };
 
-        $formattedQuestions = array_map($formatQuestion, $this->questionRepository->findAll());
-
-        usort($formattedQuestions, function (string $a, string $b): int {
-            return strnatcmp($a, $b);
-        });
+        $formattedQuestions = array_map($formatQuestion, $questions);
 
         return array_combine($formattedQuestions, $formattedQuestions);
     }

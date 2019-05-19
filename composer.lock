@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4bde29e149fbc2085d3d382552ac5095",
+    "content-hash": "1969f238267725016cd09b2f1b6f007c",
     "packages": [
         {
             "name": "composer/ca-bundle",
@@ -5997,6 +5997,57 @@
                 "table"
             ],
             "time": "2019-04-17T22:23:33+00:00"
+        },
+        {
+            "name": "wandersonwhcr/romans",
+            "version": "v1.1.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/wandersonwhcr/romans.git",
+                "reference": "cb076a6371abc6627a261157b856effc77784320"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/wandersonwhcr/romans/zipball/cb076a6371abc6627a261157b856effc77784320",
+                "reference": "cb076a6371abc6627a261157b856effc77784320",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0"
+            },
+            "require-dev": {
+                "jakub-onderka/php-parallel-lint": "0.9.*",
+                "phpmd/phpmd": "2.6.*",
+                "phpunit/phpunit": "6.1.*",
+                "sebastian/phpcpd": "3.0.*",
+                "squizlabs/php_codesniffer": "2.8.*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-develop": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Romans\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "A Simple PHP Roman Numerals Library",
+            "keywords": [
+                "converter",
+                "filter",
+                "format",
+                "roman",
+                "roman-number",
+                "roman-numeral",
+                "validator"
+            ],
+            "time": "2018-01-30T11:08:31+00:00"
         },
         {
             "name": "webmozart/assert",

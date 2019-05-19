@@ -536,6 +536,9 @@
     "vyfony/mysqldump-bundle": {
         "version": "v0.1.2"
     },
+    "wandersonwhcr/romans": {
+        "version": "v1.1.5"
+    },
     "webmozart/assert": {
         "version": "1.3.0"
     },

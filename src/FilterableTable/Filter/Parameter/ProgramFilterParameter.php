@@ -29,6 +29,7 @@ use App\Persistence\QueryBuilder\Alias\AliasFactoryInterface;
 use App\Persistence\Repository\PolesianProgram\ProgramRepository;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\QueryBuilder;
+use Romans\Filter\RomanToInt;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Vyfony\Bundle\FilterableTableBundle\Filter\Configurator\Parameter\ExpressionBuilderInterface;
 use Vyfony\Bundle\FilterableTableBundle\Filter\Configurator\Parameter\FilterParameterInterface;
@@ -49,13 +50,23 @@ final class ProgramFilterParameter implements FilterParameterInterface, Expressi
     private $aliasFactory;
 
     /**
+     * @var RomanToInt
+     */
+    private $romanToIntConverter;
+
+    /**
      * @param ProgramRepository     $programRepository
      * @param AliasFactoryInterface $aliasFactory
+     * @param RomanToInt            $romanToIntConverter
      */
-    public function __construct(ProgramRepository $programRepository, AliasFactoryInterface $aliasFactory)
-    {
+    public function __construct(
+        ProgramRepository $programRepository,
+        AliasFactoryInterface $aliasFactory,
+        RomanToInt $romanToIntConverter
+    ) {
         $this->programRepository = $programRepository;
         $this->aliasFactory = $aliasFactory;
+        $this->romanToIntConverter = $romanToIntConverter;
     }
 
     /**
@@ -130,7 +141,14 @@ final class ProgramFilterParameter implements FilterParameterInterface, Expressi
         $entityCollection = $this->programRepository->findAll();
 
         usort($entityCollection, function (Program $a, Program $b): int {
-            return strnatcmp($a->getNumber(), $b->getNumber());
+            $aProgramNumber = $this->romanToIntConverter->filter($a->getNumber());
+            $bProgramNumber = $this->romanToIntConverter->filter($b->getNumber());
+
+            if ($aProgramNumber === $bProgramNumber) {
+                return 0;
+            }
+
+            return $aProgramNumber < $bProgramNumber ? -1 : 1;
         });
 
         $choiceValueFactory = function (Program $program): int {
