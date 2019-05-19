@@ -24,6 +24,7 @@ declare(strict_types=1);
 
 namespace App\FilterableTable\Filter\Parameter;
 
+use App\Import\Card\Formatter\VillageFullName\Formatter\VillageFullNameFormatterInterface;
 use App\Persistence\Entity\Location\Village;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
@@ -37,6 +38,19 @@ use Vyfony\Bundle\FilterableTableBundle\Filter\Configurator\Parameter\FilterPara
  */
 final class VillageFilterParameter implements FilterParameterInterface, ExpressionBuilderInterface
 {
+    /**
+     * @var VillageFullNameFormatterInterface
+     */
+    private $villageFullNameFormatter;
+
+    /**
+     * @param VillageFullNameFormatterInterface $villageFullNameFormatter
+     */
+    public function __construct(VillageFullNameFormatterInterface $villageFullNameFormatter)
+    {
+        $this->villageFullNameFormatter = $villageFullNameFormatter;
+    }
+
     /**
      * @return string
      */
@@ -118,12 +132,7 @@ final class VillageFilterParameter implements FilterParameterInterface, Expressi
     private function createLabelBuilder(): callable
     {
         return function (Village $village) {
-            return sprintf(
-                '%s (%s, %s)',
-                $village->getName(),
-                $village->getRaion()->getName(),
-                $village->getRaion()->getOblast()->getName()
-            );
+            return $this->villageFullNameFormatter->formatVillage($village);
         };
     }
 }

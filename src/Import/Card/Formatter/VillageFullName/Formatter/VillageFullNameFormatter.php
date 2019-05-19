@@ -92,7 +92,7 @@ final class VillageFullNameFormatter implements VillageFullNameFormatterInterfac
     private function formatNumberInAtlas(VillageFullNameInterface $villageFullName): string
     {
         if (null !== $villageFullName->getNumberInAtlas()) {
-            return sprintf(' (%s)', $villageFullName->getNumberInAtlas());
+            return sprintf(' (№ %s)', $villageFullName->getNumberInAtlas());
         }
 
         return '';

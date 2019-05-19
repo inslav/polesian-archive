@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1969f238267725016cd09b2f1b6f007c",
+    "content-hash": "a02eddb6bdae1b1c4028dd7c40608d27",
     "packages": [
         {
             "name": "composer/ca-bundle",
@@ -5928,16 +5928,16 @@
         },
         {
             "name": "vyfony/filterable-table-bundle",
-            "version": "v0.1.16",
+            "version": "v0.1.17",
             "source": {
                 "type": "git",
                 "url": "https://github.com/vyfony/filterable-table-bundle.git",
-                "reference": "db87c5a52828e12b00bf96294a649cfc6d6ec928"
+                "reference": "326673583b6ead4ec17612ee4589dae17e0a0dd0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/vyfony/filterable-table-bundle/zipball/db87c5a52828e12b00bf96294a649cfc6d6ec928",
-                "reference": "db87c5a52828e12b00bf96294a649cfc6d6ec928",
+                "url": "https://api.github.com/repos/vyfony/filterable-table-bundle/zipball/326673583b6ead4ec17612ee4589dae17e0a0dd0",
+                "reference": "326673583b6ead4ec17612ee4589dae17e0a0dd0",
                 "shasum": ""
             },
             "require": {
@@ -5996,7 +5996,7 @@
                 "symfony-bundle",
                 "table"
             ],
-            "time": "2019-04-17T22:23:33+00:00"
+            "time": "2019-05-19T14:46:11+00:00"
         },
         {
             "name": "wandersonwhcr/romans",

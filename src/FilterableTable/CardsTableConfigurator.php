@@ -24,7 +24,10 @@ declare(strict_types=1);
 
 namespace App\FilterableTable;
 
+use App\Import\Card\Formatter\VillageFullName\Formatter\VillageFullNameFormatterInterface;
 use App\Persistence\Entity\Card\Card;
+use Symfony\Component\Routing\RouterInterface;
+use Vyfony\Bundle\FilterableTableBundle\Filter\Configurator\FilterConfiguratorInterface;
 use Vyfony\Bundle\FilterableTableBundle\Table\Checkbox\CheckboxHandler;
 use Vyfony\Bundle\FilterableTableBundle\Table\Configurator\AbstractTableConfigurator;
 use Vyfony\Bundle\FilterableTableBundle\Table\Metadata\Column\ColumnMetadata;
@@ -35,6 +38,50 @@ use Vyfony\Bundle\FilterableTableBundle\Table\Metadata\Column\ColumnMetadataInte
  */
 final class CardsTableConfigurator extends AbstractTableConfigurator
 {
+    /**
+     * @var VillageFullNameFormatterInterface
+     */
+    private $villageFullNameFormatter;
+
+    /**
+     * @param RouterInterface                   $router
+     * @param FilterConfiguratorInterface       $filterConfigurator
+     * @param string                            $defaultSortBy
+     * @param string                            $defaultSortOrder
+     * @param string                            $listRoute
+     * @param string                            $showRoute
+     * @param array                             $showRouteParameters
+     * @param int                               $pageSize
+     * @param int                               $paginatorTailLength
+     * @param VillageFullNameFormatterInterface $villageFullNameFormatter
+     */
+    public function __construct(
+        RouterInterface $router,
+        FilterConfiguratorInterface $filterConfigurator,
+        string $defaultSortBy,
+        string $defaultSortOrder,
+        string $listRoute,
+        string $showRoute,
+        array $showRouteParameters,
+        int $pageSize,
+        int $paginatorTailLength,
+        VillageFullNameFormatterInterface $villageFullNameFormatter
+    ) {
+        parent::__construct(
+            $router,
+            $filterConfigurator,
+            $defaultSortBy,
+            $defaultSortOrder,
+            $listRoute,
+            $showRoute,
+            $showRouteParameters,
+            $pageSize,
+            $paginatorTailLength
+        );
+
+        $this->villageFullNameFormatter = $villageFullNameFormatter;
+    }
+
     /**
      * @return string
      */
@@ -57,7 +104,7 @@ final class CardsTableConfigurator extends AbstractTableConfigurator
             (new ColumnMetadata())
                 ->setName('village')
                 ->setValueExtractor(function (Card $card): string {
-                    return $card->getVillage()->getName();
+                    return $this->villageFullNameFormatter->formatVillage($card->getVillage());
                 })
                 ->setLabel('controller.card.list.table.column.village'),
         ];
