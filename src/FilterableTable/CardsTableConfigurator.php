@@ -113,7 +113,6 @@ final class CardsTableConfigurator extends AbstractTableConfigurator
             (new ColumnMetadata())
                 ->setName('questions')
                 ->setValueExtractor(function (Card $card): string {
-
                     $formatQuestion = function (Question $question): string {
                         return $this->questionNumberFormatter->formatQuestion($question);
                     };
