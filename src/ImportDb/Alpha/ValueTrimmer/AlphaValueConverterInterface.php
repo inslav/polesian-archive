@@ -29,24 +29,9 @@ namespace App\ImportDb\Alpha\ValueTrimmer;
  */
 interface AlphaValueConverterInterface
 {
-    /**
-     * @param string|null $value
-     *
-     * @return string|null
-     */
     public function getTrimmedOrNull(?string $value): ?string;
 
-    /**
-     * @param string $value
-     *
-     * @return string
-     */
     public function getTrimmed(string $value): string;
 
-    /**
-     * @param string $value
-     *
-     * @return int
-     */
     public function getInt(string $value): int;
 }

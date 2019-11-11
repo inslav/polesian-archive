@@ -70,11 +70,6 @@ abstract class AbstractManyToManyEntityStorage
      */
     private $logger;
 
-    /**
-     * @param RegistryInterface            $doctrine
-     * @param AlphaValueConverterInterface $valueConverter
-     * @param LoggerInterface              $logger
-     */
     public function __construct(
         RegistryInterface $doctrine,
         AlphaValueConverterInterface $valueConverter,
@@ -87,8 +82,6 @@ abstract class AbstractManyToManyEntityStorage
     }
 
     /**
-     * @param AlphaCard $alphaCard
-     *
      * @return object[]
      */
     final public function getAndPersistEntities(AlphaCard $alphaCard): array
@@ -135,37 +128,14 @@ abstract class AbstractManyToManyEntityStorage
         return $entitiesWithoutRelationToAlphaCard;
     }
 
-    /**
-     * @return string
-     */
     abstract protected function getAlphaEntityClass(): string;
 
-    /**
-     * @param object $alphaEntity
-     *
-     * @return string
-     */
     abstract protected function getAlphaEntityKey(object $alphaEntity): string;
 
-    /**
-     * @param object $alphaEntity
-     *
-     * @return string|null
-     */
     abstract protected function getAlphaCardKey(object $alphaEntity): ?string;
 
-    /**
-     * @param object $alphaEntity
-     *
-     * @return object
-     */
     abstract protected function createEntity(object $alphaEntity): object;
 
-    /**
-     * @param object $alphaEntity
-     *
-     * @return object
-     */
     private function getEntity(object $alphaEntity): object
     {
         $alphaEntityKey = $this->getAlphaEntityKey($alphaEntity);
@@ -182,8 +152,6 @@ abstract class AbstractManyToManyEntityStorage
     }
 
     /**
-     * @param AlphaCard $alphaCard
-     *
      * @return object[]
      */
     private function getAlphaEntities(AlphaCard $alphaCard): array
@@ -192,10 +160,10 @@ abstract class AbstractManyToManyEntityStorage
             $this->createAlphaEntitiesCache();
         }
 
-        $alphaCardKey = $alphaCard->getSpvnkey();
+        $alphaCardKey = (string) $alphaCard->getSpvnkey();
 
         return \array_key_exists($alphaCardKey, $this->alphaEntitiesByAlphaCardKeyCache)
-            ? $this->alphaEntitiesByAlphaCardKeyCache[$alphaCard->getSpvnkey()]
+            ? $this->alphaEntitiesByAlphaCardKeyCache[$alphaCardKey]
             : [];
     }
 

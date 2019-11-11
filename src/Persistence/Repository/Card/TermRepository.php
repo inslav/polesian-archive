@@ -34,30 +34,18 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 final class TermRepository extends ServiceEntityRepository
 {
-    /**
-     * @param RegistryInterface $registry
-     */
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Term::class);
     }
 
-    /**
-     * @param string $name
-     *
-     * @return Term|null
-     */
     public function findOneByName(string $name): ?Term
     {
         return $this->findOneBy(['name' => $name]);
     }
 
     /**
-     * @param string $name
-     *
      * @throws ORMException
-     *
-     * @return Term
      */
     public function createTerm(string $name): Term
     {
@@ -71,11 +59,7 @@ final class TermRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param string $name
-     *
      * @throws ORMException
-     *
-     * @return Term
      */
     public function findOneByNameOrCreate(string $name): Term
     {

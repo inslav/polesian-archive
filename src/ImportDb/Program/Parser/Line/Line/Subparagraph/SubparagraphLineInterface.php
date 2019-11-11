@@ -31,13 +31,7 @@ use App\ImportDb\Program\Parser\Line\Line\ProgramTextLineInterface;
  */
 interface SubparagraphLineInterface extends ProgramTextLineInterface
 {
-    /**
-     * @return string
-     */
     public function getLetter(): string;
 
-    /**
-     * @return string
-     */
     public function getText(): string;
 }

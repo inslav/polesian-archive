@@ -47,10 +47,6 @@ final class ImportAlphaDbCommand extends Command
      */
     private $alphaImporter;
 
-    /**
-     * @param ProgramImporterInterface $programImporter
-     * @param AlphaImporterInterface   $alphaImporter
-     */
     public function __construct(
         ProgramImporterInterface $programImporter,
         AlphaImporterInterface $alphaImporter
@@ -74,12 +70,6 @@ final class ImportAlphaDbCommand extends Command
         ;
     }
 
-    /**
-     * @param InputInterface  $input
-     * @param OutputInterface $output
-     *
-     * @return int
-     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $this->programImporter->importProgram($input->getArgument('program-source-file'));

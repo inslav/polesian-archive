@@ -29,8 +29,5 @@ namespace App\ImportDb\Program;
  */
 interface ProgramImporterInterface
 {
-    /**
-     * @param string $pathToSourceFile
-     */
     public function importProgram(string $pathToSourceFile): void;
 }

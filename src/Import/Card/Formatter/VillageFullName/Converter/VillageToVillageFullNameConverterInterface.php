@@ -32,10 +32,5 @@ use App\Persistence\Entity\Location\Village;
  */
 interface VillageToVillageFullNameConverterInterface
 {
-    /**
-     * @param Village $village
-     *
-     * @return VillageFullNameInterface
-     */
     public function convertToVillageFullName(Village $village): VillageFullNameInterface;
 }

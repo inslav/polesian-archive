@@ -115,18 +115,6 @@ final class XlsxCardImporter implements CardImporterInterface
      */
     private $collectorRepository;
 
-    /**
-     * @param QuestionNumberParserInterface  $questionNumberParser
-     * @param VillageFullNameParserInterface $villageFullNameParser
-     * @param EntityManagerInterface         $entityManager
-     * @param VillageRepository              $villageRepository
-     * @param QuestionRepository             $questionRepository
-     * @param SeasonRepository               $seasonRepository
-     * @param KeywordRepository              $keywordRepository
-     * @param TermRepository                 $termRepository
-     * @param InformantRepository            $informantRepository
-     * @param CollectorRepository            $collectorRepository
-     */
     public function __construct(
         QuestionNumberParserInterface $questionNumberParser,
         VillageFullNameParserInterface $villageFullNameParser,
@@ -152,8 +140,6 @@ final class XlsxCardImporter implements CardImporterInterface
     }
 
     /**
-     * @param string $pathToFile
-     *
      * @throws PhpSpreadsheet\Exception
      */
     public function import(string $pathToFile): void
@@ -246,9 +232,9 @@ final class XlsxCardImporter implements CardImporterInterface
                 );
 
                 if (!$isFormattedAnswerValid) {
-                    throw new InvalidArgumentException(
-                        sprintf('Cannot parse answer "%s"', $formattedHasPositiveAnswer)
-                    );
+                    $message = sprintf('Cannot parse answer "%s"', $formattedHasPositiveAnswer);
+
+                    throw new InvalidArgumentException($message);
                 }
 
                 $card->setHasPositiveAnswer(self::HAS_POSITIVE_ANSWER_TRUE === $formattedHasPositiveAnswer);

@@ -32,9 +32,6 @@ use App\Persistence\Entity\PolesianProgram\Program;
  */
 final class ProgramStorage extends AbstractPersistedManyToOneEntityStorage
 {
-    /**
-     * @return string
-     */
     protected function getEntityClass(): string
     {
         return Program::class;
@@ -42,8 +39,6 @@ final class ProgramStorage extends AbstractPersistedManyToOneEntityStorage
 
     /**
      * @param object|Program $entity
-     *
-     * @return string
      */
     protected function getEntityKey(object $entity): string
     {
@@ -52,8 +47,6 @@ final class ProgramStorage extends AbstractPersistedManyToOneEntityStorage
 
     /**
      * @param object|AlphaCard $alphaObject
-     *
-     * @return string|null
      */
     protected function getAlphaEntityKey(object $alphaObject): ?string
     {

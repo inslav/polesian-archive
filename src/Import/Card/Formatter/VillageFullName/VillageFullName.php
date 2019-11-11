@@ -49,12 +49,6 @@ final class VillageFullName implements VillageFullNameInterface
      */
     private $numberInAtlas;
 
-    /**
-     * @param string      $name
-     * @param string      $raion
-     * @param string      $oblast
-     * @param string|null $numberInAtlas
-     */
     public function __construct(string $name, string $raion, string $oblast, ?string $numberInAtlas)
     {
         $this->name = $name;
@@ -63,33 +57,21 @@ final class VillageFullName implements VillageFullNameInterface
         $this->numberInAtlas = $numberInAtlas;
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @return string
-     */
     public function getRaion(): string
     {
         return $this->raion;
     }
 
-    /**
-     * @return string
-     */
     public function getOblast(): string
     {
         return $this->oblast;
     }
 
-    /**
-     * @return string|null
-     */
     public function getNumberInAtlas(): ?string
     {
         return $this->numberInAtlas;

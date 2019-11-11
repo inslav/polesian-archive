@@ -32,9 +32,6 @@ use App\Persistence\Entity\Card\Term;
  */
 final class TermStorage extends AbstractManyToManyEntityStorage
 {
-    /**
-     * @return string
-     */
     protected function getAlphaEntityClass(): string
     {
         return AlphaTerm::class;
@@ -42,8 +39,6 @@ final class TermStorage extends AbstractManyToManyEntityStorage
 
     /**
      * @param object|AlphaTerm $alphaEntity
-     *
-     * @return string
      */
     protected function getAlphaEntityKey(object $alphaEntity): string
     {
@@ -52,8 +47,6 @@ final class TermStorage extends AbstractManyToManyEntityStorage
 
     /**
      * @param object|AlphaTerm $alphaEntity
-     *
-     * @return string|null
      */
     protected function getAlphaCardKey(object $alphaEntity): ?string
     {
@@ -72,11 +65,6 @@ final class TermStorage extends AbstractManyToManyEntityStorage
         ;
     }
 
-    /**
-     * @param string $termName
-     *
-     * @return string
-     */
     private function getFixedTermName(string $termName): string
     {
         $correctTermNameByTermName = [

@@ -63,25 +63,17 @@ class Keyword
         $this->cards = new ArrayCollection();
     }
 
-    /**
-     * @return int|null
-     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * @return string|null
-     */
     public function getName(): ?string
     {
         return $this->name;
     }
 
     /**
-     * @param string $name
-     *
      * @return Keyword
      */
     public function setName(string $name): self
@@ -116,8 +108,6 @@ class Keyword
     }
 
     /**
-     * @param Card $card
-     *
      * @return Keyword
      */
     public function addCard(Card $card): self
@@ -130,8 +120,6 @@ class Keyword
     }
 
     /**
-     * @param Card $card
-     *
      * @return Keyword
      */
     public function removeCard(Card $card): self

@@ -96,19 +96,6 @@ final class SkippedAlphaCard implements SkippedAlphaCardInterface
      */
     private $num;
 
-    /**
-     * @param string      $spvnkey
-     * @param string|null $selokey
-     * @param string      $hutor
-     * @param string      $god
-     * @param string|null $sezon
-     * @param string      $nprog
-     * @param string      $nvopr
-     * @param string|null $otv
-     * @param string      $dtext
-     * @param string      $optext
-     * @param string      $num
-     */
     public function __construct(
         string $spvnkey,
         ?string $selokey,
@@ -135,89 +122,56 @@ final class SkippedAlphaCard implements SkippedAlphaCardInterface
         $this->num = $num;
     }
 
-    /**
-     * @return string
-     */
     public function getSpvnkey(): string
     {
         return $this->spvnkey;
     }
 
-    /**
-     * @return string|null
-     */
     public function getSelokey(): ?string
     {
         return $this->selokey;
     }
 
-    /**
-     * @return string
-     */
     public function getHutor(): string
     {
         return $this->hutor;
     }
 
-    /**
-     * @return string
-     */
     public function getGod(): string
     {
         return $this->god;
     }
 
-    /**
-     * @return string|null
-     */
     public function getSezon(): ?string
     {
         return $this->sezon;
     }
 
-    /**
-     * @return string
-     */
     public function getNprog(): string
     {
         return $this->nprog;
     }
 
-    /**
-     * @return string
-     */
     public function getNvopr(): string
     {
         return $this->nvopr;
     }
 
-    /**
-     * @return string|null
-     */
     public function getOtv(): ?string
     {
         return $this->otv;
     }
 
-    /**
-     * @return string
-     */
     public function getDtext(): string
     {
         return $this->dtext;
     }
 
-    /**
-     * @return string
-     */
     public function getOptext(): string
     {
         return $this->optext;
     }
 
-    /**
-     * @return string
-     */
     public function getNum(): string
     {
         return $this->num;

@@ -41,13 +41,6 @@ final class ParagraphStorage extends AbstractPersistedManyToOneEntityStorage
      */
     private $programStorage;
 
-    /**
-     * @param RegistryInterface             $doctrine
-     * @param AlphaValueConverterInterface  $valueConverter
-     * @param QuestionNumberParserInterface $questionNumberParser
-     * @param LoggerInterface               $logger
-     * @param ProgramStorage                $programStorage
-     */
     public function __construct(
         RegistryInterface $doctrine,
         AlphaValueConverterInterface $valueConverter,
@@ -59,9 +52,6 @@ final class ParagraphStorage extends AbstractPersistedManyToOneEntityStorage
         $this->programStorage = $programStorage;
     }
 
-    /**
-     * @return string
-     */
     protected function getEntityClass(): string
     {
         return Paragraph::class;
@@ -69,8 +59,6 @@ final class ParagraphStorage extends AbstractPersistedManyToOneEntityStorage
 
     /**
      * @param object|Paragraph $entity
-     *
-     * @return string
      */
     protected function getEntityKey(object $entity): string
     {
@@ -79,8 +67,6 @@ final class ParagraphStorage extends AbstractPersistedManyToOneEntityStorage
 
     /**
      * @param object|AlphaCard $alphaObject
-     *
-     * @return string|null
      */
     protected function getAlphaEntityKey(object $alphaObject): ?string
     {

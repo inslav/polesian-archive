@@ -48,13 +48,6 @@ final class VillageStorage extends AbstractManyToOneEntityStorage
      */
     private $alphaEntityByAlphaEntityKeyCache;
 
-    /**
-     * @param RegistryInterface             $doctrine
-     * @param AlphaValueConverterInterface  $valueConverter
-     * @param QuestionNumberParserInterface $questionNumberParser
-     * @param LoggerInterface               $logger
-     * @param RaionStorage                  $raionStorage
-     */
     public function __construct(
         RegistryInterface $doctrine,
         AlphaValueConverterInterface $valueConverter,
@@ -68,8 +61,6 @@ final class VillageStorage extends AbstractManyToOneEntityStorage
 
     /**
      * @param object|AlphaCard $alphaObject
-     *
-     * @return string|null
      */
     protected function getAlphaEntityKey(object $alphaObject): ?string
     {
@@ -93,11 +84,7 @@ final class VillageStorage extends AbstractManyToOneEntityStorage
     }
 
     /**
-     * @param AlphaCard $alphaCard
-     *
      * @throws InvalidArgumentException
-     *
-     * @return AlphaVillage
      */
     private function getAlphaEntity(AlphaCard $alphaCard): AlphaVillage
     {
@@ -105,7 +92,7 @@ final class VillageStorage extends AbstractManyToOneEntityStorage
             $this->alphaEntityByAlphaEntityKeyCache = $this->createAlphaEntityByAlphaEntityKeyCache();
         }
 
-        $alphaEntityKey = $alphaCard->getSelokey();
+        $alphaEntityKey = (string) $alphaCard->getSelokey();
 
         if (!\array_key_exists($alphaEntityKey, $this->alphaEntityByAlphaEntityKeyCache)) {
             throw new InvalidArgumentException(sprintf('Cannot get alpha village with key %s', $alphaEntityKey));

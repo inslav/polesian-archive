@@ -31,10 +31,5 @@ use App\ImportDb\Program\Parser\Line\Line\ProgramTextLineInterface;
  */
 interface ProgramTextLineParserInterface
 {
-    /**
-     * @param string $programTextLine
-     *
-     * @return ProgramTextLineInterface
-     */
     public function parseProgramTextLine(string $programTextLine): ProgramTextLineInterface;
 }

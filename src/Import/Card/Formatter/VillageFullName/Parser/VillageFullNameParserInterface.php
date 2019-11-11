@@ -31,10 +31,5 @@ use App\Import\Card\Formatter\VillageFullName\VillageFullNameInterface;
  */
 interface VillageFullNameParserInterface
 {
-    /**
-     * @param string $villageFullName
-     *
-     * @return VillageFullNameInterface
-     */
     public function parseVillageFullName(string $villageFullName): VillageFullNameInterface;
 }

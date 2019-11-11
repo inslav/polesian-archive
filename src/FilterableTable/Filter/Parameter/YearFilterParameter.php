@@ -41,35 +41,21 @@ final class YearFilterParameter implements FilterParameterInterface, ExpressionB
      */
     private $cardRepository;
 
-    /**
-     * @param CardRepository $cardRepository
-     */
     public function __construct(CardRepository $cardRepository)
     {
         $this->cardRepository = $cardRepository;
     }
 
-    /**
-     * @return string
-     */
     public function getQueryParameterName(): string
     {
         return 'year';
     }
 
-    /**
-     * @return string
-     */
     public function getType(): string
     {
         return ChoiceType::class;
     }
 
-    /**
-     * @param EntityManager $entityManager
-     *
-     * @return array
-     */
     public function getOptions(EntityManager $entityManager): array
     {
         return [
@@ -85,11 +71,7 @@ final class YearFilterParameter implements FilterParameterInterface, ExpressionB
     }
 
     /**
-     * @param QueryBuilder $queryBuilder
-     * @param mixed        $formData
-     * @param string       $entityAlias
-     *
-     * @return string|null
+     * @param mixed $formData
      */
     public function buildWhereExpression(QueryBuilder $queryBuilder, $formData, string $entityAlias): ?string
     {
@@ -102,9 +84,6 @@ final class YearFilterParameter implements FilterParameterInterface, ExpressionB
         return (string) $queryBuilder->expr()->in($entityAlias.'.'.$this->getQueryParameterName(), $formattedYears);
     }
 
-    /**
-     * @return array
-     */
     private function createChoices(): array
     {
         $cardAlias = 'card';

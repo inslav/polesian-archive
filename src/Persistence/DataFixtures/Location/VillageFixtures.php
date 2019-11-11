@@ -38,9 +38,6 @@ final class VillageFixtures extends Fixture implements DependentFixtureInterface
 
     public const VILLAGE_SHCHEDROGOR = 'Щедрогор';
 
-    /**
-     * @param ObjectManager $manager
-     */
     public function load(ObjectManager $manager): void
     {
         $village = (new Village())

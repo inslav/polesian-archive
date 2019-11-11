@@ -50,9 +50,6 @@ final class ParagraphFixtures extends Fixture implements DependentFixtureInterfa
 
     public const PROGRAM_XV_PARAGRAPH_2 = 'XV.2';
 
-    /**
-     * @param ObjectManager $manager
-     */
     public function load(ObjectManager $manager): void
     {
         $paragraph = (new Paragraph())

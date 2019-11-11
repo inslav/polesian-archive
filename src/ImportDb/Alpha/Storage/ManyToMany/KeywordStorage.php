@@ -32,9 +32,6 @@ use App\Persistence\Entity\Card\Keyword;
  */
 final class KeywordStorage extends AbstractManyToManyEntityStorage
 {
-    /**
-     * @return string
-     */
     protected function getAlphaEntityClass(): string
     {
         return AlphaKeyword::class;
@@ -42,8 +39,6 @@ final class KeywordStorage extends AbstractManyToManyEntityStorage
 
     /**
      * @param object|AlphaKeyword $alphaEntity
-     *
-     * @return string
      */
     protected function getAlphaEntityKey(object $alphaEntity): string
     {
@@ -52,8 +47,6 @@ final class KeywordStorage extends AbstractManyToManyEntityStorage
 
     /**
      * @param object|AlphaKeyword $alphaEntity
-     *
-     * @return string|null
      */
     protected function getAlphaCardKey(object $alphaEntity): ?string
     {

@@ -44,11 +44,6 @@ final class DownloadFileInfo implements DownloadFileInfoInterface
      */
     private $contentType;
 
-    /**
-     * @param string $name
-     * @param string $content
-     * @param string $contentType
-     */
     public function __construct(string $name, string $content, string $contentType)
     {
         $this->name = $name;
@@ -56,25 +51,16 @@ final class DownloadFileInfo implements DownloadFileInfoInterface
         $this->contentType = $contentType;
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @return string
-     */
     public function getContent(): string
     {
         return $this->content;
     }
 
-    /**
-     * @return string
-     */
     public function getContentType(): string
     {
         return $this->contentType;

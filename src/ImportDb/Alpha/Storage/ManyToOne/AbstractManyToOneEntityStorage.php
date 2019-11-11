@@ -68,12 +68,6 @@ abstract class AbstractManyToOneEntityStorage
      */
     private $logger;
 
-    /**
-     * @param RegistryInterface             $doctrine
-     * @param AlphaValueConverterInterface  $valueConverter
-     * @param QuestionNumberParserInterface $questionNumberParser
-     * @param LoggerInterface               $logger
-     */
     public function __construct(
         RegistryInterface $doctrine,
         AlphaValueConverterInterface $valueConverter,
@@ -87,11 +81,6 @@ abstract class AbstractManyToOneEntityStorage
         $this->logger = $logger;
     }
 
-    /**
-     * @param object $alphaObject
-     *
-     * @return object|null
-     */
     final public function getEntity(object $alphaObject): ?object
     {
         $this->initializeCache();
@@ -106,9 +95,9 @@ abstract class AbstractManyToOneEntityStorage
             $entity = $this->createEntity($alphaObject);
 
             if (null === $entity) {
-                throw new LogicException(
-                    sprintf('Expected to create entity with alpha entity key "%s", got null', $alphaEntityKey)
-                );
+                $message = sprintf('Expected to create entity with alpha entity key "%s", got null', $alphaEntityKey);
+
+                throw new LogicException($message);
             }
 
             $this->defaultObjectManager->persist($entity);
@@ -119,25 +108,10 @@ abstract class AbstractManyToOneEntityStorage
         return $this->entityByAlphaEntityKeyCache[$alphaEntityKey];
     }
 
-    /**
-     * @param object $alphaObject
-     *
-     * @return string|null
-     */
     abstract protected function getAlphaEntityKey(object $alphaObject): ?string;
 
-    /**
-     * @param object $alphaObject
-     *
-     * @return object
-     */
     abstract protected function createEntity(object $alphaObject): object;
 
-    /**
-     * @param AlphaCard $alphaCard
-     *
-     * @return QuestionNumberInterface
-     */
     final protected function getQuestionNumber(AlphaCard $alphaCard): QuestionNumberInterface
     {
         return $this->questionNumberParser

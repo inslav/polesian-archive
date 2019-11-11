@@ -44,11 +44,6 @@ final class ParagraphLine implements ParagraphLineInterface
      */
     private $text;
 
-    /**
-     * @param int         $number
-     * @param string|null $title
-     * @param string|null $text
-     */
     public function __construct(int $number, ?string $title, ?string $text)
     {
         $this->number = $number;
@@ -56,25 +51,16 @@ final class ParagraphLine implements ParagraphLineInterface
         $this->text = $text;
     }
 
-    /**
-     * @return int
-     */
     public function getNumber(): int
     {
         return $this->number;
     }
 
-    /**
-     * @return string|null
-     */
     public function getTitle(): ?string
     {
         return $this->title;
     }
 
-    /**
-     * @return string|null
-     */
     public function getText(): ?string
     {
         return $this->text;

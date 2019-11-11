@@ -29,11 +29,5 @@ namespace App\Persistence\QueryBuilder\Alias;
  */
 interface AliasFactoryInterface
 {
-    /**
-     * @param string $className
-     * @param string $alias
-     *
-     * @return string
-     */
     public function createAlias(string $className, string $alias): string;
 }

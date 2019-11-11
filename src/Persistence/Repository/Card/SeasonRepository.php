@@ -33,19 +33,11 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 final class SeasonRepository extends ServiceEntityRepository
 {
-    /**
-     * @param RegistryInterface $registry
-     */
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Season::class);
     }
 
-    /**
-     * @param string $name
-     *
-     * @return Season|null
-     */
     public function findOneByName(string $name): ?Season
     {
         return $this->findOneBy(['name' => $name]);

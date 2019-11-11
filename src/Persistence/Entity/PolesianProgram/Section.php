@@ -67,25 +67,17 @@ class Section
         $this->programs = new ArrayCollection();
     }
 
-    /**
-     * @return int|null
-     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * @return string|null
-     */
     public function getName(): ?string
     {
         return $this->name;
     }
 
     /**
-     * @param string $name
-     *
      * @return Section
      */
     public function setName(string $name): self
@@ -104,8 +96,6 @@ class Section
     }
 
     /**
-     * @param Program $program
-     *
      * @return Section
      */
     public function addProgram(Program $program): self
@@ -113,23 +103,6 @@ class Section
         if (!$this->programs->contains($program)) {
             $this->programs[] = $program;
             $program->setSection($this);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @param Program $program
-     *
-     * @return Section
-     */
-    public function removeProgram(Program $program): self
-    {
-        if ($this->programs->contains($program)) {
-            $this->programs->removeElement($program);
-            if ($program->getSection() === $this) {
-                $program->setSection(null);
-            }
         }
 
         return $this;

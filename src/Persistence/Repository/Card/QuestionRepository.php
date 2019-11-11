@@ -53,12 +53,6 @@ final class QuestionRepository extends ServiceEntityRepository
      */
     private $subparagraphRepository;
 
-    /**
-     * @param RegistryInterface      $registry
-     * @param ProgramRepository      $programRepository
-     * @param ParagraphRepository    $paragraphRepository
-     * @param SubparagraphRepository $subparagraphRepository
-     */
     public function __construct(
         RegistryInterface $registry,
         ProgramRepository $programRepository,
@@ -72,11 +66,7 @@ final class QuestionRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param QuestionNumberInterface $questionNumber
-     *
      * @throws ORMException
-     *
-     * @return Question
      */
     public function createQuestion(QuestionNumberInterface $questionNumber): Question
     {

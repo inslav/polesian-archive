@@ -41,10 +41,6 @@ final class RaionRepository extends ServiceEntityRepository
      */
     private $oblastRepository;
 
-    /**
-     * @param RegistryInterface $registry
-     * @param OblastRepository  $oblastRepository
-     */
     public function __construct(RegistryInterface $registry, OblastRepository $oblastRepository)
     {
         parent::__construct($registry, Raion::class);
@@ -53,12 +49,7 @@ final class RaionRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param string $name
-     * @param string $oblastName
-     *
      * @throws ORMException
-     *
-     * @return Raion
      */
     public function findOneByNameAndOblastNameOrCreate(string $name, string $oblastName): Raion
     {
@@ -74,12 +65,6 @@ final class RaionRepository extends ServiceEntityRepository
         return $raion;
     }
 
-    /**
-     * @param string $name
-     * @param string $oblastName
-     *
-     * @return Raion|null
-     */
     private function findOneByNameAndOblastName(string $name, string $oblastName): ?Raion
     {
         $queryBuilder = $this->createQueryBuilder('raion');
@@ -102,12 +87,7 @@ final class RaionRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param string $name
-     * @param string $oblastName
-     *
      * @throws ORMException
-     *
-     * @return Raion
      */
     private function createRaion(string $name, string $oblastName): Raion
     {

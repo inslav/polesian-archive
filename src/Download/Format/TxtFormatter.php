@@ -47,10 +47,6 @@ final class TxtFormatter implements FormatterInterface
      */
     private $questionNumberFormatter;
 
-    /**
-     * @param QuestionToQuestionNumberConverter $questionToQuestionNumberConverter
-     * @param QuestionNumberFormatterInterface  $questionNumberFormatter
-     */
     public function __construct(
         QuestionToQuestionNumberConverter $questionToQuestionNumberConverter,
         QuestionNumberFormatterInterface $questionNumberFormatter
@@ -61,8 +57,6 @@ final class TxtFormatter implements FormatterInterface
 
     /**
      * @param Card[]|array $cards
-     *
-     * @return string
      */
     public function format(array $cards): string
     {
@@ -77,27 +71,17 @@ final class TxtFormatter implements FormatterInterface
 
     /**
      * @param Card[] $cards
-     *
-     * @return string
      */
     public function getFileName(array $cards): string
     {
         return 'cards.txt';
     }
 
-    /**
-     * @return string
-     */
     public function getContentType(): string
     {
         return 'text/plain';
     }
 
-    /**
-     * @param Card $card
-     *
-     * @return string
-     */
     private function formatCard(Card $card): string
     {
         $formattedQuestions = implode(

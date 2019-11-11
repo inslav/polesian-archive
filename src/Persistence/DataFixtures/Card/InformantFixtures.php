@@ -35,9 +35,6 @@ final class InformantFixtures extends Fixture
 {
     public const INFORMANT_MSV = 'МСВ';
 
-    /**
-     * @param ObjectManager $manager
-     */
     public function load(ObjectManager $manager): void
     {
         $informant = (new Informant())

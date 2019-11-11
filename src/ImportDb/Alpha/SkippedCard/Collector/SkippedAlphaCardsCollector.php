@@ -36,10 +36,6 @@ final class SkippedAlphaCardsCollector implements SkippedAlphaCardsCollectorInte
      */
     private $skippedAlphaCards = [];
 
-    /**
-     * @param string                    $errorCategory
-     * @param SkippedAlphaCardInterface $skippedAlphaCard
-     */
     public function add(string $errorCategory, SkippedAlphaCardInterface $skippedAlphaCard): void
     {
         if (!\array_key_exists($errorCategory, $this->skippedAlphaCards)) {

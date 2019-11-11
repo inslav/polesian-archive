@@ -51,9 +51,6 @@ final class QuestionNumberFormatterTest extends TestCase
 
     /**
      * @dataProvider getQuestionNumbers
-     *
-     * @param QuestionNumberInterface $questionNumber
-     * @param string                  $expectedFormattedQuestionNumber
      */
     public function testFormat(QuestionNumberInterface $questionNumber, string $expectedFormattedQuestionNumber): void
     {
@@ -64,9 +61,6 @@ final class QuestionNumberFormatterTest extends TestCase
 
     /**
      * @dataProvider getInvalidQuestionNumbers
-     *
-     * @param QuestionNumberInterface $questionNumber
-     * @param Throwable               $throwable
      */
     public function testFormatWithInvalidNumbers(QuestionNumberInterface $questionNumber, Throwable $throwable): void
     {

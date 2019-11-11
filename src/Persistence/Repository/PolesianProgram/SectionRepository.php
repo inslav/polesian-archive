@@ -34,20 +34,13 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 final class SectionRepository extends ServiceEntityRepository
 {
-    /**
-     * @param RegistryInterface $registry
-     */
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Section::class);
     }
 
     /**
-     * @param string $name
-     *
      * @throws ORMException
-     *
-     * @return Section
      */
     public function createSection(string $name): Section
     {

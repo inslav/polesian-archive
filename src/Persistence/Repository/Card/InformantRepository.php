@@ -34,30 +34,18 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 final class InformantRepository extends ServiceEntityRepository
 {
-    /**
-     * @param RegistryInterface $registry
-     */
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Informant::class);
     }
 
-    /**
-     * @param string $name
-     *
-     * @return Informant|null
-     */
     public function findOneByName(string $name): ?Informant
     {
         return $this->findOneBy(['name' => $name]);
     }
 
     /**
-     * @param string $name
-     *
      * @throws ORMException
-     *
-     * @return Informant
      */
     public function createInformant(string $name): Informant
     {
@@ -71,11 +59,7 @@ final class InformantRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param string $name
-     *
      * @throws ORMException
-     *
-     * @return Informant
      */
     public function findOneByNameOrCreate(string $name): Informant
     {

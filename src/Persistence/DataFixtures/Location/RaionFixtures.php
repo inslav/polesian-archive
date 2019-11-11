@@ -38,9 +38,6 @@ final class RaionFixtures extends Fixture implements DependentFixtureInterface
 
     const RAION_RATNOVSKIY = 'Ратновский';
 
-    /**
-     * @param ObjectManager $manager
-     */
     public function load(ObjectManager $manager): void
     {
         $raion = (new Raion())

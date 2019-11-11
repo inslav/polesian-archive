@@ -49,12 +49,6 @@ final class QuestionNumber implements QuestionNumberInterface
      */
     private $isAdditional;
 
-    /**
-     * @param string      $programNumber
-     * @param int|null    $paragraphNumber
-     * @param string|null $subparagraphLetter
-     * @param bool        $isAdditional
-     */
     public function __construct(
         string $programNumber,
         ?int $paragraphNumber,
@@ -67,33 +61,21 @@ final class QuestionNumber implements QuestionNumberInterface
         $this->isAdditional = $isAdditional;
     }
 
-    /**
-     * @return string
-     */
     public function getProgramNumber(): string
     {
         return $this->programNumber;
     }
 
-    /**
-     * @return int|null
-     */
     public function getParagraphNumber(): ?int
     {
         return $this->paragraphNumber;
     }
 
-    /**
-     * @return string|null
-     */
     public function getSubparagraphLetter(): ?string
     {
         return $this->subparagraphLetter;
     }
 
-    /**
-     * @return bool
-     */
     public function getIsAdditional(): bool
     {
         return $this->isAdditional;

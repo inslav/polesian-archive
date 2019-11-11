@@ -36,10 +36,6 @@ final class BrokenCardException extends InvalidArgumentException
      */
     private $category;
 
-    /**
-     * @param string $category
-     * @param string $message
-     */
     public function __construct(string $category, string $message = '')
     {
         parent::__construct($message);
@@ -48,9 +44,6 @@ final class BrokenCardException extends InvalidArgumentException
     }
 
     /**
-     * @param string $alphaEntityKey
-     * @param string $storageClass
-     *
      * @return BrokenCardException
      */
     public static function programMismatch(string $alphaEntityKey, string $storageClass): self
@@ -66,9 +59,6 @@ final class BrokenCardException extends InvalidArgumentException
     }
 
     /**
-     * @param bool $isTextBroken
-     * @param bool $isDescriptionBroken
-     *
      * @return BrokenCardException
      */
     public static function specialCharacters(bool $isTextBroken, bool $isDescriptionBroken): self
@@ -89,9 +79,6 @@ final class BrokenCardException extends InvalidArgumentException
         );
     }
 
-    /**
-     * @return string
-     */
     public function getCategory(): string
     {
         return $this->category;

@@ -29,23 +29,11 @@ namespace App\Import\Card\Formatter\VillageFullName;
  */
 interface VillageFullNameInterface
 {
-    /**
-     * @return string
-     */
     public function getName(): string;
 
-    /**
-     * @return string
-     */
     public function getRaion(): string;
 
-    /**
-     * @return string
-     */
     public function getOblast(): string;
 
-    /**
-     * @return string|null
-     */
     public function getNumberInAtlas(): ?string;
 }

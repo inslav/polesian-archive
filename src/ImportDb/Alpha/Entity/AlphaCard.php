@@ -113,89 +113,56 @@ class AlphaCard
      */
     private $num;
 
-    /**
-     * @return string|null
-     */
     public function getSpvnkey(): ?string
     {
         return $this->spvnkey;
     }
 
-    /**
-     * @return string|null
-     */
     public function getSelokey(): ?string
     {
         return $this->selokey;
     }
 
-    /**
-     * @return string|null
-     */
     public function getHutor(): ?string
     {
         return $this->hutor;
     }
 
-    /**
-     * @return string|null
-     */
     public function getGod(): ?string
     {
         return $this->god;
     }
 
-    /**
-     * @return string|null
-     */
     public function getSezon(): ?string
     {
         return $this->sezon;
     }
 
-    /**
-     * @return string|null
-     */
     public function getNprog(): ?string
     {
         return $this->nprog;
     }
 
-    /**
-     * @return string|null
-     */
     public function getNvopr(): ?string
     {
         return $this->nvopr;
     }
 
-    /**
-     * @return string|null
-     */
     public function getOtv(): ?string
     {
         return $this->otv;
     }
 
-    /**
-     * @return string|null
-     */
     public function getDtext(): ?string
     {
         return $this->dtext;
     }
 
-    /**
-     * @return string|null
-     */
     public function getOptext(): ?string
     {
         return $this->optext;
     }
 
-    /**
-     * @return string|null
-     */
     public function getNum(): ?string
     {
         return $this->num;

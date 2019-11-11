@@ -63,25 +63,17 @@ class Collector
         $this->cards = new ArrayCollection();
     }
 
-    /**
-     * @return int|null
-     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * @return string|null
-     */
     public function getName(): ?string
     {
         return $this->name;
     }
 
     /**
-     * @param string $name
-     *
      * @return Collector
      */
     public function setName(string $name): self
@@ -116,8 +108,6 @@ class Collector
     }
 
     /**
-     * @param Card $card
-     *
      * @return Collector
      */
     public function addCard(Card $card): self
@@ -131,8 +121,6 @@ class Collector
     }
 
     /**
-     * @param Card $card
-     *
      * @return Collector
      */
     public function removeCard(Card $card): self

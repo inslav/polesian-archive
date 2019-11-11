@@ -40,25 +40,17 @@ final class QuestionNumberFormatter implements QuestionNumberFormatterInterface
      */
     private $questionToQuestionNumberConverter;
 
-    /**
-     * @param QuestionToQuestionNumberConverterInterface $questionToQuestionNumberConverter
-     */
     public function __construct(QuestionToQuestionNumberConverterInterface $questionToQuestionNumberConverter)
     {
         $this->questionToQuestionNumberConverter = $questionToQuestionNumberConverter;
     }
 
-    /**
-     * @param QuestionNumberInterface $questionNumber
-     *
-     * @return string
-     */
     public function format(QuestionNumberInterface $questionNumber): string
     {
         if (null === $questionNumber->getParagraphNumber() && null !== $questionNumber->getSubparagraphLetter()) {
-            throw new InvalidArgumentException(
-                'Cannot format question number: subparagraph is set while paragraph is null'
-            );
+            $message = 'Cannot format question number: subparagraph is set while paragraph is null';
+
+            throw new InvalidArgumentException($message);
         }
 
         $formattedProgram = $questionNumber->getProgramNumber();
@@ -68,7 +60,7 @@ final class QuestionNumberFormatter implements QuestionNumberFormatterInterface
                 '',
                 [
                     QuestionNumberParser::QUESTION_NUMBER_PARTS_DELIMITER,
-                    $questionNumber->getParagraphNumber(),
+                    (string) $questionNumber->getParagraphNumber(),
                     $questionNumber->getSubparagraphLetter() ?? '',
                 ]
             )
@@ -94,11 +86,6 @@ final class QuestionNumberFormatter implements QuestionNumberFormatterInterface
         );
     }
 
-    /**
-     * @param Question $question
-     *
-     * @return string
-     */
     public function formatQuestion(Question $question): string
     {
         return $this->format($this->questionToQuestionNumberConverter->convert($question));

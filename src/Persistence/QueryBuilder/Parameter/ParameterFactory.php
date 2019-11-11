@@ -29,12 +29,6 @@ namespace App\Persistence\QueryBuilder\Parameter;
  */
 final class ParameterFactory implements ParameterFactoryInterface
 {
-    /**
-     * @param string $fieldAlias
-     * @param int    $index
-     *
-     * @return string
-     */
     public function createParameter(string $fieldAlias, int $index): string
     {
         return ':'.str_replace('.', '_', $fieldAlias).'_'.uniqid().'_'.$index;

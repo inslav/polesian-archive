@@ -50,17 +50,11 @@ class AlphaKeyword
      */
     private $spvnkey;
 
-    /**
-     * @return string|null
-     */
     public function getSlov(): ?string
     {
         return $this->slov;
     }
 
-    /**
-     * @return string|null
-     */
     public function getSpvnkey(): ?string
     {
         return $this->spvnkey;

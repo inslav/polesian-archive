@@ -43,35 +43,21 @@ final class VillageFilterParameter implements FilterParameterInterface, Expressi
      */
     private $villageFullNameFormatter;
 
-    /**
-     * @param VillageFullNameFormatterInterface $villageFullNameFormatter
-     */
     public function __construct(VillageFullNameFormatterInterface $villageFullNameFormatter)
     {
         $this->villageFullNameFormatter = $villageFullNameFormatter;
     }
 
-    /**
-     * @return string
-     */
     public function getQueryParameterName(): string
     {
         return 'village';
     }
 
-    /**
-     * @return string
-     */
     public function getType(): string
     {
         return EntityType::class;
     }
 
-    /**
-     * @param EntityManager $entityManager
-     *
-     * @return array
-     */
     public function getOptions(EntityManager $entityManager): array
     {
         return [
@@ -89,11 +75,7 @@ final class VillageFilterParameter implements FilterParameterInterface, Expressi
     }
 
     /**
-     * @param QueryBuilder $queryBuilder
-     * @param mixed        $formData
-     * @param string       $entityAlias
-     *
-     * @return string|null
+     * @param mixed $formData
      */
     public function buildWhereExpression(QueryBuilder $queryBuilder, $formData, string $entityAlias): ?string
     {
@@ -112,9 +94,6 @@ final class VillageFilterParameter implements FilterParameterInterface, Expressi
         return (string) $queryBuilder->expr()->in($entityAlias.'.village', $ids);
     }
 
-    /**
-     * @return callable
-     */
     private function createQueryBuilder(): callable
     {
         return function (EntityRepository $repository): QueryBuilder {
@@ -126,9 +105,6 @@ final class VillageFilterParameter implements FilterParameterInterface, Expressi
         };
     }
 
-    /**
-     * @return callable
-     */
     private function createLabelBuilder(): callable
     {
         return function (Village $village) {

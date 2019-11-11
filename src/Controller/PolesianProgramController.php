@@ -57,12 +57,6 @@ final class PolesianProgramController extends AbstractController
      */
     private $subparagraphRepository;
 
-    /**
-     * @param SectionRepository      $sectionRepository
-     * @param ProgramRepository      $programRepository
-     * @param ParagraphRepository    $paragraphRepository
-     * @param SubparagraphRepository $subparagraphRepository
-     */
     public function __construct(
         SectionRepository $sectionRepository,
         ProgramRepository $programRepository,
@@ -79,8 +73,6 @@ final class PolesianProgramController extends AbstractController
      * @Route("/polesian-program", name="polesian_program__index")
      *
      * @Template("polesian_program/index.html.twig")
-     *
-     * @return array
      */
     public function index(): array
     {
@@ -95,10 +87,6 @@ final class PolesianProgramController extends AbstractController
      * @Route("/polesian-program/program/{number}", name="polesian_program__program")
      *
      * @Template("polesian_program/program.html.twig")
-     *
-     * @param string $number
-     *
-     * @return array
      */
     public function program(string $number): array
     {
@@ -113,11 +101,6 @@ final class PolesianProgramController extends AbstractController
      * @Route("/polesian-program/program/{programNumber}/paragraph/{number}", name="polesian_program__paragraph")
      *
      * @Template("polesian_program/paragraph.html.twig")
-     *
-     * @param string $programNumber
-     * @param int    $number
-     *
-     * @return array
      */
     public function paragraph(string $programNumber, int $number): array
     {
@@ -132,12 +115,6 @@ final class PolesianProgramController extends AbstractController
      * @Route("/polesian-program/program/{programNumber}/paragraph/{paragraphNumber}/subparagraph/{letter}", name="polesian_program__subparagraph")
      *
      * @Template("polesian_program/subparagraph.html.twig")
-     *
-     * @param string $programNumber
-     * @param int    $paragraphNumber
-     * @param string $letter
-     *
-     * @return array
      */
     public function subparagraph(string $programNumber, int $paragraphNumber, string $letter): array
     {

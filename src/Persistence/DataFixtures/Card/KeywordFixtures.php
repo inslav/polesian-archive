@@ -43,9 +43,6 @@ final class KeywordFixtures extends Fixture
 
     public const KEYWORD_TSVETY = 'Цветы';
 
-    /**
-     * @param ObjectManager $manager
-     */
     public function load(ObjectManager $manager): void
     {
         $keyword = (new Keyword())

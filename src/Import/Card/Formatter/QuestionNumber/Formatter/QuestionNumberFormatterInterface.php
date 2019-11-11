@@ -24,7 +24,6 @@ declare(strict_types=1);
 
 namespace App\Import\Card\Formatter\QuestionNumber\Formatter;
 
-use App\Import\Card\Formatter\QuestionNumber\QuestionNumber;
 use App\Import\Card\Formatter\QuestionNumber\QuestionNumberInterface;
 use App\Persistence\Entity\Card\Question;
 
@@ -33,17 +32,7 @@ use App\Persistence\Entity\Card\Question;
  */
 interface QuestionNumberFormatterInterface
 {
-    /**
-     * @param QuestionNumberInterface $questionNumber
-     *
-     * @return string
-     */
     public function format(QuestionNumberInterface $questionNumber): string;
 
-    /**
-     * @param Question $question
-     *
-     * @return string
-     */
     public function formatQuestion(Question $question): string;
 }

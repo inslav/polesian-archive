@@ -33,11 +33,6 @@ use App\Persistence\Entity\Card\Question;
  */
 final class QuestionToQuestionNumberConverter implements QuestionToQuestionNumberConverterInterface
 {
-    /**
-     * @param Question $question
-     *
-     * @return QuestionNumberInterface
-     */
     public function convert(Question $question): QuestionNumberInterface
     {
         return new QuestionNumber(

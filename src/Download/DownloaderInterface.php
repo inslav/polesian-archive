@@ -32,11 +32,5 @@ use App\Download\Format\FormatterInterface;
  */
 interface DownloaderInterface
 {
-    /**
-     * @param array              $cardIds
-     * @param FormatterInterface $formatter
-     *
-     * @return DownloadFileInfoInterface
-     */
     public function download(array $cardIds, FormatterInterface $formatter): DownloadFileInfoInterface;
 }

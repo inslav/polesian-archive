@@ -40,20 +40,11 @@ final class Downloader implements DownloaderInterface
      */
     private $doctrine;
 
-    /**
-     * @param RegistryInterface $doctrine
-     */
     public function __construct(RegistryInterface $doctrine)
     {
         $this->doctrine = $doctrine;
     }
 
-    /**
-     * @param array              $cardIds
-     * @param FormatterInterface $formatter
-     *
-     * @return DownloadFileInfoInterface
-     */
     public function download(array $cardIds, FormatterInterface $formatter): DownloadFileInfoInterface
     {
         $cards = [];

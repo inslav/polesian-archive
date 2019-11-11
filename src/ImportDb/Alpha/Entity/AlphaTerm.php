@@ -50,17 +50,11 @@ class AlphaTerm
      */
     private $spvnkey;
 
-    /**
-     * @return string|null
-     */
     public function getTerm(): ?string
     {
         return $this->term;
     }
 
-    /**
-     * @return string|null
-     */
     public function getSpvnkey(): ?string
     {
         return $this->spvnkey;

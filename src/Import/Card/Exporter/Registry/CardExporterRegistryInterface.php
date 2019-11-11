@@ -31,10 +31,5 @@ use App\Import\Card\Exporter\CardExporterInterface;
  */
 interface CardExporterRegistryInterface
 {
-    /**
-     * @param string $exporterFormat
-     *
-     * @return CardExporterInterface
-     */
     public function getExporter(string $exporterFormat): CardExporterInterface;
 }

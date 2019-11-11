@@ -53,11 +53,6 @@ final class CardController extends AbstractController
      */
     private $cardRepository;
 
-    /**
-     * @param TableInterface                   $filterableTable
-     * @param QuestionNumberFormatterInterface $questionFormatter
-     * @param CardRepository                   $cardRepository
-     */
     public function __construct(
         TableInterface $filterableTable,
         QuestionNumberFormatterInterface $questionFormatter,
@@ -72,8 +67,6 @@ final class CardController extends AbstractController
      * @Route("/list", name="card__list")
      *
      * @Template("card/list.html.twig")
-     *
-     * @return array
      */
     public function list(): array
     {
@@ -86,13 +79,9 @@ final class CardController extends AbstractController
     }
 
     /**
-     * @param int $id
-     *
      * @Route("/show/{id}", name="card__show")
      *
      * @Template("card/show.html.twig")
-     *
-     * @return array
      */
     public function show(int $id): array
     {
