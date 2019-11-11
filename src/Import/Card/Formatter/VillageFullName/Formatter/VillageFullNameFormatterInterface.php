@@ -32,17 +32,7 @@ use App\Persistence\Entity\Location\Village;
  */
 interface VillageFullNameFormatterInterface
 {
-    /**
-     * @param VillageFullNameInterface $villageFullName
-     *
-     * @return string
-     */
     public function format(VillageFullNameInterface $villageFullName): string;
 
-    /**
-     * @param Village $village
-     *
-     * @return string
-     */
     public function formatVillage(Village $village): string;
 }

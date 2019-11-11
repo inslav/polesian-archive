@@ -41,9 +41,6 @@ final class ImportCommand extends Command
      */
     private $cardImporterRegistry;
 
-    /**
-     * @param CardImporterRegistryInterface $cardImporterRegistry
-     */
     public function __construct(CardImporterRegistryInterface $cardImporterRegistry)
     {
         parent::__construct();
@@ -60,12 +57,6 @@ final class ImportCommand extends Command
         ;
     }
 
-    /**
-     * @param InputInterface  $input
-     * @param OutputInterface $output
-     *
-     * @return int
-     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $this

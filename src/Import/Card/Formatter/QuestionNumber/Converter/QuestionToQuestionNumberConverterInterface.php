@@ -32,10 +32,5 @@ use App\Persistence\Entity\Card\Question;
  */
 interface QuestionToQuestionNumberConverterInterface
 {
-    /**
-     * @param Question $question
-     *
-     * @return QuestionNumberInterface
-     */
     public function convert(Question $question): QuestionNumberInterface;
 }

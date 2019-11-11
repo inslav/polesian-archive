@@ -31,13 +31,7 @@ use App\ImportDb\Program\Parser\Line\Line\ProgramTextLineInterface;
  */
 interface ProgramLineInterface extends ProgramTextLineInterface
 {
-    /**
-     * @return string
-     */
     public function getNumber(): string;
 
-    /**
-     * @return string
-     */
     public function getName(): string;
 }

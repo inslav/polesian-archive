@@ -29,8 +29,5 @@ namespace App\Import\Card\Importer;
  */
 interface CardImporterInterface
 {
-    /**
-     * @param string $pathToFile
-     */
     public function import(string $pathToFile): void;
 }

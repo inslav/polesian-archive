@@ -87,25 +87,17 @@ class Village
         $this->cards = new ArrayCollection();
     }
 
-    /**
-     * @return int|null
-     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * @return string|null
-     */
     public function getName(): ?string
     {
         return $this->name;
     }
 
     /**
-     * @param string $name
-     *
      * @return Village
      */
     public function setName(string $name): self
@@ -115,17 +107,12 @@ class Village
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getNumberInAtlas(): ?string
     {
         return $this->numberInAtlas;
     }
 
     /**
-     * @param string|null $numberInAtlas
-     *
      * @return Village
      */
     public function setNumberInAtlas(?string $numberInAtlas): self
@@ -135,37 +122,27 @@ class Village
         return $this;
     }
 
-    /**
-     * @return Raion|null
-     */
     public function getRaion(): ?Raion
     {
         return $this->raion;
     }
 
     /**
-     * @param Raion|null $raion
-     *
      * @return Village
      */
-    public function setRaion(?Raion $raion): self
+    public function setRaion(Raion $raion): self
     {
         $this->raion = $raion;
 
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getComment(): ?string
     {
         return $this->comment;
     }
 
     /**
-     * @param string|null $comment
-     *
      * @return Village
      */
     public function setComment(?string $comment): self
@@ -200,8 +177,6 @@ class Village
     }
 
     /**
-     * @param Card $card
-     *
      * @return Village
      */
     public function addCard(Card $card): self
@@ -209,23 +184,6 @@ class Village
         if (!$this->cards->contains($card)) {
             $this->cards[] = $card;
             $card->setVillage($this);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @param Card $card
-     *
-     * @return Village
-     */
-    public function removeCard(Card $card): self
-    {
-        if ($this->cards->contains($card)) {
-            $this->cards->removeElement($card);
-            if ($card->getVillage() === $this) {
-                $card->setVillage(null);
-            }
         }
 
         return $this;

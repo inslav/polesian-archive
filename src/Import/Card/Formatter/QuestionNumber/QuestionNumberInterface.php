@@ -29,23 +29,11 @@ namespace App\Import\Card\Formatter\QuestionNumber;
  */
 interface QuestionNumberInterface
 {
-    /**
-     * @return string
-     */
     public function getProgramNumber(): string;
 
-    /**
-     * @return int|null
-     */
     public function getParagraphNumber(): ?int;
 
-    /**
-     * @return string|null
-     */
     public function getSubparagraphLetter(): ?string;
 
-    /**
-     * @return bool
-     */
     public function getIsAdditional(): bool;
 }

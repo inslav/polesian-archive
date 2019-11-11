@@ -68,9 +68,6 @@ final class SubparagraphFixtures extends Fixture implements DependentFixtureInte
 
     public const PROGRAM_XV_PARAGRAPH_1_SUBPARAGRAPH_Z = 'XV.1z';
 
-    /**
-     * @param ObjectManager $manager
-     */
     public function load(ObjectManager $manager): void
     {
         $subparagraph = (new Subparagraph())

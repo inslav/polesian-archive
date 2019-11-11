@@ -37,23 +37,13 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 final class ParagraphRepository extends ServiceEntityRepository
 {
-    /**
-     * @param RegistryInterface $registry
-     */
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Paragraph::class);
     }
 
     /**
-     * @param int         $number
-     * @param string|null $title
-     * @param string|null $text
-     * @param Program     $program
-     *
      * @throws ORMException
-     *
-     * @return Paragraph
      */
     public function createParagraph(int $number, ?string $title, ?string $text, Program $program): Paragraph
     {
@@ -69,12 +59,6 @@ final class ParagraphRepository extends ServiceEntityRepository
         return $paragraph;
     }
 
-    /**
-     * @param string $programNumber
-     * @param int    $number
-     *
-     * @return Paragraph|null
-     */
     public function findOneByProgramNumberAndNumber(string $programNumber, int $number): ?Paragraph
     {
         $queryBuilder = $this->createQueryBuilder('paragraph');

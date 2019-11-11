@@ -32,9 +32,6 @@ use App\Persistence\Entity\Card\Informant;
  */
 final class InformantStorage extends AbstractManyToManyEntityStorage
 {
-    /**
-     * @return string
-     */
     protected function getAlphaEntityClass(): string
     {
         return AlphaInformant::class;
@@ -42,8 +39,6 @@ final class InformantStorage extends AbstractManyToManyEntityStorage
 
     /**
      * @param object|AlphaInformant $alphaEntity
-     *
-     * @return string
      */
     protected function getAlphaEntityKey(object $alphaEntity): string
     {
@@ -52,8 +47,6 @@ final class InformantStorage extends AbstractManyToManyEntityStorage
 
     /**
      * @param object|AlphaInformant $alphaEntity
-     *
-     * @return string|null
      */
     protected function getAlphaCardKey(object $alphaEntity): ?string
     {

@@ -39,27 +39,17 @@ final class SubparagraphLine implements SubparagraphLineInterface
      */
     private $text;
 
-    /**
-     * @param string $letter
-     * @param string $text
-     */
     public function __construct(string $letter, string $text)
     {
         $this->letter = $letter;
         $this->text = $text;
     }
 
-    /**
-     * @return string
-     */
     public function getLetter(): string
     {
         return $this->letter;
     }
 
-    /**
-     * @return string
-     */
     public function getText(): string
     {
         return $this->text;

@@ -34,30 +34,18 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 final class CollectorRepository extends ServiceEntityRepository
 {
-    /**
-     * @param RegistryInterface $registry
-     */
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Collector::class);
     }
 
-    /**
-     * @param string $name
-     *
-     * @return Collector|null
-     */
     public function findOneByName(string $name): ?Collector
     {
         return $this->findOneBy(['name' => $name]);
     }
 
     /**
-     * @param string $name
-     *
      * @throws ORMException
-     *
-     * @return Collector
      */
     public function createCollector(string $name): Collector
     {
@@ -71,11 +59,7 @@ final class CollectorRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param string $name
-     *
      * @throws ORMException
-     *
-     * @return Collector
      */
     public function findOneByNameOrCreate(string $name): Collector
     {

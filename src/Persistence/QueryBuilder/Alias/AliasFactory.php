@@ -29,12 +29,6 @@ namespace App\Persistence\QueryBuilder\Alias;
  */
 final class AliasFactory implements AliasFactoryInterface
 {
-    /**
-     * @param string $className
-     * @param string $alias
-     *
-     * @return string
-     */
     public function createAlias(string $className, string $alias): string
     {
         $classNameParts = explode('\\', $className);

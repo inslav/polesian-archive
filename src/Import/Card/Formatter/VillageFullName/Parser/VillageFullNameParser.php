@@ -35,11 +35,6 @@ final class VillageFullNameParser implements VillageFullNameParserInterface
 {
     public const VILLAGE_FULL_NAME_PARTS_DELIMITER = ', ';
 
-    /**
-     * @param string $villageFullName
-     *
-     * @return VillageFullNameInterface
-     */
     public function parseVillageFullName(string $villageFullName): VillageFullNameInterface
     {
         if (preg_match('/() \((.+)\)/', $villageFullName, $matches)) {
@@ -56,9 +51,9 @@ final class VillageFullNameParser implements VillageFullNameParserInterface
         $expectedPartsCount = 3;
 
         if ($expectedPartsCount !== $partsCount) {
-            throw new InvalidArgumentException(
-                sprintf('Unexpected village full name "%s" parts count "%d"', $villageFullName, $partsCount)
-            );
+            $message = sprintf('Unexpected village full name "%s" parts count "%d"', $villageFullName, $partsCount);
+
+            throw new InvalidArgumentException($message);
         }
 
         return new VillageFullName(

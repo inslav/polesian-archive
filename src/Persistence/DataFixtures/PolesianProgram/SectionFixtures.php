@@ -37,9 +37,6 @@ final class SectionFixtures extends Fixture
 
     public const SECTION_NATURE = 'nature';
 
-    /**
-     * @param ObjectManager $manager
-     */
     public function load(ObjectManager $manager): void
     {
         $section = (new Section())

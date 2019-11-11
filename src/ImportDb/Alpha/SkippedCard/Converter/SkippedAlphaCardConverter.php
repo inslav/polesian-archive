@@ -33,11 +33,6 @@ use App\ImportDb\Alpha\SkippedCard\SkippedAlphaCardInterface;
  */
 final class SkippedAlphaCardConverter implements SkippedAlphaCardConverterInterface
 {
-    /**
-     * @param AlphaCard $alphaCard
-     *
-     * @return SkippedAlphaCardInterface
-     */
     public function convertAlphaCardToSkippedAlphaCard(AlphaCard $alphaCard): SkippedAlphaCardInterface
     {
         return new SkippedAlphaCard(

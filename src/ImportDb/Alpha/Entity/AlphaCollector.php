@@ -50,17 +50,11 @@ class AlphaCollector
      */
     private $spvnkey;
 
-    /**
-     * @return string|null
-     */
     public function getSobir(): ?string
     {
         return $this->sobir;
     }
 
-    /**
-     * @return string|null
-     */
     public function getSpvnkey(): ?string
     {
         return $this->spvnkey;

@@ -34,8 +34,6 @@ final class SeasonStorage extends AbstractManyToOneEntityStorage
 {
     /**
      * @param object|AlphaCard $alphaObject
-     *
-     * @return string|null
      */
     protected function getAlphaEntityKey(object $alphaObject): ?string
     {

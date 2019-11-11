@@ -79,25 +79,17 @@ class Question
         $this->isAdditional = false;
     }
 
-    /**
-     * @return int|null
-     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * @return Program|null
-     */
     public function getProgram(): ?Program
     {
         return $this->program;
     }
 
     /**
-     * @param Program $program
-     *
      * @return Question
      */
     public function setProgram(Program $program): self
@@ -107,17 +99,12 @@ class Question
         return $this;
     }
 
-    /**
-     * @return Paragraph|null
-     */
     public function getParagraph(): ?Paragraph
     {
         return $this->paragraph;
     }
 
     /**
-     * @param Paragraph|null $paragraph
-     *
      * @return Question
      */
     public function setParagraph(?Paragraph $paragraph): self
@@ -127,17 +114,12 @@ class Question
         return $this;
     }
 
-    /**
-     * @return Subparagraph|null
-     */
     public function getSubparagraph(): ?Subparagraph
     {
         return $this->subparagraph;
     }
 
     /**
-     * @param Subparagraph|null $subparagraph
-     *
      * @return Question
      */
     public function setSubparagraph(?Subparagraph $subparagraph): self
@@ -156,8 +138,6 @@ class Question
     }
 
     /**
-     * @param bool $isAdditional
-     *
      * @return Question
      */
     public function setIsAdditional(bool $isAdditional): self

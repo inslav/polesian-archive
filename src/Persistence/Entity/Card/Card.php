@@ -147,45 +147,32 @@ class Card
         $this->collectors = new ArrayCollection();
     }
 
-    /**
-     * @return int|null
-     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * @return Village|null
-     */
     public function getVillage(): ?Village
     {
         return $this->village;
     }
 
     /**
-     * @param Village|null $village
-     *
      * @return Card
      */
-    public function setVillage(?Village $village): self
+    public function setVillage(Village $village): self
     {
         $this->village = $village;
 
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getKhutor(): ?string
     {
         return $this->khutor;
     }
 
     /**
-     * @param string|null $khutor
-     *
      * @return Card
      */
     public function setKhutor(?string $khutor): self
@@ -220,8 +207,6 @@ class Card
     }
 
     /**
-     * @param Question $question
-     *
      * @return Card
      */
     public function addQuestion(Question $question): self
@@ -236,8 +221,6 @@ class Card
     }
 
     /**
-     * @param Question $question
-     *
      * @return Card
      */
     public function removeQuestion(Question $question): self
@@ -249,17 +232,12 @@ class Card
         return $this;
     }
 
-    /**
-     * @return int|null
-     */
     public function getYear(): ?int
     {
         return $this->year;
     }
 
     /**
-     * @param int $year
-     *
      * @return Card
      */
     public function setYear(int $year): self
@@ -269,17 +247,12 @@ class Card
         return $this;
     }
 
-    /**
-     * @return Season|null
-     */
     public function getSeason(): ?Season
     {
         return $this->season;
     }
 
     /**
-     * @param Season|null $season
-     *
      * @return Card
      */
     public function setSeason(?Season $season): self
@@ -289,17 +262,12 @@ class Card
         return $this;
     }
 
-    /**
-     * @return bool
-     */
     public function getHasPositiveAnswer(): bool
     {
         return $this->hasPositiveAnswer;
     }
 
     /**
-     * @param bool $hasPositiveAnswer
-     *
      * @return Card
      */
     public function setHasPositiveAnswer(bool $hasPositiveAnswer): self
@@ -309,17 +277,12 @@ class Card
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getText(): ?string
     {
         return $this->text;
     }
 
     /**
-     * @param string $text
-     *
      * @return Card
      */
     public function setText(string $text): self
@@ -329,17 +292,12 @@ class Card
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getDescription(): ?string
     {
         return $this->description;
     }
 
     /**
-     * @param string $description
-     *
      * @return Card
      */
     public function setDescription(string $description): self
@@ -349,17 +307,12 @@ class Card
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getComment(): ?string
     {
         return $this->comment;
     }
 
     /**
-     * @param string|null $comment
-     *
      * @return Card
      */
     public function setComment(?string $comment): self
@@ -394,8 +347,6 @@ class Card
     }
 
     /**
-     * @param Keyword $newKeyword
-     *
      * @return Card
      */
     public function addKeyword(Keyword $newKeyword): self
@@ -409,8 +360,6 @@ class Card
     }
 
     /**
-     * @param Keyword $newKeyword
-     *
      * @return Card
      */
     public function removeKeyword(Keyword $newKeyword): self
@@ -448,8 +397,6 @@ class Card
     }
 
     /**
-     * @param Term $term
-     *
      * @return Card
      */
     public function addTerm(Term $term): self
@@ -462,8 +409,6 @@ class Card
     }
 
     /**
-     * @param Term $term
-     *
      * @return Card
      */
     public function removeTerm(Term $term): self
@@ -500,8 +445,6 @@ class Card
     }
 
     /**
-     * @param Informant $informant
-     *
      * @return Card
      */
     public function addInformant(Informant $informant): self
@@ -514,8 +457,6 @@ class Card
     }
 
     /**
-     * @param Informant $informant
-     *
      * @return Card
      */
     public function removeInformant(Informant $informant): self
@@ -552,8 +493,6 @@ class Card
     }
 
     /**
-     * @param Collector $collector
-     *
      * @return Card
      */
     public function addCollector(Collector $collector): self
@@ -566,8 +505,6 @@ class Card
     }
 
     /**
-     * @param Collector $collector
-     *
      * @return Card
      */
     public function removeCollector(Collector $collector): self

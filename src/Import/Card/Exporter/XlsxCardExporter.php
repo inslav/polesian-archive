@@ -59,11 +59,6 @@ final class XlsxCardExporter implements CardExporterInterface
      */
     private $villageFullNameFormatter;
 
-    /**
-     * @param CardRepository                    $cardRepository
-     * @param QuestionNumberFormatterInterface  $questionNumberFormatter
-     * @param VillageFullNameFormatterInterface $villageFullNameFormatter
-     */
     public function __construct(
         CardRepository $cardRepository,
         QuestionNumberFormatterInterface $questionNumberFormatter,
@@ -75,9 +70,6 @@ final class XlsxCardExporter implements CardExporterInterface
     }
 
     /**
-     * @param string   $pathToFile
-     * @param int|null $bunchSize
-     *
      * @throws PhpSpreadsheet\Exception
      * @throws InvalidArgumentException
      */
@@ -99,9 +91,6 @@ final class XlsxCardExporter implements CardExporterInterface
     }
 
     /**
-     * @param array  $cards
-     * @param string $pathToFile
-     *
      * @throws PhpSpreadsheet\Exception
      */
     private function exportCards(array $cards, string $pathToFile): void
@@ -125,12 +114,6 @@ final class XlsxCardExporter implements CardExporterInterface
         $writer->save($pathToFile);
     }
 
-    /**
-     * @param string $pathToFile
-     * @param int    $bunchIndex
-     *
-     * @return string
-     */
     private function getBunchPathToFile(string $pathToFile, int $bunchIndex): string
     {
         $pathToFileParts = explode('.', $pathToFile);
@@ -149,11 +132,6 @@ final class XlsxCardExporter implements CardExporterInterface
         return implode('.', $pathToFileParts);
     }
 
-    /**
-     * @param Card $card
-     *
-     * @return array
-     */
     private function getColumnValues(Card $card): array
     {
         $formatQuestion = function (Question $question): string {

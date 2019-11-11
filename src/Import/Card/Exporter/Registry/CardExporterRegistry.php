@@ -38,19 +38,11 @@ final class CardExporterRegistry implements CardExporterRegistryInterface
      */
     private $xlsxCardExporter;
 
-    /**
-     * @param XlsxCardExporter $xlsxCardExporter
-     */
     public function __construct(XlsxCardExporter $xlsxCardExporter)
     {
         $this->xlsxCardExporter = $xlsxCardExporter;
     }
 
-    /**
-     * @param string $exportFormat
-     *
-     * @return CardExporterInterface
-     */
     public function getExporter(string $exportFormat): CardExporterInterface
     {
         $availableExporters = $this->getAvailableExporters();

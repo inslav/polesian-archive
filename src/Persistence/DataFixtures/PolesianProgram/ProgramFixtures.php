@@ -42,9 +42,6 @@ final class ProgramFixtures extends Fixture implements DependentFixtureInterface
 
     public const PROGRAM_XV = 'XV';
 
-    /**
-     * @param ObjectManager $manager
-     */
     public function load(ObjectManager $manager): void
     {
         $program = (new Program())

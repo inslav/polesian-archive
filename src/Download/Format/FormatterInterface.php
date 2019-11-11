@@ -33,20 +33,13 @@ interface FormatterInterface
 {
     /**
      * @param Card[] $cards
-     *
-     * @return string
      */
     public function format(array $cards): string;
 
     /**
      * @param Card[] $cards
-     *
-     * @return string
      */
     public function getFileName(array $cards): string;
 
-    /**
-     * @return string
-     */
     public function getContentType(): string;
 }

@@ -31,10 +31,5 @@ use App\Import\Card\Formatter\QuestionNumber\QuestionNumberInterface;
  */
 interface QuestionNumberParserInterface
 {
-    /**
-     * @param string $questionNumber
-     *
-     * @return QuestionNumberInterface
-     */
     public function parseQuestionNumber(string $questionNumber): QuestionNumberInterface;
 }

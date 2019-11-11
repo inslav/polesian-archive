@@ -54,11 +54,6 @@ final class ProgramFilterParameter implements FilterParameterInterface, Expressi
      */
     private $romanToIntConverter;
 
-    /**
-     * @param ProgramRepository     $programRepository
-     * @param AliasFactoryInterface $aliasFactory
-     * @param RomanToInt            $romanToIntConverter
-     */
     public function __construct(
         ProgramRepository $programRepository,
         AliasFactoryInterface $aliasFactory,
@@ -69,27 +64,16 @@ final class ProgramFilterParameter implements FilterParameterInterface, Expressi
         $this->romanToIntConverter = $romanToIntConverter;
     }
 
-    /**
-     * @return string
-     */
     public function getQueryParameterName(): string
     {
         return 'program';
     }
 
-    /**
-     * @return string
-     */
     public function getType(): string
     {
         return ChoiceType::class;
     }
 
-    /**
-     * @param EntityManager $entityManager
-     *
-     * @return array
-     */
     public function getOptions(EntityManager $entityManager): array
     {
         return [
@@ -105,11 +89,7 @@ final class ProgramFilterParameter implements FilterParameterInterface, Expressi
     }
 
     /**
-     * @param QueryBuilder $queryBuilder
-     * @param mixed        $formData
-     * @param string       $entityAlias
-     *
-     * @return string|null
+     * @param mixed $formData
      */
     public function buildWhereExpression(QueryBuilder $queryBuilder, $formData, string $entityAlias): ?string
     {
@@ -133,9 +113,6 @@ final class ProgramFilterParameter implements FilterParameterInterface, Expressi
         return (string) $queryBuilder->expr()->in($programAlias.'.id', $programIds);
     }
 
-    /**
-     * @return array
-     */
     private function createChoices(): array
     {
         $entityCollection = $this->programRepository->findAll();

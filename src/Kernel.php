@@ -42,9 +42,6 @@ final class Kernel extends BaseKernel
 
     private const CONFIG_EXTENSION = '.yaml';
 
-    /**
-     * @return iterable
-     */
     public function registerBundles(): iterable
     {
         $bundles = require $this->getBundlesDeclarationFile();
@@ -57,9 +54,6 @@ final class Kernel extends BaseKernel
     }
 
     /**
-     * @param ContainerBuilder $container
-     * @param LoaderInterface  $loader
-     *
      * @throws Exception
      */
     protected function configureContainer(ContainerBuilder $container, LoaderInterface $loader): void
@@ -77,8 +71,6 @@ final class Kernel extends BaseKernel
     }
 
     /**
-     * @param RouteCollectionBuilder $routes
-     *
      * @throws LoaderLoadException
      */
     protected function configureRoutes(RouteCollectionBuilder $routes): void
@@ -90,17 +82,11 @@ final class Kernel extends BaseKernel
         $routes->import($routesDir.self::CONFIG_EXTENSION, '/', 'glob');
     }
 
-    /**
-     * @return string
-     */
     private function getConfigDir(): string
     {
         return $this->getProjectDir().'/config';
     }
 
-    /**
-     * @return string
-     */
     private function getBundlesDeclarationFile(): string
     {
         return $this->getConfigDir().'/bundles.php';

@@ -38,19 +38,11 @@ final class CardImporterRegistry implements CardImporterRegistryInterface
      */
     private $xlsxCardImporter;
 
-    /**
-     * @param XlsxCardImporter $xlsxCardImporter
-     */
     public function __construct(XlsxCardImporter $xlsxCardImporter)
     {
         $this->xlsxCardImporter = $xlsxCardImporter;
     }
 
-    /**
-     * @param string $importFormat
-     *
-     * @return CardImporterInterface
-     */
     public function getImporter(string $importFormat): CardImporterInterface
     {
         $availableImporters = $this->getAvailableImporters();

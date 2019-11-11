@@ -53,10 +53,6 @@ final class ProgramImporter implements ProgramImporterInterface
      */
     private $registry;
 
-    /**
-     * @param ProgramTextLineParserInterface $programTextLineParser
-     * @param RegistryInterface              $registry
-     */
     public function __construct(
         ProgramTextLineParserInterface $programTextLineParser,
         RegistryInterface $registry
@@ -66,8 +62,6 @@ final class ProgramImporter implements ProgramImporterInterface
     }
 
     /**
-     * @param string $pathToSourceFile
-     *
      * @throws InvalidArgumentException
      * @throws ORMException
      */
@@ -129,12 +123,6 @@ final class ProgramImporter implements ProgramImporterInterface
         $this->registry->getManager()->flush();
     }
 
-    /**
-     * @param string $currentInstanceClass
-     * @param string $neededInstanceClass
-     *
-     * @return LogicException
-     */
     private function createException(string $currentInstanceClass, string $neededInstanceClass): LogicException
     {
         return new LogicException(

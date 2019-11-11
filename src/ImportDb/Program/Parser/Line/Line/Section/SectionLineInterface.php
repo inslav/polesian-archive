@@ -31,8 +31,5 @@ use App\ImportDb\Program\Parser\Line\Line\ProgramTextLineInterface;
  */
 interface SectionLineInterface extends ProgramTextLineInterface
 {
-    /**
-     * @return string
-     */
     public function getName(): string;
 }

@@ -41,13 +41,6 @@ final class RaionStorage extends AbstractManyToOneEntityStorage
      */
     private $oblastStorage;
 
-    /**
-     * @param RegistryInterface             $doctrine
-     * @param AlphaValueConverterInterface  $valueConverter
-     * @param QuestionNumberParserInterface $questionNumberParser
-     * @param LoggerInterface               $logger
-     * @param OblastStorage                 $oblastStorage
-     */
     public function __construct(
         RegistryInterface $doctrine,
         AlphaValueConverterInterface $valueConverter,
@@ -61,8 +54,6 @@ final class RaionStorage extends AbstractManyToOneEntityStorage
 
     /**
      * @param object|AlphaVillage $alphaObject
-     *
-     * @return string|null
      */
     protected function getAlphaEntityKey(object $alphaObject): ?string
     {

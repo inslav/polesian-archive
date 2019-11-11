@@ -72,25 +72,17 @@ class Raion
         $this->villages = new ArrayCollection();
     }
 
-    /**
-     * @return int|null
-     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * @return string|null
-     */
     public function getName(): ?string
     {
         return $this->name;
     }
 
     /**
-     * @param string $name
-     *
      * @return Raion
      */
     public function setName(string $name): self
@@ -100,20 +92,15 @@ class Raion
         return $this;
     }
 
-    /**
-     * @return Oblast|null
-     */
     public function getOblast(): ?Oblast
     {
         return $this->oblast;
     }
 
     /**
-     * @param Oblast|null $oblast
-     *
      * @return Raion
      */
-    public function setOblast(?Oblast $oblast): self
+    public function setOblast(Oblast $oblast): self
     {
         $this->oblast = $oblast;
 
@@ -129,8 +116,6 @@ class Raion
     }
 
     /**
-     * @param Village $village
-     *
      * @return Raion
      */
     public function addVillage(Village $village): self
@@ -138,23 +123,6 @@ class Raion
         if (!$this->villages->contains($village)) {
             $this->villages[] = $village;
             $village->setRaion($this);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @param Village $village
-     *
-     * @return Raion
-     */
-    public function removeVillage(Village $village): self
-    {
-        if ($this->villages->contains($village)) {
-            $this->villages->removeElement($village);
-            if ($village->getRaion() === $this) {
-                $village->setRaion(null);
-            }
         }
 
         return $this;

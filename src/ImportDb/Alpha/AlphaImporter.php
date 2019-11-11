@@ -118,21 +118,6 @@ final class AlphaImporter implements AlphaImporterInterface
      */
     private $logger;
 
-    /**
-     * @param Filesystem                          $filesystem
-     * @param RegistryInterface                   $doctrine
-     * @param AlphaValueConverterInterface        $valueConverter
-     * @param SkippedAlphaCardsCollectorInterface $skippedAlphaCardsCollector
-     * @param SkippedAlphaCardConverterInterface  $skippedAlphaCardConverter
-     * @param VillageStorage                      $villageStorage
-     * @param QuestionStorage                     $questionStorage
-     * @param SeasonStorage                       $seasonStorage
-     * @param KeywordStorage                      $keywordsStorage
-     * @param TermStorage                         $termsStorage
-     * @param InformantStorage                    $informantStorage
-     * @param CollectorStorage                    $collectorsStorage
-     * @param LoggerInterface                     $logger
-     */
     public function __construct(
         Filesystem $filesystem,
         RegistryInterface $doctrine,
@@ -164,9 +149,6 @@ final class AlphaImporter implements AlphaImporterInterface
         $this->logger = $logger;
     }
 
-    /**
-     * @param string $pathToSkippedAlphaCardsLogFile
-     */
     public function import(string $pathToSkippedAlphaCardsLogFile): void
     {
         $this->logger->info(sprintf('Running Alpha Import %s', static::class));
@@ -176,9 +158,6 @@ final class AlphaImporter implements AlphaImporterInterface
         $this->logger->info('Alpha Import has been successfully finished');
     }
 
-    /**
-     * @param string $pathToSkippedAlphaCardsLogFile
-     */
     private function importCards(string $pathToSkippedAlphaCardsLogFile): void
     {
         $this->logger->info('Importing AlphaCards');
@@ -220,11 +199,6 @@ final class AlphaImporter implements AlphaImporterInterface
         $this->logger->info('AlphaCards to Cards conversion has been successfully finished');
     }
 
-    /**
-     * @param AlphaCard $alphaCard
-     * @param int       $processingAlphaCardIndex
-     * @param int       $alphaCardsLeft
-     */
     private function convertAlphaCardToCard(
         AlphaCard $alphaCard,
         int $processingAlphaCardIndex,
@@ -284,9 +258,6 @@ final class AlphaImporter implements AlphaImporterInterface
         }
     }
 
-    /**
-     * @param string $pathToSkippedAlphaCardsLogDirectory
-     */
     private function writeSkippedAlphaCardsToFile(string $pathToSkippedAlphaCardsLogDirectory): void
     {
         $this->logger->info(
@@ -361,11 +332,6 @@ final class AlphaImporter implements AlphaImporterInterface
         ];
     }
 
-    /**
-     * @param string $textValue
-     *
-     * @return bool
-     */
     private function isTextValueBroken(string $textValue): bool
     {
         return false !== mb_strpos($textValue, \chr(0)) || false !== mb_strpos($textValue, \chr(1));

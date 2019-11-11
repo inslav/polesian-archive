@@ -49,10 +49,6 @@ final class FilterableTableController extends AbstractController
      */
     private $txtFormatter;
 
-    /**
-     * @param DownloaderInterface $downloader
-     * @param TxtFormatter        $txtFormatter
-     */
     public function __construct(DownloaderInterface $downloader, TxtFormatter $txtFormatter)
     {
         $this->downloader = $downloader;
@@ -61,19 +57,12 @@ final class FilterableTableController extends AbstractController
 
     /**
      * @Route("/download/txt", name="filterable_table__download_txt")
-     *
-     * @return Response
      */
     public function downloadTxt(): Response
     {
         return $this->download($this->txtFormatter);
     }
 
-    /**
-     * @param FormatterInterface $formatter
-     *
-     * @return Response
-     */
     private function download(FormatterInterface $formatter): Response
     {
         $rowIdentifiers = json_decode(
@@ -94,13 +83,6 @@ final class FilterableTableController extends AbstractController
         );
     }
 
-    /**
-     * @param string $content
-     * @param string $fileName
-     * @param string $contentType
-     *
-     * @return Response
-     */
     private function memoryFile(string $content, string $fileName, string $contentType): Response
     {
         $response = new Response($content);

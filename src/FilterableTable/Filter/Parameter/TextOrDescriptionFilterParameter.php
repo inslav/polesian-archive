@@ -47,10 +47,6 @@ final class TextOrDescriptionFilterParameter implements FilterParameterInterface
      */
     private $parameterFactory;
 
-    /**
-     * @param AliasFactoryInterface     $aliasFactory
-     * @param ParameterFactoryInterface $parameterFactory
-     */
     public function __construct(
         AliasFactoryInterface $aliasFactory,
         ParameterFactoryInterface $parameterFactory
@@ -59,27 +55,16 @@ final class TextOrDescriptionFilterParameter implements FilterParameterInterface
         $this->parameterFactory = $parameterFactory;
     }
 
-    /**
-     * @return string
-     */
     public function getQueryParameterName(): string
     {
         return 'text';
     }
 
-    /**
-     * @return string
-     */
     public function getType(): string
     {
         return TextType::class;
     }
 
-    /**
-     * @param EntityManager $entityManager
-     *
-     * @return array
-     */
     public function getOptions(EntityManager $entityManager): array
     {
         return [
@@ -92,11 +77,7 @@ final class TextOrDescriptionFilterParameter implements FilterParameterInterface
     }
 
     /**
-     * @param QueryBuilder $queryBuilder
-     * @param mixed        $formData
-     * @param string       $entityAlias
-     *
-     * @return string|null
+     * @param mixed $formData
      */
     public function buildWhereExpression(QueryBuilder $queryBuilder, $formData, string $entityAlias): ?string
     {

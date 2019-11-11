@@ -67,45 +67,32 @@ class Subparagraph
      */
     private $text;
 
-    /**
-     * @return int|null
-     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * @return Paragraph|null
-     */
     public function getParagraph(): ?Paragraph
     {
         return $this->paragraph;
     }
 
     /**
-     * @param Paragraph|null $paragraph
-     *
      * @return Subparagraph
      */
-    public function setParagraph(?Paragraph $paragraph): self
+    public function setParagraph(Paragraph $paragraph): self
     {
         $this->paragraph = $paragraph;
 
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getLetter(): ?string
     {
         return $this->letter;
     }
 
     /**
-     * @param string $letter
-     *
      * @return Subparagraph
      */
     public function setLetter(string $letter): self
@@ -115,17 +102,12 @@ class Subparagraph
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getText(): ?string
     {
         return $this->text;
     }
 
     /**
-     * @param string $text
-     *
      * @return Subparagraph
      */
     public function setText(string $text): self

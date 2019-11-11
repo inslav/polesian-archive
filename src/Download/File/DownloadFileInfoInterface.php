@@ -29,18 +29,9 @@ namespace App\Download\File;
  */
 interface DownloadFileInfoInterface
 {
-    /**
-     * @return string
-     */
     public function getName(): string;
 
-    /**
-     * @return string
-     */
     public function getContent(): string;
 
-    /**
-     * @return string
-     */
     public function getContentType(): string;
 }

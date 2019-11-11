@@ -32,9 +32,6 @@ use App\Persistence\Entity\Card\Collector;
  */
 final class CollectorStorage extends AbstractManyToManyEntityStorage
 {
-    /**
-     * @return string
-     */
     protected function getAlphaEntityClass(): string
     {
         return AlphaCollector::class;
@@ -42,8 +39,6 @@ final class CollectorStorage extends AbstractManyToManyEntityStorage
 
     /**
      * @param object|AlphaCollector $alphaEntity
-     *
-     * @return string
      */
     protected function getAlphaEntityKey(object $alphaEntity): string
     {
@@ -52,8 +47,6 @@ final class CollectorStorage extends AbstractManyToManyEntityStorage
 
     /**
      * @param object|AlphaCollector $alphaEntity
-     *
-     * @return string|null
      */
     protected function getAlphaCardKey(object $alphaEntity): ?string
     {

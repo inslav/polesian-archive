@@ -37,22 +37,13 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 final class SubparagraphRepository extends ServiceEntityRepository
 {
-    /**
-     * @param RegistryInterface $registry
-     */
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Subparagraph::class);
     }
 
     /**
-     * @param string    $letter
-     * @param string    $text
-     * @param Paragraph $paragraph
-     *
      * @throws ORMException
-     *
-     * @return Subparagraph
      */
     public function createSubparagraph(string $letter, string $text, Paragraph $paragraph): Subparagraph
     {
@@ -68,13 +59,7 @@ final class SubparagraphRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param string $programNumber
-     * @param int    $paragraphNumber
-     * @param string $letter
-     *
      * @throws LogicException
-     *
-     * @return Subparagraph|null
      */
     public function findOneByProgramNumberAndParagraphNumberAndLetter(
         string $programNumber,

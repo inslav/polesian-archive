@@ -35,22 +35,13 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 final class ProgramRepository extends ServiceEntityRepository
 {
-    /**
-     * @param RegistryInterface $registry
-     */
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Program::class);
     }
 
     /**
-     * @param string  $number
-     * @param string  $name
-     * @param Section $section
-     *
      * @throws ORMException
-     *
-     * @return Program
      */
     public function createProgram(string $number, string $name, Section $section): Program
     {
@@ -65,11 +56,6 @@ final class ProgramRepository extends ServiceEntityRepository
         return $program;
     }
 
-    /**
-     * @param string $number
-     *
-     * @return Program|null
-     */
     public function findOneByNumber(string $number): ?Program
     {
         return $this->findOneBy(['number' => $number]);

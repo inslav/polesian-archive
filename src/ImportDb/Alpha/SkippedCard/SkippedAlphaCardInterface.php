@@ -31,58 +31,25 @@ use JsonSerializable;
  */
 interface SkippedAlphaCardInterface extends JsonSerializable
 {
-    /**
-     * @return string
-     */
     public function getSpvnkey(): string;
 
-    /**
-     * @return string|null
-     */
     public function getSelokey(): ?string;
 
-    /**
-     * @return string
-     */
     public function getHutor(): string;
 
-    /**
-     * @return string
-     */
     public function getGod(): string;
 
-    /**
-     * @return string|null
-     */
     public function getSezon(): ?string;
 
-    /**
-     * @return string
-     */
     public function getNprog(): string;
 
-    /**
-     * @return string
-     */
     public function getNvopr(): string;
 
-    /**
-     * @return string|null
-     */
     public function getOtv(): ?string;
 
-    /**
-     * @return string
-     */
     public function getDtext(): string;
 
-    /**
-     * @return string
-     */
     public function getOptext(): string;
 
-    /**
-     * @return string
-     */
     public function getNum(): string;
 }

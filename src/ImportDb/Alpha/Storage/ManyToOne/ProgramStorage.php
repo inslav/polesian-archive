@@ -41,13 +41,6 @@ final class ProgramStorage extends AbstractManyToOneEntityStorage
      */
     private $sectionStorage;
 
-    /**
-     * @param RegistryInterface             $doctrine
-     * @param AlphaValueConverterInterface  $valueConverter
-     * @param QuestionNumberParserInterface $questionNumberParser
-     * @param LoggerInterface               $logger
-     * @param SectionStorage                $sectionStorage
-     */
     public function __construct(
         RegistryInterface $doctrine,
         AlphaValueConverterInterface $valueConverter,
@@ -61,8 +54,6 @@ final class ProgramStorage extends AbstractManyToOneEntityStorage
 
     /**
      * @param object|AlphaCard $alphaObject
-     *
-     * @return string|null
      */
     protected function getAlphaEntityKey(object $alphaObject): ?string
     {

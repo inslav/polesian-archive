@@ -34,20 +34,13 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 final class OblastRepository extends ServiceEntityRepository
 {
-    /**
-     * @param RegistryInterface $registry
-     */
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Oblast::class);
     }
 
     /**
-     * @param string $name
-     *
      * @throws ORMException
-     *
-     * @return Oblast
      */
     public function findOneByNameOrCreate(string $name): Oblast
     {
@@ -60,11 +53,6 @@ final class OblastRepository extends ServiceEntityRepository
         return $oblast;
     }
 
-    /**
-     * @param string $name
-     *
-     * @return Oblast|null
-     */
     private function findOneByName(string $name): ?Oblast
     {
         return $this->findOneBy(
@@ -75,11 +63,7 @@ final class OblastRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param string $name
-     *
      * @throws ORMException
-     *
-     * @return Oblast
      */
     private function createOblast(string $name): Oblast
     {

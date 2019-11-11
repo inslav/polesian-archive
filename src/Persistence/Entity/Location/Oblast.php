@@ -63,25 +63,17 @@ class Oblast
         $this->raions = new ArrayCollection();
     }
 
-    /**
-     * @return int|null
-     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * @return string|null
-     */
     public function getName(): ?string
     {
         return $this->name;
     }
 
     /**
-     * @param string $name
-     *
      * @return Oblast
      */
     public function setName(string $name): self
@@ -100,8 +92,6 @@ class Oblast
     }
 
     /**
-     * @param Raion $raion
-     *
      * @return Oblast
      */
     public function addRaion(Raion $raion): self
@@ -109,23 +99,6 @@ class Oblast
         if (!$this->raions->contains($raion)) {
             $this->raions[] = $raion;
             $raion->setOblast($this);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @param Raion $raion
-     *
-     * @return Oblast
-     */
-    public function removeRaion(Raion $raion): self
-    {
-        if ($this->raions->contains($raion)) {
-            $this->raions->removeElement($raion);
-            if ($raion->getOblast() === $this) {
-                $raion->setOblast(null);
-            }
         }
 
         return $this;

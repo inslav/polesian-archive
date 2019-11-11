@@ -35,9 +35,6 @@ final class CollectorFixtures extends Fixture
 {
     public const COLLECTOR_GURA_A_V = 'Гура А. В.';
 
-    /**
-     * @param ObjectManager $manager
-     */
     public function load(ObjectManager $manager): void
     {
         $collector = (new Collector())

@@ -55,9 +55,6 @@ final class QuestionFixtures extends Fixture implements DependentFixtureInterfac
 
     public const QUESTION_9 = 'question-9';
 
-    /**
-     * @param ObjectManager $manager
-     */
     public function load(ObjectManager $manager): void
     {
         $question = (new Question())

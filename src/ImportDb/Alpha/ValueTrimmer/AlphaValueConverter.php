@@ -31,11 +31,6 @@ use InvalidArgumentException;
  */
 final class AlphaValueConverter implements AlphaValueConverterInterface
 {
-    /**
-     * @param string|null $value
-     *
-     * @return string|null
-     */
     public function getTrimmedOrNull(?string $value): ?string
     {
         if (null !== $value) {
@@ -49,22 +44,13 @@ final class AlphaValueConverter implements AlphaValueConverterInterface
         return null;
     }
 
-    /**
-     * @param string $value
-     *
-     * @return string
-     */
     public function getTrimmed(string $value): string
     {
         return trim($value);
     }
 
     /**
-     * @param string $value
-     *
      * @throws InvalidArgumentException
-     *
-     * @return int
      */
     public function getInt(string $value): int
     {

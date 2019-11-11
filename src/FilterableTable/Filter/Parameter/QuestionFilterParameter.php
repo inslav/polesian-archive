@@ -73,14 +73,6 @@ final class QuestionFilterParameter implements FilterParameterInterface, Express
      */
     private $questionRepository;
 
-    /**
-     * @param AliasFactoryInterface            $aliasFactory
-     * @param ParameterFactoryInterface        $parameterFactory
-     * @param QuestionNumberFormatterInterface $questionNumberFormatter
-     * @param QuestionNumberParserInterface    $questionNumberParser
-     * @param RomanToInt                       $romanToIntConverter
-     * @param QuestionRepository               $questionRepository
-     */
     public function __construct(
         AliasFactoryInterface $aliasFactory,
         ParameterFactoryInterface $parameterFactory,
@@ -97,27 +89,16 @@ final class QuestionFilterParameter implements FilterParameterInterface, Express
         $this->questionRepository = $questionRepository;
     }
 
-    /**
-     * @return string
-     */
     public function getQueryParameterName(): string
     {
         return 'questions';
     }
 
-    /**
-     * @return string
-     */
     public function getType(): string
     {
         return ChoiceType::class;
     }
 
-    /**
-     * @param EntityManager $entityManager
-     *
-     * @return array
-     */
     public function getOptions(EntityManager $entityManager): array
     {
         return [
@@ -133,11 +114,7 @@ final class QuestionFilterParameter implements FilterParameterInterface, Express
     }
 
     /**
-     * @param QueryBuilder $queryBuilder
-     * @param mixed        $formData
-     * @param string       $entityAlias
-     *
-     * @return string|null
+     * @param mixed $formData
      */
     public function buildWhereExpression(QueryBuilder $queryBuilder, $formData, string $entityAlias): ?string
     {
@@ -218,9 +195,6 @@ final class QuestionFilterParameter implements FilterParameterInterface, Express
         return (string) $queryBuilder->expr()->orX(...$orWhereClauses);
     }
 
-    /**
-     * @return array
-     */
     private function createChoices(): array
     {
         $questions = $this->questionRepository->findAll();

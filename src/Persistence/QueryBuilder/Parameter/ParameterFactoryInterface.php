@@ -29,11 +29,5 @@ namespace App\Persistence\QueryBuilder\Parameter;
  */
 interface ParameterFactoryInterface
 {
-    /**
-     * @param string $fieldAlias
-     * @param int    $index
-     *
-     * @return string
-     */
     public function createParameter(string $fieldAlias, int $index): string;
 }

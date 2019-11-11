@@ -35,11 +35,6 @@ use App\ImportDb\Program\Parser\Line\Line\Subparagraph\SubparagraphLine;
  */
 final class ProgramTextLineParser implements ProgramTextLineParserInterface
 {
-    /**
-     * @param string $programTextLine
-     *
-     * @return ProgramTextLineInterface
-     */
     public function parseProgramTextLine(string $programTextLine): ProgramTextLineInterface
     {
         if (1 === preg_match('/^(\d+)\. (Запишите .+)$/u', $programTextLine, $matches)) {

@@ -49,10 +49,6 @@ final class OblastFilterParameter implements FilterParameterInterface, Expressio
      */
     private $parameterFactory;
 
-    /**
-     * @param AliasFactoryInterface     $aliasFactory
-     * @param ParameterFactoryInterface $parameterFactory
-     */
     public function __construct(
         AliasFactoryInterface $aliasFactory,
         ParameterFactoryInterface $parameterFactory
@@ -61,27 +57,16 @@ final class OblastFilterParameter implements FilterParameterInterface, Expressio
         $this->parameterFactory = $parameterFactory;
     }
 
-    /**
-     * @return string
-     */
     public function getQueryParameterName(): string
     {
         return 'oblast';
     }
 
-    /**
-     * @return string
-     */
     public function getType(): string
     {
         return EntityType::class;
     }
 
-    /**
-     * @param EntityManager $entityManager
-     *
-     * @return array
-     */
     public function getOptions(EntityManager $entityManager): array
     {
         return [
@@ -99,11 +84,7 @@ final class OblastFilterParameter implements FilterParameterInterface, Expressio
     }
 
     /**
-     * @param QueryBuilder $queryBuilder
-     * @param mixed        $formData
-     * @param string       $entityAlias
-     *
-     * @return string|null
+     * @param mixed $formData
      */
     public function buildWhereExpression(QueryBuilder $queryBuilder, $formData, string $entityAlias): ?string
     {
@@ -141,9 +122,6 @@ final class OblastFilterParameter implements FilterParameterInterface, Expressio
         return (string) $queryBuilder->expr()->orX(...$orWhereClauses);
     }
 
-    /**
-     * @return callable
-     */
     private function createQueryBuilder(): callable
     {
         return function (EntityRepository $repository): QueryBuilder {

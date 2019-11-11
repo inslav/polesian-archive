@@ -43,35 +43,21 @@ final class TermFilterParameter implements FilterParameterInterface, ExpressionB
      */
     private $aliasFactory;
 
-    /**
-     * @param AliasFactoryInterface $aliasFactory
-     */
     public function __construct(AliasFactoryInterface $aliasFactory)
     {
         $this->aliasFactory = $aliasFactory;
     }
 
-    /**
-     * @return string
-     */
     public function getQueryParameterName(): string
     {
         return 'term';
     }
 
-    /**
-     * @return string
-     */
     public function getType(): string
     {
         return EntityType::class;
     }
 
-    /**
-     * @param EntityManager $entityManager
-     *
-     * @return array
-     */
     public function getOptions(EntityManager $entityManager): array
     {
         return [
@@ -89,11 +75,7 @@ final class TermFilterParameter implements FilterParameterInterface, ExpressionB
     }
 
     /**
-     * @param QueryBuilder $queryBuilder
-     * @param mixed        $formData
-     * @param string       $entityAlias
-     *
-     * @return string|null
+     * @param mixed $formData
      */
     public function buildWhereExpression(QueryBuilder $queryBuilder, $formData, string $entityAlias): ?string
     {
@@ -119,9 +101,6 @@ final class TermFilterParameter implements FilterParameterInterface, ExpressionB
         return (string) $queryBuilder->expr()->in($termAlias.'.id', $ids);
     }
 
-    /**
-     * @return callable
-     */
     private function createQueryBuilder(): callable
     {
         return function (EntityRepository $repository): QueryBuilder {

@@ -41,9 +41,6 @@ final class ExportCommand extends Command
      */
     private $cardExporterRegistry;
 
-    /**
-     * @param CardExporterRegistryInterface $cardExporterRegistry
-     */
     public function __construct(CardExporterRegistryInterface $cardExporterRegistry)
     {
         parent::__construct();
@@ -61,12 +58,6 @@ final class ExportCommand extends Command
         ;
     }
 
-    /**
-     * @param InputInterface  $input
-     * @param OutputInterface $output
-     *
-     * @return int
-     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $bunchSizeArgument = $input->getArgument('bunch-size');

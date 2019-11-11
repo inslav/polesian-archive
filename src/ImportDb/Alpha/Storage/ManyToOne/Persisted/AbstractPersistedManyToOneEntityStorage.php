@@ -33,16 +33,8 @@ use App\ImportDb\Alpha\Storage\ManyToOne\AbstractManyToOneEntityStorage;
  */
 abstract class AbstractPersistedManyToOneEntityStorage extends AbstractManyToOneEntityStorage
 {
-    /**
-     * @return string
-     */
     abstract protected function getEntityClass(): string;
 
-    /**
-     * @param object $entity
-     *
-     * @return string
-     */
     abstract protected function getEntityKey(object $entity): string;
 
     /**
@@ -63,14 +55,9 @@ abstract class AbstractPersistedManyToOneEntityStorage extends AbstractManyToOne
      * @param object|AlphaCard $alphaObject
      *
      * @throws BrokenCardException
-     *
-     * @return object
      */
     final protected function createEntity(object $alphaObject): object
     {
-        throw BrokenCardException::programMismatch(
-            $this->getAlphaEntityKey($alphaObject),
-            static::class
-        );
+        throw BrokenCardException::programMismatch($this->getAlphaEntityKey($alphaObject), static::class);
     }
 }

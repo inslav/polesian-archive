@@ -33,11 +33,6 @@ use App\Persistence\Entity\Location\Village;
  */
 final class VillageToVillageFullNameConverter implements VillageToVillageFullNameConverterInterface
 {
-    /**
-     * @param Village $village
-     *
-     * @return VillageFullNameInterface
-     */
     public function convertToVillageFullName(Village $village): VillageFullNameInterface
     {
         return new VillageFullName(

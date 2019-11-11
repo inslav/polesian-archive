@@ -50,17 +50,11 @@ class AlphaInformant
      */
     private $spvnkey;
 
-    /**
-     * @return string|null
-     */
     public function getInformator(): ?string
     {
         return $this->informator;
     }
 
-    /**
-     * @return string|null
-     */
     public function getSpvnkey(): ?string
     {
         return $this->spvnkey;

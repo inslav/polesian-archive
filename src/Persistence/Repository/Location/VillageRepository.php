@@ -42,10 +42,6 @@ final class VillageRepository extends ServiceEntityRepository
      */
     private $raionRepository;
 
-    /**
-     * @param RegistryInterface $registry
-     * @param RaionRepository   $raionRepository
-     */
     public function __construct(RegistryInterface $registry, RaionRepository $raionRepository)
     {
         parent::__construct($registry, Village::class);
@@ -54,11 +50,7 @@ final class VillageRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param VillageFullNameInterface $villageFullName
-     *
      * @throws ORMException
-     *
-     * @return Village
      */
     public function findOneByNameAndRaionAndOblastOrCreate(VillageFullNameInterface $villageFullName): Village
     {
@@ -75,13 +67,6 @@ final class VillageRepository extends ServiceEntityRepository
         return $village;
     }
 
-    /**
-     * @param string $name
-     * @param string $raionName
-     * @param string $oblastName
-     *
-     * @return Village|null
-     */
     private function findOneByNameAndRaionNameAndOblastName(
         string $name,
         string $raionName,
@@ -110,11 +95,7 @@ final class VillageRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param VillageFullNameInterface $villageFullName
-     *
      * @throws ORMException
-     *
-     * @return Village
      */
     private function createVillage(VillageFullNameInterface $villageFullName): Village
     {

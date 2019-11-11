@@ -31,18 +31,9 @@ use App\ImportDb\Program\Parser\Line\Line\ProgramTextLineInterface;
  */
 interface ParagraphLineInterface extends ProgramTextLineInterface
 {
-    /**
-     * @return int
-     */
     public function getNumber(): int;
 
-    /**
-     * @return string|null
-     */
     public function getTitle(): ?string;
 
-    /**
-     * @return string|null
-     */
     public function getText(): ?string;
 }

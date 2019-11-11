@@ -99,18 +99,6 @@ final class CardsFilterConfigurator extends AbstractFilterConfigurator
      */
     private $textOrDescriptionFilterParameter;
 
-    /**
-     * @param ProgramFilterParameter           $programFilterParameter
-     * @param QuestionFilterParameter          $questionFilterParameter
-     * @param YearFilterParameter              $yearFilterParameter
-     * @param OblastFilterParameter            $oblastFilterParameter
-     * @param RaionFilterParameter             $raionFilterParameter
-     * @param VillageFilterParameter           $villageFilterParameter
-     * @param KeywordFilterParameter           $keywordFilterParameter
-     * @param TermFilterParameter              $termFilterParameter
-     * @param CollectorFilterParameter         $collectorFilterParameter
-     * @param TextOrDescriptionFilterParameter $textOrDescriptionFilterParameter
-     */
     public function __construct(
         ProgramFilterParameter $programFilterParameter,
         QuestionFilterParameter $questionFilterParameter,
@@ -136,9 +124,6 @@ final class CardsFilterConfigurator extends AbstractFilterConfigurator
         $this->textOrDescriptionFilterParameter = $textOrDescriptionFilterParameter;
     }
 
-    /**
-     * @return array
-     */
     public function createDefaults(): array
     {
         return [
@@ -151,9 +136,6 @@ final class CardsFilterConfigurator extends AbstractFilterConfigurator
         ];
     }
 
-    /**
-     * @return array
-     */
     public function createSubmitButtonOptions(): array
     {
         return [
@@ -162,9 +144,6 @@ final class CardsFilterConfigurator extends AbstractFilterConfigurator
         ];
     }
 
-    /**
-     * @return array
-     */
     public function createResetButtonOptions(): array
     {
         return [
@@ -173,9 +152,6 @@ final class CardsFilterConfigurator extends AbstractFilterConfigurator
         ];
     }
 
-    /**
-     * @return array
-     */
     public function createSearchInFoundButtonOptions(): array
     {
         return [
@@ -184,9 +160,6 @@ final class CardsFilterConfigurator extends AbstractFilterConfigurator
         ];
     }
 
-    /**
-     * @return string
-     */
     public function getDisablePaginationLabel(): string
     {
         return 'controller.card.list.filter.disablePaginator';
@@ -200,9 +173,9 @@ final class CardsFilterConfigurator extends AbstractFilterConfigurator
     public function getEntityId($entity)
     {
         if (!$entity instanceof Card) {
-            throw new InvalidArgumentException(
-                sprintf('Expected entity of type "%s", "%s" given', Card::class, $entity)
-            );
+            $message = sprintf('Expected entity of type "%s", "%s" given', Card::class, $entity);
+
+            throw new InvalidArgumentException($message);
         }
 
         return $entity->getId();

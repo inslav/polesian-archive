@@ -37,9 +37,6 @@ final class TermFixtures extends Fixture
 
     public const TERM_2 = 'термин 2';
 
-    /**
-     * @param ObjectManager $manager
-     */
     public function load(ObjectManager $manager): void
     {
         $term = (new Term())

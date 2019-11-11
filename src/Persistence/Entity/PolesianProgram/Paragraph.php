@@ -90,45 +90,32 @@ class Paragraph
         $this->subparagraphs = new ArrayCollection();
     }
 
-    /**
-     * @return int|null
-     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * @return Program|null
-     */
     public function getProgram(): ?Program
     {
         return $this->program;
     }
 
     /**
-     * @param Program|null $program
-     *
      * @return Paragraph
      */
-    public function setProgram(?Program $program): self
+    public function setProgram(Program $program): self
     {
         $this->program = $program;
 
         return $this;
     }
 
-    /**
-     * @return int|null
-     */
     public function getNumber(): ?int
     {
         return $this->number;
     }
 
     /**
-     * @param int $number
-     *
      * @return Paragraph
      */
     public function setNumber(int $number): self
@@ -138,17 +125,12 @@ class Paragraph
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getTitle(): ?string
     {
         return $this->title;
     }
 
     /**
-     * @param string|null $title
-     *
      * @return Paragraph
      */
     public function setTitle(?string $title): self
@@ -158,17 +140,12 @@ class Paragraph
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getText(): ?string
     {
         return $this->text;
     }
 
     /**
-     * @param string|null $text
-     *
      * @return Paragraph
      */
     public function setText(?string $text): self
@@ -187,8 +164,6 @@ class Paragraph
     }
 
     /**
-     * @param Subparagraph $subparagraph
-     *
      * @return Paragraph
      */
     public function addSubparagraph(Subparagraph $subparagraph): self
@@ -196,23 +171,6 @@ class Paragraph
         if (!$this->subparagraphs->contains($subparagraph)) {
             $this->subparagraphs[] = $subparagraph;
             $subparagraph->setParagraph($this);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @param Subparagraph $subparagraph
-     *
-     * @return Paragraph
-     */
-    public function removeSubparagraph(Subparagraph $subparagraph): self
-    {
-        if ($this->subparagraphs->contains($subparagraph)) {
-            $this->subparagraphs->removeElement($subparagraph);
-            if ($subparagraph->getParagraph() === $this) {
-                $subparagraph->setParagraph(null);
-            }
         }
 
         return $this;

@@ -84,57 +84,36 @@ class AlphaVillage
      */
     private $opselo;
 
-    /**
-     * @return string
-     */
     public function getSelo(): string
     {
         return $this->selo;
     }
 
-    /**
-     * @return string
-     */
     public function getDistrict(): string
     {
         return $this->district;
     }
 
-    /**
-     * @return string
-     */
     public function getRegion(): string
     {
         return $this->region;
     }
 
-    /**
-     * @return string|null
-     */
     public function getInd(): ?string
     {
         return $this->ind;
     }
 
-    /**
-     * @return string|null
-     */
     public function getAtlas(): ?string
     {
         return $this->atlas;
     }
 
-    /**
-     * @return string
-     */
     public function getSelokey(): string
     {
         return $this->selokey;
     }
 
-    /**
-     * @return string|null
-     */
     public function getOpselo(): ?string
     {
         return $this->opselo;

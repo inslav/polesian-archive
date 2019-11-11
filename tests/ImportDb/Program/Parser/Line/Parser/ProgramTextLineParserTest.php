@@ -53,9 +53,6 @@ final class ProgramTextLineParserTest extends TestCase
 
     /**
      * @dataProvider getSectionLines
-     *
-     * @param string               $programTextLine
-     * @param SectionLineInterface $expectedSectionLine
      */
     public function testParseSectionLine(string $programTextLine, SectionLineInterface $expectedSectionLine): void
     {
@@ -70,9 +67,6 @@ final class ProgramTextLineParserTest extends TestCase
 
     /**
      * @dataProvider getProgramLines
-     *
-     * @param string               $programTextLine
-     * @param ProgramLineInterface $expectedLine
      */
     public function testParseProgramLine(string $programTextLine, ProgramLineInterface $expectedLine): void
     {
@@ -88,9 +82,6 @@ final class ProgramTextLineParserTest extends TestCase
 
     /**
      * @dataProvider getParagraphLines
-     *
-     * @param string                 $programTextLine
-     * @param ParagraphLineInterface $expectedLine
      */
     public function testParseParagraphLine(string $programTextLine, ParagraphLineInterface $expectedLine): void
     {
@@ -107,9 +98,6 @@ final class ProgramTextLineParserTest extends TestCase
 
     /**
      * @dataProvider getSubparagraphLines
-     *
-     * @param string                    $programTextLine
-     * @param SubparagraphLineInterface $expectedLine
      */
     public function testParseSubparagraphLine(string $programTextLine, SubparagraphLineInterface $expectedLine): void
     {
@@ -128,9 +116,6 @@ final class ProgramTextLineParserTest extends TestCase
      * @dataProvider getProgramLines
      * @dataProvider getParagraphLines
      * @dataProvider getSubparagraphLines
-     *
-     * @param string                   $programTextLine
-     * @param ProgramTextLineInterface $expectedLine
      */
     public function testParseWithObjectsEqualityCheck(string $programTextLine, ProgramTextLineInterface $expectedLine): void
     {

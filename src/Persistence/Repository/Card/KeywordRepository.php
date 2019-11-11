@@ -34,30 +34,18 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 final class KeywordRepository extends ServiceEntityRepository
 {
-    /**
-     * @param RegistryInterface $registry
-     */
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Keyword::class);
     }
 
-    /**
-     * @param string $name
-     *
-     * @return Keyword|null
-     */
     public function findOneByName(string $name): ?Keyword
     {
         return $this->findOneBy(['name' => $name]);
     }
 
     /**
-     * @param string $name
-     *
      * @throws ORMException
-     *
-     * @return Keyword
      */
     public function createKeyword(string $name): Keyword
     {
@@ -71,11 +59,7 @@ final class KeywordRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param string $name
-     *
      * @throws ORMException
-     *
-     * @return Keyword
      */
     public function findOneByNameOrCreate(string $name): Keyword
     {

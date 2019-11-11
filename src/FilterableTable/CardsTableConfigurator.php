@@ -50,18 +50,6 @@ final class CardsTableConfigurator extends AbstractTableConfigurator
      */
     private $questionNumberFormatter;
 
-    /**
-     * @param RouterInterface                   $router
-     * @param FilterConfiguratorInterface       $filterConfigurator
-     * @param string                            $defaultSortBy
-     * @param string                            $defaultSortOrder
-     * @param string                            $listRoute
-     * @param string                            $showRoute
-     * @param array                             $showRouteParameters
-     * @param int                               $pageSize
-     * @param int                               $paginatorTailLength
-     * @param VillageFullNameFormatterInterface $villageFullNameFormatter
-     */
     public function __construct(
         RouterInterface $router,
         FilterConfiguratorInterface $filterConfigurator,
@@ -91,9 +79,6 @@ final class CardsTableConfigurator extends AbstractTableConfigurator
         $this->questionNumberFormatter = $questionNumberFormatter;
     }
 
-    /**
-     * @return string
-     */
     protected function getResultsCountText(): string
     {
         return 'controller.card.list.table.resultsCount';
@@ -131,9 +116,6 @@ final class CardsTableConfigurator extends AbstractTableConfigurator
         ];
     }
 
-    /**
-     * @return array
-     */
     protected function createCheckboxHandlers(): array
     {
         return [

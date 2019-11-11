@@ -37,9 +37,6 @@ final class SeasonFixtures extends Fixture
 
     public const SEASON_WINTER = 'зима';
 
-    /**
-     * @param ObjectManager $manager
-     */
     public function load(ObjectManager $manager): void
     {
         $season = (new Season())

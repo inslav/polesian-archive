@@ -35,9 +35,6 @@ use Doctrine\Common\Persistence\ObjectManager;
  */
 final class CardFixtures extends Fixture implements DependentFixtureInterface
 {
-    /**
-     * @param ObjectManager $manager
-     */
     public function load(ObjectManager $manager): void
     {
         $manager->persist($this->getCard1());
@@ -63,9 +60,6 @@ final class CardFixtures extends Fixture implements DependentFixtureInterface
         ];
     }
 
-    /**
-     * @return Card
-     */
     private function getCard1(): Card
     {
         return (new Card())
@@ -104,9 +98,6 @@ EOT
         ;
     }
 
-    /**
-     * @return Card
-     */
     private function getCard2(): Card
     {
         return (new Card())

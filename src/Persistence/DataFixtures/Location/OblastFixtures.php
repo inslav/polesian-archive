@@ -37,9 +37,6 @@ final class OblastFixtures extends Fixture
 
     const OBLAST_VOLYNSKAYA = 'Волынская';
 
-    /**
-     * @param ObjectManager $manager
-     */
     public function load(ObjectManager $manager): void
     {
         $oblast = (new Oblast())

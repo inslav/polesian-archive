@@ -38,11 +38,7 @@ final class QuestionNumberParser implements QuestionNumberParserInterface
     public const QUESTION_NUMBER_IS_ADDITIONAL_PART = 'доп';
 
     /**
-     * @param string $questionNumber
-     *
      * @throws InvalidArgumentException
-     *
-     * @return QuestionNumberInterface
      */
     public function parseQuestionNumber(string $questionNumber): QuestionNumberInterface
     {
@@ -54,9 +50,9 @@ final class QuestionNumberParser implements QuestionNumberParserInterface
         $maximalPartsCount = 3;
 
         if ($partsCount < $minimalPartsCount || $partsCount > $maximalPartsCount) {
-            throw new InvalidArgumentException(
-                sprintf('Unexpected question number "%s" parts count "%d"', $questionNumber, $partsCount)
-            );
+            $message = sprintf('Unexpected question number "%s" parts count "%d"', $questionNumber, $partsCount);
+
+            throw new InvalidArgumentException($message);
         }
 
         $programNumber = $questionNumberParts[0];
@@ -81,9 +77,9 @@ final class QuestionNumberParser implements QuestionNumberParserInterface
                 $paragraphNumber = (int) $matches[1];
                 $subparagraphLetter = $matches[2];
             } else {
-                throw new InvalidArgumentException(
-                    sprintf('Cannot parse question name and letter "%s"', $paragraphAndSubparagraph)
-                );
+                $message = sprintf('Cannot parse question name and letter "%s"', $paragraphAndSubparagraph);
+
+                throw new InvalidArgumentException($message);
             }
         }
 

@@ -25,7 +25,6 @@ declare(strict_types=1);
 namespace App\ImportDb\Alpha\Storage\ManyToOne\Persisted;
 
 use App\Import\Card\Formatter\QuestionNumber\Formatter\QuestionNumberFormatterInterface;
-use App\Import\Card\Formatter\QuestionNumber\Parser\QuestionNumberParser;
 use App\Import\Card\Formatter\QuestionNumber\Parser\QuestionNumberParserInterface;
 use App\Import\Card\Formatter\QuestionNumber\QuestionNumberInterface;
 use App\ImportDb\Alpha\Entity\AlphaCard;
@@ -49,14 +48,6 @@ final class SubparagraphStorage extends AbstractPersistedManyToOneEntityStorage
      */
     private $paragraphStorage;
 
-    /**
-     * @param RegistryInterface                $doctrine
-     * @param AlphaValueConverterInterface     $valueConverter
-     * @param QuestionNumberParserInterface    $questionNumberParser
-     * @param LoggerInterface                  $logger
-     * @param QuestionNumberFormatterInterface $questionNumberFormatter
-     * @param ParagraphStorage                 $paragraphStorage
-     */
     public function __construct(
         RegistryInterface $doctrine,
         AlphaValueConverterInterface $valueConverter,
@@ -70,9 +61,6 @@ final class SubparagraphStorage extends AbstractPersistedManyToOneEntityStorage
         $this->paragraphStorage = $paragraphStorage;
     }
 
-    /**
-     * @return string
-     */
     protected function getEntityClass(): string
     {
         return Subparagraph::class;
@@ -80,8 +68,6 @@ final class SubparagraphStorage extends AbstractPersistedManyToOneEntityStorage
 
     /**
      * @param object|Subparagraph $entity
-     *
-     * @return string
      */
     protected function getEntityKey(object $entity): string
     {
@@ -90,8 +76,6 @@ final class SubparagraphStorage extends AbstractPersistedManyToOneEntityStorage
 
     /**
      * @param object|AlphaCard $alphaObject
-     *
-     * @return string|null
      */
     protected function getAlphaEntityKey(object $alphaObject): ?string
     {
@@ -106,11 +90,6 @@ final class SubparagraphStorage extends AbstractPersistedManyToOneEntityStorage
         return $this->paragraphStorage->getAlphaEntityKey($alphaObject).$subparagraphLetter;
     }
 
-    /**
-     * @param QuestionNumberInterface $questionNumber
-     *
-     * @return string|null
-     */
     private function getFixedSubparagraphLetter(QuestionNumberInterface $questionNumber): ?string
     {
         $formattedQuestionNumber = $this->questionNumberFormatter->format($questionNumber);

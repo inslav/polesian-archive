@@ -34,8 +34,6 @@ final class OblastStorage extends AbstractManyToOneEntityStorage
 {
     /**
      * @param object|AlphaVillage $alphaObject
-     *
-     * @return string|null
      */
     protected function getAlphaEntityKey(object $alphaObject): ?string
     {
@@ -60,11 +58,6 @@ final class OblastStorage extends AbstractManyToOneEntityStorage
         ;
     }
 
-    /**
-     * @param string $oblastName
-     *
-     * @return string
-     */
     private function getFixedOblastName(string $oblastName): string
     {
         $correctOblastNameByOblastName = [
