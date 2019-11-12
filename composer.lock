@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3aece29a93523faf04475293fda35cea",
+    "content-hash": "ac56f8228a7094ca312571976716dbec",
     "packages": [
         {
             "name": "composer/ca-bundle",
@@ -2663,16 +2663,16 @@
         },
         {
             "name": "swiftmailer/swiftmailer",
-            "version": "v6.2.1",
+            "version": "v6.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/swiftmailer/swiftmailer.git",
-                "reference": "5397cd05b0a0f7937c47b0adcb4c60e5ab936b6a"
+                "reference": "149cfdf118b169f7840bbe3ef0d4bc795d1780c9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/5397cd05b0a0f7937c47b0adcb4c60e5ab936b6a",
-                "reference": "5397cd05b0a0f7937c47b0adcb4c60e5ab936b6a",
+                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/149cfdf118b169f7840bbe3ef0d4bc795d1780c9",
+                "reference": "149cfdf118b169f7840bbe3ef0d4bc795d1780c9",
                 "shasum": ""
             },
             "require": {
@@ -2721,7 +2721,7 @@
                 "mail",
                 "mailer"
             ],
-            "time": "2019-04-21T09:21:45+00:00"
+            "time": "2019-11-12T09:31:26+00:00"
         },
         {
             "name": "symfony/asset",
@@ -6052,16 +6052,16 @@
         },
         {
             "name": "vyfony/portation-bundle",
-            "version": "dev-master",
+            "version": "v0.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/vyfony/portation-bundle.git",
-                "reference": "ef0615c8b3c1bf3a2e6022442c707f95326e625b"
+                "reference": "bca02c4db54de1952199a00c8969202a4ff25ab5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/vyfony/portation-bundle/zipball/ef0615c8b3c1bf3a2e6022442c707f95326e625b",
-                "reference": "ef0615c8b3c1bf3a2e6022442c707f95326e625b",
+                "url": "https://api.github.com/repos/vyfony/portation-bundle/zipball/bca02c4db54de1952199a00c8969202a4ff25ab5",
+                "reference": "bca02c4db54de1952199a00c8969202a4ff25ab5",
                 "shasum": ""
             },
             "require": {
@@ -6078,7 +6078,7 @@
                 "symfony/yaml": "^4.0"
             },
             "require-dev": {
-                "friendsofphp/php-cs-fixer": "^2.15",
+                "friendsofphp/php-cs-fixer": "^2.16",
                 "jakub-onderka/php-parallel-lint": "^1.0",
                 "phan/phan": "^2.3",
                 "phpro/grumphp": "^0.16",
@@ -6117,7 +6117,7 @@
                 "portation",
                 "symfony-bundle"
             ],
-            "time": "2019-11-10T21:43:10+00:00"
+            "time": "2019-11-12T23:18:52+00:00"
         },
         {
             "name": "wandersonwhcr/romans",
@@ -8156,9 +8156,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "vyfony/portation-bundle": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
