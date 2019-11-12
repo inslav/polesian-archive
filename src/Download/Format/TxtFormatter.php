@@ -24,8 +24,8 @@ declare(strict_types=1);
 
 namespace App\Download\Format;
 
-use App\Import\Card\Formatter\QuestionNumber\Converter\QuestionToQuestionNumberConverter;
-use App\Import\Card\Formatter\QuestionNumber\Formatter\QuestionNumberFormatterInterface;
+use App\Formatter\QuestionNumber\Converter\QuestionToQuestionNumberConverter;
+use App\Formatter\QuestionNumber\Formatter\QuestionNumberFormatterInterface;
 use App\Persistence\Entity\Card\Card;
 use App\Persistence\Entity\Card\Collector;
 use App\Persistence\Entity\Card\Keyword;

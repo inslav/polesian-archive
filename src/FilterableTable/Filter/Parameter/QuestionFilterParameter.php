@@ -24,9 +24,9 @@ declare(strict_types=1);
 
 namespace App\FilterableTable\Filter\Parameter;
 
-use App\Import\Card\Formatter\QuestionNumber\Formatter\QuestionNumberFormatterInterface;
-use App\Import\Card\Formatter\QuestionNumber\Parser\QuestionNumberParserInterface;
-use App\Import\Card\Formatter\QuestionNumber\QuestionNumberInterface;
+use App\Formatter\QuestionNumber\Formatter\QuestionNumberFormatterInterface;
+use App\Formatter\QuestionNumber\Parser\QuestionNumberParserInterface;
+use App\Formatter\QuestionNumber\QuestionNumberInterface;
 use App\Persistence\Entity\Card\Question;
 use App\Persistence\QueryBuilder\Alias\AliasFactoryInterface;
 use App\Persistence\QueryBuilder\Parameter\ParameterFactoryInterface;

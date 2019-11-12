@@ -40,4 +40,5 @@ return [
     Vyfony\Bundle\FilterableTableBundle\VyfonyFilterableTableBundle::class => ['all' => true],
     Knp\Bundle\MenuBundle\KnpMenuBundle::class => ['all' => true],
     Vyfony\Bundle\MysqldumpBundle\VyfonyMysqldumpBundle::class => ['dev' => true],
+    Vyfony\Bundle\PortationBundle\VyfonyPortationBundle::class => ['all' => true],
 ];

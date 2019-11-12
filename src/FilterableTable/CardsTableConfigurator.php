@@ -24,8 +24,8 @@ declare(strict_types=1);
 
 namespace App\FilterableTable;
 
-use App\Import\Card\Formatter\QuestionNumber\Formatter\QuestionNumberFormatterInterface;
-use App\Import\Card\Formatter\VillageFullName\Formatter\VillageFullNameFormatterInterface;
+use App\Formatter\QuestionNumber\Formatter\QuestionNumberFormatterInterface;
+use App\Formatter\VillageFullName\Formatter\VillageFullNameFormatterInterface;
 use App\Persistence\Entity\Card\Card;
 use App\Persistence\Entity\Card\Question;
 use Symfony\Component\Routing\RouterInterface;
