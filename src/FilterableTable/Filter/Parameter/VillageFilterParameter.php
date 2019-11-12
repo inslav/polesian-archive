@@ -24,7 +24,7 @@ declare(strict_types=1);
 
 namespace App\FilterableTable\Filter\Parameter;
 
-use App\Import\Card\Formatter\VillageFullName\Formatter\VillageFullNameFormatterInterface;
+use App\Formatter\VillageFullName\Formatter\VillageFullNameFormatterInterface;
 use App\Persistence\Entity\Location\Village;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;

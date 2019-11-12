@@ -16,26 +16,25 @@
 # a copy of the GNU General Public License along with Polesian Archive,
 # see <http://www.gnu.org/licenses/>.
 
-parameters:
-  locale: 'ru'
-
-services:
-  _defaults:
-    autowire: true
-    autoconfigure: true
-
-  App\:
-    resource: '../src/*'
-    exclude: '../src/{Command/ImportDb,ImportDb,Persistence/Entity,Kernel.php}'
-
-  App\Controller\:
-    resource: '../src/Controller'
-    tags: ['controller.service_arguments']
-
-  App\Menu\MenuBuilder:
-    arguments: ['@knp_menu.factory', '@request_stack']
-    tags:
-      - { name: knp_menu.menu_builder, method: createMainMenu, alias: main }
-
-  Romans\Filter\RomanToInt:
-    public: false
+portation:
+  format:
+    xlsx:
+      header:
+        id: ID
+        card:
+          village: Село
+          khutor: Хутор
+          questions: Вопросы
+          year: Год
+          season: Сезон
+          hasPositiveAnswer: Утвердительный ответ
+          text: Текст
+          description: Описание
+          keywords: Ключевые слова
+          terms: Термины
+          informants: Информанты
+          collectors: Собиратели
+  formatter:
+    bool:
+      "true": ""
+      "false": "нет"

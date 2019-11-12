@@ -24,7 +24,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use App\Import\Card\Formatter\QuestionNumber\Formatter\QuestionNumberFormatterInterface;
+use App\Formatter\QuestionNumber\Formatter\QuestionNumberFormatterInterface;
 use App\Persistence\Repository\Card\CardRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

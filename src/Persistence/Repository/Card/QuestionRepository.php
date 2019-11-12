@@ -24,7 +24,7 @@ declare(strict_types=1);
 
 namespace App\Persistence\Repository\Card;
 
-use App\Import\Card\Formatter\QuestionNumber\QuestionNumberInterface;
+use App\Formatter\QuestionNumber\QuestionNumberInterface;
 use App\Persistence\Entity\Card\Question;
 use App\Persistence\Repository\PolesianProgram\ParagraphRepository;
 use App\Persistence\Repository\PolesianProgram\ProgramRepository;

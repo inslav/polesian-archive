@@ -24,7 +24,7 @@ declare(strict_types=1);
 
 namespace App\Persistence\Repository\Location;
 
-use App\Import\Card\Formatter\VillageFullName\VillageFullNameInterface;
+use App\Formatter\VillageFullName\VillageFullNameInterface;
 use App\Persistence\Entity\Location\Village;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\NonUniqueResultException;
