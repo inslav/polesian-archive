@@ -41,22 +41,22 @@ class Raion
      *
      * @ORM\Id()
      * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @ORM\Column(name="id", type="integer")
      */
     private $id;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
 
     /**
      * @var Oblast
      *
+     * @ORM\JoinColumn(name="oblast_id", nullable=false)
      * @ORM\ManyToOne(targetEntity="App\Persistence\Entity\Location\Oblast", inversedBy="raions")
-     * @ORM\JoinColumn(nullable=false)
      */
     private $oblast;
 

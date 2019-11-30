@@ -41,21 +41,22 @@ class Question
      *
      * @ORM\Id()
      * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @ORM\Column(name="id", type="integer")
      */
     private $id;
 
     /**
      * @var Program
      *
+     * @ORM\JoinColumn(name="program_id", nullable=false)
      * @ORM\ManyToOne(targetEntity="App\Persistence\Entity\PolesianProgram\Program")
-     * @ORM\JoinColumn(nullable=false)
      */
     private $program;
 
     /**
      * @var Paragraph|null
      *
+     * @ORM\JoinColumn(name="paragraph_id", nullable=true)
      * @ORM\ManyToOne(targetEntity="App\Persistence\Entity\PolesianProgram\Paragraph")
      */
     private $paragraph;
@@ -63,6 +64,7 @@ class Question
     /**
      * @var Subparagraph|null
      *
+     * @ORM\JoinColumn(name="subparagraph_id", nullable=true)
      * @ORM\ManyToOne(targetEntity="App\Persistence\Entity\PolesianProgram\Subparagraph")
      */
     private $subparagraph;
@@ -70,7 +72,7 @@ class Question
     /**
      * @var bool
      *
-     * @ORM\Column(type="boolean", options={"default": 0})
+     * @ORM\Column(name="is_additional", type="boolean", options={"default": 0})
      */
     private $isAdditional;
 
