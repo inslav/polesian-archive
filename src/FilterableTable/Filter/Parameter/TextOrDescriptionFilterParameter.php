@@ -24,7 +24,6 @@ declare(strict_types=1);
 
 namespace App\FilterableTable\Filter\Parameter;
 
-use App\Persistence\QueryBuilder\Alias\AliasFactoryInterface;
 use App\Persistence\QueryBuilder\Parameter\ParameterFactoryInterface;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\QueryBuilder;
@@ -38,20 +37,12 @@ use Vyfony\Bundle\FilterableTableBundle\Filter\Configurator\Parameter\FilterPara
 final class TextOrDescriptionFilterParameter implements FilterParameterInterface, ExpressionBuilderInterface
 {
     /**
-     * @var AliasFactoryInterface
-     */
-    private $aliasFactory;
-
-    /**
      * @var ParameterFactoryInterface
      */
     private $parameterFactory;
 
-    public function __construct(
-        AliasFactoryInterface $aliasFactory,
-        ParameterFactoryInterface $parameterFactory
-    ) {
-        $this->aliasFactory = $aliasFactory;
+    public function __construct(ParameterFactoryInterface $parameterFactory)
+    {
         $this->parameterFactory = $parameterFactory;
     }
 
@@ -104,7 +95,7 @@ final class TextOrDescriptionFilterParameter implements FilterParameterInterface
         ): string {
             return (string) $queryBuilder->expr()->like(
                 'LOWER('.$entityAlias.'.'.$fieldName.')',
-                ':'.$parameterName
+                $parameterName
             );
         };
 

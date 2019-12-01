@@ -31,6 +31,12 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Persistence\Repository\Card\CardRepository")
+ * @ORM\Table(
+ *     indexes={
+ *         @ORM\Index(columns={"text"}, flags={"fulltext"}),
+ *         @ORM\Index(columns={"description"}, flags={"fulltext"})
+ *     }
+ * )
  *
  * @author Anton Dyshkant <vyshkant@gmail.com>
  */
