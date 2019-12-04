@@ -30,6 +30,11 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Persistence\Repository\Card\CollectorRepository")
+ * @ORM\Table(
+ *     indexes={
+ *         @ORM\Index(columns={"name"})
+ *     }
+ * )
  *
  * @author Anton Dyshkant <vyshkant@gmail.com>
  */

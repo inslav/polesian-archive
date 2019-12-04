@@ -49,7 +49,7 @@ class Question
      * @var Program
      *
      * @ORM\JoinColumn(name="program_id", nullable=false)
-     * @ORM\ManyToOne(targetEntity="App\Persistence\Entity\PolesianProgram\Program")
+     * @ORM\ManyToOne(targetEntity="App\Persistence\Entity\PolesianProgram\Program", fetch="EAGER")
      */
     private $program;
 
@@ -57,7 +57,7 @@ class Question
      * @var Paragraph|null
      *
      * @ORM\JoinColumn(name="paragraph_id", nullable=true)
-     * @ORM\ManyToOne(targetEntity="App\Persistence\Entity\PolesianProgram\Paragraph")
+     * @ORM\ManyToOne(targetEntity="App\Persistence\Entity\PolesianProgram\Paragraph", fetch="EAGER")
      */
     private $paragraph;
 
@@ -65,7 +65,7 @@ class Question
      * @var Subparagraph|null
      *
      * @ORM\JoinColumn(name="subparagraph_id", nullable=true)
-     * @ORM\ManyToOne(targetEntity="App\Persistence\Entity\PolesianProgram\Subparagraph")
+     * @ORM\ManyToOne(targetEntity="App\Persistence\Entity\PolesianProgram\Subparagraph", fetch="EAGER")
      */
     private $subparagraph;
 

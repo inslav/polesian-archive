@@ -34,7 +34,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(
  *     indexes={
  *         @ORM\Index(columns={"text"}, flags={"fulltext"}),
- *         @ORM\Index(columns={"description"}, flags={"fulltext"})
+ *         @ORM\Index(columns={"description"}, flags={"fulltext"}),
+ *         @ORM\Index(columns={"year"})
  *     }
  * )
  *
