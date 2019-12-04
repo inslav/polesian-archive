@@ -30,8 +30,8 @@ use App\Persistence\Repository\PolesianProgram\ParagraphRepository;
 use App\Persistence\Repository\PolesianProgram\ProgramRepository;
 use App\Persistence\Repository\PolesianProgram\SubparagraphRepository;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\ORMException;
-use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
  * @author Anton Dyshkant <vyshkant@gmail.com>
@@ -54,7 +54,7 @@ final class QuestionRepository extends ServiceEntityRepository
     private $subparagraphRepository;
 
     public function __construct(
-        RegistryInterface $registry,
+        ManagerRegistry $registry,
         ProgramRepository $programRepository,
         ParagraphRepository $paragraphRepository,
         SubparagraphRepository $subparagraphRepository

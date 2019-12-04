@@ -26,15 +26,15 @@ namespace App\Persistence\Repository\PolesianProgram;
 
 use App\Persistence\Entity\PolesianProgram\Section;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\ORMException;
-use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
  * @author Anton Dyshkant <vyshkant@gmail.com>
  */
 final class SectionRepository extends ServiceEntityRepository
 {
-    public function __construct(RegistryInterface $registry)
+    public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Section::class);
     }

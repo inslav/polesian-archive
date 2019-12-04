@@ -28,8 +28,8 @@ use App\Formatter\QuestionNumber\Parser\QuestionNumberParserInterface;
 use App\ImportDb\Alpha\Entity\AlphaCard;
 use App\ImportDb\Alpha\ValueTrimmer\AlphaValueConverterInterface;
 use App\Persistence\Entity\PolesianProgram\Paragraph;
+use Doctrine\Common\Persistence\ManagerRegistry;
 use Psr\Log\LoggerInterface;
-use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
  * @author Anton Dyshkant <vyshkant@gmail.com>
@@ -46,7 +46,7 @@ final class ParagraphStorage extends AbstractManyToOneEntityStorage
     private $programStorage;
 
     public function __construct(
-        RegistryInterface $doctrine,
+        ManagerRegistry $doctrine,
         AlphaValueConverterInterface $valueConverter,
         QuestionNumberParserInterface $questionNumberParser,
         LoggerInterface $logger,

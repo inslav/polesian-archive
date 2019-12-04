@@ -27,10 +27,10 @@ namespace App\Persistence\Repository\Location;
 use App\Formatter\VillageFullName\VillageFullNameInterface;
 use App\Persistence\Entity\Location\Village;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\ORMException;
 use LogicException;
-use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
  * @author Anton Dyshkant <vyshkant@gmail.com>
@@ -42,7 +42,7 @@ final class VillageRepository extends ServiceEntityRepository
      */
     private $raionRepository;
 
-    public function __construct(RegistryInterface $registry, RaionRepository $raionRepository)
+    public function __construct(ManagerRegistry $registry, RaionRepository $raionRepository)
     {
         parent::__construct($registry, Village::class);
 

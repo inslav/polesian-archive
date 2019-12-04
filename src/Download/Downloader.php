@@ -28,7 +28,7 @@ use App\Download\File\DownloadFileInfo;
 use App\Download\File\DownloadFileInfoInterface;
 use App\Download\Format\FormatterInterface;
 use App\Persistence\Entity\Card\Card;
-use Symfony\Bridge\Doctrine\RegistryInterface;
+use Doctrine\Common\Persistence\ManagerRegistry;
 
 /**
  * @author Anton Dyshkant <vyshkant@gmail.com>
@@ -36,11 +36,11 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
 final class Downloader implements DownloaderInterface
 {
     /**
-     * @var RegistryInterface
+     * @var ManagerRegistry
      */
     private $doctrine;
 
-    public function __construct(RegistryInterface $doctrine)
+    public function __construct(ManagerRegistry $doctrine)
     {
         $this->doctrine = $doctrine;
     }

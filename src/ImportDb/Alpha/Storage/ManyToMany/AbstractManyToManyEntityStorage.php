@@ -26,9 +26,9 @@ namespace App\ImportDb\Alpha\Storage\ManyToMany;
 
 use App\ImportDb\Alpha\Entity\AlphaCard;
 use App\ImportDb\Alpha\ValueTrimmer\AlphaValueConverterInterface;
+use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\Common\Persistence\ObjectManager;
 use Psr\Log\LoggerInterface;
-use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
  * @author Anton Dyshkant <vyshkant@gmail.com>
@@ -71,7 +71,7 @@ abstract class AbstractManyToManyEntityStorage
     private $logger;
 
     public function __construct(
-        RegistryInterface $doctrine,
+        ManagerRegistry $doctrine,
         AlphaValueConverterInterface $valueConverter,
         LoggerInterface $logger
     ) {

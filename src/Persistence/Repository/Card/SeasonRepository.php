@@ -26,14 +26,14 @@ namespace App\Persistence\Repository\Card;
 
 use App\Persistence\Entity\Card\Season;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Symfony\Bridge\Doctrine\RegistryInterface;
+use Doctrine\Common\Persistence\ManagerRegistry;
 
 /**
  * @author Anton Dyshkant <vyshkant@gmail.com>
  */
 final class SeasonRepository extends ServiceEntityRepository
 {
-    public function __construct(RegistryInterface $registry)
+    public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Season::class);
     }

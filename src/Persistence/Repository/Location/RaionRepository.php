@@ -26,10 +26,10 @@ namespace App\Persistence\Repository\Location;
 
 use App\Persistence\Entity\Location\Raion;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\ORMException;
 use LogicException;
-use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
  * @author Anton Dyshkant <vyshkant@gmail.com>
@@ -41,7 +41,7 @@ final class RaionRepository extends ServiceEntityRepository
      */
     private $oblastRepository;
 
-    public function __construct(RegistryInterface $registry, OblastRepository $oblastRepository)
+    public function __construct(ManagerRegistry $registry, OblastRepository $oblastRepository)
     {
         parent::__construct($registry, Raion::class);
 

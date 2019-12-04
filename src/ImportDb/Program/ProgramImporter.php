@@ -33,10 +33,10 @@ use App\Persistence\Entity\PolesianProgram\Paragraph;
 use App\Persistence\Entity\PolesianProgram\Program;
 use App\Persistence\Entity\PolesianProgram\Section;
 use App\Persistence\Entity\PolesianProgram\Subparagraph;
+use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\ORMException;
 use InvalidArgumentException;
 use LogicException;
-use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
  * @author Anton Dyshkant <vyshkant@gmail.com>
@@ -49,13 +49,13 @@ final class ProgramImporter implements ProgramImporterInterface
     private $programTextLineParser;
 
     /**
-     * @var RegistryInterface
+     * @var ManagerRegistry
      */
     private $registry;
 
     public function __construct(
         ProgramTextLineParserInterface $programTextLineParser,
-        RegistryInterface $registry
+        ManagerRegistry $registry
     ) {
         $this->programTextLineParser = $programTextLineParser;
         $this->registry = $registry;
