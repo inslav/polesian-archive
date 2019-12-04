@@ -36,7 +36,7 @@ if ('prod' !== $_SERVER['APP_ENV']) {
             'The "APP_ENV" environment variable is not set to "prod". '.
             'Please run "composer require symfony/dotenv" to load the ".env" files configuring the application.';
 
-        throw new RuntimeException();
+        throw new RuntimeException($message);
     }
 
     (new Dotenv())->loadEnv(dirname(__DIR__).'/.env');

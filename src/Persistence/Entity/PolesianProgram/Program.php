@@ -40,29 +40,29 @@ class Program
      *
      * @ORM\Id()
      * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @ORM\Column(name="id", type="integer")
      */
     private $id;
 
     /**
      * @var Section
      *
+     * @ORM\JoinColumn(name="section_id", nullable=false)
      * @ORM\ManyToOne(targetEntity="App\Persistence\Entity\PolesianProgram\Section", inversedBy="programs")
-     * @ORM\JoinColumn(nullable=false)
      */
     private $section;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=255, unique=true)
+     * @ORM\Column(name="number", type="string", length=255, unique=true)
      */
     private $number;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=255, unique=true)
+     * @ORM\Column(name="name", type="string", length=255, unique=true)
      */
     private $name;
 

@@ -41,36 +41,36 @@ class Paragraph
      *
      * @ORM\Id()
      * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @ORM\Column(name="id", type="integer")
      */
     private $id;
 
     /**
      * @var Program
      *
+     * @ORM\JoinColumn(name="program_id", nullable=false)
      * @ORM\ManyToOne(targetEntity="App\Persistence\Entity\PolesianProgram\Program", inversedBy="paragraphs")
-     * @ORM\JoinColumn(nullable=false)
      */
     private $program;
 
     /**
      * @var int
      *
-     * @ORM\Column(type="integer")
+     * @ORM\Column(name="number", type="integer")
      */
     private $number;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(name="title", type="string", length=255, nullable=true)
      */
     private $title;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(type="text", nullable=true)
+     * @ORM\Column(name="text", type="text", nullable=true)
      */
     private $text;
 

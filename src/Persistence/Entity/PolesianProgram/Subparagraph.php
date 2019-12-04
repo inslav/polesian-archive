@@ -41,29 +41,29 @@ class Subparagraph
      *
      * @ORM\Id()
      * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @ORM\Column(name="id", type="integer")
      */
     private $id;
 
     /**
      * @var Paragraph
      *
+     * @ORM\JoinColumn(name="paragraph_id", nullable=false)
      * @ORM\ManyToOne(targetEntity="App\Persistence\Entity\PolesianProgram\Paragraph", inversedBy="subparagraphs")
-     * @ORM\JoinColumn(nullable=false)
      */
     private $paragraph;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(name="letter", type="string", length=255)
      */
     private $letter;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="text")
+     * @ORM\Column(name="text", type="text")
      */
     private $text;
 

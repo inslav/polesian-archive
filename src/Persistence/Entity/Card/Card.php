@@ -31,6 +31,13 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Persistence\Repository\Card\CardRepository")
+ * @ORM\Table(
+ *     indexes={
+ *         @ORM\Index(columns={"text"}, flags={"fulltext"}),
+ *         @ORM\Index(columns={"description"}, flags={"fulltext"}),
+ *         @ORM\Index(columns={"year"})
+ *     }
+ * )
  *
  * @author Anton Dyshkant <vyshkant@gmail.com>
  */
@@ -41,15 +48,15 @@ class Card
      *
      * @ORM\Id()
      * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @ORM\Column(name="id", type="integer")
      */
     private $id;
 
     /**
      * @var Village
      *
+     * @ORM\JoinColumn(name="village_id", nullable=false)
      * @ORM\ManyToOne(targetEntity="App\Persistence\Entity\Location\Village", inversedBy="cards")
-     * @ORM\JoinColumn(nullable=false)
      */
     private $village;
 
@@ -70,13 +77,14 @@ class Card
     /**
      * @var int
      *
-     * @ORM\Column(type="integer")
+     * @ORM\Column(name="year", type="integer")
      */
     private $year;
 
     /**
      * @var Season|null
      *
+     * @ORM\JoinColumn(name="season_id", nullable=true)
      * @ORM\ManyToOne(targetEntity="App\Persistence\Entity\Card\Season", inversedBy="cards")
      */
     private $season;
@@ -84,28 +92,28 @@ class Card
     /**
      * @var bool
      *
-     * @ORM\Column(type="boolean", options={"default": 0})
+     * @ORM\Column(name="has_positive_answer", type="boolean", options={"default": 0})
      */
     private $hasPositiveAnswer;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="text")
+     * @ORM\Column(name="text",type="text")
      */
     private $text;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="text")
+     * @ORM\Column(name="description",type="text")
      */
     private $description;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(type="text", nullable=true)
+     * @ORM\Column(name="comment",type="text", nullable=true)
      */
     private $comment;
 

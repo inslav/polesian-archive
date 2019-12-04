@@ -30,6 +30,11 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Persistence\Repository\Card\InformantRepository")
+ * @ORM\Table(
+ *     indexes={
+ *         @ORM\Index(columns={"name"})
+ *     }
+ * )
  *
  * @author Anton Dyshkant <vyshkant@gmail.com>
  */
@@ -40,14 +45,14 @@ class Informant
      *
      * @ORM\Id()
      * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @ORM\Column(name="id", type="integer")
      */
     private $id;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=255, unique=true)
+     * @ORM\Column(name="name", type="string", length=255, unique=true)
      */
     private $name;
 

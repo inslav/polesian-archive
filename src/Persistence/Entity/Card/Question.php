@@ -41,36 +41,38 @@ class Question
      *
      * @ORM\Id()
      * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @ORM\Column(name="id", type="integer")
      */
     private $id;
 
     /**
      * @var Program
      *
-     * @ORM\ManyToOne(targetEntity="App\Persistence\Entity\PolesianProgram\Program")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(name="program_id", nullable=false)
+     * @ORM\ManyToOne(targetEntity="App\Persistence\Entity\PolesianProgram\Program", fetch="EAGER")
      */
     private $program;
 
     /**
      * @var Paragraph|null
      *
-     * @ORM\ManyToOne(targetEntity="App\Persistence\Entity\PolesianProgram\Paragraph")
+     * @ORM\JoinColumn(name="paragraph_id", nullable=true)
+     * @ORM\ManyToOne(targetEntity="App\Persistence\Entity\PolesianProgram\Paragraph", fetch="EAGER")
      */
     private $paragraph;
 
     /**
      * @var Subparagraph|null
      *
-     * @ORM\ManyToOne(targetEntity="App\Persistence\Entity\PolesianProgram\Subparagraph")
+     * @ORM\JoinColumn(name="subparagraph_id", nullable=true)
+     * @ORM\ManyToOne(targetEntity="App\Persistence\Entity\PolesianProgram\Subparagraph", fetch="EAGER")
      */
     private $subparagraph;
 
     /**
      * @var bool
      *
-     * @ORM\Column(type="boolean", options={"default": 0})
+     * @ORM\Column(name="is_additional", type="boolean", options={"default": 0})
      */
     private $isAdditional;
 

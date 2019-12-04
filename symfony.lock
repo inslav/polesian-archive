@@ -1,7 +1,4 @@
 {
-    "composer/ca-bundle": {
-        "version": "1.1.2"
-    },
     "composer/semver": {
         "version": "1.4.2"
     },
@@ -323,6 +320,9 @@
             "ref": "1717e67afa995e4f01a25ba9ae7aca5b2327bcaa"
         }
     },
+    "symfony/http-client": {
+        "version": "v4.3.8"
+    },
     "symfony/http-foundation": {
         "version": "v4.1.4"
     },
@@ -343,6 +343,9 @@
             "version": "1.0",
             "ref": "fadbfe33303a76e25cb63401050439aa9b1a9c7f"
         }
+    },
+    "symfony/mime": {
+        "version": "v5.0.0"
     },
     "symfony/monolog-bridge": {
         "version": "v4.1.4"
@@ -382,6 +385,9 @@
     },
     "symfony/polyfill-php72": {
         "version": "v1.9.0"
+    },
+    "symfony/polyfill-php73": {
+        "version": "v1.13.1"
     },
     "symfony/process": {
         "version": "v4.1.4"

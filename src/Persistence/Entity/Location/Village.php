@@ -42,36 +42,36 @@ class Village
      *
      * @ORM\Id()
      * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @ORM\Column(name="id", type="integer")
      */
     private $id;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(name="number_in_atlas", type="string", length=255, nullable=true)
      */
     private $numberInAtlas;
 
     /**
      * @var Raion
      *
+     * @ORM\JoinColumn(name="raion_id", nullable=false)
      * @ORM\ManyToOne(targetEntity="App\Persistence\Entity\Location\Raion", inversedBy="villages")
-     * @ORM\JoinColumn(nullable=false)
      */
     private $raion;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(type="text", nullable=true)
+     * @ORM\Column(name="comment", type="text", nullable=true)
      */
     private $comment;
 
