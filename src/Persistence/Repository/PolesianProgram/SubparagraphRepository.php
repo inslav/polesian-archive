@@ -27,17 +27,17 @@ namespace App\Persistence\Repository\PolesianProgram;
 use App\Persistence\Entity\PolesianProgram\Paragraph;
 use App\Persistence\Entity\PolesianProgram\Subparagraph;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\ORMException;
 use LogicException;
-use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
  * @author Anton Dyshkant <vyshkant@gmail.com>
  */
 final class SubparagraphRepository extends ServiceEntityRepository
 {
-    public function __construct(RegistryInterface $registry)
+    public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Subparagraph::class);
     }

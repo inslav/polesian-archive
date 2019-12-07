@@ -29,9 +29,9 @@ use App\ImportDb\Alpha\Entity\AlphaCard;
 use App\ImportDb\Alpha\Entity\AlphaVillage;
 use App\ImportDb\Alpha\ValueTrimmer\AlphaValueConverterInterface;
 use App\Persistence\Entity\Location\Village;
+use Doctrine\Common\Persistence\ManagerRegistry;
 use InvalidArgumentException;
 use Psr\Log\LoggerInterface;
-use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
  * @author Anton Dyshkant <vyshkant@gmail.com>
@@ -49,7 +49,7 @@ final class VillageStorage extends AbstractManyToOneEntityStorage
     private $alphaEntityByAlphaEntityKeyCache;
 
     public function __construct(
-        RegistryInterface $doctrine,
+        ManagerRegistry $doctrine,
         AlphaValueConverterInterface $valueConverter,
         QuestionNumberParserInterface $questionNumberParser,
         LoggerInterface $logger,

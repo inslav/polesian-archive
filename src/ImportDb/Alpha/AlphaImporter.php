@@ -38,9 +38,9 @@ use App\ImportDb\Alpha\Storage\ManyToOne\SeasonStorage;
 use App\ImportDb\Alpha\Storage\ManyToOne\VillageStorage;
 use App\ImportDb\Alpha\ValueTrimmer\AlphaValueConverterInterface;
 use App\Persistence\Entity\Card\Card;
+use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\Common\Persistence\ObjectManager;
 use Psr\Log\LoggerInterface;
-use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\Filesystem\Filesystem;
 
 /**
@@ -120,7 +120,7 @@ final class AlphaImporter implements AlphaImporterInterface
 
     public function __construct(
         Filesystem $filesystem,
-        RegistryInterface $doctrine,
+        ManagerRegistry $doctrine,
         AlphaValueConverterInterface $valueConverter,
         SkippedAlphaCardsCollectorInterface $skippedAlphaCardsCollector,
         SkippedAlphaCardConverterInterface $skippedAlphaCardConverter,

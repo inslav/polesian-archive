@@ -39,7 +39,7 @@ if ('prod' !== $_SERVER['APP_ENV']) {
         throw new RuntimeException($message);
     }
 
-    (new Dotenv())->loadEnv(dirname(__DIR__).'/.env');
+    (new Dotenv(true))->loadEnv(dirname(__DIR__).'/.env');
 }
 
 $_SERVER['APP_ENV'] = $_ENV['APP_ENV'] = $_SERVER['APP_ENV'] ?: $_ENV['APP_ENV'] ?: 'dev';

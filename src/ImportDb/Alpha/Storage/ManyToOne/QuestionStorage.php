@@ -31,8 +31,8 @@ use App\ImportDb\Alpha\Storage\ManyToOne\Persisted\ProgramStorage;
 use App\ImportDb\Alpha\Storage\ManyToOne\Persisted\SubparagraphStorage;
 use App\ImportDb\Alpha\ValueTrimmer\AlphaValueConverterInterface;
 use App\Persistence\Entity\Card\Question;
+use Doctrine\Common\Persistence\ManagerRegistry;
 use Psr\Log\LoggerInterface;
-use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
  * @author Anton Dyshkant <vyshkant@gmail.com>
@@ -55,7 +55,7 @@ final class QuestionStorage extends AbstractManyToOneEntityStorage
     private $subparagraphStorage;
 
     public function __construct(
-        RegistryInterface $doctrine,
+        ManagerRegistry $doctrine,
         AlphaValueConverterInterface $valueConverter,
         QuestionNumberParserInterface $questionNumberParser,
         LoggerInterface $logger,
