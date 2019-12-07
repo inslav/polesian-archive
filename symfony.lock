@@ -95,9 +95,6 @@
     "felixfbecker/advanced-json-rpc": {
         "version": "v3.0.3"
     },
-    "fig/link-util": {
-        "version": "1.0.0"
-    },
     "friendsofphp/php-cs-fixer": {
         "version": "2.2",
         "recipe": {
@@ -286,6 +283,9 @@
     },
     "symfony/dotenv": {
         "version": "v4.1.7"
+    },
+    "symfony/error-handler": {
+        "version": "v4.4.1"
     },
     "symfony/event-dispatcher": {
         "version": "v4.1.4"
