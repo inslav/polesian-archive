@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d339a0c9926f4afc2410022123acf5fd",
+    "content-hash": "a6bea5e2103088c66097516c9093bbcc",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -6007,36 +6007,57 @@
             "time": "2019-10-12T00:35:04+00:00"
         },
         {
-            "name": "symfony/webpack-encore-pack",
-            "version": "v1.0.3",
+            "name": "symfony/webpack-encore-bundle",
+            "version": "v1.7.2",
             "source": {
                 "type": "git",
-                "url": "https://github.com/symfony/webpack-encore-pack.git",
-                "reference": "8d7f51379d7ae17aea7cf501d910a11896895ac4"
+                "url": "https://github.com/symfony/webpack-encore-bundle.git",
+                "reference": "787c2fdedde57788013339f05719c82ce07b6058"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/webpack-encore-pack/zipball/8d7f51379d7ae17aea7cf501d910a11896895ac4",
-                "reference": "8d7f51379d7ae17aea7cf501d910a11896895ac4",
+                "url": "https://api.github.com/repos/symfony/webpack-encore-bundle/zipball/787c2fdedde57788013339f05719c82ce07b6058",
+                "reference": "787c2fdedde57788013339f05719c82ce07b6058",
                 "shasum": ""
             },
             "require": {
-                "symfony/asset": "^3.3|^4.0"
+                "php": "^7.1.3",
+                "symfony/asset": "^3.4 || ^4.0 || ^5.0",
+                "symfony/config": "^3.4 || ^4.0 || ^5.0",
+                "symfony/dependency-injection": "^3.4 || ^4.0 || ^5.0",
+                "symfony/http-kernel": "^3.4 || ^4.0 || ^5.0",
+                "symfony/service-contracts": "^1.0 || ^2.0"
             },
-            "type": "symfony-pack",
+            "require-dev": {
+                "symfony/framework-bundle": "^3.4 || ^4.0 || ^5.0",
+                "symfony/phpunit-bridge": "^4.3.5 || ^5.0",
+                "symfony/twig-bundle": "^3.4 || ^4.0 || ^5.0",
+                "symfony/web-link": "^3.4 || ^4.0 || ^5.0"
+            },
+            "type": "symfony-bundle",
             "extra": {
                 "thanks": {
                     "name": "symfony/webpack-encore",
                     "url": "https://github.com/symfony/webpack-encore"
                 }
             },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\WebpackEncoreBundle\\": "src"
+                }
+            },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
-            "description": "A pack for Symfony Encore",
-            "abandoned": "symfony/webpack-encore-bundle",
-            "time": "2018-07-16T10:15:28+00:00"
+            "authors": [
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Integration with your Symfony app & Webpack Encore!",
+            "time": "2019-11-26T14:48:41+00:00"
         },
         {
             "name": "symfony/yaml",
@@ -6163,16 +6184,16 @@
         },
         {
             "name": "vyfony/filterable-table-bundle",
-            "version": "v0.1.19",
+            "version": "v0.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/vyfony/filterable-table-bundle.git",
-                "reference": "2da3ac7bb9c57948a32e6d7860507b7477750c56"
+                "reference": "8bbbb9e96ed515fe830bddeff3ba2f034799f65f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/vyfony/filterable-table-bundle/zipball/2da3ac7bb9c57948a32e6d7860507b7477750c56",
-                "reference": "2da3ac7bb9c57948a32e6d7860507b7477750c56",
+                "url": "https://api.github.com/repos/vyfony/filterable-table-bundle/zipball/8bbbb9e96ed515fe830bddeff3ba2f034799f65f",
+                "reference": "8bbbb9e96ed515fe830bddeff3ba2f034799f65f",
                 "shasum": ""
             },
             "require": {
@@ -6231,7 +6252,7 @@
                 "symfony-bundle",
                 "table"
             ],
-            "time": "2019-12-04T23:29:19+00:00"
+            "time": "2019-12-08T22:08:35+00:00"
         },
         {
             "name": "vyfony/mysqldump-bundle",

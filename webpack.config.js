@@ -21,6 +21,7 @@
 const encore = require('@symfony/webpack-encore');
 
 encore
+    .disableSingleRuntimeChunk()
     .setOutputPath('public/build/')
     .setPublicPath('/build')
     .cleanupOutputBeforeBuild()

@@ -139,7 +139,7 @@ final class CardsFilterConfigurator extends AbstractFilterConfigurator
     public function createSubmitButtonOptions(): array
     {
         return [
-            'attr' => ['class' => 'btn btn-default'],
+            'attr' => ['class' => 'btn btn-primary'],
             'label' => 'controller.card.list.filter.submitButton',
         ];
     }
@@ -147,7 +147,7 @@ final class CardsFilterConfigurator extends AbstractFilterConfigurator
     public function createResetButtonOptions(): array
     {
         return [
-            'attr' => ['class' => 'btn btn-default'],
+            'attr' => ['class' => 'btn btn-secondary'],
             'label' => 'controller.card.list.filter.resetButton',
         ];
     }
@@ -155,7 +155,7 @@ final class CardsFilterConfigurator extends AbstractFilterConfigurator
     public function createSearchInFoundButtonOptions(): array
     {
         return [
-            'attr' => ['class' => 'btn btn-default'],
+            'attr' => ['class' => 'btn btn-warning'],
             'label' => 'controller.card.list.filter.searchInFoundButton',
         ];
     }

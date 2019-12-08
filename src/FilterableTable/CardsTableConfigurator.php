@@ -122,7 +122,8 @@ final class CardsTableConfigurator extends AbstractTableConfigurator
             new CheckboxHandler(
                 'filterable_table__download_txt',
                 'controller.card.list.download.txt.label',
-                'controller.card.list.download.txt.emptySelectionError'
+                'controller.card.list.download.txt.emptySelectionError',
+                ['btn', 'btn-secondary']
             ),
         ];
     }
