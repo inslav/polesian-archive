@@ -53,6 +53,11 @@ final class Kernel extends BaseKernel
         }
     }
 
+    public function getProjectDir(): string
+    {
+        return \dirname(__DIR__);
+    }
+
     /**
      * @throws Exception
      */
@@ -60,12 +65,16 @@ final class Kernel extends BaseKernel
     {
         $container->addResource(new FileResource($this->getBundlesDeclarationFile()));
 
-        $container->setParameter('container.dumper.inline_class_loader', true);
+        $container->setParameter(
+            'container.dumper.inline_class_loader',
+            \PHP_VERSION_ID < 70400 || !ini_get('opcache.preload')
+        );
+        $container->setParameter('container.dumper.inline_factories', true);
 
         $configDir = $this->getConfigDir();
 
         $loader->load($configDir.'/{packages}/*'.self::CONFIG_EXTENSION, 'glob');
-        $loader->load($configDir.'/{packages}/'.$this->environment.'/**/*'.self::CONFIG_EXTENSION, 'glob');
+        $loader->load($configDir.'/{packages}/'.$this->environment.'/*'.self::CONFIG_EXTENSION, 'glob');
         $loader->load($configDir.'/{services}'.self::CONFIG_EXTENSION, 'glob');
         $loader->load($configDir.'/{services}_'.$this->environment.self::CONFIG_EXTENSION, 'glob');
     }
@@ -77,8 +86,8 @@ final class Kernel extends BaseKernel
     {
         $routesDir = $this->getConfigDir().'/{routes}';
 
+        $routes->import($routesDir.'/'.$this->environment.'/*'.self::CONFIG_EXTENSION, '/', 'glob');
         $routes->import($routesDir.'/*'.self::CONFIG_EXTENSION, '/', 'glob');
-        $routes->import($routesDir.'/'.$this->environment.'/**/*'.self::CONFIG_EXTENSION, '/', 'glob');
         $routes->import($routesDir.self::CONFIG_EXTENSION, '/', 'glob');
     }
 

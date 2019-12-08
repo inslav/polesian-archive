@@ -21,7 +21,7 @@ monolog:
   handlers:
     main:
       type: stream
-      path: '%kernel.logs_dir%/%kernel.environment%.log'
+      path: '%env(resolve:LOGS_DIR)%/%kernel.environment%.log'
       level: debug
       channels: ['!event']
     console:
@@ -30,7 +30,7 @@ monolog:
       channels: ['!event', '!doctrine', '!console']
     alpha_import:
       type: stream
-      path: '%kernel.logs_dir%/alpha-import.log'
+      path: '%env(resolve:LOGS_DIR)%/alpha-import.log'
       level: debug
       channels: alpha_import
       include_stacktraces: true
