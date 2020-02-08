@@ -25,7 +25,6 @@ declare(strict_types=1);
 namespace App\FilterableTable\Filter\Parameter;
 
 use App\Persistence\Entity\PolesianProgram\Program;
-use App\Persistence\QueryBuilder\Alias\AliasFactoryInterface;
 use App\Persistence\Repository\PolesianProgram\ProgramRepository;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\QueryBuilder;
@@ -33,6 +32,7 @@ use Romans\Filter\RomanToInt;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Vyfony\Bundle\FilterableTableBundle\Filter\Configurator\Parameter\ExpressionBuilderInterface;
 use Vyfony\Bundle\FilterableTableBundle\Filter\Configurator\Parameter\FilterParameterInterface;
+use Vyfony\Bundle\FilterableTableBundle\Persistence\QueryBuilder\Alias\AliasFactoryInterface;
 
 /**
  * @author Anton Dyshkant <vyshkant@gmail.com>

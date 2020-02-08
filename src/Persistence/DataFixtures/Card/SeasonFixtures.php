@@ -26,7 +26,7 @@ namespace App\Persistence\DataFixtures\Card;
 
 use App\Persistence\Entity\Card\Season;
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 
 /**
  * @author Anton Dyshkant <vyshkant@gmail.com>

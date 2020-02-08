@@ -27,7 +27,7 @@ namespace App\Persistence\DataFixtures\PolesianProgram;
 use App\Persistence\Entity\PolesianProgram\Subparagraph;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 
 /**
  * @author Anton Dyshkant <vyshkant@gmail.com>

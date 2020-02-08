@@ -52,13 +52,6 @@ parameters:
       triggered_by: ['php']
       metadata:
         priority: -70
-    phpmnd:
-      exclude_path:
-        - 'node_modules'
-        - 'var'
-        - 'vendor'
-      metadata:
-        priority: -80
     phpcsfixer2:
       config: .php_cs.dist
       metadata:
@@ -74,7 +67,7 @@ parameters:
         - '/vendor/*'
       metadata:
         priority: -100
-    phpunit:
+    phpunitbridge:
       always_execute: true
       metadata:
         priority: -110

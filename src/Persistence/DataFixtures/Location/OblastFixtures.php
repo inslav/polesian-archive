@@ -26,7 +26,7 @@ namespace App\Persistence\DataFixtures\Location;
 
 use App\Persistence\Entity\Location\Oblast;
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 
 /**
  * @author Anton Dyshkant <vyshkant@gmail.com>

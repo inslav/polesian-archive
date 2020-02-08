@@ -1,6 +1,6 @@
 {
     "name": "inslav/polesian-archive",
-    "description": "Polesian Archive database site",
+    "description": "«Polesian Archive» database",
     "version": "0.0.1",
     "type": "project",
     "keywords": ["polesia", "linguistics", "ethnography", "science"],
@@ -41,7 +41,7 @@
         "symfony/web-link": "4.4.*",
         "symfony/webpack-encore-bundle": "^1.7",
         "symfony/yaml": "4.4.*",
-        "vyfony/filterable-table-bundle": "^0.2.0",
+        "vyfony/filterable-table-bundle": "^0.2.3",
         "vyfony/mysqldump-bundle": "^0.2.0",
         "vyfony/portation-bundle": "^0.0.4",
         "wandersonwhcr/romans": "^1.1"
@@ -50,13 +50,12 @@
         "friendsofphp/php-cs-fixer": "^2.16",
         "jakub-onderka/php-parallel-lint": "^1.0",
         "phan/phan": "^2.4",
-        "phpro/grumphp": "^0.16",
-        "povils/phpmnd": "^2.1",
+        "phpro/grumphp": "^0.17",
         "squizlabs/php_codesniffer": "^3.5",
         "symfony/browser-kit": "4.4.*",
         "symfony/css-selector": "4.4.*",
         "symfony/debug-pack": "*",
-        "symfony/maker-bundle": "^1.9",
+        "symfony/maker-bundle": "^1.14",
         "symfony/phpunit-bridge": "4.4.*",
         "symfony/profiler-pack": "*",
         "symfony/test-pack": "*",
@@ -104,7 +103,7 @@
     },
     "extra": {
         "symfony": {
-            "allow-contrib": false,
+            "allow-contrib": true,
             "require": "4.4.*"
         }
     }

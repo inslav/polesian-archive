@@ -28,8 +28,6 @@ use App\Formatter\QuestionNumber\Formatter\QuestionNumberFormatterInterface;
 use App\Formatter\QuestionNumber\Parser\QuestionNumberParserInterface;
 use App\Formatter\QuestionNumber\QuestionNumberInterface;
 use App\Persistence\Entity\Card\Question;
-use App\Persistence\QueryBuilder\Alias\AliasFactoryInterface;
-use App\Persistence\QueryBuilder\Parameter\ParameterFactoryInterface;
 use App\Persistence\Repository\Card\QuestionRepository;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\QueryBuilder;
@@ -37,6 +35,8 @@ use Romans\Filter\RomanToInt;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Vyfony\Bundle\FilterableTableBundle\Filter\Configurator\Parameter\ExpressionBuilderInterface;
 use Vyfony\Bundle\FilterableTableBundle\Filter\Configurator\Parameter\FilterParameterInterface;
+use Vyfony\Bundle\FilterableTableBundle\Persistence\QueryBuilder\Alias\AliasFactoryInterface;
+use Vyfony\Bundle\FilterableTableBundle\Persistence\QueryBuilder\Parameter\ParameterFactoryInterface;
 
 /**
  * @author Anton Dyshkant <vyshkant@gmail.com>

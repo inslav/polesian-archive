@@ -116,12 +116,6 @@
     "gitonomy/gitlib": {
         "version": "v1.2.0"
     },
-    "jakub-onderka/php-console-color": {
-        "version": "v0.2"
-    },
-    "jakub-onderka/php-console-highlighter": {
-        "version": "v0.3.2"
-    },
     "jakub-onderka/php-parallel-lint": {
         "version": "v1.0.0"
     },
@@ -181,12 +175,6 @@
     },
     "phpro/grumphp": {
         "version": "v0.16.2"
-    },
-    "phpunit/php-timer": {
-        "version": "2.1.2"
-    },
-    "povils/phpmnd": {
-        "version": "v2.1.0"
     },
     "psr/cache": {
         "version": "1.0.1"

@@ -30,7 +30,7 @@ use App\Persistence\DataFixtures\PolesianProgram\SubparagraphFixtures;
 use App\Persistence\Entity\Card\Question;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 
 /**
  * @author Anton Dyshkant <vyshkant@gmail.com>
