@@ -129,7 +129,7 @@ final class CardsFilterConfigurator extends AbstractFilterConfigurator
         return [
             'label_attr' => ['class' => ''],
             'translation_domain' => 'messages',
-            'attr' => ['class' => 'row'],
+            'attr' => ['class' => 'row', 'target' => '_blank'],
             'method' => 'GET',
             'csrf_protection' => false,
             'required' => false,
