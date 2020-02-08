@@ -94,7 +94,8 @@ final class CardsTableConfigurator extends AbstractTableConfigurator
                 ->setName('id')
                 ->setIsIdentifier(true)
                 ->setIsSortable(true)
-                ->setLabel('controller.card.list.table.column.id'),
+                ->setLabel('controller.card.list.table.column.id')
+                ->setAttributes(['target' => '_blank']),
             (new ColumnMetadata())
                 ->setName('questions')
                 ->setValueExtractor(function (Card $card): string {

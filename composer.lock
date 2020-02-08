@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bc9d8ffae0a8a1ad677541212dd2d2aa",
+    "content-hash": "cf38bbc74e8d84eedd6a37643e32c752",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -6193,16 +6193,16 @@
         },
         {
             "name": "vyfony/filterable-table-bundle",
-            "version": "0.2.3",
+            "version": "v0.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/vyfony/filterable-table-bundle.git",
-                "reference": "62540128b126bc6bdd2f366f400ac985e9e7d7da"
+                "reference": "fb13f476eac6515cdcd8e77df3eff9adf0eff81b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/vyfony/filterable-table-bundle/zipball/62540128b126bc6bdd2f366f400ac985e9e7d7da",
-                "reference": "62540128b126bc6bdd2f366f400ac985e9e7d7da",
+                "url": "https://api.github.com/repos/vyfony/filterable-table-bundle/zipball/fb13f476eac6515cdcd8e77df3eff9adf0eff81b",
+                "reference": "fb13f476eac6515cdcd8e77df3eff9adf0eff81b",
                 "shasum": ""
             },
             "require": {
@@ -6261,7 +6261,7 @@
                 "symfony-bundle",
                 "table"
             ],
-            "time": "2020-02-08T00:15:40+00:00"
+            "time": "2020-02-08T17:11:21+00:00"
         },
         {
             "name": "vyfony/mysqldump-bundle",

@@ -41,7 +41,7 @@
         "symfony/web-link": "4.4.*",
         "symfony/webpack-encore-bundle": "^1.7",
         "symfony/yaml": "4.4.*",
-        "vyfony/filterable-table-bundle": "^0.2.3",
+        "vyfony/filterable-table-bundle": "^0.3.0",
         "vyfony/mysqldump-bundle": "^0.2.0",
         "vyfony/portation-bundle": "^0.0.4",
         "wandersonwhcr/romans": "^1.1"
