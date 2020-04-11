@@ -26,6 +26,10 @@ see <http://www.gnu.org/licenses/>.
     {{ parent() }}{{ card.id }}
 {%- endblock %}
 
+{% block stylesheets %}
+    {{ encore_entry_link_tags('css/card/show') }}
+{% endblock %}
+
 {% block page_content %}
     {% import _self as self %}
 

@@ -23,8 +23,7 @@ see <http://www.gnu.org/licenses/>.
 {% extends 'base.html.twig' %}
 
 {% block stylesheets %}
-    {{ parent() }}
-    <link href="{{ asset('build/css/polesian-program/index.css') }}" rel="stylesheet">
+    {{ encore_entry_link_tags('css/polesian-program/index') }}
 {% endblock %}
 
 {% block page_content %}

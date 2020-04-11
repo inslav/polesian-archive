@@ -18,7 +18,9 @@
  * see <http://www.gnu.org/licenses/>.
  */
 
+@import "../base";
 @import "~bootstrap/scss/bootstrap";
+@import "~select2/dist/css/select2.min.css";
 
 @mixin sorted-column($isAsc){
   &:after {
@@ -65,8 +67,6 @@ main.pa-main {
       }
     }
 
-
-
     th,
     td {
       &:nth-child(1),
@@ -94,6 +94,32 @@ main.pa-main {
     .vyfony-filterable-table-bundle-button-form-group {
       padding-right: 15px;
       padding-left: 15px;
+    }
+  }
+
+  .pa-loading-container {
+    .pa-loading-preloader {
+      width: 100%;
+      height: 400px;
+      background-image: url('../../../assets/images/preloader.gif');
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    .pa-loading-content {
+      height: 0;
+      overflow: hidden;
+
+    }
+
+    &.loaded {
+      .pa-loading-preloader {
+        height: 0;
+      }
+
+      .pa-loading-content {
+        height: auto;
+      }
     }
   }
 

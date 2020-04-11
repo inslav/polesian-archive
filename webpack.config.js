@@ -20,19 +20,36 @@
 
 const encore = require('@symfony/webpack-encore');
 
+function getSelect2Localizations() {
+
+    const fs = require('fs');
+
+    const select2LocalizationFolder = './node_modules/select2/dist/js/i18n/';
+    return fs
+        .readdirSync(select2LocalizationFolder)
+        .filter(fileName => fileName.endsWith('.js'))
+        .map(fileName => select2LocalizationFolder + fileName);
+}
+
 encore
     .disableSingleRuntimeChunk()
     .setOutputPath('public/build/')
     .setPublicPath('/build')
     .cleanupOutputBeforeBuild()
     .enableSourceMaps(!encore.isProduction())
-    .addStyleEntry('css/base', './assets/scss/base.scss')
+    .autoProvidejQuery()
+    .addEntry('js/card/list', ['./assets/js/card/list.js', ...getSelect2Localizations()])
     .addStyleEntry('css/card/list', './assets/scss/card/list.scss')
+    .addStyleEntry('css/card/show', './assets/scss/card/show.scss')
     .addStyleEntry('css/polesian-program/index', './assets/scss/polesian_program/index.scss')
     .addStyleEntry('css/polesian-program/program', './assets/scss/polesian_program/program.scss')
     .addStyleEntry('css/polesian-program/paragraph', './assets/scss/polesian_program/paragraph.scss')
     .addStyleEntry('css/polesian-program/subparagraph', './assets/scss/polesian_program/subparagraph.scss')
     .enableSassLoader()
+    .copyFiles({
+        from: './assets/images',
+        to: 'images/[path][name].[ext]',
+    })
 ;
 
 module.exports = encore.getWebpackConfig();

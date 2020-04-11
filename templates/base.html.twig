@@ -21,14 +21,12 @@ see <http://www.gnu.org/licenses/>.
 -#}
 
 <!doctype html>
-<html>
+<html lang="{{ app.request.locale }}">
     <head>
         <meta charset="utf-8">
         <title>{% block title %}{{ ('controller.'~controller~'.'~method~'.title')|trans }}{% endblock %} – {{ 'page.label'|trans }}</title>
 
-        {% block stylesheets %}
-            <link href="{{ asset('build/css/base.css') }}" rel="stylesheet">
-        {% endblock %}
+        {% block stylesheets %}{% endblock %}
     </head>
 
     <body>
