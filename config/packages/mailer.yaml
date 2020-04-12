@@ -17,5 +17,5 @@
 # see <http://www.gnu.org/licenses/>.
 
 framework:
-  router:
-    strict_requirements: true
+  mailer:
+    dsn: '%env(MAILER_DSN)%'

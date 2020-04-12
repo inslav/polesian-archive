@@ -71,9 +71,6 @@ parameters:
       always_execute: true
       metadata:
         priority: -110
-    securitychecker:
-      metadata:
-        priority: -120
     phan:
       config_file: .phan.dist
       metadata:

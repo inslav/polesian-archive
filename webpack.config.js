@@ -31,12 +31,18 @@ function getSelect2Localizations() {
         .map(fileName => select2LocalizationFolder + fileName);
 }
 
+if (!encore.isRuntimeEnvironmentConfigured()) {
+    encore.configureRuntimeEnvironment(process.env.NODE_ENV || 'dev');
+}
+
 encore
     .disableSingleRuntimeChunk()
     .setOutputPath('public/build/')
     .setPublicPath('/build')
     .cleanupOutputBeforeBuild()
+    .enableBuildNotifications()
     .enableSourceMaps(!encore.isProduction())
+    .enableVersioning(encore.isProduction())
     .autoProvidejQuery()
     .addEntry('js/card/list', ['./assets/js/card/list.js', ...getSelect2Localizations()])
     .addStyleEntry('css/card/list', './assets/scss/card/list.scss')
@@ -49,6 +55,10 @@ encore
     .copyFiles({
         from: './assets/images',
         to: 'images/[path][name].[ext]',
+    })
+    .configureBabelPresetEnv((config) => {
+        config.useBuiltIns = 'usage';
+        config.corejs = 3;
     })
 ;
 

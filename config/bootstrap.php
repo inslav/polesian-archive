@@ -27,7 +27,7 @@ use Symfony\Component\Dotenv\Dotenv;
 require dirname(__DIR__).'/vendor/autoload.php';
 
 if (is_array($env = @include dirname(__DIR__).'/.env.local.php')
-    && ($_SERVER['APP_ENV'] ?? $_ENV['APP_ENV'] ?? $env['APP_ENV']) === $env['APP_ENV']
+    && (!isset($env['APP_ENV']) || ($_SERVER['APP_ENV'] ?? $_ENV['APP_ENV'] ?? $env['APP_ENV']) === $env['APP_ENV'])
 ) {
     foreach ($env as $k => $v) {
         $_ENV[$k] = $_ENV[$k] ?? (isset($_SERVER[$k]) && 0 !== strpos($k, 'HTTP_') ? $_SERVER[$k] : $v);
