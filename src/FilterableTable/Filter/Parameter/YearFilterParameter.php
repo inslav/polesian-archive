@@ -36,9 +36,6 @@ use Vyfony\Bundle\FilterableTableBundle\Filter\Configurator\Parameter\FilterPara
  */
 final class YearFilterParameter implements FilterParameterInterface, ExpressionBuilderInterface
 {
-    /**
-     * @var CardRepository
-     */
     private $cardRepository;
 
     public function __construct(CardRepository $cardRepository)

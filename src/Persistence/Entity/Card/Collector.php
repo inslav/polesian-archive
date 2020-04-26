@@ -41,8 +41,6 @@ use Doctrine\ORM\Mapping as ORM;
 class Collector
 {
     /**
-     * @var int
-     *
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(name="id", type="integer")
@@ -50,15 +48,11 @@ class Collector
     private $id;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="name", type="string", length=255, unique=true)
      */
     private $name;
 
     /**
-     * @var Collection|Card[]
-     *
      * @ORM\ManyToMany(targetEntity="App\Persistence\Entity\Card\Card", mappedBy="collectors")
      */
     private $cards;

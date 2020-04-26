@@ -29,24 +29,12 @@ namespace App\Formatter\QuestionNumber;
  */
 final class QuestionNumber implements QuestionNumberInterface
 {
-    /**
-     * @var string
-     */
     private $programNumber;
 
-    /**
-     * @var int|null
-     */
     private $paragraphNumber;
 
-    /**
-     * @var string|null
-     */
     private $subparagraphLetter;
 
-    /**
-     * @var bool
-     */
     private $isAdditional;
 
     public function __construct(

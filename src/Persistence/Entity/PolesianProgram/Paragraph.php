@@ -37,8 +37,6 @@ use Doctrine\ORM\Mapping as ORM;
 class Paragraph
 {
     /**
-     * @var int
-     *
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(name="id", type="integer")
@@ -46,37 +44,27 @@ class Paragraph
     private $id;
 
     /**
-     * @var Program
-     *
      * @ORM\JoinColumn(name="program_id", nullable=false)
      * @ORM\ManyToOne(targetEntity="App\Persistence\Entity\PolesianProgram\Program", inversedBy="paragraphs")
      */
     private $program;
 
     /**
-     * @var int
-     *
      * @ORM\Column(name="number", type="integer")
      */
     private $number;
 
     /**
-     * @var string|null
-     *
      * @ORM\Column(name="title", type="string", length=255, nullable=true)
      */
     private $title;
 
     /**
-     * @var string|null
-     *
      * @ORM\Column(name="text", type="text", nullable=true)
      */
     private $text;
 
     /**
-     * @var Collection|Subparagraph[]
-     *
      * @ORM\OneToMany(
      *     targetEntity="App\Persistence\Entity\PolesianProgram\Subparagraph",
      *     mappedBy="paragraph",

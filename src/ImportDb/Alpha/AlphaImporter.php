@@ -39,7 +39,6 @@ use App\ImportDb\Alpha\Storage\ManyToOne\VillageStorage;
 use App\ImportDb\Alpha\ValueTrimmer\AlphaValueConverterInterface;
 use App\Persistence\Entity\Card\Card;
 use Doctrine\Common\Persistence\ManagerRegistry;
-use Doctrine\Common\Persistence\ObjectManager;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Filesystem\Filesystem;
 
@@ -48,74 +47,32 @@ use Symfony\Component\Filesystem\Filesystem;
  */
 final class AlphaImporter implements AlphaImporterInterface
 {
-    /**
-     * @var Filesystem
-     */
     private $filesystem;
 
-    /**
-     * @var ObjectManager
-     */
     private $alphaObjectManager;
 
-    /**
-     * @var ObjectManager
-     */
     private $defaultObjectManager;
 
-    /**
-     * @var AlphaValueConverterInterface
-     */
     private $valueConverter;
 
-    /**
-     * @var SkippedAlphaCardsCollectorInterface
-     */
     private $skippedAlphaCardsCollector;
 
-    /**
-     * @var SkippedAlphaCardConverterInterface
-     */
     private $skippedAlphaCardConverter;
 
-    /**
-     * @var VillageStorage
-     */
     private $villageStorage;
 
-    /**
-     * @var QuestionStorage
-     */
     private $questionStorage;
 
-    /**
-     * @var SeasonStorage
-     */
     private $seasonStorage;
 
-    /**
-     * @var KeywordStorage
-     */
     private $keywordStorage;
 
-    /**
-     * @var TermStorage
-     */
     private $termStorage;
 
-    /**
-     * @var InformantStorage
-     */
     private $informantStorage;
 
-    /**
-     * @var CollectorStorage
-     */
     private $collectorStorage;
 
-    /**
-     * @var LoggerInterface
-     */
     private $logger;
 
     public function __construct(

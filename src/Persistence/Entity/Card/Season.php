@@ -36,8 +36,6 @@ use Doctrine\ORM\Mapping as ORM;
 class Season
 {
     /**
-     * @var int
-     *
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(name="id", type="integer")
@@ -45,15 +43,11 @@ class Season
     private $id;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="name", type="string", length=255, unique=true)
      */
     private $name;
 
     /**
-     * @var Collection|Card[]
-     *
      * @ORM\OneToMany(targetEntity="App\Persistence\Entity\Card\Card", mappedBy="season")
      */
     private $cards;

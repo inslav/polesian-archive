@@ -37,14 +37,8 @@ use Symfony\Component\Console\Style\SymfonyStyle;
  */
 final class ImportAlphaDbCommand extends Command
 {
-    /**
-     * @var ProgramImporterInterface
-     */
     private $programImporter;
 
-    /**
-     * @var AlphaImporterInterface
-     */
     private $alphaImporter;
 
     public function __construct(

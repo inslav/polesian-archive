@@ -29,19 +29,10 @@ namespace App\Download\File;
  */
 final class DownloadFileInfo implements DownloadFileInfoInterface
 {
-    /**
-     * @var string
-     */
     private $name;
 
-    /**
-     * @var string
-     */
     private $content;
 
-    /**
-     * @var string
-     */
     private $contentType;
 
     public function __construct(string $name, string $content, string $contentType)

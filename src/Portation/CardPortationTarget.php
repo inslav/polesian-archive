@@ -66,69 +66,30 @@ final class CardPortationTarget implements PortationTargetInterface
 
     private const NEW_ROW_KEY = '+';
 
-    /**
-     * @var CardRepository
-     */
     private $cardRepository;
 
-    /**
-     * @var VillageRepository
-     */
     private $villageRepository;
 
-    /**
-     * @var QuestionRepository
-     */
     private $questionRepository;
 
-    /**
-     * @var SeasonRepository
-     */
     private $seasonRepository;
 
-    /**
-     * @var KeywordRepository
-     */
     private $keywordRepository;
 
-    /**
-     * @var TermRepository
-     */
     private $termRepository;
 
-    /**
-     * @var InformantRepository
-     */
     private $informantRepository;
 
-    /**
-     * @var CollectorRepository
-     */
     private $collectorRepository;
 
-    /**
-     * @var BoolFormatterInterface
-     */
     private $boolFormatter;
 
-    /**
-     * @var QuestionNumberFormatterInterface
-     */
     private $questionNumberFormatter;
 
-    /**
-     * @var VillageFullNameFormatterInterface
-     */
     private $villageFullNameFormatter;
 
-    /**
-     * @var QuestionNumberParserInterface
-     */
     private $questionNumberParser;
 
-    /**
-     * @var VillageFullNameParserInterface
-     */
     private $villageFullNameParser;
 
     public function __construct(

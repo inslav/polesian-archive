@@ -29,24 +29,12 @@ namespace App\Formatter\VillageFullName;
  */
 final class VillageFullName implements VillageFullNameInterface
 {
-    /**
-     * @var string
-     */
     private $name;
 
-    /**
-     * @var string
-     */
     private $raion;
 
-    /**
-     * @var string
-     */
     private $oblast;
 
-    /**
-     * @var string|null
-     */
     private $numberInAtlas;
 
     public function __construct(string $name, string $raion, string $oblast, ?string $numberInAtlas)

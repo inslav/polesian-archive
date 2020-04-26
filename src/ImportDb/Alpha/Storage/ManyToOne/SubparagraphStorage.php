@@ -38,9 +38,6 @@ final class SubparagraphStorage extends AbstractManyToOneEntityStorage
 {
     private const DUMMY_TEXT = '';
 
-    /**
-     * @var ParagraphStorage
-     */
     private $paragraphStorage;
 
     public function __construct(

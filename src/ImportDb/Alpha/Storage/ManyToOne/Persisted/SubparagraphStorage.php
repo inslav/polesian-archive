@@ -38,14 +38,8 @@ use Psr\Log\LoggerInterface;
  */
 final class SubparagraphStorage extends AbstractPersistedManyToOneEntityStorage
 {
-    /**
-     * @var QuestionNumberFormatterInterface
-     */
     private $questionNumberFormatter;
 
-    /**
-     * @var ParagraphStorage
-     */
     private $paragraphStorage;
 
     public function __construct(

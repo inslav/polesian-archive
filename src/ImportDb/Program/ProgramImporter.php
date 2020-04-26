@@ -43,14 +43,8 @@ use LogicException;
  */
 final class ProgramImporter implements ProgramImporterInterface
 {
-    /**
-     * @var ProgramTextLineParserInterface
-     */
     private $programTextLineParser;
 
-    /**
-     * @var ManagerRegistry
-     */
     private $registry;
 
     public function __construct(

@@ -25,7 +25,7 @@ declare(strict_types=1);
 namespace App\Download;
 
 use App\Download\File\DownloadFileInfoInterface;
-use App\Download\Format\FormatterInterface;
+use App\Download\Formatter\FormatterInterface;
 
 /**
  * @author Anton Dyshkant <vyshkant@gmail.com>

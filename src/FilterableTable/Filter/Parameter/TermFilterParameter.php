@@ -38,9 +38,6 @@ use Vyfony\Bundle\FilterableTableBundle\Persistence\QueryBuilder\Alias\AliasFact
  */
 final class TermFilterParameter implements FilterParameterInterface, ExpressionBuilderInterface
 {
-    /**
-     * @var AliasFactoryInterface
-     */
     private $aliasFactory;
 
     public function __construct(AliasFactoryInterface $aliasFactory)

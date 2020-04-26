@@ -37,8 +37,6 @@ use Doctrine\ORM\Mapping as ORM;
 class Question
 {
     /**
-     * @var int
-     *
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(name="id", type="integer")
@@ -46,32 +44,24 @@ class Question
     private $id;
 
     /**
-     * @var Program
-     *
      * @ORM\JoinColumn(name="program_id", nullable=false)
      * @ORM\ManyToOne(targetEntity="App\Persistence\Entity\PolesianProgram\Program", fetch="EAGER")
      */
     private $program;
 
     /**
-     * @var Paragraph|null
-     *
      * @ORM\JoinColumn(name="paragraph_id", nullable=true)
      * @ORM\ManyToOne(targetEntity="App\Persistence\Entity\PolesianProgram\Paragraph", fetch="EAGER")
      */
     private $paragraph;
 
     /**
-     * @var Subparagraph|null
-     *
      * @ORM\JoinColumn(name="subparagraph_id", nullable=true)
      * @ORM\ManyToOne(targetEntity="App\Persistence\Entity\PolesianProgram\Subparagraph", fetch="EAGER")
      */
     private $subparagraph;
 
     /**
-     * @var bool
-     *
      * @ORM\Column(name="is_additional", type="boolean", options={"default": 0})
      */
     private $isAdditional;

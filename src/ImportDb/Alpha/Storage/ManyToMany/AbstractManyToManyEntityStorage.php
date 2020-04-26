@@ -27,7 +27,6 @@ namespace App\ImportDb\Alpha\Storage\ManyToMany;
 use App\ImportDb\Alpha\Entity\AlphaCard;
 use App\ImportDb\Alpha\ValueTrimmer\AlphaValueConverterInterface;
 use Doctrine\Common\Persistence\ManagerRegistry;
-use Doctrine\Common\Persistence\ObjectManager;
 use Psr\Log\LoggerInterface;
 
 /**
@@ -35,39 +34,18 @@ use Psr\Log\LoggerInterface;
  */
 abstract class AbstractManyToManyEntityStorage
 {
-    /**
-     * @var ObjectManager
-     */
     protected $alphaObjectManager;
 
-    /**
-     * @var ObjectManager
-     */
     protected $defaultObjectManager;
 
-    /**
-     * @var AlphaValueConverterInterface
-     */
     protected $valueConverter;
 
-    /**
-     * @var object[]
-     */
     private $entityByAlphaEntityKeyCache = [];
 
-    /**
-     * @var object[][]
-     */
     private $alphaEntitiesByAlphaCardKeyCache;
 
-    /**
-     * @var object[]
-     */
     private $alphaEntitiesWithoutRelationToAlphaCard;
 
-    /**
-     * @var LoggerInterface
-     */
     private $logger;
 
     public function __construct(

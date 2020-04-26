@@ -35,8 +35,6 @@ use Doctrine\ORM\Mapping as ORM;
 class Polvopr
 {
     /**
-     * @var string|null
-     *
      * @ORM\Id()
      * @ORM\Column(name="vopr", type="string", length=5, nullable=true, options={"fixed"=true})
      */

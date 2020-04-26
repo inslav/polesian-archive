@@ -43,34 +43,16 @@ use Vyfony\Bundle\FilterableTableBundle\Persistence\QueryBuilder\Parameter\Param
  */
 final class QuestionFilterParameter implements FilterParameterInterface, ExpressionBuilderInterface
 {
-    /**
-     * @var AliasFactoryInterface
-     */
     private $aliasFactory;
 
-    /**
-     * @var ParameterFactoryInterface
-     */
     private $parameterFactory;
 
-    /**
-     * @var QuestionNumberFormatterInterface
-     */
     private $questionNumberFormatter;
 
-    /**
-     * @var QuestionNumberParserInterface
-     */
     private $questionNumberParser;
 
-    /**
-     * @var RomanToInt
-     */
     private $romanToIntConverter;
 
-    /**
-     * @var QuestionRepository
-     */
     private $questionRepository;
 
     public function __construct(

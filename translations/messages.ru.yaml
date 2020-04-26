@@ -52,6 +52,29 @@ controller:
         txt:
           label: Скачать в формате .txt
           emptySelectionError: Не выбрана ни одна карточка
+          schema:
+            id: Id
+            question: Вопрос
+            year: Год
+            village: Село
+            text: Диалектный текст
+            description: Описание
+            collectors: Собиратели
+            keywords: Ключевые слова
+            terms: Термины
+        xlsx:
+          label: Скачать в формате .xlsx
+          emptySelectionError: Не выбрана ни одна карточка
+          schema:
+            id: Id
+            question: Вопрос
+            year: Год
+            village: Село
+            text: Диалектный текст
+            description: Описание
+            collectors: Собиратели
+            keywords: Ключевые слова
+            terms: Термины
     show:
       title: Карточка №
       card:

@@ -37,8 +37,6 @@ use Doctrine\ORM\Mapping as ORM;
 class Raion
 {
     /**
-     * @var int
-     *
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(name="id", type="integer")
@@ -46,23 +44,17 @@ class Raion
     private $id;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
 
     /**
-     * @var Oblast
-     *
      * @ORM\JoinColumn(name="oblast_id", nullable=false)
      * @ORM\ManyToOne(targetEntity="App\Persistence\Entity\Location\Oblast", inversedBy="raions")
      */
     private $oblast;
 
     /**
-     * @var Collection|Village[]
-     *
      * @ORM\OneToMany(targetEntity="App\Persistence\Entity\Location\Village", mappedBy="raion", orphanRemoval=true)
      */
     private $villages;

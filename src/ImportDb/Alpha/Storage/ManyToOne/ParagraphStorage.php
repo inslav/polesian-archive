@@ -40,9 +40,6 @@ final class ParagraphStorage extends AbstractManyToOneEntityStorage
 
     private const DUMMY_TEXT = null;
 
-    /**
-     * @var ProgramStorage
-     */
     private $programStorage;
 
     public function __construct(

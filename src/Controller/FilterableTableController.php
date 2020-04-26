@@ -25,8 +25,9 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Download\DownloaderInterface;
-use App\Download\Format\FormatterInterface;
-use App\Download\Format\TxtFormatter;
+use App\Download\Formatter\FormatterInterface;
+use App\Download\Formatter\Txt\TxtFormatter;
+use App\Download\Formatter\Xlsx\XlsxFormatter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
@@ -39,20 +40,20 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class FilterableTableController extends AbstractController
 {
-    /**
-     * @var DownloaderInterface
-     */
     private $downloader;
 
-    /**
-     * @var TxtFormatter
-     */
     private $txtFormatter;
 
-    public function __construct(DownloaderInterface $downloader, TxtFormatter $txtFormatter)
-    {
+    private $xlsxFormatter;
+
+    public function __construct(
+        DownloaderInterface $downloader,
+        TxtFormatter $txtFormatter,
+        XlsxFormatter $xlsxFormatter
+    ) {
         $this->downloader = $downloader;
         $this->txtFormatter = $txtFormatter;
+        $this->xlsxFormatter = $xlsxFormatter;
     }
 
     /**
@@ -61,6 +62,14 @@ final class FilterableTableController extends AbstractController
     public function downloadTxt(): Response
     {
         return $this->download($this->txtFormatter);
+    }
+
+    /**
+     * @Route("/download/xlsx", name="filterable_table__download_xlsx")
+     */
+    public function downloadXlsx(): Response
+    {
+        return $this->download($this->xlsxFormatter);
     }
 
     private function download(FormatterInterface $formatter): Response

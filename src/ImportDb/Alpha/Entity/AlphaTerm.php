@@ -35,16 +35,12 @@ use Doctrine\ORM\Mapping as ORM;
 class AlphaTerm
 {
     /**
-     * @var string
-     *
      * @ORM\Id()
      * @ORM\Column(name="term", type="string")
      */
     private $term;
 
     /**
-     * @var string|null
-     *
      * @ORM\Id()
      * @ORM\Column(name="spvnkey", nullable=true, type="string")
      */

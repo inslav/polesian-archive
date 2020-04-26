@@ -31,9 +31,6 @@ use InvalidArgumentException;
  */
 final class BrokenCardException extends InvalidArgumentException
 {
-    /**
-     * @var string
-     */
     private $category;
 
     public function __construct(string $category, string $message = '')

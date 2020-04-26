@@ -38,14 +38,8 @@ use Psr\Log\LoggerInterface;
  */
 final class VillageStorage extends AbstractManyToOneEntityStorage
 {
-    /**
-     * @var RaionStorage
-     */
     private $raionStorage;
 
-    /**
-     * @var AlphaVillage[]
-     */
     private $alphaEntityByAlphaEntityKeyCache;
 
     public function __construct(

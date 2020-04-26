@@ -35,16 +35,12 @@ use Doctrine\ORM\Mapping as ORM;
 class AlphaCollector
 {
     /**
-     * @var string
-     *
      * @ORM\Id()
      * @ORM\Column(name="sobir", type="string")
      */
     private $sobir;
 
     /**
-     * @var string|null
-     *
      * @ORM\Id()
      * @ORM\Column(name="spvnkey", nullable=true, type="string")
      */

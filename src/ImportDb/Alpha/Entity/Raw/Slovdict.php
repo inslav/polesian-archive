@@ -35,16 +35,12 @@ use Doctrine\ORM\Mapping as ORM;
 class Slovdict
 {
     /**
-     * @var string
-     *
      * @ORM\Id()
      * @ORM\Column(name="slov", type="string")
      */
     private $slov;
 
     /**
-     * @var float|null
-     *
      * @ORM\Column(name="cnt", type="float", precision=53, scale=0, nullable=true)
      */
     private $cnt;

@@ -35,9 +35,6 @@ use InvalidArgumentException;
  */
 final class QuestionNumberFormatter implements QuestionNumberFormatterInterface
 {
-    /**
-     * @var QuestionToQuestionNumberConverterInterface
-     */
     private $questionToQuestionNumberConverter;
 
     public function __construct(QuestionToQuestionNumberConverterInterface $questionToQuestionNumberConverter)

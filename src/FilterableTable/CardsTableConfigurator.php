@@ -40,14 +40,8 @@ use Vyfony\Bundle\FilterableTableBundle\Table\Metadata\Column\ColumnMetadataInte
  */
 final class CardsTableConfigurator extends AbstractTableConfigurator
 {
-    /**
-     * @var VillageFullNameFormatterInterface
-     */
     private $villageFullNameFormatter;
 
-    /**
-     * @var QuestionNumberFormatterInterface
-     */
     private $questionNumberFormatter;
 
     public function __construct(
@@ -119,12 +113,20 @@ final class CardsTableConfigurator extends AbstractTableConfigurator
 
     protected function createCheckboxHandlers(): array
     {
+        $classes = ['btn', 'btn-secondary', 'pa-download-button'];
+
         return [
             new CheckboxHandler(
                 'filterable_table__download_txt',
                 'controller.card.list.download.txt.label',
                 'controller.card.list.download.txt.emptySelectionError',
-                ['btn', 'btn-secondary']
+                $classes
+            ),
+            new CheckboxHandler(
+                'filterable_table__download_xlsx',
+                'controller.card.list.download.xlsx.label',
+                'controller.card.list.download.xlsx.emptySelectionError',
+                $classes
             ),
         ];
     }

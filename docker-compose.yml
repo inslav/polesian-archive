@@ -1,3 +1,5 @@
+version: '3.4'
+
 # This file is part of Polesian Archive.
 #
 # Copyright (c) Institute of Slavic Studies of the Russian Academy of Sciences
@@ -16,14 +18,12 @@
 # a copy of the GNU General Public License along with Polesian Archive,
 # see <http://www.gnu.org/licenses/>.
 
-KERNEL_CLASS='App\Kernel'
-APP_SECRET='not_so_secret'
-SYMFONY_DEPRECATIONS_HELPER='max[self]=0'
-PANTHER_APP_ENV=panther
-DATABASE_URL=mysql://root:@127.0.0.1:3306/polesian-archive?serverVersion=5.7
+services:
 
-LOGS_DIR=%kernel.logs_dir%
-ALPHA_DATABASE_NAME=db_name
-ALPHA_DATABASE_USER=db_user
-ALPHA_DATABASE_PASSWORD=db_password
-ALPHA_DATABASE_HOST=db_host
+  db:
+    image: mysql:5
+    restart: always
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: 1
+    ports:
+      - 3306:3306

@@ -39,19 +39,10 @@ use Vyfony\Bundle\FilterableTableBundle\Persistence\QueryBuilder\Alias\AliasFact
  */
 final class ProgramFilterParameter implements FilterParameterInterface, ExpressionBuilderInterface
 {
-    /**
-     * @var ProgramRepository
-     */
     private $programRepository;
 
-    /**
-     * @var AliasFactoryInterface
-     */
     private $aliasFactory;
 
-    /**
-     * @var RomanToInt
-     */
     private $romanToIntConverter;
 
     public function __construct(

@@ -36,9 +36,6 @@ use Vyfony\Bundle\FilterableTableBundle\Persistence\QueryBuilder\Parameter\Param
  */
 final class TextOrDescriptionFilterParameter implements FilterParameterInterface, ExpressionBuilderInterface
 {
-    /**
-     * @var ParameterFactoryInterface
-     */
     private $parameterFactory;
 
     public function __construct(ParameterFactoryInterface $parameterFactory)

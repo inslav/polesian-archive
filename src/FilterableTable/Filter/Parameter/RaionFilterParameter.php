@@ -39,14 +39,8 @@ use Vyfony\Bundle\FilterableTableBundle\Persistence\QueryBuilder\Parameter\Param
  */
 final class RaionFilterParameter implements FilterParameterInterface, ExpressionBuilderInterface
 {
-    /**
-     * @var AliasFactoryInterface
-     */
     private $aliasFactory;
 
-    /**
-     * @var ParameterFactoryInterface
-     */
     private $parameterFactory;
 
     public function __construct(

@@ -39,19 +39,10 @@ use Psr\Log\LoggerInterface;
  */
 final class QuestionStorage extends AbstractManyToOneEntityStorage
 {
-    /**
-     * @var ProgramStorage
-     */
     private $programStorage;
 
-    /**
-     * @var ParagraphStorage
-     */
     private $paragraphStorage;
 
-    /**
-     * @var SubparagraphStorage
-     */
     private $subparagraphStorage;
 
     public function __construct(

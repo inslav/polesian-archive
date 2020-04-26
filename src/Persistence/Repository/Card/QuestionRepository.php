@@ -38,19 +38,10 @@ use Doctrine\ORM\ORMException;
  */
 final class QuestionRepository extends ServiceEntityRepository
 {
-    /**
-     * @var ProgramRepository
-     */
     private $programRepository;
 
-    /**
-     * @var ParagraphRepository
-     */
     private $paragraphRepository;
 
-    /**
-     * @var SubparagraphRepository
-     */
     private $subparagraphRepository;
 
     public function __construct(

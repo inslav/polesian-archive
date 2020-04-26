@@ -26,7 +26,7 @@ namespace App\Download;
 
 use App\Download\File\DownloadFileInfo;
 use App\Download\File\DownloadFileInfoInterface;
-use App\Download\Format\FormatterInterface;
+use App\Download\Formatter\FormatterInterface;
 use App\Persistence\Entity\Card\Card;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
@@ -35,9 +35,6 @@ use Doctrine\Common\Persistence\ManagerRegistry;
  */
 final class Downloader implements DownloaderInterface
 {
-    /**
-     * @var ManagerRegistry
-     */
     private $doctrine;
 
     public function __construct(ManagerRegistry $doctrine)

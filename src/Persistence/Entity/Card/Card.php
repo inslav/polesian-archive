@@ -44,8 +44,6 @@ use Doctrine\ORM\Mapping as ORM;
 class Card
 {
     /**
-     * @var int
-     *
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(name="id", type="integer")
@@ -53,94 +51,68 @@ class Card
     private $id;
 
     /**
-     * @var Village
-     *
      * @ORM\JoinColumn(name="village_id", nullable=false)
      * @ORM\ManyToOne(targetEntity="App\Persistence\Entity\Location\Village", inversedBy="cards")
      */
     private $village;
 
     /**
-     * @var string|null
-     *
      * @ORM\Column(type="string", nullable=true)
      */
     private $khutor;
 
     /**
-     * @var Collection|Question[]
-     *
      * @ORM\ManyToMany(targetEntity="App\Persistence\Entity\Card\Question")
      */
     private $questions;
 
     /**
-     * @var int
-     *
      * @ORM\Column(name="year", type="integer")
      */
     private $year;
 
     /**
-     * @var Season|null
-     *
      * @ORM\JoinColumn(name="season_id", nullable=true)
      * @ORM\ManyToOne(targetEntity="App\Persistence\Entity\Card\Season", inversedBy="cards")
      */
     private $season;
 
     /**
-     * @var bool
-     *
      * @ORM\Column(name="has_positive_answer", type="boolean", options={"default": 0})
      */
     private $hasPositiveAnswer;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="text",type="text")
      */
     private $text;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="description",type="text")
      */
     private $description;
 
     /**
-     * @var string|null
-     *
      * @ORM\Column(name="comment",type="text", nullable=true)
      */
     private $comment;
 
     /**
-     * @var Collection|Keyword[]
-     *
      * @ORM\ManyToMany(targetEntity="App\Persistence\Entity\Card\Keyword", inversedBy="cards")
      */
     private $keywords;
 
     /**
-     * @var Collection|Term[]
-     *
      * @ORM\ManyToMany(targetEntity="App\Persistence\Entity\Card\Term", inversedBy="cards")
      */
     private $terms;
 
     /**
-     * @var Collection|Informant[]
-     *
      * @ORM\ManyToMany(targetEntity="App\Persistence\Entity\Card\Informant", inversedBy="cards")
      */
     private $informants;
 
     /**
-     * @var Collection|Collector[]
-     *
      * @ORM\ManyToMany(targetEntity="App\Persistence\Entity\Card\Collector", inversedBy="cards")
      */
     private $collectors;

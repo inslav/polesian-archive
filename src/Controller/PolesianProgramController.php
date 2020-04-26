@@ -37,24 +37,12 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class PolesianProgramController extends AbstractController
 {
-    /**
-     * @var SectionRepository
-     */
     private $sectionRepository;
 
-    /**
-     * @var ProgramRepository
-     */
     private $programRepository;
 
-    /**
-     * @var ParagraphRepository
-     */
     private $paragraphRepository;
 
-    /**
-     * @var SubparagraphRepository
-     */
     private $subparagraphRepository;
 
     public function __construct(

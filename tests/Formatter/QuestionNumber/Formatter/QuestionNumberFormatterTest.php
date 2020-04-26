@@ -37,9 +37,6 @@ use Throwable;
  */
 final class QuestionNumberFormatterTest extends TestCase
 {
-    /**
-     * @var QuestionNumberFormatter
-     */
     private $questionNumberFormatter;
 
     protected function setUp(): void

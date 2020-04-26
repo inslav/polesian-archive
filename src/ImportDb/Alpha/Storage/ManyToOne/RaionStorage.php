@@ -36,9 +36,6 @@ use Psr\Log\LoggerInterface;
  */
 final class RaionStorage extends AbstractManyToOneEntityStorage
 {
-    /**
-     * @var OblastStorage
-     */
     private $oblastStorage;
 
     public function __construct(

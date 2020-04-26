@@ -35,16 +35,12 @@ use Doctrine\ORM\Mapping as ORM;
 class Termdict
 {
     /**
-     * @var string|null
-     *
      * @ORM\Id()
      * @ORM\Column(name="term", type="string", nullable=true)
      */
     private $term;
 
     /**
-     * @var float|null
-     *
      * @ORM\Column(name="cnt", type="float", precision=53, scale=0, nullable=true)
      */
     private $cnt;

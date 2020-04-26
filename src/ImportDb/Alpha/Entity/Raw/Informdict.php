@@ -35,16 +35,12 @@ use Doctrine\ORM\Mapping as ORM;
 class Informdict
 {
     /**
-     * @var string|null
-     *
      * @ORM\Id()
      * @ORM\Column(name="inform", type="string", nullable=true)
      */
     private $inform;
 
     /**
-     * @var float|null
-     *
      * @ORM\Column(name="cnt", type="float", precision=53, scale=0, nullable=true)
      */
     private $cnt;

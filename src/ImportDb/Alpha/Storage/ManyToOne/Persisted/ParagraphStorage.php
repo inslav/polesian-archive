@@ -36,9 +36,6 @@ use Psr\Log\LoggerInterface;
  */
 final class ParagraphStorage extends AbstractPersistedManyToOneEntityStorage
 {
-    /**
-     * @var ProgramStorage
-     */
     private $programStorage;
 
     public function __construct(

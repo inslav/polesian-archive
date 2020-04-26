@@ -35,16 +35,12 @@ use Doctrine\ORM\Mapping as ORM;
 class AlphaInformant
 {
     /**
-     * @var string
-     *
      * @ORM\Id()
      * @ORM\Column(name="informator", type="string")
      */
     private $informator;
 
     /**
-     * @var string|null
-     *
      * @ORM\Id()
      * @ORM\Column(name="spvnkey", nullable=true, type="string")
      */

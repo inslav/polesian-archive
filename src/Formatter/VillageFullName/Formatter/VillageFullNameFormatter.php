@@ -34,9 +34,6 @@ use App\Persistence\Entity\Location\Village;
  */
 final class VillageFullNameFormatter implements VillageFullNameFormatterInterface
 {
-    /**
-     * @var VillageToVillageFullNameConverterInterface
-     */
     private $villageToVillageFullNameConverter;
 
     public function __construct(VillageToVillageFullNameConverterInterface $villageToVillageFullNameConverter)

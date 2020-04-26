@@ -22,24 +22,30 @@ declare(strict_types=1);
  * see <http://www.gnu.org/licenses/>.
  */
 
-namespace App\Download\Format;
-
-use App\Persistence\Entity\Card\Card;
+namespace App\Download\Formatter\Xlsx;
 
 /**
  * @author Anton Dyshkant <vyshkant@gmail.com>
  */
-interface FormatterInterface
+class XlsxColumnData
 {
-    /**
-     * @param Card[] $cards
-     */
-    public function format(array $cards): string;
+    private $width;
 
-    /**
-     * @param Card[] $cards
-     */
-    public function getFileName(array $cards): string;
+    private $valueGetter;
 
-    public function getContentType(): string;
+    public function __construct(int $width, callable $valueGetter)
+    {
+        $this->width = $width;
+        $this->valueGetter = $valueGetter;
+    }
+
+    public function getWidth(): int
+    {
+        return $this->width;
+    }
+
+    public function getValueGetter(): callable
+    {
+        return $this->valueGetter;
+    }
 }

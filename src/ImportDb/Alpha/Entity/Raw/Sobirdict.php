@@ -35,16 +35,12 @@ use Doctrine\ORM\Mapping as ORM;
 class Sobirdict
 {
     /**
-     * @var string
-     *
      * @ORM\Id()
      * @ORM\Column(name="sobir", type="string")
      */
     private $sobir;
 
     /**
-     * @var float|null
-     *
      * @ORM\Column(name="cnt", type="float", precision=53, scale=0, nullable=true)
      */
     private $cnt;

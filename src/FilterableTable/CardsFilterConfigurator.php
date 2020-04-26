@@ -49,54 +49,24 @@ use Vyfony\Bundle\FilterableTableBundle\Table\Metadata\Column\ColumnMetadata;
  */
 final class CardsFilterConfigurator extends AbstractFilterConfigurator
 {
-    /**
-     * @var ProgramFilterParameter
-     */
     private $programFilterParameter;
 
-    /**
-     * @var QuestionFilterParameter
-     */
     private $questionFilterParameter;
 
-    /**
-     * @var YearFilterParameter
-     */
     private $yearFilterParameter;
 
-    /**
-     * @var OblastFilterParameter
-     */
     private $oblastFilterParameter;
 
-    /**
-     * @var RaionFilterParameter
-     */
     private $raionFilterParameter;
 
-    /**
-     * @var VillageFilterParameter
-     */
     private $villageFilterParameter;
 
-    /**
-     * @var KeywordFilterParameter
-     */
     private $keywordFilterParameter;
 
-    /**
-     * @var TermFilterParameter
-     */
     private $termFilterParameter;
 
-    /**
-     * @var CollectorFilterParameter
-     */
     private $collectorFilterParameter;
 
-    /**
-     * @var TextOrDescriptionFilterParameter
-     */
     private $textOrDescriptionFilterParameter;
 
     public function __construct(

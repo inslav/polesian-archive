@@ -38,19 +38,10 @@ use Vyfony\Bundle\FilterableTableBundle\Table\TableInterface;
  */
 final class CardController extends AbstractController
 {
-    /**
-     * @var TableInterface
-     */
     private $filterableTable;
 
-    /**
-     * @var QuestionNumberFormatterInterface
-     */
     private $questionFormatter;
 
-    /**
-     * @var CardRepository
-     */
     private $cardRepository;
 
     public function __construct(

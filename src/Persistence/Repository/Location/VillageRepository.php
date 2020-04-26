@@ -37,9 +37,6 @@ use LogicException;
  */
 final class VillageRepository extends ServiceEntityRepository
 {
-    /**
-     * @var RaionRepository
-     */
     private $raionRepository;
 
     public function __construct(ManagerRegistry $registry, RaionRepository $raionRepository)

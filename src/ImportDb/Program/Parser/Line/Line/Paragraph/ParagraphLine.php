@@ -29,19 +29,10 @@ namespace App\ImportDb\Program\Parser\Line\Line\Paragraph;
  */
 final class ParagraphLine implements ParagraphLineInterface
 {
-    /**
-     * @var int
-     */
     private $number;
 
-    /**
-     * @var string|null
-     */
     private $title;
 
-    /**
-     * @var string|null
-     */
     private $text;
 
     public function __construct(int $number, ?string $title, ?string $text)

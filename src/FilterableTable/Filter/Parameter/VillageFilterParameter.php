@@ -38,9 +38,6 @@ use Vyfony\Bundle\FilterableTableBundle\Filter\Configurator\Parameter\FilterPara
  */
 final class VillageFilterParameter implements FilterParameterInterface, ExpressionBuilderInterface
 {
-    /**
-     * @var VillageFullNameFormatterInterface
-     */
     private $villageFullNameFormatter;
 
     public function __construct(VillageFullNameFormatterInterface $villageFullNameFormatter)

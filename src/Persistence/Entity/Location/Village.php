@@ -38,8 +38,6 @@ use Doctrine\ORM\Mapping as ORM;
 class Village
 {
     /**
-     * @var int
-     *
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(name="id", type="integer")
@@ -47,37 +45,27 @@ class Village
     private $id;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
 
     /**
-     * @var string|null
-     *
      * @ORM\Column(name="number_in_atlas", type="string", length=255, nullable=true)
      */
     private $numberInAtlas;
 
     /**
-     * @var Raion
-     *
      * @ORM\JoinColumn(name="raion_id", nullable=false)
      * @ORM\ManyToOne(targetEntity="App\Persistence\Entity\Location\Raion", inversedBy="villages")
      */
     private $raion;
 
     /**
-     * @var string|null
-     *
      * @ORM\Column(name="comment", type="text", nullable=true)
      */
     private $comment;
 
     /**
-     * @var Collection|Card[]
-     *
      * @ORM\OneToMany(targetEntity="App\Persistence\Entity\Card\Card", mappedBy="village", orphanRemoval=true)
      */
     private $cards;

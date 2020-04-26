@@ -35,8 +35,6 @@ use Doctrine\ORM\Mapping as ORM;
 class AlphaCard
 {
     /**
-     * @var string
-     *
      * @ORM\Id()
      * @ORM\GeneratedValue(strategy="IDENTITY")
      * @ORM\Column(name="spvnkey", type="string", length=50, options={"fixed"=true})
@@ -44,71 +42,51 @@ class AlphaCard
     private $spvnkey;
 
     /**
-     * @var string|null
-     *
      * @ORM\Column(name="selokey", type="string", nullable=true)
      */
     private $selokey;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="hutor", type="string", length=25, options={"fixed"=true})
      */
     private $hutor;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="god", type="string")
      */
     private $god;
 
     /**
-     * @var string|null
-     *
      * @ORM\Column(name="sezon", type="string", length=5, nullable=true, options={"fixed"=true})
      */
     private $sezon;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="nprog", type="string", length=7, options={"fixed"=true})
      */
     private $nprog;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="nvopr", type="string", length=5, options={"fixed"=true})
      */
     private $nvopr;
 
     /**
-     * @var string|null
-     *
      * @ORM\Column(name="otv", type="string", length=3, nullable=true, options={"fixed"=true})
      */
     private $otv;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="dtext", type="string")
      */
     private $dtext;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="optext", type="string")
      */
     private $optext;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="num", type="decimal", precision=18, scale=0)
      */
     private $num;

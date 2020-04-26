@@ -29,9 +29,6 @@ namespace App\ImportDb\Program\Parser\Line\Line\Section;
  */
 final class SectionLine implements SectionLineInterface
 {
-    /**
-     * @var string
-     */
     private $name;
 
     public function __construct(string $name)

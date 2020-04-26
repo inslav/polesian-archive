@@ -41,9 +41,6 @@ use PHPUnit\Framework\TestCase;
  */
 final class ProgramTextLineParserTest extends TestCase
 {
-    /**
-     * @var ProgramTextLineParser
-     */
     private $programTextLineParser;
 
     protected function setUp(): void

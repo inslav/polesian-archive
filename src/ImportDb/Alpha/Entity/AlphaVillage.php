@@ -35,51 +35,37 @@ use Doctrine\ORM\Mapping as ORM;
 class AlphaVillage
 {
     /**
-     * @var string
-     *
      * @ORM\Column(name="selo", type="string")
      */
     private $selo;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="district", type="string")
      */
     private $district;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="region", type="string")
      */
     private $region;
 
     /**
-     * @var string|null
-     *
      * @ORM\Column(name="ind", type="string", length=4, nullable=true, options={"fixed"=true})
      */
     private $ind;
 
     /**
-     * @var string|null
-     *
      * @ORM\Column(name="atlas", type="string", length=5, nullable=true, options={"fixed"=true})
      */
     private $atlas;
 
     /**
-     * @var string
-     *
      * @ORM\Id()
      * @ORM\Column(name="selokey", type="string")
      */
     private $selokey;
 
     /**
-     * @var string|null
-     *
      * @ORM\Column(name="opselo", type="string", nullable=true)
      */
     private $opselo;

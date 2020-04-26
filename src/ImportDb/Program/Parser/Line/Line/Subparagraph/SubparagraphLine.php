@@ -29,14 +29,8 @@ namespace App\ImportDb\Program\Parser\Line\Line\Subparagraph;
  */
 final class SubparagraphLine implements SubparagraphLineInterface
 {
-    /**
-     * @var string
-     */
     private $letter;
 
-    /**
-     * @var string
-     */
     private $text;
 
     public function __construct(string $letter, string $text)

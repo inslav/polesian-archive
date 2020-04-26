@@ -29,14 +29,8 @@ namespace App\ImportDb\Program\Parser\Line\Line\Program;
  */
 final class ProgramLine implements ProgramLineInterface
 {
-    /**
-     * @var string
-     */
     private $number;
 
-    /**
-     * @var string
-     */
     private $name;
 
     public function __construct(string $number, string $name)

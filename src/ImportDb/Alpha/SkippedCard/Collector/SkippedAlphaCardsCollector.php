@@ -31,9 +31,6 @@ use App\ImportDb\Alpha\SkippedCard\SkippedAlphaCardInterface;
  */
 final class SkippedAlphaCardsCollector implements SkippedAlphaCardsCollectorInterface
 {
-    /**
-     * @var SkippedAlphaCardInterface[][]
-     */
     private $skippedAlphaCards = [];
 
     public function add(string $errorCategory, SkippedAlphaCardInterface $skippedAlphaCard): void

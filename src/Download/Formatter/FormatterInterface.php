@@ -22,37 +22,24 @@ declare(strict_types=1);
  * see <http://www.gnu.org/licenses/>.
  */
 
-namespace App\ImportDb\Alpha\Entity;
+namespace App\Download\Formatter;
 
-use Doctrine\ORM\Mapping as ORM;
+use App\Persistence\Entity\Card\Card;
 
 /**
- * @ORM\Table(name="polslov", indexes={@ORM\Index(name="IDX_B720B6C19374FFED", columns={"spvnkey"})})
- * @ORM\Entity()
- *
  * @author Anton Dyshkant <vyshkant@gmail.com>
  */
-class AlphaKeyword
+interface FormatterInterface
 {
     /**
-     * @ORM\Id()
-     * @ORM\Column(name="slov", type="string")
+     * @param Card[] $cards
      */
-    private $slov;
+    public function format(array $cards): string;
 
     /**
-     * @ORM\Id()
-     * @ORM\Column(name="spvnkey", nullable=true, type="string")
+     * @param Card[] $cards
      */
-    private $spvnkey;
+    public function getFileName(array $cards): string;
 
-    public function getSlov(): ?string
-    {
-        return $this->slov;
-    }
-
-    public function getSpvnkey(): ?string
-    {
-        return $this->spvnkey;
-    }
+    public function getContentType(): string;
 }

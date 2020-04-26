@@ -29,7 +29,6 @@ use App\Formatter\QuestionNumber\QuestionNumberInterface;
 use App\ImportDb\Alpha\Entity\AlphaCard;
 use App\ImportDb\Alpha\ValueTrimmer\AlphaValueConverterInterface;
 use Doctrine\Common\Persistence\ManagerRegistry;
-use Doctrine\Common\Persistence\ObjectManager;
 use LogicException;
 use Psr\Log\LoggerInterface;
 
@@ -38,34 +37,16 @@ use Psr\Log\LoggerInterface;
  */
 abstract class AbstractManyToOneEntityStorage
 {
-    /**
-     * @var ObjectManager
-     */
     protected $alphaObjectManager;
 
-    /**
-     * @var ObjectManager
-     */
     protected $defaultObjectManager;
 
-    /**
-     * @var AlphaValueConverterInterface
-     */
     protected $valueConverter;
 
-    /**
-     * @var QuestionNumberParserInterface
-     */
     private $questionNumberParser;
 
-    /**
-     * @var object[]
-     */
     private $entityByAlphaEntityKeyCache;
 
-    /**
-     * @var LoggerInterface
-     */
     private $logger;
 
     public function __construct(
