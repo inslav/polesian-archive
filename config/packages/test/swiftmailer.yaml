@@ -1,5 +1,3 @@
-version: '3.4'
-
 # This file is part of Polesian Archive.
 #
 # Copyright (c) Institute of Slavic Studies of the Russian Academy of Sciences
@@ -18,12 +16,5 @@ version: '3.4'
 # a copy of the GNU General Public License along with Polesian Archive,
 # see <http://www.gnu.org/licenses/>.
 
-services:
-
-  db:
-    image: mysql:5
-    restart: always
-    environment:
-      MYSQL_ALLOW_EMPTY_PASSWORD: 1
-    ports:
-      - 3306:3306
+swiftmailer:
+  disable_delivery: true

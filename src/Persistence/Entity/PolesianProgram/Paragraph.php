@@ -78,6 +78,15 @@ class Paragraph
         $this->subparagraphs = new ArrayCollection();
     }
 
+    public function __toString(): string
+    {
+        return sprintf(
+            '%s %s',
+            (string) $this->program,
+            (string) $this->number
+        );
+    }
+
     public function getId(): ?int
     {
         return $this->id;

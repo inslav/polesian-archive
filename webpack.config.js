@@ -18,7 +18,7 @@
  * see <http://www.gnu.org/licenses/>.
  */
 
-const encore = require('@symfony/webpack-encore');
+const Encore = require('@symfony/webpack-encore');
 
 function getSelect2Localizations() {
 
@@ -31,26 +31,17 @@ function getSelect2Localizations() {
         .map(fileName => select2LocalizationFolder + fileName);
 }
 
-if (!encore.isRuntimeEnvironmentConfigured()) {
-    encore.configureRuntimeEnvironment(process.env.NODE_ENV || 'dev');
+if (!Encore.isRuntimeEnvironmentConfigured()) {
+    Encore.configureRuntimeEnvironment(process.env.NODE_ENV || 'dev');
 }
 
-encore
-    .disableSingleRuntimeChunk()
+Encore
     .setOutputPath('public/build/')
     .setPublicPath('/build')
     .cleanupOutputBeforeBuild()
-    .enableBuildNotifications()
-    .enableSourceMaps(!encore.isProduction())
-    .enableVersioning(encore.isProduction())
-    .autoProvidejQuery()
-    .addEntry('js/card/list', ['./assets/js/card/list.js', ...getSelect2Localizations()])
-    .addStyleEntry('css/card/list', './assets/scss/card/list.scss')
-    .addStyleEntry('css/card/show', './assets/scss/card/show.scss')
-    .addStyleEntry('css/polesian-program/index', './assets/scss/polesian_program/index.scss')
-    .addStyleEntry('css/polesian-program/program', './assets/scss/polesian_program/program.scss')
-    .addStyleEntry('css/polesian-program/paragraph', './assets/scss/polesian_program/paragraph.scss')
-    .addStyleEntry('css/polesian-program/subparagraph', './assets/scss/polesian_program/subparagraph.scss')
+    .disableSingleRuntimeChunk()
+    .enableSourceMaps(!Encore.isProduction())
+    .enableVersioning(Encore.isProduction())
     .enableSassLoader()
     .copyFiles({
         from: './assets/images',
@@ -60,6 +51,14 @@ encore
         config.useBuiltIns = 'usage';
         config.corejs = 3;
     })
+    .addEntry('js/card/list', ['./assets/js/pages/site/card/list.js', ...getSelect2Localizations()])
+    .addStyleEntry('css/card/list', './assets/scss/pages/site/card/list.scss')
+    .addStyleEntry('css/card/show', './assets/scss/pages/site/card/show.scss')
+    .addStyleEntry('css/polesian-program/index', './assets/scss/pages/site/polesian_program/index.scss')
+    .addStyleEntry('css/polesian-program/program', './assets/scss/pages/site/polesian_program/program.scss')
+    .addStyleEntry('css/polesian-program/paragraph', './assets/scss/pages/site/polesian_program/paragraph.scss')
+    .addStyleEntry('css/polesian-program/subparagraph', './assets/scss/pages/site/polesian_program/subparagraph.scss')
+    .addStyleEntry('css/site/security/login', './assets/scss/pages/site/security/login.scss')
 ;
 
-module.exports = encore.getWebpackConfig();
+module.exports = Encore.getWebpackConfig();

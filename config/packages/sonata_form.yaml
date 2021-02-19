@@ -16,6 +16,5 @@
 # a copy of the GNU General Public License along with Polesian Archive,
 # see <http://www.gnu.org/licenses/>.
 
-framework:
-  mailer:
-    dsn: '%env(MAILER_DSN)%'
+sonata_form:
+  form_type: standard

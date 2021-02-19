@@ -22,27 +22,22 @@ declare(strict_types=1);
  * see <http://www.gnu.org/licenses/>.
  */
 
-namespace App\Persistence\DataFixtures\Card;
+namespace App\Admin;
 
-use App\Persistence\Entity\Card\Informant;
-use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Persistence\ObjectManager;
+use App\Admin\Abstraction\AbstractEntityAdmin;
 
 /**
  * @author Anton Dyshkant <vyshkant@gmail.com>
  */
-final class InformantFixtures extends Fixture
+final class QuestionAdmin extends AbstractEntityAdmin
 {
-    public const INFORMANT_MSV = 'МСВ';
+    /**
+     * @var string
+     */
+    protected $baseRouteName = 'polesian_archive_question';
 
-    public function load(ObjectManager $manager): void
-    {
-        $informant = (new Informant())
-            ->setName('МСВ')
-        ;
-        $manager->persist($informant);
-        $this->addReference(self::INFORMANT_MSV, $informant);
-
-        $manager->flush();
-    }
+    /**
+     * @var string
+     */
+    protected $baseRoutePattern = 'polesian-archive/question';
 }

@@ -79,14 +79,14 @@ return [
         'PhanUndeclaredMethodInCallable',
         'PhanEmptyFQSENInCallable',
         'PhanEmptyFQSENInClasslike',
-        'PhanNonClassMethodCall',
+//        'PhanNonClassMethodCall', // we use callables
         'PhanTypeArrayOperator',
         'PhanTypeArraySuspicious',
         'PhanTypeArrayUnsetSuspicious',
         'PhanTypeArraySuspiciousNullable',
         'PhanTypeSuspiciousIndirectVariable',
         'PhanTypeComparisonFromArray',
-        'PhanTypeComparisonToArray',
+//        'PhanTypeComparisonToArray', // Phan does not understand preg_split return options
         'PhanTypeConversionFromArray',
         'PhanTypeInstantiateAbstract',
         'PhanTypeInstantiateInterface',
@@ -99,9 +99,9 @@ return [
         'PhanTypeInvalidThrowsNonObject',
         'PhanTypeInvalidThrowsNonThrowable',
         'PhanTypeInvalidThrowsIsTrait',
-        'PhanTypeInvalidThrowsIsInterface',
+//        'PhanTypeInvalidThrowsIsInterface', // interfaces are thrown intentional
         'PhanTypeMagicVoidWithReturn',
-        'PhanTypeMismatchArgument',
+//        'PhanTypeMismatchArgument', // Phan does not work good with type inference
         'PhanTypeMismatchArgumentInternal',
         'PhanPartialTypeMismatchArgument',
         'PhanPartialTypeMismatchArgumentInternal',
@@ -130,7 +130,7 @@ return [
         'PhanPossiblyFalseTypeReturn',
 //        'PhanTypeMismatchDeclaredReturn', // Phan does not work with collection content type annotations
         'PhanTypeMismatchDeclaredReturnNullable',
-        'PhanTypeMismatchDeclaredParam',
+//        'PhanTypeMismatchDeclaredParam', // Phan does not work with collection content type annotations
         'PhanTypeMismatchDeclaredParamNullable',
         'PhanTypeMissingReturn',
         'PhanTypeNonVarPassByRef',
@@ -174,12 +174,12 @@ return [
         'PhanParamTooManyInternal',
         'PhanParamTooManyCallable',
         'PhanParamTypeMismatch',
-        'PhanParamSignatureMismatch',
+//        'PhanParamSignatureMismatch', // commented out to allow type overloading in repositories
         'PhanParamSignatureMismatchInternal',
         'PhanParamRedefined',
         'PhanParamSignatureRealMismatchReturnType',
         'PhanParamSignatureRealMismatchReturnTypeInternal',
-        'PhanParamSignaturePHPDocMismatchReturnType',
+//        'PhanParamSignaturePHPDocMismatchReturnType', // commented out to allow type overloading in repositories
         'PhanParamSignatureRealMismatchTooManyRequiredParameters',
         'PhanParamSignatureRealMismatchTooManyRequiredParametersInternal',
         'PhanParamSignaturePHPDocMismatchTooManyRequiredParameters',
@@ -188,7 +188,7 @@ return [
         'PhanParamSignaturePHPDocMismatchTooFewParameters',
         'PhanParamSignatureRealMismatchHasParamType',
         'PhanParamSignatureRealMismatchHasParamTypeInternal',
-        'PhanParamSignaturePHPDocMismatchHasParamType',
+//        'PhanParamSignaturePHPDocMismatchHasParamType', // commented out to allow type overloading in repositories
         'PhanParamSignatureRealMismatchHasNoParamType',
         'PhanParamSignatureRealMismatchHasNoParamTypeInternal',
         'PhanParamSignaturePHPDocMismatchHasNoParamType',
@@ -266,7 +266,7 @@ return [
         'PhanAccessClassInternal',
         'PhanAccessClassConstantInternal',
         'PhanAccessPropertyInternal',
-        'PhanAccessMethodInternal',
+//        'PhanAccessMethodInternal', // useless
         'PhanAccessWrongInheritanceCategory',
         'PhanAccessWrongInheritanceCategoryInternal',
         'PhanAccessExtendsFinalClass',

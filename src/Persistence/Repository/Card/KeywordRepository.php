@@ -31,6 +31,11 @@ use Doctrine\ORM\ORMException;
 
 /**
  * @author Anton Dyshkant <vyshkant@gmail.com>
+ *
+ * @method Keyword|null find(int $id, ?int $lockMode = null, ?int $lockVersion = null)
+ * @method Keyword|null findOneBy(array $criteria, ?array $orderBy = null)
+ * @method Keyword[]    findAll()
+ * @method Keyword[]    findBy(array $criteria, ?array $orderBy = null, ?int $limit = null, ?int $offset = null)
  */
 final class KeywordRepository extends ServiceEntityRepository
 {

@@ -16,7 +16,7 @@
 # a copy of the GNU General Public License along with Polesian Archive,
 # see <http://www.gnu.org/licenses/>.
 
-parameters:
+grumphp:
   hide_circumvention_tip: true
   process_timeout: null
   ascii:
@@ -24,7 +24,7 @@ parameters:
     succeeded: ~
   tasks:
     phpversion:
-      project: '7.2'
+      project: '7.4'
       metadata:
         priority: 0
     git_blacklist:
@@ -59,9 +59,8 @@ parameters:
     phpcs:
       standard: PSR2
       ignore_patterns:
+        - '/migrations/*'
         - '/node_modules/*'
-        - '/src/Persistence/DataFixtures/*'
-        - '/src/Persistence/Migrations/*'
         - '/tests/*'
         - '/var/*'
         - '/vendor/*'

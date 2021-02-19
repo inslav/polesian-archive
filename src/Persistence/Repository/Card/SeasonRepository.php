@@ -30,6 +30,11 @@ use Doctrine\Common\Persistence\ManagerRegistry;
 
 /**
  * @author Anton Dyshkant <vyshkant@gmail.com>
+ *
+ * @method Season|null find(int $id, ?int $lockMode = null, ?int $lockVersion = null)
+ * @method Season|null findOneBy(array $criteria, ?array $orderBy = null)
+ * @method Season[]    findAll()
+ * @method Season[]    findBy(array $criteria, ?array $orderBy = null, ?int $limit = null, ?int $offset = null)
  */
 final class SeasonRepository extends ServiceEntityRepository
 {

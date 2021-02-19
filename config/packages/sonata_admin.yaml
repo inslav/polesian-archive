@@ -1,0 +1,134 @@
+# This file is part of Polesian Archive.
+#
+# Copyright (c) Institute of Slavic Studies of the Russian Academy of Sciences
+#
+# Polesian Archive is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, version 3.
+#
+# Polesian Archive is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU General Public License for more details.
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code. If you have not received
+# a copy of the GNU General Public License along with Polesian Archive,
+# see <http://www.gnu.org/licenses/>.
+
+sonata_admin:
+  title: Полесский архив
+  dashboard:
+    blocks:
+      - { type: sonata.admin.block.admin_list, position: left }
+    groups:
+      cards:
+        label_catalogue: admin
+        label: menu.groups.cards.label
+        items:
+          - admin.card
+        roles: [ ROLE_ADMIN ]
+      people:
+        label_catalogue: admin
+        label: menu.groups.people.label
+        items:
+          - admin.collector
+          - admin.informant
+        roles: [ ROLE_ADMIN ]
+      words:
+        label_catalogue: admin
+        label: menu.groups.words.label
+        items:
+          - admin.term
+          - admin.keyword
+        roles: [ ROLE_ADMIN ]
+      locations:
+        label_catalogue: admin
+        label: menu.groups.locations.label
+        items:
+          - admin.village
+          - admin.raion
+          - admin.oblast
+        roles: [ ROLE_ADMIN ]
+      misc:
+        label_catalogue: admin
+        label: menu.groups.misc.label
+        items:
+          - admin.season
+        roles: [ ROLE_ADMIN ]
+      security:
+        label_catalogue: admin
+        label: menu.groups.security.label
+        items:
+          - admin.user
+        roles: [ ROLE_SUPER_ADMIN ]
+  options:
+    legacy_twig_text_extension: false
+    use_icheck: false
+
+sonata_block:
+  blocks:
+    sonata.admin.block.admin_list:
+      contexts: [admin]
+
+services:
+  admin.card:
+    class: App\Admin\CardAdmin
+    arguments: [ null, App\Persistence\Entity\Card\Card, null ]
+    tags:
+      - { name: sonata.admin, manager_type: orm }
+  admin.season:
+    class: App\Admin\SeasonAdmin
+    arguments: [ null, App\Persistence\Entity\Card\Season, null ]
+    tags:
+      - { name: sonata.admin, manager_type: orm }
+  admin.village:
+    class: App\Admin\VillageAdmin
+    arguments: [ null, App\Persistence\Entity\Location\Village, null ]
+    tags:
+      - { name: sonata.admin, manager_type: orm }
+  admin.raion:
+    class: App\Admin\RaionAdmin
+    arguments: [ null, App\Persistence\Entity\Location\Raion, null ]
+    tags:
+      - { name: sonata.admin, manager_type: orm }
+  admin.oblast:
+    class: App\Admin\OblastAdmin
+    arguments: [ null, App\Persistence\Entity\Location\Oblast, null ]
+    tags:
+      - { name: sonata.admin, manager_type: orm }
+  admin.collector:
+    class: App\Admin\CollectorAdmin
+    arguments: [ null, App\Persistence\Entity\Card\Collector, null ]
+    tags:
+      - { name: sonata.admin, manager_type: orm }
+  admin.informant:
+    class: App\Admin\InformantAdmin
+    arguments: [ null, App\Persistence\Entity\Card\Informant, null ]
+    tags:
+      - { name: sonata.admin, manager_type: orm }
+  admin.keyword:
+    class: App\Admin\KeywordAdmin
+    arguments: [ null, App\Persistence\Entity\Card\Keyword, null ]
+    tags:
+      - { name: sonata.admin, manager_type: orm }
+  admin.term:
+    class: App\Admin\TermAdmin
+    arguments: [ null, App\Persistence\Entity\Card\Term, null ]
+    tags:
+      - { name: sonata.admin, manager_type: orm }
+  admin.question:
+    class: App\Admin\QuestionAdmin
+    arguments: [ null, App\Persistence\Entity\Card\Question, null ]
+    tags:
+      - { name: sonata.admin, manager_type: orm }
+  admin.user:
+    class: App\Admin\UserAdmin
+    arguments:
+      - null
+      - App\Persistence\Entity\Security\User
+      - null
+      - '@Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface'
+      - '@Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface'
+    tags:
+      - { name: sonata.admin, manager_type: orm }

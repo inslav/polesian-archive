@@ -31,6 +31,11 @@ use Doctrine\ORM\ORMException;
 
 /**
  * @author Anton Dyshkant <vyshkant@gmail.com>
+ *
+ * @method Term|null find(int $id, ?int $lockMode = null, ?int $lockVersion = null)
+ * @method Term|null findOneBy(array $criteria, ?array $orderBy = null)
+ * @method Term[]    findAll()
+ * @method Term[]    findBy(array $criteria, ?array $orderBy = null, ?int $limit = null, ?int $offset = null)
  */
 final class TermRepository extends ServiceEntityRepository
 {

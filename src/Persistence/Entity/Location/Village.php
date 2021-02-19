@@ -75,6 +75,15 @@ class Village
         $this->cards = new ArrayCollection();
     }
 
+    public function __toString(): string
+    {
+        return sprintf(
+            '%s (%s)',
+            (string) $this->name,
+            (string) $this->numberInAtlas
+        );
+    }
+
     public function getId(): ?int
     {
         return $this->id;

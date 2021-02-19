@@ -31,6 +31,11 @@ use Doctrine\ORM\ORMException;
 
 /**
  * @author Anton Dyshkant <vyshkant@gmail.com>
+ *
+ * @method Section|null find(int $id, ?int $lockMode = null, ?int $lockVersion = null)
+ * @method Section|null findOneBy(array $criteria, ?array $orderBy = null)
+ * @method Section[]    findAll()
+ * @method Section[]    findBy(array $criteria, ?array $orderBy = null, ?int $limit = null, ?int $offset = null)
  */
 final class SectionRepository extends ServiceEntityRepository
 {

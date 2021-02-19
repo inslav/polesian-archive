@@ -72,6 +72,16 @@ class Program
         $this->paragraphs = new ArrayCollection();
     }
 
+    public function __toString(): string
+    {
+        return sprintf(
+            '%s %s %s',
+            (string) $this->section,
+            (string) $this->number,
+            (string) $this->name,
+        );
+    }
+
     public function getId(): ?int
     {
         return $this->id;

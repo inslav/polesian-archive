@@ -35,6 +35,11 @@ use Doctrine\ORM\ORMException;
 
 /**
  * @author Anton Dyshkant <vyshkant@gmail.com>
+ *
+ * @method Question|null find(int $id, ?int $lockMode = null, ?int $lockVersion = null)
+ * @method Question|null findOneBy(array $criteria, ?array $orderBy = null)
+ * @method Question[]    findAll()
+ * @method Question[]    findBy(array $criteria, ?array $orderBy = null, ?int $limit = null, ?int $offset = null)
  */
 final class QuestionRepository extends ServiceEntityRepository
 {
@@ -51,6 +56,7 @@ final class QuestionRepository extends ServiceEntityRepository
         SubparagraphRepository $subparagraphRepository
     ) {
         parent::__construct($registry, Question::class);
+
         $this->programRepository = $programRepository;
         $this->paragraphRepository = $paragraphRepository;
         $this->subparagraphRepository = $subparagraphRepository;

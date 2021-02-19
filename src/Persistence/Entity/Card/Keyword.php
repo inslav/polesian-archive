@@ -62,6 +62,14 @@ class Keyword
         $this->cards = new ArrayCollection();
     }
 
+    public function __toString(): string
+    {
+        return sprintf(
+            '%s',
+            (string) $this->name
+        );
+    }
+
     public function getId(): ?int
     {
         return $this->id;

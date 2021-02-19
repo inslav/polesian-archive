@@ -24,6 +24,8 @@ declare(strict_types=1);
 
 namespace App\Persistence\Entity\Card;
 
+use App\Formatter\QuestionNumber\Converter\QuestionToQuestionNumberConverter;
+use App\Formatter\QuestionNumber\Formatter\QuestionNumberFormatter;
 use App\Persistence\Entity\Location\Village;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -83,17 +85,17 @@ class Card
     private $hasPositiveAnswer;
 
     /**
-     * @ORM\Column(name="text",type="text")
+     * @ORM\Column(name="text", type="text")
      */
     private $text;
 
     /**
-     * @ORM\Column(name="description",type="text")
+     * @ORM\Column(name="description", type="text")
      */
     private $description;
 
     /**
-     * @ORM\Column(name="comment",type="text", nullable=true)
+     * @ORM\Column(name="comment", type="text", nullable=true)
      */
     private $comment;
 
@@ -125,6 +127,24 @@ class Card
         $this->terms = new ArrayCollection();
         $this->informants = new ArrayCollection();
         $this->collectors = new ArrayCollection();
+    }
+
+    public function __toString(): string
+    {
+        return sprintf(
+            '%s (%s)',
+            (string) $this->id,
+            implode(
+                ', ',
+                $this
+                    ->questions
+                    ->map(function (Question $question): string {
+                        return (new QuestionNumberFormatter(new QuestionToQuestionNumberConverter()))
+                            ->formatQuestion($question);
+                    })
+                    ->toArray()
+            )
+        );
     }
 
     public function getId(): ?int

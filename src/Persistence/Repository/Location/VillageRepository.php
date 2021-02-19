@@ -34,6 +34,11 @@ use LogicException;
 
 /**
  * @author Anton Dyshkant <vyshkant@gmail.com>
+ *
+ * @method Village|null find(int $id, ?int $lockMode = null, ?int $lockVersion = null)
+ * @method Village|null findOneBy(array $criteria, ?array $orderBy = null)
+ * @method Village[]    findAll()
+ * @method Village[]    findBy(array $criteria, ?array $orderBy = null, ?int $limit = null, ?int $offset = null)
  */
 final class VillageRepository extends ServiceEntityRepository
 {
