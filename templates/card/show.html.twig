@@ -47,6 +47,16 @@ see <http://www.gnu.org/licenses/>.
             {{ self.format_text_row('collectors', self.format_collection_of_named_entities('collectors', card.collectors)) }}
         </tbody>
     </table>
+    {% if is_granted('ROLE_ADMIN') %}
+        <div class="container">
+            <a href="{{ path('polesian_archive_card_edit', {'id': card.id}) }}"
+               target="_blank"
+               class="h5"
+            >
+                {{- 'controller.card.show.admin'|trans -}}
+            </a>
+        </div>
+    {% endif %}
 {% endblock %}
 
 {%- macro format_village(village) -%}

@@ -32,6 +32,11 @@ use Doctrine\ORM\ORMException;
 
 /**
  * @author Anton Dyshkant <vyshkant@gmail.com>
+ *
+ * @method Program|null find(int $id, ?int $lockMode = null, ?int $lockVersion = null)
+ * @method Program|null findOneBy(array $criteria, ?array $orderBy = null)
+ * @method Program[]    findAll()
+ * @method Program[]    findBy(array $criteria, ?array $orderBy = null, ?int $limit = null, ?int $offset = null)
  */
 final class ProgramRepository extends ServiceEntityRepository
 {

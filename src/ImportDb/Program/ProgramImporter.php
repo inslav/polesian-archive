@@ -61,7 +61,7 @@ final class ProgramImporter implements ProgramImporterInterface
      */
     public function importProgram(string $pathToSourceFile): void
     {
-        $programTextLines = explode(PHP_EOL, file_get_contents($pathToSourceFile));
+        $programTextLines = explode(\PHP_EOL, file_get_contents($pathToSourceFile));
 
         $currentSection = null;
         $currentProgram = null;

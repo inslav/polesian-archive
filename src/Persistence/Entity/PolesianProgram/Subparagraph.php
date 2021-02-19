@@ -59,6 +59,15 @@ class Subparagraph
      */
     private $text;
 
+    public function __toString(): string
+    {
+        return sprintf(
+            '%s %s',
+            (string) $this->paragraph,
+            (string) $this->letter
+        );
+    }
+
     public function getId(): ?int
     {
         return $this->id;

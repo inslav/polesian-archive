@@ -17,6 +17,14 @@
 # see <http://www.gnu.org/licenses/>.
 
 controller:
+  security:
+    login:
+      title: Авторизация
+      form:
+        username: Имя пользователя
+        password: Пароль
+        rememberMe: Запомнить меня
+        signIn: Войти
   card:
     list:
       title: Список карточек
@@ -77,6 +85,7 @@ controller:
             terms: Термины
     show:
       title: Карточка №
+      admin: Просмотреть в админке
       card:
         value:
           villageRaionAndOblast: "village, raion район, oblast область"

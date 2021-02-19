@@ -1,0 +1,179 @@
+# This file is part of Polesian Archive.
+#
+# Copyright (c) Institute of Slavic Studies of the Russian Academy of Sciences
+#
+# Polesian Archive is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, version 3.
+#
+# Polesian Archive is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU General Public License for more details.
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code. If you have not received
+# a copy of the GNU General Public License along with Polesian Archive,
+# see <http://www.gnu.org/licenses/>.
+
+menu:
+  groups:
+    cards:
+      label: Карточки
+    people:
+      label: Люди
+    words:
+      label: Слова
+    locations:
+      label: Местности
+    misc:
+      label: Прочее
+    security:
+      label: Безопасность
+  paragraphs:
+    card:
+      label: Карточки
+    collector:
+      label: Собиратели
+    informant:
+      label: Информанты
+    term:
+      label: Термины
+    keyword:
+      label: Ключевые слова
+    village:
+      label: Села
+    raion:
+      label: Районы
+    oblast:
+      label: Области
+    season:
+      label: Сезоны
+    user:
+      label: Пользователи
+tabMenu:
+  siteView: Посмотреть на сайте
+list:
+  card:
+    fields:
+      id: Внутренний идентификатор
+      village: Село
+      year: Год
+  collector:
+    fields:
+      id: Внутренний идентификатор
+      name: Имя
+  informant:
+    fields:
+      id: Внутренний идентификатор
+      name: Ключ
+  term:
+    fields:
+      id: Внутренний идентификатор
+      name: Термин
+  keyword:
+    fields:
+      id: Внутренний идентификатор
+      name: Слово
+  village:
+    fields:
+      id: Внутренний идентификатор
+      name: Название
+      numberInAtlas: Номер в Атласе
+  raion:
+    fields:
+      id: Внутренний идентификатор
+      name: Название
+  oblast:
+    fields:
+      id: Внутренний идентификатор
+      name: Название
+  season:
+    fields:
+      id: Внутренний идентификатор
+      name: Название
+  user:
+    fields:
+      id: Внутренний идентификатор
+      username: Имя пользователя (логин)
+      fullName: Полное имя
+      roles: Роли
+form:
+  card:
+    fields:
+      village: Село
+      khutor: Хутор
+      questions: Вопросы
+      year: Год
+      season: Сезон
+      hasPositiveAnswer: Утвердительный ответ
+      text: Текст
+      description: Описание
+      comment: Комментарий
+      keywords: Ключевые слова
+      terms: Термины
+      informants: Информанты
+      collectors: Собиратели
+  collector:
+    section:
+      default:
+        label: Сведения о собирателе
+    fields:
+      id: Внутренний идентификатор
+      name: Имя
+  informant:
+    section:
+      default:
+        label: Сведения об информанте
+    fields:
+      id: Внутренний идентификатор
+      name: Ключ
+  term:
+    section:
+      default:
+        label: Сведения о термине
+    fields:
+      id: Внутренний идентификатор
+      name: Термин
+  keyword:
+    section:
+      default:
+        label: Сведения о ключевом слове
+    fields:
+      id: Внутренний идентификатор
+      name: Слово
+  village:
+    section:
+      default:
+        label: Сведения о селе
+    fields:
+      name: Название
+      numberInAtlas: Номер в Атласе
+      comment: Комментарий
+      raion: Район
+  raion:
+    section:
+      default:
+        label: Сведения о районе
+    fields:
+      name: Название
+      oblast: Область
+  oblast:
+    section:
+      default:
+        label: Сведения об области
+    fields:
+      name: Название
+  season:
+    section:
+      default:
+        label: Сведения о сезоне
+    fields:
+      name: Название
+  user:
+    fields:
+      id: Внутренний идентификатор
+      username: Имя пользователя (логин)
+      fullName: Полное имя
+      roles: Роли
+      plainPassword: Новый пароль

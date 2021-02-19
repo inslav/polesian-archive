@@ -31,6 +31,11 @@ use Doctrine\ORM\ORMException;
 
 /**
  * @author Anton Dyshkant <vyshkant@gmail.com>
+ *
+ * @method Informant|null find(int $id, ?int $lockMode = null, ?int $lockVersion = null)
+ * @method Informant|null findOneBy(array $criteria, ?array $orderBy = null)
+ * @method Informant[]    findAll()
+ * @method Informant[]    findBy(array $criteria, ?array $orderBy = null, ?int $limit = null, ?int $offset = null)
  */
 final class InformantRepository extends ServiceEntityRepository
 {

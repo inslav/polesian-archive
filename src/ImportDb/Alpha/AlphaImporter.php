@@ -230,7 +230,7 @@ final class AlphaImporter implements AlphaImporterInterface
                 $pathToSkippedAlphaCardsLogDirectory.\DIRECTORY_SEPARATOR.$category,
                 json_encode(
                     $alphaCards,
-                    JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT
+                    \JSON_UNESCAPED_UNICODE | \JSON_PRETTY_PRINT
                 )
             );
         }

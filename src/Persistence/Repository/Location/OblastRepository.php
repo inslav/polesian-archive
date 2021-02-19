@@ -31,6 +31,11 @@ use Doctrine\ORM\ORMException;
 
 /**
  * @author Anton Dyshkant <vyshkant@gmail.com>
+ *
+ * @method Oblast|null find(int $id, ?int $lockMode = null, ?int $lockVersion = null)
+ * @method Oblast|null findOneBy(array $criteria, ?array $orderBy = null)
+ * @method Oblast[]    findAll()
+ * @method Oblast[]    findBy(array $criteria, ?array $orderBy = null, ?int $limit = null, ?int $offset = null)
  */
 final class OblastRepository extends ServiceEntityRepository
 {

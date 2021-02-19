@@ -30,6 +30,11 @@ use Doctrine\Common\Persistence\ManagerRegistry;
 
 /**
  * @author Anton Dyshkant <vyshkant@gmail.com>
+ *
+ * @method Card|null find(int $id, ?int $lockMode = null, ?int $lockVersion = null)
+ * @method Card|null findOneBy(array $criteria, ?array $orderBy = null)
+ * @method Card[]    findAll()
+ * @method Card[]    findBy(array $criteria, ?array $orderBy = null, ?int $limit = null, ?int $offset = null)
  */
 final class CardRepository extends ServiceEntityRepository
 {

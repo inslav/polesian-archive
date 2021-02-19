@@ -22,35 +22,22 @@ declare(strict_types=1);
  * see <http://www.gnu.org/licenses/>.
  */
 
-namespace App\Persistence\DataFixtures\PolesianProgram;
+namespace App\Form;
 
-use App\Persistence\Entity\PolesianProgram\Section;
-use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Persistence\ObjectManager;
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\FormBuilderInterface;
 
 /**
  * @author Anton Dyshkant <vyshkant@gmail.com>
  */
-final class SectionFixtures extends Fixture
+final class AdminLoginForm extends AbstractType
 {
-    public const SECTION_FAMILY = 'family';
-
-    public const SECTION_NATURE = 'nature';
-
-    public function load(ObjectManager $manager): void
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $section = (new Section())
-            ->setName('СЕМЕЙНАЯ ОБРЯДНОСТЬ')
-        ;
-        $manager->persist($section);
-        $this->addReference(self::SECTION_FAMILY, $section);
-
-        $section = (new Section())
-            ->setName('ПРЕДСТАВЛЕНИЯ О ПРИРОДЕ')
-        ;
-        $manager->persist($section);
-        $this->addReference(self::SECTION_NATURE, $section);
-
-        $manager->flush();
+        $builder
+            ->add('username', TextType::class)
+            ->add('password', PasswordType::class);
     }
 }

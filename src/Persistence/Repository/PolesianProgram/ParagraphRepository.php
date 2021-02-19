@@ -34,6 +34,11 @@ use LogicException;
 
 /**
  * @author Anton Dyshkant <vyshkant@gmail.com>
+ *
+ * @method Paragraph|null find(int $id, ?int $lockMode = null, ?int $lockVersion = null)
+ * @method Paragraph|null findOneBy(array $criteria, ?array $orderBy = null)
+ * @method Paragraph[]    findAll()
+ * @method Paragraph[]    findBy(array $criteria, ?array $orderBy = null, ?int $limit = null, ?int $offset = null)
  */
 final class ParagraphRepository extends ServiceEntityRepository
 {

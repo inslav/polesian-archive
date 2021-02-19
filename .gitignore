@@ -47,3 +47,6 @@
 ###> phpro/grumphp ###
 /grumphp.yml
 ###< phpro/grumphp ###
+###> symfony/web-server-bundle ###
+/.web-server-pid
+###< symfony/web-server-bundle ###

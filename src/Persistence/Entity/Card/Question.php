@@ -71,6 +71,17 @@ class Question
         $this->isAdditional = false;
     }
 
+    public function __toString(): string
+    {
+        return sprintf(
+            '%s %s %s %s',
+            (string) $this->program,
+            (string) $this->paragraph,
+            (string) $this->subparagraph,
+            (string) $this->isAdditional
+        );
+    }
+
     public function getId(): ?int
     {
         return $this->id;

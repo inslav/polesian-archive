@@ -25,8 +25,13 @@ services:
     autoconfigure: true
 
   App\:
-    resource: '../src/*'
-    exclude: '../src/{DependencyInjection,Command/ImportDb,ImportDb,Persistence/Entity,Kernel.php}'
+    resource: '../src/'
+    exclude:
+      - '../src/DependencyInjection/'
+      - '../src/Command/ImportDb'
+      - '../src/ImportDb'
+      - '../src/Persistence/Entity/'
+      - '../src/Kernel.php'
 
   App\Controller\:
     resource: '../src/Controller'
